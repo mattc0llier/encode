@@ -1,0 +1,52 @@
+{
+  "name": "encode",
+  "version": "1.0.0",
+  "description": "Lambda school precourse game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattc0llier/encode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattc0llier/encode/issues"
+  },
+  "homepage": "https://github.com/mattc0llier/encode#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "classnames": "^2.2.6",
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "node": "^12.3.1",
+    "pg-promise": "^8.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.2",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
+    "jest-fetch-mock": "^2.1.2",
+    "react-test-renderer": "^16.8.6",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      "@babel/preset-env"
+    ]
+  }
+}
