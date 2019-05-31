@@ -8,33 +8,11 @@ CREATE DATABASE encode;
 DROP TABLE objectives;
 DROP TABLE lessons;
 DROP TABLE courses;
+DROP TABLE organizations;
+DROP TABLE users;
+DROP TABLE activities;
 
 -- Insert this code inside your better_change database
-CREATE TABLE objectives(
-  id SERIAL PRIMARY KEY,
-  number INT,
-  objective VARCHAR(1000) NOT NULL,
-  url VARCHAR(1000) NOT NULL,
-  lesson_id INT
-  FOREIGN KEY (lesson_id) REFERENCES lessons (id)
-);
-
-CREATE TABLE lessons(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(500) NOT NULL,
-  url VARCHAR(1000) NOT NULL,
-  course_id INT
-  FOREIGN KEY (course_id) REFERENCES courses (id)
-);
-
-CREATE TABLE courses(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(500) NOT NULL,
-  url VARCHAR(1000) NOT NULL,
-  organization_id INT
-  FOREIGN KEY (organization_id) REFERENCES organizations (id)
-);
-
 CREATE TABLE organizations(
   id SERIAL PRIMARY KEY,
   name VARCHAR(500) NOT NULL,
@@ -51,6 +29,31 @@ CREATE TABLE users(
   password VARCHAR(200) NOT NULL,
   tel VARCHAR(30) NOT NULL UNIQUE,
   creation_date TIMESTAMP WITH TIME ZONE
+);
+
+CREATE TABLE courses(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(500) NOT NULL,
+  url VARCHAR(1000) NOT NULL,
+  organization_id INT,
+  FOREIGN KEY (organization_id) REFERENCES organizations (id)
+);
+
+CREATE TABLE lessons(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(500) NOT NULL,
+  url VARCHAR(1000) NOT NULL,
+  course_id INT,
+  FOREIGN KEY (course_id) REFERENCES courses (id)
+);
+
+CREATE TABLE objectives(
+  id SERIAL PRIMARY KEY,
+  number INT,
+  objective VARCHAR(1000) NOT NULL,
+  url VARCHAR(1000) NOT NULL,
+  lesson_id INT,
+  FOREIGN KEY (lesson_id) REFERENCES lessons (id)
 );
 
 CREATE TABLE activities(
@@ -107,7 +110,7 @@ INSERT INTO objectives
 INSERT INTO objectives
   (id, number, objective, url, lesson_id)
   VALUES
-  (3, 3, 'Learn how web development fits into the Greater Software Hierarchy', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/learn-how-web-development-fits-into-the-greater-software-hierarchy/', 1)
+  (3, 3, 'Learn how web development fits into the Greater Software Hierarchy', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/learn-how-web-development-fits-into-the-greater-software-hierarchy/', 1);
 INSERT INTO objectives
   (id, number, objective, url, lesson_id)
   VALUES
@@ -163,4 +166,4 @@ INSERT INTO objectives
 INSERT INTO objectives
   (id, number, objective, url, lesson_id)
   VALUES
-  (16, 16, 'Quiz: Introduction to Control Flow', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-introduction-to-control-flow/', 4);
+  (17, 17, 'Quiz: Introduction to Control Flow', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-introduction-to-control-flow/', 4);
