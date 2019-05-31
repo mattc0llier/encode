@@ -1,4 +1,5 @@
 require('dotenv').config();
+console.log('.env working?', process.env.TESTING);
 
 
 const express = require('express');
@@ -17,7 +18,6 @@ const db = pgp({
 app.use(bodyParser.json());
 app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
-
 
 // get homepage
 app.use('/', function(req, res){
