@@ -6,6 +6,7 @@ Encode is a game to help you smash the Lambda School precourses.
 - Work with other students in the same situation as you and set up a study group.
 - Log your education activity and prove your understanding to Lambda School.
 
+
 ![Encode Screenshot](./static/assets/images/Screenshot.png)
 
 ## Scoring mechanism:
@@ -17,7 +18,7 @@ Encode is a game to help you smash the Lambda School precourses.
 - 50 points - 
 - 60 points - 
 
-Based on Bloom's educational taxonomy (read more here)
+Based on Bloom's educational taxonomy ([read more here](http://www.celt.iastate.edu/teaching/effective-teaching-practices/revised-blooms-taxonomy/))
 
 ## Streaks 
 
