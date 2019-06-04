@@ -6,6 +6,8 @@ Encode is a motivational game to help you smash the Lambda School precourses and
 - Work with other students in the same situation as you and set up a study group.
 - Log your education activity and prove your understanding to Lambda School.
 
+Sign up at ([encode.app](https://encode.app))
+
 
 ![Encode Screenshot](./static/assets/images/Screenshot.png)
 
