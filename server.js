@@ -31,6 +31,13 @@ app.get('/api/objectives', function(req, res){
   .catch(error => res.json({ error: error.message }));
 });
 
+// get all objectives
+app.get('/api/objectives', function(req, res){
+  db.any('SELECT * FROM objectives')
+  .then(data => res.json(data))
+  .catch(error => res.json({ error: error.message }));
+});
+
 app.listen(9090, function(){
   console.log('Listening on port 9090');
 });
