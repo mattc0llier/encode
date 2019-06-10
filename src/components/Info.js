@@ -9,7 +9,7 @@ class Info extends React.Component {
     return(
       <div class="info">
         <h4>Info</h4>
-        <img src="#" alt="profile picture" />
+        <img src="../../static/assets/images/Roland.jpg" alt="profile picture" />
         <p>This is my bio</p>
         <p>This is my Location</p>
       </div>

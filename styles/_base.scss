@@ -3,7 +3,7 @@
 @import '_colors.scss';
 @import '_typography.scss';
 
-$mobile-max-width: 400px;
+$mobile-max-width: 800px;
 
 html {
   box-sizing: border-box;
@@ -31,6 +31,15 @@ body {
     max-width: $mobile-max-width;
     margin: auto;
   }
+}
+
+img {
+  max-width: 200px;
+  max-height: 200px;
+  display: block;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
 }
 
 .btn,
