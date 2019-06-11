@@ -18,7 +18,6 @@ class WorkingOn extends React.Component {
       this.setState(
         { objectives: body }
       )
-      console.log(this.state.objectives);
     })
     .catch(error => console.log(error.message));
   }
@@ -31,14 +30,12 @@ class WorkingOn extends React.Component {
     const sortedObjectives = this.state.objectives.sort(function(a, b) {
       return a.number - b.number;
     });
-    console.log('sorted', sortedObjectives);
 
     return(
       <div className="workingOn">
         <p>WorkingOn</p>
         {sortedObjectives.map(objective => (
           <div key={objective.id}>
-            {console.log(objective)}
             <Objective objectiveObject={objective}/>
           </div>
         ))}

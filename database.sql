@@ -60,6 +60,7 @@ CREATE TABLE activities(
   id SERIAL PRIMARY KEY,
   objectives_id INT,
   user_id INT,
+  complete BOOLEAN,
   FOREIGN KEY (objectives_id) REFERENCES objectives (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
@@ -68,6 +69,14 @@ INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, creation_date)
   VALUES
   (1, 'Matt', 'Collier', '/static/assets/images/Roland.jpg', 'matt@encode.app', 'matt', 'password', '01234567890', '2018-10-21T10:37:33.735972Z');
+INSERT INTO users
+  (id, first_name, last_name, photo, username, email, password, tel, creation_date)
+  VALUES
+  (2, 'Roland', 'Levy', '/static/assets/images/Rolandd.jpg', 'test@gmail.com', 'roland', 'password', '01234567899', '2018-10-22T10:37:33.735972Z');
+INSERT INTO users
+  (id, first_name, last_name, photo, username, email, password, tel, creation_date)
+  VALUES
+  (3, 'Dmitri', 'Grabov', '/static/assets/images/Rolanddd.jpg', 'testing@gmail.com', 'dmitri', 'password', '01234567898', '2018-10-23T10:37:33.735972Z');
 
 INSERT INTO organizations
   (id, name, url)
@@ -167,3 +176,41 @@ INSERT INTO objectives
   (id, number, objective, url, lesson_id)
   VALUES
   (17, 17, 'Quiz: Introduction to Control Flow', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-introduction-to-control-flow/', 4);
+
+
+  INSERT INTO activities
+    (id, objectives_id, user_id, complete)
+    VALUES
+    (1, 1, 1, true);
+  INSERT INTO activities
+    (id, objectives_id, user_id, complete)
+    VALUES
+    (2, 2, 1, true);
+  INSERT INTO activities
+    (id, objectives_id, user_id, complete)
+    VALUES
+    (3, 3, 1, false);
+  INSERT INTO activities
+    (id, objectives_id, user_id, complete)
+    VALUES
+    (4, 1, 2, true);
+  INSERT INTO activities
+    (id, objectives_id, user_id, complete)
+    VALUES
+    (5, 2, 2, false);
+  INSERT INTO activities
+    (id, objectives_id, user_id, complete)
+    VALUES
+    (6, 3, 2, false);
+  INSERT INTO activities
+    (id, objectives_id, user_id, complete)
+    VALUES
+    (7, 1, 3, false);
+  INSERT INTO activities
+    (id, objectives_id, user_id, complete)
+    VALUES
+    (8, 2, 3, false);
+  INSERT INTO activities
+    (id, objectives_id, user_id, complete)
+    VALUES
+    (9, 3, 3, false);
