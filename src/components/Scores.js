@@ -9,7 +9,7 @@ class Scores extends React.Component {
     return(
       <div className="scores">
         <p>Scores</p>
-        <span>32 23 12</span>
+        <span>🎓32 🔥23 ✅12</span>
       </div>
     )
   }

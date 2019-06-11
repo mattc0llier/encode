@@ -63,6 +63,7 @@ CREATE TABLE activities(
   objectives_id INT,
   user_id INT,
   complete BOOLEAN DEFAULT FALSE,
+  completion_time TIMESTAMPZ,
   FOREIGN KEY (objectives_id) REFERENCES objectives (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
@@ -79,6 +80,7 @@ INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
   VALUES
   (3, 'Dmitri', 'Grabov', '/static/assets/images/Rolanddd.jpg', 'testing@gmail.com', 'dmitri', 'password', '01234567898', 'Constructor Labs founder', 'London, UK', '2018-10-23T10:37:33.735972Z');
+
 
 INSERT INTO organizations
   (id, name, url)
