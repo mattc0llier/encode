@@ -8,7 +8,7 @@ class Status extends React.Component {
 
   render(){
     return(
-      <div class="status">
+      <div className="status">
         <p>This is a Status</p>
         <ul>
         <Objective />

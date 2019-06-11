@@ -11,13 +11,12 @@ class Profile extends React.Component {
 
   render(){
     return(
-      <div>
-      <h2>Matts profile page</h2>
-        <div class="left">
+      <div className="profile">
+        <div className="left">
           <h2>Left hand side</h2>
           <Info/>
         </div>
-        <div class="right">
+        <div className="right">
           <h2>right hand side</h2>
           <Scores/>
           <WorkingOn/>
