@@ -59,7 +59,7 @@ app.get('/api/users', function(req, res){
 app.get('/api/users/:id', (req, res) => {
   const { id } = req.params;
   return db
-    .one('SELECT id, first_name, last_name, tel, username, photo FROM users WHERE id=$1', [id])
+    .one('SELECT id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date FROM users WHERE id=$1', [id])
     .then(data => res.json(data))
     .catch(error => res.json({ error: error.message }));
   /* eslint-enable camelcase */
