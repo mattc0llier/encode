@@ -6,12 +6,10 @@ class Info extends React.Component {
   }
 
   render(){
-    console.log('current user info', this.props.currentUserObject);
     return(
       <div className="info">
-        <h4>Info</h4>
-        <h3>{this.props.currentUserObject.first_name} {this.props.currentUserObject.last_name} </h3>
         <img src={this.props.currentUserObject.photo} alt="profile picture" />
+        <h3>{this.props.currentUserObject.first_name} {this.props.currentUserObject.last_name} </h3>
         <p>{this.props.currentUserObject.bio}</p>
         <p>{this.props.currentUserObject.location}</p>
       </div>

@@ -9,7 +9,7 @@ class History extends React.Component {
   render(){
     return(
       <div>
-        <p>History</p>
+        <h3>History</h3>
         <Status/>
       </div>
     )

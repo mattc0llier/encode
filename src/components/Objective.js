@@ -10,7 +10,10 @@ class Objective extends React.Component {
     return(
       <div className="objective">
       {objectivesObjectExists ? (
-        <p>{this.props.objectiveObject.number} - {this.props.objectiveObject.objective}</p>
+        <div className="checkbox">
+          <input type="checkbox" id="scales" name="scales" />
+          <label for="scales">{this.props.objectiveObject.number} - {this.props.objectiveObject.objective}</label>
+        </div>
       ) : null}
       </div>
     )

@@ -9,7 +9,6 @@ class App extends React.Component {
   render(){
     return(
       <React.Fragment>
-        <h1>Encode</h1>
         <Nav />
         <Profile />
       </React.Fragment>

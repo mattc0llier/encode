@@ -33,7 +33,7 @@ class WorkingOn extends React.Component {
 
     return(
       <div className="workingOn">
-        <p>WorkingOn</p>
+        <h3>Working On</h3>
         {sortedObjectives.map(objective => (
           <div key={objective.id}>
             <Objective objectiveObject={objective}/>

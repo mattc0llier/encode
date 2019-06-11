@@ -3,12 +3,20 @@ import Scores from './Scores';
 import Info from './Info';
 import WorkingOn from './WorkingOn';
 import History from './History';
+import Activity from './Activity';
+
+import '../../styles/components/Profile.scss';
+
 
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { currentUser: []}
+    this.state = { currentUser: []};
+
+    this.fetchUser = this.fetchUser.bind(this);
   }
+
+
 
   fetchUser(id){
     fetch(`/api/users/${id}`)
@@ -32,11 +40,10 @@ class Profile extends React.Component {
     return(
       <div className="profile">
         <div className="left">
-          <h2>Left hand side</h2>
           <Info currentUserObject={this.state.currentUser}/>
+          <Activity />
         </div>
         <div className="right">
-          <h2>right hand side</h2>
           <Scores/>
           <WorkingOn/>
           <History/>
