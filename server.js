@@ -55,6 +55,15 @@ app.get('/api/users', function(req, res){
   .then(data => res.json(data))
   .catch(error => res.json({ error: error.message }));
 });
+// retrieve User by id
+app.get('/api/users/:id', (req, res) => {
+  const { id } = req.params;
+  return db
+    .one('SELECT id, first_name, last_name, tel, username, photo FROM users WHERE id=$1', [id])
+    .then(data => res.json(data))
+    .catch(error => res.json({ error: error.message }));
+  /* eslint-enable camelcase */
+});
 
 // get all activities
 app.get('/api/activities', function(req, res){
