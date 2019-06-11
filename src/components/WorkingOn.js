@@ -28,13 +28,18 @@ class WorkingOn extends React.Component {
   }
 
   render(){
+    const sortedObjectives = this.state.objectives.sort(function(a, b) {
+      return a.number - b.number;
+    });
+    console.log('sorted', sortedObjectives);
+
     return(
       <div className="workingOn">
         <p>WorkingOn</p>
-
-        {this.state.objectives.map(objective => (
+        {sortedObjectives.map(objective => (
           <div key={objective.id}>
-            <p>{objective.number} - {objective.objective}</p>
+            {console.log(objective)}
+            <Objective objectiveObject={objective}/>
           </div>
         ))}
       </div>
