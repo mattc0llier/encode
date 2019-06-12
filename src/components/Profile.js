@@ -34,11 +34,8 @@ class Profile extends React.Component {
       return response.json();
     })
     .then(body => {
-      const sortedObjectives = body.sort(function(a, b) {
-        return a.number - b.number;
-      });
       this.setState({
-        currentUserObjectives: sortedObjectives
+        currentUserObjectives: body
       })
       console.log('user objectives', this.state.currentUserObjectives);
     })
@@ -61,7 +58,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchUser(1);
+    this.fetchUser(2);
   }
 
   render(){

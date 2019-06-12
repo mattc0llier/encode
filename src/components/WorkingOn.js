@@ -7,7 +7,10 @@ class WorkingOn extends React.Component {
   }
 
   render(){
-    const filteredObjects = this.props.currentUserObjectivesObject.filter(object => object.complete == false )
+    const sortedObjectives = this.props.currentUserObjectivesObject.sort(function(a, b) {
+      return a.number - b.number;
+    });
+    const filteredObjects = sortedObjectives.filter(object => object.complete == false )
 
     return(
       <div className="workingOn">

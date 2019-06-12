@@ -8,7 +8,10 @@ class History extends React.Component {
   }
 
   render(){
-    const filteredObjects = this.props.currentUserObjectivesObject.filter(object => object.complete == true )
+    const sortedObjectives = this.props.currentUserObjectivesObject.sort(function(a, b) {
+      return a.number - b.number;
+    });
+    const filteredObjects = sortedObjectives.filter(object => object.complete == true )
     return(
       <div className="history">
         <h3>History</h3>
