@@ -1,5 +1,6 @@
 import React from 'react';
 import Status from './Status'
+import Objective from './Objective'
 
 class History extends React.Component {
   constructor(){
@@ -10,6 +11,7 @@ class History extends React.Component {
     return(
       <div>
         <h3>History</h3>
+
         <Status/>
       </div>
     )

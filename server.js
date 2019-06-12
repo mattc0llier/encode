@@ -71,12 +71,11 @@ app.get('/api/activities', function(req, res){
   .catch(error => res.json({ error: error.message }));
 });
 
-// get activities for a given User Id
-app.get('/api/users/:id/activities', (req, res) => {
+// get objectives for a given User Id
+app.get('/api/users/:id/objectives', (req, res) => {
   const { id } = req.params;
   return db
-  // need to make objective_id and add TIMESTAMPZ
-    .any('SELECT * FROM activities WHERE activities.user_id=$1', [id])
+    .any('SELECT objectives.id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, activities.complete, completion_time FROM objectives, activities WHERE activities.objective_id = objectives.id AND activities.user_id=$1', [id])
     .then(data => res.json(data))
     .catch(error => res.json({ error: error.message }));
 });

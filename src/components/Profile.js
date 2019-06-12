@@ -11,21 +11,33 @@ import '../../styles/components/Profile.scss';
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { currentUser: [], currentUserActivities: [] };
+    this.state = { currentUser: [], currentUserObjectives: [] };
 
     this.fetchUser = this.fetchUser.bind(this);
+    this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
   }
 
-  fetchUserActivities(id){
-    fetch(`/api/users/${id}/activities`)
+  // fetchUserObjectives(){
+  //   this.state.currentUserActivities
+  //   fetch(`/api/activities/objectives`)
+  //   .then(function(response){
+  //     return response.json();
+  //   })
+  //   .then(body => {
+  //     console.log(body);
+  //   })
+  // }
+
+  fetchUserObjectives(id){
+    fetch(`/api/users/${id}/objectives`)
     .then(function(response) {
       return response.json();
     })
     .then(body => {
-      console.log(body);
       this.setState({
-        currentUserActivities: body
+        currentUserObjectives: body
       })
+      console.log('user objectives', this.state.currentUserObjectives);
     })
     .catch(error => console.log(error.message));
   }
@@ -39,7 +51,7 @@ class Profile extends React.Component {
       this.setState(
         { currentUser: body}
       )
-      // fetchUserActivities()
+      this.fetchUserObjectives(body.id)
       console.log(this.state.currentUser);
     })
     .catch(error => console.log(error.message));
@@ -47,7 +59,6 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.fetchUser(1);
-    this.fetchUserActivities(1)
   }
 
   render(){
@@ -59,8 +70,8 @@ class Profile extends React.Component {
         </div>
         <div className="right">
           <Scores/>
-          <WorkingOn/>
-          <History/>
+          <WorkingOn currentUserIncompleteActivitiesObject={this.state.currentUserActivities}/>
+          <History currentUserCompletedActivitiesObject={this.state.currentUserActivities}/>
         </div>
       </div>
     )
