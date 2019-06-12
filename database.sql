@@ -63,8 +63,8 @@ CREATE TABLE activities(
   objective_id INT,
   user_id INT,
   complete BOOLEAN DEFAULT FALSE,
-  completion_time TIMESTAMPZ,
-  FOREIGN KEY (objectives_id) REFERENCES objectives (id),
+  completion_time TIMESTAMP,
+  FOREIGN KEY (objective_id) REFERENCES objectives (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
@@ -194,6 +194,62 @@ INSERT INTO activities
   (id, objective_id, user_id, complete)
   VALUES
   (3, 3, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (10, 4, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (11, 5, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (12, 6, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (13, 7, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (14, 8, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (15, 9, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (16, 10, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (17, 11, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (18, 12, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (19, 13, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (20, 14, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (21, 15, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (22, 16, 1, FALSE);
+INSERT INTO activities
+  (id, objective_id, user_id, complete)
+  VALUES
+  (22, 17, 1, FALSE);
 INSERT INTO activities
   (id, objective_id, user_id, complete)
   VALUES
