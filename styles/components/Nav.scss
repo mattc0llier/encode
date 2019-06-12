@@ -2,5 +2,10 @@
 
 .nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-nav {
+  display: flex;
 }

@@ -60,7 +60,7 @@ CREATE TABLE objectives(
 
 CREATE TABLE activities(
   id SERIAL PRIMARY KEY,
-  objectives_id INT,
+  objective_id INT,
   user_id INT,
   complete BOOLEAN DEFAULT FALSE,
   completion_time TIMESTAMPZ,
@@ -71,15 +71,15 @@ CREATE TABLE activities(
 INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
   VALUES
-  (1, 'Matt', 'Collier', '/static/assets/images/Roland.jpg', 'matt@encode.app', 'matt', 'password', '01234567890', 'University drop out. Product / Code / Sales previously at @pusher @gocardless @mintdigital', 'Devon, UK', '2018-10-21T10:37:33.735972Z');
+  (1, 'Matt', 'Collier', '/static/assets/images/Roland.jpg', 'matt', 'matt@encode.app', 'password', '01234567890', 'University drop out. Product / Code / Sales previously at @pusher @gocardless @mintdigital', 'Devon, UK', '2018-10-21T10:37:33.735972Z');
 INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
   VALUES
-  (2, 'Roland', 'Levy', '/static/assets/images/Rolandd.jpg', 'test@gmail.com', 'roland', 'password', '01234567899', 'Constructor Labs alumni, Bhuddist guru', 'London, UK', '2018-10-22T10:37:33.735972Z');
+  (2, 'Roland', 'Levy', '/static/assets/images/Rolandd.jpg', 'roland', 'test@gmail.com', 'password', '01234567899', 'Constructor Labs alumni, Bhuddist guru', 'London, UK', '2018-10-22T10:37:33.735972Z');
 INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
   VALUES
-  (3, 'Dmitri', 'Grabov', '/static/assets/images/Rolanddd.jpg', 'testing@gmail.com', 'dmitri', 'password', '01234567898', 'Constructor Labs founder', 'London, UK', '2018-10-23T10:37:33.735972Z');
+  (3, 'Dmitri', 'Grabov', '/static/assets/images/Rolanddd.jpg', 'dmitri', 'testing@gmail.com', 'password', '01234567898', 'Constructor Labs founder', 'London, UK', '2018-10-23T10:37:33.735972Z');
 
 
 INSERT INTO organizations
@@ -183,38 +183,38 @@ INSERT INTO objectives
 
 
 INSERT INTO activities
-  (id, objectives_id, user_id, complete)
+  (id, objective_id, user_id, complete)
   VALUES
   (1, 1, 1, TRUE);
 INSERT INTO activities
-  (id, objectives_id, user_id, complete)
+  (id, objective_id, user_id, complete)
   VALUES
   (2, 2, 1, TRUE);
 INSERT INTO activities
-  (id, objectives_id, user_id, complete)
+  (id, objective_id, user_id, complete)
   VALUES
   (3, 3, 1, FALSE);
 INSERT INTO activities
-  (id, objectives_id, user_id, complete)
+  (id, objective_id, user_id, complete)
   VALUES
   (4, 1, 2, TRUE);
 INSERT INTO activities
-  (id, objectives_id, user_id, complete)
+  (id, objective_id, user_id, complete)
   VALUES
   (5, 2, 2, FALSE);
 INSERT INTO activities
-  (id, objectives_id, user_id, complete)
+  (id, objective_id, user_id, complete)
   VALUES
   (6, 3, 2, FALSE);
 INSERT INTO activities
-  (id, objectives_id, user_id, complete)
+  (id, objective_id, user_id, complete)
   VALUES
   (7, 1, 3, FALSE);
 INSERT INTO activities
-  (id, objectives_id, user_id, complete)
+  (id, objective_id, user_id, complete)
   VALUES
   (8, 2, 3, FALSE);
 INSERT INTO activities
-  (id, objectives_id, user_id, complete)
+  (id, objective_id, user_id, complete)
   VALUES
   (9, 3, 3, FALSE);

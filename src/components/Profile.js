@@ -11,12 +11,24 @@ import '../../styles/components/Profile.scss';
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { currentUser: []};
+    this.state = { currentUser: [], currentUserActivities: [] };
 
     this.fetchUser = this.fetchUser.bind(this);
   }
 
-
+  fetchUserActivities(id){
+    fetch(`/api/users/${id}/activities`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      console.log(body);
+      this.setState({
+        currentUserActivities: body
+      })
+    })
+    .catch(error => console.log(error.message));
+  }
 
   fetchUser(id){
     fetch(`/api/users/${id}`)
@@ -27,6 +39,7 @@ class Profile extends React.Component {
       this.setState(
         { currentUser: body}
       )
+      // fetchUserActivities()
       console.log(this.state.currentUser);
     })
     .catch(error => console.log(error.message));
@@ -34,6 +47,7 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.fetchUser(1);
+    this.fetchUserActivities(1)
   }
 
   render(){

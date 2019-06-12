@@ -71,6 +71,16 @@ app.get('/api/activities', function(req, res){
   .catch(error => res.json({ error: error.message }));
 });
 
+// get activities for a given User Id
+app.get('/api/users/:id/activities', (req, res) => {
+  const { id } = req.params;
+  return db
+  // need to make objective_id and add TIMESTAMPZ
+    .any('SELECT * FROM activities WHERE activities.user_id=$1', [id])
+    .then(data => res.json(data))
+    .catch(error => res.json({ error: error.message }));
+});
+
 // get homepage
 app.use('/', function(req, res){
   res.render('index');
