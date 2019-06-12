@@ -4,37 +4,15 @@ import Objective from './Objective'
 class WorkingOn extends React.Component {
   constructor(){
     super();
-
-    this.state = { objectives: [] };
-    this.fetchObjective = this.fetchObjective.bind(this);
-  }
-
-  fetchObjective(){
-    fetch(`/api/objectives`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(body => {
-      this.setState(
-        { objectives: body }
-      )
-    })
-    .catch(error => console.log(error.message));
-  }
-
-  componentDidMount() {
-    this.fetchObjective();
   }
 
   render(){
-    const sortedObjectives = this.state.objectives.sort(function(a, b) {
-      return a.number - b.number;
-    });
+    const filteredObjects = this.props.currentUserObjectivesObject.filter(object => object.complete == false )
 
     return(
       <div className="workingOn">
         <h3>Working On</h3>
-        {sortedObjectives.map(objective => (
+        {filteredObjects.map(objective => (
           <div key={objective.id}>
             <Objective objectiveObject={objective}/>
           </div>

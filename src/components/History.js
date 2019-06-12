@@ -8,10 +8,15 @@ class History extends React.Component {
   }
 
   render(){
+    const filteredObjects = this.props.currentUserObjectivesObject.filter(object => object.complete == true )
     return(
-      <div>
+      <div className="history">
         <h3>History</h3>
-
+        {filteredObjects.map(objective => (
+          <div key={objective.id}>
+            <Objective objectiveObject={objective}/>
+          </div>
+        ))}
         <Status/>
       </div>
     )

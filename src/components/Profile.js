@@ -34,8 +34,11 @@ class Profile extends React.Component {
       return response.json();
     })
     .then(body => {
+      const sortedObjectives = body.sort(function(a, b) {
+        return a.number - b.number;
+      });
       this.setState({
-        currentUserObjectives: body
+        currentUserObjectives: sortedObjectives
       })
       console.log('user objectives', this.state.currentUserObjectives);
     })
@@ -70,8 +73,8 @@ class Profile extends React.Component {
         </div>
         <div className="right">
           <Scores/>
-          <WorkingOn currentUserIncompleteActivitiesObject={this.state.currentUserActivities}/>
-          <History currentUserCompletedActivitiesObject={this.state.currentUserActivities}/>
+          <WorkingOn currentUserObjectivesObject={this.state.currentUserObjectives}/>
+          <History currentUserObjectivesObject={this.state.currentUserObjectives}/>
         </div>
       </div>
     )
