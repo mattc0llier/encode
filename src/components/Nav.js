@@ -11,11 +11,11 @@ class Nav extends React.Component {
   render(){
     return(
       <div className="nav">
-        <h3>Encode Logo</h3>
+        <h1>encode</h1>
         <div className="right-nav">
-          <h3>Students</h3>
-          <h3>Study Groups</h3>
-          <h3>My profile</h3>
+          <h3>students</h3>
+          <h3>study groups</h3>
+          <h3>profile</h3>
         </div>
       </div>
     )

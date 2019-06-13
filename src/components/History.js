@@ -9,7 +9,7 @@ class History extends React.Component {
 
   render(){
     const sortedObjectives = this.props.currentUserObjectivesObject.sort(function(a, b) {
-      return a.number - b.number;
+      return b.number - a.number;
     });
     const filteredObjects = sortedObjectives.filter(object => object.complete == true )
     return(
