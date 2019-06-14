@@ -11,7 +11,7 @@ class Nav extends React.Component {
   render(){
     return(
       <div className="nav">
-        <h1>encode</h1>
+        <a href="/"><h1>encode</h1></a>
         <div className="right-nav">
           <h3>students</h3>
           <h3>study groups</h3>

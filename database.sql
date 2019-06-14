@@ -63,7 +63,7 @@ CREATE TABLE activities(
   objective_id INT,
   user_id INT,
   complete BOOLEAN DEFAULT FALSE,
-  completion_time TIMESTAMP,
+  completion_time TIMESTAMP WITH TIME ZONE,
   FOREIGN KEY (objective_id) REFERENCES objectives (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
@@ -183,94 +183,94 @@ INSERT INTO objectives
 
 
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (1, 1, 1, TRUE);
+  (1, 1, 1, TRUE, '2018-10-28T10:37:33.735972Z');
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (2, 2, 1, TRUE);
+  (2, 2, 1, TRUE, '2018-10-28T10:37:34.735972Z');
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (3, 3, 1, FALSE);
+  (3, 3, 1, TRUE, '2018-10-28T10:37:35.735972Z');
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (10, 4, 1, FALSE);
+  (10, 4, 1, TRUE, '2018-10-29T10:40:33.735972Z');
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (11, 5, 1, FALSE);
+  (11, 5, 1, TRUE, '2018-10-29T10:40:34.735972Z');
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (12, 6, 1, FALSE);
+  (12, 6, 1, TRUE, '2018-10-30T10:40:37.735972Z');
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (13, 7, 1, FALSE);
+  (13, 7, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (14, 8, 1, FALSE);
+  (14, 8, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (15, 9, 1, FALSE);
+  (15, 9, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (16, 10, 1, FALSE);
+  (16, 10, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (17, 11, 1, FALSE);
+  (17, 11, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (18, 12, 1, FALSE);
+  (18, 12, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (19, 13, 1, FALSE);
+  (19, 13, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (20, 14, 1, FALSE);
+  (20, 14, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (21, 15, 1, FALSE);
+  (21, 15, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (22, 16, 1, FALSE);
+  (22, 16, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (22, 17, 1, FALSE);
+  (23, 17, 1, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (4, 1, 2, TRUE);
+  (4, 1, 2, TRUE, '2018-10-28T10:37:33.735972Z');
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (5, 2, 2, FALSE);
+  (5, 2, 2, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (6, 3, 2, FALSE);
+  (6, 3, 2, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (7, 1, 3, FALSE);
+  (7, 1, 3, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (8, 2, 3, FALSE);
+  (8, 2, 3, FALSE, NULL);
 INSERT INTO activities
-  (id, objective_id, user_id, complete)
+  (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (9, 3, 3, FALSE);
+  (9, 3, 3, FALSE, NULL);
