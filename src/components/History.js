@@ -26,18 +26,18 @@ class History extends React.Component {
       }, {});
     }
 
-    const groupedObjectivesByDay = groupByDate(filteredObjects, 'completion_time');
+    const groupedObjectsArray = Object.entries(groupByDate(filteredObjects, 'completion_time'))
 
-    console.log('objectives grouped by day', groupedObjectivesByDay);
-
-    const objectivesStatusExists = !!groupedObjectivesByDay;
+    console.log('groupedObjectsArray',  groupedObjectsArray);
 
     return(
       <div className="history">
         <h3>History</h3>
-        {objectivesStatusExists ? (
-          <p>hello</p>
-        ) : null}
+          {groupedObjectsArray.map(dailyObjectives => {
+            <div key={dailyObjectives[0]}>
+              <p>hello</p>
+            </div>
+          })}
       </div>
     )
   }
