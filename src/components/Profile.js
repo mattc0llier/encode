@@ -24,18 +24,13 @@ class Profile extends React.Component {
   }
 
   receiveObjectiveStatus(completedObjective){
-    console.log('profile receiving objective', completedObjective);
-
     //received completed objective
     //filter all current objectives to remove the completed one
     function removeComplete(userObjective) {
-      console.log('trig');
       return userObjective.id !== completedObjective.id
     }
 
     const updatedUserObjectives = this.state.currentUserObjectives.filter(removeComplete)
-
-    console.log('updatedUserObjectives', updatedUserObjectives);
 
     //add the updated completed objective into the user objective state
     this.setState({
@@ -49,8 +44,6 @@ class Profile extends React.Component {
         completion_time: Date.now(),
       })
     });
-    console.log('new currentUserObjectives', this.state.currentUserObjectives);
-
   }
 
   fetchUserObjectives(id){
