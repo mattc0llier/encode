@@ -33,7 +33,11 @@ class History extends React.Component {
     return(
       <div className="history">
         <h3>History</h3>
-        <p>hello</p>
+          {groupedObjectsArray.map(status => (
+            <div key={status[0]}>
+              <Status statusArray={status}/> 
+            </div>
+          ))}
       </div>
     )
   }

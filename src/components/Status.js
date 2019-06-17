@@ -11,7 +11,11 @@ class Status extends React.Component {
       <div className="status">
         <ul>
           <p>This is a Status</p>
-
+          <p>{this.props.statusArray[0]}</p>
+          {console.log('status', this.props.statusArray[1])}
+          {this.props.statusArray[1].map(objective => (
+            <Objective objectiveObject={objective}/>
+          ))}
         </ul>
       </div>
     )
