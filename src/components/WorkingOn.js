@@ -4,14 +4,19 @@ import Objective from './Objective'
 class WorkingOn extends React.Component {
   constructor(){
     super();
+
   }
+
+
+
 
   render(){
     const sortedObjectives = this.props.currentUserObjectivesObject.sort(function(a, b) {
       return a.number - b.number;
     });
     const filteredObjects = sortedObjectives.filter(objective => objective.complete == false )
-    console.log('first in array', filteredObjects[0]);
+
+    this.props.receiveNextUserObjective(filteredObjects[0])
 
 
     return(

@@ -11,11 +11,16 @@ import '../../styles/components/Profile.scss';
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { currentUser: [], currentUserObjectives: [] };
+    this.state = { currentUser: [], currentUserObjectives: [], nextUserObjective: {} };
 
     this.fetchUser = this.fetchUser.bind(this);
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
     this.receiveObjectiveStatus = this.receiveObjectiveStatus.bind(this);
+    this.receiveNextUserObjective = this.receiveNextUserObjective.bind(this);
+  }
+
+  receiveNextUserObjective(nextObjective){
+    console.log('nextObjective', nextObjective);
   }
 
   receiveObjectiveStatus(completedObjective){
@@ -84,6 +89,7 @@ class Profile extends React.Component {
           <WorkingOn
             currentUserObjectivesObject={this.state.currentUserObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}
+            receiveNextUserObjective={this.receiveNextUserObjective}
           />
           <History
             currentUserObjectivesObject={this.state.currentUserObjectives}

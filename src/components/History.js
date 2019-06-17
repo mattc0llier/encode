@@ -10,11 +10,10 @@ class History extends React.Component {
   }
 
   render(){
+    // filter objects just for the completed objects
     const filteredObjects = this.props.currentUserObjectivesObject.filter(object => object.complete == true )
-    // const sortedObjectives = filteredObjects.sort(function(a, b) {
-    //   return a.completion_time - b.completion_time;
-    // });
 
+    //group completed objects by the date they were completed by
     function groupByDate(objectArray, property) {
       return objectArray.reduce(function (acc, obj) {
         var key = startOfDay(obj[property]).toISOString().split('T')[0];
@@ -26,6 +25,7 @@ class History extends React.Component {
       }, {});
     }
 
+    //make those completed object dates into arrays to be mapped over.
     const groupedObjectsArray = Object.entries(groupByDate(filteredObjects, 'completion_time'))
 
     console.log('groupedObjectsArray',  groupedObjectsArray);
