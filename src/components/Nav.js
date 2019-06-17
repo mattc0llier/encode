@@ -13,9 +13,9 @@ class Nav extends React.Component {
       <div className="nav">
         <a href="/"><h1>encode</h1></a>
         <div className="right-nav">
-          <h3>students</h3>
-          <h3>study groups</h3>
-          <h3>profile</h3>
+          <a href="/"><h3>students</h3></a>
+          <a href="/"><h3>study groups</h3></a>
+          <a href="/user/1"><h3>profile</h3></a>
         </div>
       </div>
     )
