@@ -56,10 +56,10 @@ app.get('/api/users', function(req, res){
   .catch(error => res.json({ error: error.message }));
 });
 // retrieve User by id
-app.get('/api/users/:id', (req, res) => {
-  const { id } = req.params;
+app.get('/api/users/:username', (req, res) => {
+  const { username } = req.params;
   return db
-    .one('SELECT id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date FROM users WHERE id=$1', [id])
+    .one('SELECT id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date FROM users WHERE username=$1', [username])
     .then(data => res.json(data))
     .catch(error => res.json({ error: error.message }));
 });

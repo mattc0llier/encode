@@ -19,7 +19,7 @@ class App extends React.Component {
             <Route path="/" exact component={Homepage} />
             <Route path="/students" component={Students} />
             <Route path="/groups" component={Groups} />
-            <Route path="/users/:id" component={Profile} />
+            <Route path="/users/:username" component={Profile} />
           </Switch>
         </React.Fragment>
       </Router>

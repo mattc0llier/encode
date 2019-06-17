@@ -34,7 +34,7 @@ class Students extends React.Component {
         <h1>Students</h1>
         {this.state.allUsers.map(student => (
           <h3 key={student.id}>
-            <Link to={`/users/${student.id}`}>{student.first_name} {student.last_name}</Link>
+            <Link to={`/users/${student.username}`}>{student.first_name} {student.last_name}</Link>
           </h3>
         ))}
 

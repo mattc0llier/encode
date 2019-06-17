@@ -75,7 +75,7 @@ class Profile extends React.Component {
 
   componentDidMount() {
     const { match } = this.props;
-    this.fetchUser(match.params.id);
+    this.fetchUser(match.params.username);
   }
 
   render(){
