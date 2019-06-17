@@ -19,7 +19,7 @@ class Objective extends React.Component {
       {objectivesObjectExists ? (
         <div className="checkbox">
           <input type="checkbox" id="objective" name="objective" onClick={this.handleClick} />
-          <label for="objective">{this.props.objectiveObject.number} - {this.props.objectiveObject.objective}</label>
+          <label for="objective">✅ {this.props.objectiveObject.number} - {this.props.objectiveObject.objective}</label>
         </div>
       ) : null}
       </div>
