@@ -25,19 +25,28 @@ class Profile extends React.Component {
 
   receiveObjectiveStatus(completedObjective){
     console.log('profile receiving objective', completedObjective);
-    const updatedUserObjectives = this.state.currentUserObjectives.filter(userObjective =>
-      userObjective.id !== objective.id
-    )
+
+    //received completed objective
+    //filter all current objectives to remove the completed one
+    function removeComplete(userObjective) {
+      console.log('trig');
+      return userObjective.id !== completedObjective.id
+    }
+
+    const updatedUserObjectives = this.state.currentUserObjectives.filter(removeComplete)
+
     console.log('updatedUserObjectives', updatedUserObjectives);
+
+    //add the updated completed objective into the user objective state
     this.setState({
       currentUserObjectives: updatedUserObjectives.concat({
-        complete: true,
-        completion_time: Date.now(),
         id: completedObjective.id,
         lesson_id: completedObjective.lesson_id,
         number: completedObjective.number,
         objective: completedObjective.objective,
-        url: completedObjective.url
+        url: completedObjective.url,
+        complete: true,
+        completion_time: Date.now(),
       })
     });
     console.log('new currentUserObjectives', this.state.currentUserObjectives);
@@ -53,7 +62,6 @@ class Profile extends React.Component {
       this.setState({
         currentUserObjectives: body
       })
-      console.log('user objectives', this.state.currentUserObjectives);
     })
     .catch(error => console.log(error.message));
   }
@@ -68,7 +76,6 @@ class Profile extends React.Component {
         { currentUser: body}
       )
       this.fetchUserObjectives(body.id)
-      console.log(this.state.currentUser);
     })
     .catch(error => console.log(error.message));
   }
