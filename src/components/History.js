@@ -2,6 +2,7 @@ import React from 'react';
 import Status from './Status'
 import Objective from './Objective'
 const startOfDay = require('date-fns/start_of_day')
+// const compareDesc = require('date-fns/compareDesc')
 
 
 class History extends React.Component {
@@ -27,15 +28,16 @@ class History extends React.Component {
 
     //make those completed object dates into arrays to be mapped over.
     const groupedObjectsArray = Object.entries(groupByDate(filteredObjects, 'completion_time'))
+    // const sortedObjectives = groupedObjectsArray.sort(compareDesc);
 
-    console.log('groupedObjectsArray',  groupedObjectsArray);
+    // console.log('sortedObjectives',  sortedObjectives);
 
     return(
       <div className="history">
         <h3>History</h3>
           {groupedObjectsArray.map(status => (
             <div key={status[0]}>
-              <Status statusArray={status}/> 
+              <Status statusArray={status}/>
             </div>
           ))}
       </div>

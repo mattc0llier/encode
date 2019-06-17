@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import '../../styles/components/Nav.scss';
 
@@ -11,12 +12,12 @@ class Nav extends React.Component {
   render(){
     return(
       <div className="nav">
-        <a href="/"><h1>encode</h1></a>
-        <div className="right-nav">
-          <a href="/"><h3>students</h3></a>
-          <a href="/"><h3>study groups</h3></a>
-          <a href="/user/1"><h3>profile</h3></a>
-        </div>
+        <Link to='/'><h1>encode</h1></Link>
+        <ul className="right-nav">
+          <Link to='/students'><li>students</li></Link>
+          <Link to='/groups'><li>study groups</li></Link>
+          <Link to='/user/1'><li>profile</li></Link>
+        </ul>
       </div>
     )
   }

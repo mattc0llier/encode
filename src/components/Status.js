@@ -1,5 +1,6 @@
 import React from 'react';
 import Objective from './Objective';
+const startOfDay = require('date-fns/start_of_day')
 
 class Status extends React.Component {
   constructor(){
@@ -10,11 +11,12 @@ class Status extends React.Component {
     return(
       <div className="status">
         <ul>
-          <p>This is a Status</p>
-          <p>{this.props.statusArray[0]}</p>
+          <h4>{this.props.statusArray[0]}</h4>
           {console.log('status', this.props.statusArray[1])}
           {this.props.statusArray[1].map(objective => (
-            <Objective objectiveObject={objective}/>
+            <div key={objective.id}>
+              <Objective objectiveObject={objective}/>
+            </div>
           ))}
         </ul>
       </div>
