@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 class Students extends React.Component {
   constructor(){
@@ -32,7 +33,9 @@ class Students extends React.Component {
       <div className="students">
         <h1>Students</h1>
         {this.state.allUsers.map(student => (
-          <h3 key={student.id}>{student.first_name} {student.last_name}</h3>
+          <h3 key={student.id}>
+            <Link to={`/users/${student.id}`}>{student.first_name} {student.last_name}</Link>
+          </h3>
         ))}
 
 
