@@ -19,14 +19,13 @@ class WorkingOn extends React.Component {
     return(
       <div className="workingOn">
         <h3>Working On</h3>
-        {filteredObjects.map(objective => (
-          <div key={objective.id}>
+
+
             <Objective
-              objectiveObject={objective}
+              objectiveObject={filteredObjects[0]}
               receiveObjectiveStatus={this.props.receiveObjectiveStatus}
             />
-          </div>
-        ))}
+
       </div>
     )
   }

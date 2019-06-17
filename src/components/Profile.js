@@ -59,8 +59,8 @@ class Profile extends React.Component {
     .catch(error => console.log(error.message));
   }
 
-  fetchUser(id){
-    fetch(`/api/users/${id}`)
+  fetchUser(username){
+    fetch(`/api/users/${username}`)
     .then(function(response) {
       return response.json();
     })

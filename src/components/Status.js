@@ -2,6 +2,9 @@ import React from 'react';
 import Objective from './Objective';
 const startOfDay = require('date-fns/start_of_day')
 
+import '../../styles/components/Status.scss';
+
+
 class Status extends React.Component {
   constructor(){
     super();

@@ -16,7 +16,7 @@ class Nav extends React.Component {
         <ul className="right-nav">
           <Link to='/students'><li>students</li></Link>
           <Link to='/groups'><li>study groups</li></Link>
-          <Link to='/user/matt'><li>profile</li></Link>
+          <Link to='/users/matt'><li>profile</li></Link>
         </ul>
       </div>
     )
