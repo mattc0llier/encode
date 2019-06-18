@@ -75,20 +75,20 @@ app.get('/api/activities', function(req, res){
 app.get('/api/users/:id/objectives', (req, res) => {
   const { id } = req.params;
   return db
-    .any('SELECT objectives.id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, activities.complete, activities.completion_time FROM objectives, activities WHERE activities.objective_id = objectives.id AND activities.user_id=$1', [id])
+    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, activities.id AS activity_id, activities.complete, activities.completion_time FROM objectives, activities WHERE activities.objective_id = objectives.id AND activities.user_id=$1', [id])
     .then(data => {
-      console.log(data)
       res.json(data)
     })
     .catch(error => res.json({ error: error.message }));
 });
 
-app.patch('/api/activity/:activityId', (req, res) => {
+app.patch('/api/activities/:activityId', (req, res) => {
   const activityId = req.params.activityId
-  const {complete, completion_time} = req.body
+  const {complete} = req.body
 
-  db.none(`UPDATE activities SET complete = $1, completion_time = $2 WHERE id = $3`, [complete, completion_time, activityId])
-  .then(() => {
+  db.one(`UPDATE activities SET complete = $1, completion_time = CURRENT_TIMESTAMP WHERE id = $2 RETURNING id AS activity_id, complete, completion_time`, [complete, activityId])
+  .then((data) => {
+    res.json(data)
     res.status(200).send({update: "success"});
   })
   .catch(error => {

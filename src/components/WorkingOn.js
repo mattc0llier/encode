@@ -19,13 +19,10 @@ class WorkingOn extends React.Component {
     return(
       <div className="workingOn">
         <h3>Working On</h3>
-
-
             <Objective
               objectiveObject={filteredObjects[0]}
               receiveObjectiveStatus={this.props.receiveObjectiveStatus}
             />
-
       </div>
     )
   }

@@ -17,7 +17,7 @@ class Status extends React.Component {
           <h4>{this.props.statusArray[0]}</h4>
           {console.log('status', this.props.statusArray[1])}
           {this.props.statusArray[1].map(objective => (
-            <div key={objective.id}>
+            <div key={objective.objective_id}>
               <Objective objectiveObject={objective}/>
             </div>
           ))}

@@ -17,6 +17,7 @@ class Profile extends React.Component {
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
     this.receiveObjectiveStatus = this.receiveObjectiveStatus.bind(this);
     this.receiveNextUserObjective = this.receiveNextUserObjective.bind(this);
+    this.updateUserActivity = this.updateUserActivity.bind(this);
   }
 
   receiveNextUserObjective(nextObjective){
@@ -24,26 +25,48 @@ class Profile extends React.Component {
   }
 
   receiveObjectiveStatus(completedObjective){
+    console.log('completedObjective', completedObjective);
+
+    fetch(`/api/activities/${completedObjective.activity_id}`, {
+      method: 'patch',
+      body: JSON.stringify({ complete: true }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      console.log(body);
+    })
+    .catch(error => console.log(error.message));
+
+
     //received completed objective
     //filter all current objectives to remove the completed one
-    function removeComplete(userObjective) {
-      return userObjective.id !== completedObjective.id
-    }
+    // function removeComplete(userObjective) {
+    //   return userObjective.objective_id !== completedObjective.objective_id
+    // }
+    //
+    // const updatedUserObjectives = this.state.currentUserObjectives.filter(removeComplete)
+    // console.log('updatedUserObjectives', updatedUserObjectives);
 
-    const updatedUserObjectives = this.state.currentUserObjectives.filter(removeComplete)
 
     //add the updated completed objective into the user objective state
-    this.setState({
-      currentUserObjectives: updatedUserObjectives.concat({
-        id: completedObjective.id,
-        lesson_id: completedObjective.lesson_id,
-        number: completedObjective.number,
-        objective: completedObjective.objective,
-        url: completedObjective.url,
-        complete: true,
-        completion_time: Date.now(),
-      })
-    });
+    // this.setState({
+    //   currentUserObjectives: updatedUserObjectives.concat({
+    //     objective_id: completedObjective.objective_id,
+    //     lesson_id: completedObjective.lesson_id,
+    //     number: completedObjective.number,
+    //     objective: completedObjective.objective,
+    //     url: completedObjective.url,
+    //     activity_id: completedObjective.activity_id,
+    //     complete: true,
+    //     completion_time: Date.now()
+    //   })
+    // }, () => console.log('new currentUserObjectives', this.state.currentUserObjectives));
+
   }
 
   fetchUserObjectives(id){
