@@ -17,7 +17,6 @@ class Profile extends React.Component {
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
     this.receiveObjectiveStatus = this.receiveObjectiveStatus.bind(this);
     this.receiveNextUserObjective = this.receiveNextUserObjective.bind(this);
-    this.updateUserActivity = this.updateUserActivity.bind(this);
   }
 
   receiveNextUserObjective(nextObjective){
@@ -27,11 +26,11 @@ class Profile extends React.Component {
   receiveObjectiveStatus(completedObjective){
     console.log('completedObjective', completedObjective);
 
-    fetch(`/api/activities/${completedObjective.activity_id}`, {
+    return fetch(`/api/activities/${completedObjective.activity_id}`, {
       method: 'patch',
       body: JSON.stringify({ complete: true }),
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }
     })
     .then(function(response) {
