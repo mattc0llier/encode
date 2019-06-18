@@ -27,7 +27,7 @@ class Profile extends React.Component {
     console.log('completedObjective', completedObjective);
 
     return fetch(`/api/activities/${completedObjective.activity_id}`, {
-      method: 'patch',
+      method: 'PATCH',
       body: JSON.stringify({ complete: true }),
       headers: {
         'Content-Type': 'application/json'
