@@ -17,12 +17,41 @@ class Profile extends React.Component {
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
     this.receiveObjectiveStatus = this.receiveObjectiveStatus.bind(this);
     this.receiveNextUserObjective = this.receiveNextUserObjective.bind(this);
+    this.updateCurrentUserObjectives = this.updateCurrentUserObjectives.bind(this);
   }
 
   receiveNextUserObjective(nextObjective){
     console.log('nextObjective', nextObjective);
   }
 
+//take db complete response and update currentUserObjectives state
+  updateCurrentUserObjectives(activitiesResponse, completedObjective){
+
+
+    function removeComplete(userObjective) {
+      return userObjective.activity_id !== activitiesResponse.activity_id
+    }
+
+    const updatedUserObjectives = this.state.currentUserObjectives.filter(removeComplete)
+    console.log('updatedUserObjectives', updatedUserObjectives);
+
+
+    // // add the updated completed objective into the user objective state
+    this.setState({
+      currentUserObjectives: updatedUserObjectives.concat({
+        objective_id: completedObjective.objective_id,
+        lesson_id: completedObjective.lesson_id,
+        number: completedObjective.number,
+        objective: completedObjective.objective,
+        url: completedObjective.url,
+        activity_id: completedObjective.activity_id,
+        complete: activitiesResponse.complete,
+        completion_time: activitiesResponse.completion_time
+      })
+    }, () => console.log('new currentUserObjectives', this.state.currentUserObjectives));
+  }
+
+// post objective complete to the database
   receiveObjectiveStatus(completedObjective){
     console.log('completedObjective', completedObjective);
 
@@ -37,35 +66,10 @@ class Profile extends React.Component {
       return response.json();
     })
     .then(body => {
-      console.log(body);
+      console.log('response', body);
+      this.updateCurrentUserObjectives(body, completedObjective)
     })
     .catch(error => console.log(error.message));
-
-
-    //received completed objective
-    //filter all current objectives to remove the completed one
-    // function removeComplete(userObjective) {
-    //   return userObjective.objective_id !== completedObjective.objective_id
-    // }
-    //
-    // const updatedUserObjectives = this.state.currentUserObjectives.filter(removeComplete)
-    // console.log('updatedUserObjectives', updatedUserObjectives);
-
-
-    //add the updated completed objective into the user objective state
-    // this.setState({
-    //   currentUserObjectives: updatedUserObjectives.concat({
-    //     objective_id: completedObjective.objective_id,
-    //     lesson_id: completedObjective.lesson_id,
-    //     number: completedObjective.number,
-    //     objective: completedObjective.objective,
-    //     url: completedObjective.url,
-    //     activity_id: completedObjective.activity_id,
-    //     complete: true,
-    //     completion_time: Date.now()
-    //   })
-    // }, () => console.log('new currentUserObjectives', this.state.currentUserObjectives));
-
   }
 
   fetchUserObjectives(id){
