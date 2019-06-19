@@ -120,6 +120,7 @@ class Profile extends React.Component {
             receiveNextUserObjective={this.receiveNextUserObjective}
           />
           <History
+            currentUserObject={this.state.currentUser}
             currentUserObjectivesObject={this.state.currentUserObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}
           />

@@ -4,8 +4,25 @@
   margin-bottom: 2rem;
 }
 
-.status-objectives {
+.status-content {
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+}
+.status-completed {
+  display: flex;
   padding: 1rem;
+}
+.status-objectives {
+}
+
+.status-header {
+  display: flex;
+  background-color: $background-mid-grey;
+  min-height: 5rem;
+  border-radius: 10px 10px 0 0;
+
+}
+.status-header img {
+  max-height: 3rem;
+  max-width: auto;
 }

@@ -20,13 +20,26 @@ class Status extends React.Component {
       <div className="status">
         <ul>
           <h3>{this.props.statusArray[0]}</h3>
-          {console.log('status', this.props.statusArray[1])}
-          <div className="status-objectives">
-            {latestObjectives.map(objective => (
-              <React.Fragment className="" key={objective.objective_id}>
-                <Objective objectiveObject={objective}/>
-              </React.Fragment>
-            ))}
+
+          <div className="status-content">
+            <div className="status-header">
+              <img src={this.props.currentUserObject.photo} />
+              <p>{this.props.currentUserObject.first_name} {this.props.currentUserObject.last_name}</p>
+              <p>🎓32 🔥23 ✅12</p>
+            </div>
+            <div className="status-completed">
+              <div className="status-objectives">
+                {latestObjectives.map(objective => (
+                  <React.Fragment key={objective.objective_id}>
+                    <Objective objectiveObject={objective}/>
+                  </React.Fragment>
+                ))}
+              </div>
+              <div className="score-increase">
+                <h4>Mastery Score increase</h4>
+                <h2>+5</h2>
+              </div>
+            </div>
           </div>
 
         </ul>

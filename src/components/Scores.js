@@ -8,8 +8,7 @@ class Scores extends React.Component {
   render(){
     return(
       <div className="scores">
-        <p>Scores</p>
-        <span>🎓32 🔥23 ✅12</span>
+        <h2>🎓32 🔥23 ✅12</h2>
       </div>
     )
   }

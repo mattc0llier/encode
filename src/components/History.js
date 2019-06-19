@@ -39,7 +39,7 @@ class History extends React.Component {
         <h3>History</h3>
           {groupedObjectsArray.map(status => (
             <div key={status[0]}>
-              <Status statusArray={status}/>
+              <Status currentUserObject={this.props.currentUserObject} statusArray={status}/>
             </div>
           ))}
       </div>
