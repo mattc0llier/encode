@@ -4,7 +4,6 @@ import Info from './Info';
 import WorkingOn from './WorkingOn';
 import History from './History';
 import Activity from './Activity';
-
 import '../../styles/components/Profile.scss';
 
 
@@ -66,8 +65,10 @@ class Profile extends React.Component {
       return response.json();
     })
     .then(body => {
-      console.log('response', body);
-      this.updateCurrentUserObjectives(body, completedObjective)
+
+        this.updateCurrentUserObjectives(body, completedObjective)
+
+
     })
     .catch(error => console.log(error.message));
   }

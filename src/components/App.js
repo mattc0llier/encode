@@ -3,7 +3,7 @@ import Homepage from './Homepage';
 import Profile from './Profile';
 import Nav from './Nav';
 import Students from './Students';
-import Groups from './Groups';
+import Leaderboard from './Leaderboard';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import '../../styles/components/App.scss';
@@ -17,8 +17,8 @@ class App extends React.Component {
           <Nav />
           <Switch>
             <Route path="/" exact component={Homepage} />
+            <Route path="/leaderboard" component={Leaderboard} />
             <Route path="/students" component={Students} />
-            <Route path="/groups" component={Groups} />
             <Route path="/users/:username" component={Profile} />
           </Switch>
         </React.Fragment>

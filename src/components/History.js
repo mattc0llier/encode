@@ -2,6 +2,8 @@ import React from 'react';
 import Status from './Status'
 import Objective from './Objective'
 const startOfDay = require('date-fns/start_of_day')
+import '../../styles/components/History.scss';
+
 // const compareDesc = require('date-fns/compareDesc')
 
 

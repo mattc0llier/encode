@@ -1,0 +1,10 @@
+@import '../base.scss';
+
+img {
+  max-width: 150px;
+  max-height: 150px;
+  display: block;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+}

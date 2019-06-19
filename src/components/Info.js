@@ -1,4 +1,6 @@
 import React from 'react';
+import '../../styles/components/Info.scss';
+
 
 class Info extends React.Component {
   constructor(){

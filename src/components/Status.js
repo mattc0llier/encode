@@ -19,13 +19,13 @@ class Status extends React.Component {
     return(
       <div className="status">
         <ul>
-          <h4>{this.props.statusArray[0]}</h4>
+          <h3>{this.props.statusArray[0]}</h3>
           {console.log('status', this.props.statusArray[1])}
           <div className="status-objectives">
             {latestObjectives.map(objective => (
-              <div key={objective.objective_id}>
+              <React.Fragment className="" key={objective.objective_id}>
                 <Objective objectiveObject={objective}/>
-              </div>
+              </React.Fragment>
             ))}
           </div>
 
