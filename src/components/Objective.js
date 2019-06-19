@@ -1,5 +1,8 @@
 import React from 'react';
 
+import '../../styles/components/Nav.scss';
+
+
 class Objective extends React.Component {
   constructor(){
     super();
@@ -18,8 +21,9 @@ class Objective extends React.Component {
       <div className="objective">
       {objectivesObjectExists ? (
         <div className="checkbox">
-          <input type="checkbox" id="objective" name="objective" onClick={this.handleClick} />
-          <label for="objective">✅ {this.props.objectiveObject.number} - {this.props.objectiveObject.objective}</label>
+          <input type="checkbox" id="objective" name="objective" onClick={this.handleClick} style={{display: this.props.objectiveObject.complete ? 'none' : 'block' }}/>
+          <span style={{display: this.props.objectiveObject.complete ? 'block' : 'none' }}>✅</span>
+          <label for="objective">{this.props.objectiveObject.number} - {this.props.objectiveObject.objective}</label>
         </div>
       ) : null}
       </div>

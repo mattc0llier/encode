@@ -11,16 +11,24 @@ class Status extends React.Component {
   }
 
   render(){
+
+    const latestObjectives = this.props.statusArray[1].sort(function(a, b) {
+      return a.completion_time - b.completion_time;
+    });
+    console.log('latestObjectives', latestObjectives);
     return(
       <div className="status">
         <ul>
           <h4>{this.props.statusArray[0]}</h4>
           {console.log('status', this.props.statusArray[1])}
-          {this.props.statusArray[1].map(objective => (
-            <div key={objective.objective_id}>
-              <Objective objectiveObject={objective}/>
-            </div>
-          ))}
+          <div className="status-objectives">
+            {latestObjectives.map(objective => (
+              <div key={objective.objective_id}>
+                <Objective objectiveObject={objective}/>
+              </div>
+            ))}
+          </div>
+
         </ul>
       </div>
     )
