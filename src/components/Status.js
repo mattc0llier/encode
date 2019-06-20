@@ -38,8 +38,8 @@ class Status extends React.Component {
                 ))}
               </div>
               <div className="score-increase">
-                <h4>Mastery Score</h4>
                 <p>+5</p>
+                <h4>Mastery Score</h4>
               </div>
             </div>
           </div>
