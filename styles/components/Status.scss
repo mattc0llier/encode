@@ -11,6 +11,7 @@
 .status-completed {
   display: flex;
   padding: 1rem;
+  justify-content: space-between;
 }
 .status-objectives {
 }
@@ -20,9 +21,28 @@
   background-color: $background-mid-grey;
   min-height: 5rem;
   border-radius: 10px 10px 0 0;
+  align-items: center;
+  padding-left: 1rem;
+}
+.header-info {
 
 }
+
 .status-header img {
   max-height: 3rem;
   max-width: auto;
+  margin-right: 1rem;
+}
+
+.score-increase {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 1rem;
+  align-items: center;
+}
+.score-increase p {
+  font-size: 5rem;
+  font-weight: 500;
+  margin: 0;
 }

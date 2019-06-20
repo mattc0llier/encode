@@ -2,12 +2,14 @@
 
 .profile {
   display: flex;
+  margin: 3rem;
 }
 
 .left {
-  flex-grow: 1;
+  flex-grow: 2;
+  margin-right: 2rem;
 }
 
 .right {
-  flex-grow: 3;
+  flex-grow: 5;
 }

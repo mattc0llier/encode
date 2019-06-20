@@ -24,8 +24,10 @@ class Status extends React.Component {
           <div className="status-content">
             <div className="status-header">
               <img src={this.props.currentUserObject.photo} />
-              <p>{this.props.currentUserObject.first_name} {this.props.currentUserObject.last_name}</p>
-              <p>🎓32 🔥23 ✅12</p>
+              <div className="header-info">
+                <p>{this.props.currentUserObject.first_name} {this.props.currentUserObject.last_name}</p>
+                <p>🎓32 🔥23 ✅12</p>
+              </div>
             </div>
             <div className="status-completed">
               <div className="status-objectives">
@@ -36,8 +38,8 @@ class Status extends React.Component {
                 ))}
               </div>
               <div className="score-increase">
-                <h4>Mastery Score increase</h4>
-                <h2>+5</h2>
+                <h4>Mastery Score</h4>
+                <p>+5</p>
               </div>
             </div>
           </div>
