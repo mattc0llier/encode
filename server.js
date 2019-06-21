@@ -15,9 +15,72 @@ const db = pgp({
     password: process.env.DB_PASSWORD
 });
 
+// passport
+const passport = require('passport');
+const cookieParser = require('cookie-parser');
+// const LocalStrategy = require('passport-local').Strategy;
+const SlackStrategy = require('passport-slack').Strategy;
+
+const connectEnsureLogin = require('connect-ensure-login');
+
+// I am going to set up passport with just slack oauth first - then username and logins.
+// const bcrypt = require('bcrypt');
+// const SALT_ROUNDS = 12;
+
+//managing session cookies
+const cookieExpirationDate = new Date();
+const cookieExpirationDays = 20;
+cookieExpirationDate.setDate(cookieExpirationDate.getDate() + cookieExpirationDays);
+
 app.use(bodyParser.json());
 app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
+app.use(cookieParser());
+app.use(require('express-session')({
+  secret: 'some random text #^*%!!', // used to generate session ids
+  resave: false,
+  saveUninitialized: false
+}));
+
+
+passport.use(new SlackStrategy({
+    clientID: process.env.SLACK_CLIENT_ID,
+    clientSecret: process.env.SLACK_CLIENT_SECRET
+  }, (accessToken, refreshToken, profile, done) => {
+    // optionally persist profile data
+    done(null, profile);
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// index route
+app.get('/', function(req, res) {
+  res.render('index', {client_id: process.env.SLACK_CLIENT_ID});
+});
+
+// on clicking "logoff" the cookie is cleared
+app.get('/logoff',
+  function(req, res) {
+    res.clearCookie('slack-passport-example');
+    res.redirect('/');
+  }
+);
+
+app.get('/auth/slack', passport.authenticate('slack'));
+
+app.get('/auth/slack/callback',
+  passport.authenticate('slack', { failureRedirect: '/login' }),
+  (req, res) => res.redirect('/profile')
+);
 
 // get all objectives
 app.get('/api/objectives', function(req, res){

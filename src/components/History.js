@@ -1,10 +1,9 @@
 import React from 'react';
 import Status from './Status'
 import Objective from './Objective'
-const startOfDay = require('date-fns/start_of_day')
+import { startOfDay, compareDesc } from 'date-fns'
 import '../../styles/components/History.scss';
 
-// const compareDesc = require('date-fns/compareDesc')
 
 
 class History extends React.Component {
@@ -30,9 +29,16 @@ class History extends React.Component {
 
     //make those completed object dates into arrays to be mapped over.
     const groupedObjectsArray = Object.entries(groupByDate(filteredObjects, 'completion_time'))
-    // const sortedObjectives = groupedObjectsArray.sort(compareDesc);
 
-    // console.log('sortedObjectives',  sortedObjectives);
+    //still struggling to access the array dates and then sort by descending dates
+    const sortedObjectives = groupedObjectsArray.sort(function(a){
+      compareDesc(a[0])
+      console.log('a[0]', a[0]);
+    })
+
+
+    console.log('groupedObjectsArray',  groupedObjectsArray);
+    console.log('sortedObjectives',  sortedObjectives);
 
     return(
       <div className="history">

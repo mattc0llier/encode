@@ -1,14 +1,14 @@
 @import '../base.scss';
 
-img {
+.info {
+  max-width: 25vw;
+}
+
+.info img {
   max-width: 150px;
   max-height: 150px;
   display: block;
   border-radius: 100px;
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
-}
-
-.info {
-  max-width: 25vw;
 }

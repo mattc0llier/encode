@@ -1,6 +1,6 @@
 import React from 'react';
 import Objective from './Objective';
-const startOfDay = require('date-fns/start_of_day')
+import { isToday } from 'date-fns'
 
 import '../../styles/components/Status.scss';
 

@@ -65,10 +65,7 @@ class Profile extends React.Component {
       return response.json();
     })
     .then(body => {
-
         this.updateCurrentUserObjectives(body, completedObjective)
-
-
     })
     .catch(error => console.log(error.message));
   }

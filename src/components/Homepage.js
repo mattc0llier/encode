@@ -5,6 +5,25 @@ import '../../styles/components/Homepage.scss';
 class Homepage extends React.Component {
   constructor(){
     super();
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event){
+    console.log('login button');
+    return fetch(`/api/login`, {
+      method: 'POST',
+      body: JSON.stringify({ username: "matt", password: "password" }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      console.log(body);
+    })
   }
 
   render(){
@@ -64,7 +83,7 @@ class Homepage extends React.Component {
                 <a href="#signup" id="button">
                   <button type="button" name="button">Join the wait list</button>
                 </a>
-                <p>14 students ready to play</p>
+                <p>33 students ready to play</p>
               </div>
             </div>
           </section>
@@ -75,7 +94,9 @@ class Homepage extends React.Component {
           </section>
               <section className="signup" id="signup">
                 <p>Leave your email and we'll let you know when we're ready to go.</p>
+                <a href="https://slack.com/oauth/authorize?scope=identity.basic&client_id=your_client_id"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
 
+                <button onClick={this.handleClick}>Login</button>
               </section>
         </main>
       </div>
