@@ -19,9 +19,10 @@ class Nav extends React.Component {
             <React.Fragment>
               <Link to='/students'><li>students</li></Link>
               <Link to='/users/matt'><li>profile</li></Link>
+              <p>Log out</p>
             </React.Fragment>
           ): (
-            <a href="https://slack.com/oauth/authorize?scope=identity.basic&client_id=586033553927.659635767442"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
+            <a href="https://slack.com/oauth/authorize?scope=identity.basic&client_id=586033553927.659635767442"><img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" /></a>
           )}
 
         </ul>

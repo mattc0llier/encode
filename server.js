@@ -48,26 +48,22 @@ passport.use(new SlackStrategy({
     clientSecret: process.env.SLACK_CLIENT_SECRET
   }, (accessToken, refreshToken, profile, done) => {
     // optionally persist profile data
-    console.log('is this being hit');
+    console.log('SlackStrategy is this being hit');
     done(null, profile);
   }
 ));
 
 passport.serializeUser(function(user, done) {
+  console.log('serializeUser');
   done(null, user);
 });
 passport.deserializeUser(function(obj, done) {
+  console.log('deserializeUser');
   done(null, obj);
 });
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-// index route
-// I don't know how to pass this client id into my front end code
-app.get('/', function(req, res) {
-  res.render('index', {client_id: process.env.SLACK_CLIENT_ID});
-});
 
 // on clicking "logoff" the cookie is cleared
 app.get('/logoff',
@@ -81,46 +77,49 @@ app.get('/auth/slack', passport.authenticate('slack'));
 
 app.get('/auth/slack/callback',
 passport.authenticate('slack',
-  { successRedirect: '/setcookie', failureRedirect: '/' }
+  { successRedirect: '/feed', failureRedirect: '/' }
 ));
 
 // on successful auth, a cookie is set before redirecting
-// to the success view
-app.get('/setcookie', requireUser,
-  function(req, res) {
-    res.cookie('slack-passport-example', new Date());
-    res.redirect('/success');
-  }
-);
-
-// if cookie exists, success. otherwise, user is redirected to index
-app.get('/success', requireLogin,
-  function(req, res) {
-    if(req.cookies['slack-passport-example']) {
-      res.redirect('/feed');
-    } else {
-      res.redirect('/');
-    }
-  }
-);
-
-function requireLogin (req, res, next) {
-  if (!req.cookies['slack-passport-example']) {
-    res.redirect('/');
-  } else {
-    console.log('hit requireLogin')
-    next();
-  }
-};
-
-function requireUser (req, res, next) {
-  if (!req.user) {
-    res.redirect('/');
-  } else {
-    console.log('hit requireUser')
-    next();
-  }
-};
+// // to the success view
+// app.get('/setcookie', requireUser,
+//   function(req, res) {
+//     res.cookie('slack-passport-example', new Date());
+//     console.log('setcookie');
+//     res.redirect('/success');
+//   }
+// );
+//
+// // if cookie exists, success. otherwise, user is redirected to index
+// app.get('/success', requireLogin,
+//   function(req, res) {
+//     if(req.cookies['slack-passport-example']) {
+//       console.log('cookie success');
+//       res.redirect('/feed');
+//     } else {
+//       console.log('cookie fail');
+//       res.redirect('/');
+//     }
+//   }
+// );
+//
+// function requireLogin (req, res, next) {
+//   if (!req.cookies['slack-passport-example']) {
+//     res.redirect('/');
+//   } else {
+//     console.log('hit requireLogin')
+//     next();
+//   }
+// };
+//
+// function requireUser (req, res, next) {
+//   if (!req.user) {
+//     res.redirect('/');
+//   } else {
+//     console.log('hit requireUser')
+//     next();
+//   }
+// };
 
 
 
@@ -203,9 +202,10 @@ app.patch('/api/activities/:activityId', (req, res) => {
   });
 })
 
-// get homepage
-app.use('/', function(req, res){
-  res.render('index');
+// index route
+// I don't know how to pass this client id into my front end code
+app.get('/', function(req, res) {
+  res.render('index', {client_id: process.env.SLACK_CLIENT_ID});
 });
 
 app.listen(9090, function(){

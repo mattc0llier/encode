@@ -15,21 +15,28 @@ class App extends React.Component {
 
   constructor(){
     super();
-      this.state = { isLoggedIn: false }
+      this.state = { isLoggedIn: false, currentUser: {} }
 
+  }
+
+  setCurrentUser(user){
+    console.log(user);
+    this.setState({
+      currentUser: user
+    })
   }
 
   render(){
     return(
       <Router>
         <React.Fragment>
-          <Nav isLoggedIn={this.state.isLoggedIn} />
+          <Nav isLoggedIn={this.state.isLoggedIn} currentUser={this.state.currentUser}/>
           <Switch>
             <Route path="/" exact component={Homepage} />
-            <PrivateRoute path="/feed" component={Feed} />
-            <Route path="/leaderboard" component={Leaderboard} />
-            <PrivateRoute path="/students" component={Students} />
-            <PrivateRoute path="/users/:username" component={Profile} />
+            <PrivateRoute path="/feed" component={Feed} currentUser={this.state.currentUser} />
+            <Route path="/leaderboard" component={Leaderboard} currentUser={this.state.currentUser} />
+            <PrivateRoute path="/students" component={Students} currentUser={this.state.currentUser} />
+            <PrivateRoute path="/users/:username" component={Profile} currentUser={this.state.currentUser} />
           </Switch>
           <Footer />
         </React.Fragment>
