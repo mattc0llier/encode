@@ -23,9 +23,9 @@ class Status extends React.Component {
 
           <div className="status-content">
             <div className="status-header">
-              <img src={this.props.currentUserObject.photo} />
+              <img src={this.props.userProfileObject.photo} />
               <div className="header-info">
-                <p>{this.props.currentUserObject.first_name} {this.props.currentUserObject.last_name}</p>
+                <p>{this.props.userProfileObject.first_name} {this.props.userProfileObject.last_name}</p>
                 <p>🎓32 🔥23 ✅12</p>
               </div>
             </div>

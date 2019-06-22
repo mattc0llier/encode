@@ -10,34 +10,34 @@ import '../../styles/components/Profile.scss';
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { currentUser: [], currentUserObjectives: [], nextUserObjective: {} };
+    this.state = { userProfile: [], userProfileProfileObjectives: [], nextUserProfileObjective: {} };
 
     this.fetchUser = this.fetchUser.bind(this);
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
     this.receiveObjectiveStatus = this.receiveObjectiveStatus.bind(this);
     this.receiveNextUserObjective = this.receiveNextUserObjective.bind(this);
-    this.updateCurrentUserObjectives = this.updateCurrentUserObjectives.bind(this);
+    this.updateuserProfileObjectives = this.updateuserProfileObjectives.bind(this);
   }
 
   receiveNextUserObjective(nextObjective){
     console.log('nextObjective', nextObjective);
   }
 
-//take db complete response and update currentUserObjectives state
-  updateCurrentUserObjectives(activitiesResponse, completedObjective){
+//take db complete response and update userProfileObjectives state
+  updateuserProfileObjectives(activitiesResponse, completedObjective){
 
 
     function removeComplete(userObjective) {
       return userObjective.activity_id !== activitiesResponse.activity_id
     }
 
-    const updatedUserObjectives = this.state.currentUserObjectives.filter(removeComplete)
+    const updatedUserObjectives = this.state.userProfileObjectives.filter(removeComplete)
     console.log('updatedUserObjectives', updatedUserObjectives);
 
 
     // // add the updated completed objective into the user objective state
     this.setState({
-      currentUserObjectives: updatedUserObjectives.concat({
+      userProfileObjectives: updatedUserObjectives.concat({
         objective_id: completedObjective.objective_id,
         lesson_id: completedObjective.lesson_id,
         number: completedObjective.number,
@@ -47,7 +47,7 @@ class Profile extends React.Component {
         complete: activitiesResponse.complete,
         completion_time: activitiesResponse.completion_time
       })
-    }, () => console.log('new currentUserObjectives', this.state.currentUserObjectives));
+    }, () => console.log('new userProfileObjectives', this.state.userProfileObjectives));
   }
 
 // post objective complete to the database
@@ -65,7 +65,7 @@ class Profile extends React.Component {
       return response.json();
     })
     .then(body => {
-        this.updateCurrentUserObjectives(body, completedObjective)
+        this.updateuserProfileObjectives(body, completedObjective)
     })
     .catch(error => console.log(error.message));
   }
@@ -77,7 +77,7 @@ class Profile extends React.Component {
     })
     .then(body => {
       this.setState({
-        currentUserObjectives: body
+        userProfileObjectives: body
       })
     })
     .catch(error => console.log(error.message));
@@ -90,7 +90,7 @@ class Profile extends React.Component {
     })
     .then(body => {
       this.setState(
-        { currentUser: body}
+        { userProfile: body}
       )
       this.fetchUserObjectives(body.id)
     })
@@ -106,19 +106,19 @@ class Profile extends React.Component {
     return(
       <div className="profile">
         <div className="left">
-          <Info currentUserObject={this.state.currentUser}/>
+          <Info userProfileObject={this.state.userProfile}/>
           <Activity />
         </div>
         <div className="right">
           <Scores/>
           <WorkingOn
-            currentUserObjectivesObject={this.state.currentUserObjectives}
+            userProfileObjectivesObject={this.state.userProfileObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}
             receiveNextUserObjective={this.receiveNextUserObjective}
           />
           <History
-            currentUserObject={this.state.currentUser}
-            currentUserObjectivesObject={this.state.currentUserObjectives}
+            userProfileObject={this.state.userProfile}
+            userProfileObjectivesObject={this.state.userProfileObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}
           />
         </div>

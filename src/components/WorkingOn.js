@@ -10,7 +10,7 @@ class WorkingOn extends React.Component {
   }
 
   render(){
-    const sortedObjectives = this.props.currentUserObjectivesObject.sort(function(a, b) {
+    const sortedObjectives = this.props.userProfileObjectivesObject.sort(function(a, b) {
       return a.number - b.number;
     });
     const filteredObjects = sortedObjectives.filter(objective => objective.complete == false )

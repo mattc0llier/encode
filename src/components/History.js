@@ -13,7 +13,7 @@ class History extends React.Component {
 
   render(){
     // filter objects just for the completed objects
-    const filteredObjects = this.props.currentUserObjectivesObject.filter(object => object.complete == true )
+    const filteredObjects = this.props.userProfileObjectivesObject.filter(object => object.complete == true )
 
     //group completed objects by the date they were completed by
     function groupByDate(objectArray, property) {
@@ -45,7 +45,7 @@ class History extends React.Component {
         <h3>History</h3>
           {groupedObjectsArray.map(status => (
             <div key={status[0]}>
-              <Status currentUserObject={this.props.currentUserObject} statusArray={status}/>
+              <Status userProfileObject={this.props.userProfileObject} statusArray={status}/>
             </div>
           ))}
       </div>

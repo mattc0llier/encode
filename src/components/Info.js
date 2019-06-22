@@ -10,10 +10,10 @@ class Info extends React.Component {
   render(){
     return(
       <div className="info">
-        <img src={this.props.currentUserObject.photo} alt="profile picture" />
-        <h3>{this.props.currentUserObject.first_name} {this.props.currentUserObject.last_name} </h3>
-        <p>{this.props.currentUserObject.bio}</p>
-        <p>{this.props.currentUserObject.location}</p>
+        <img src={this.props.userProfileObject.photo} alt="profile picture" />
+        <h3>{this.props.userProfileObject.first_name} {this.props.userProfileObject.last_name} </h3>
+        <p>{this.props.userProfileObject.bio}</p>
+        <p>{this.props.userProfileObject.location}</p>
       </div>
     )
   }

@@ -1,30 +1,29 @@
 import React from 'react';
 import '../../styles/components/Homepage.scss';
 
-
 class Homepage extends React.Component {
   constructor(){
     super();
 
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(event){
-    console.log('login button');
-    return fetch(`/api/login`, {
-      method: 'POST',
-      body: JSON.stringify({ username: "matt", password: "password" }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(body => {
-      console.log(body);
-    })
-  }
+  // handleClick(event){
+  //   console.log('login button');
+  //   return fetch(`/api/login`, {
+  //     method: 'POST',
+  //     body: JSON.stringify({ username: "matt", password: "password" }),
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //   .then(function(response) {
+  //     return response.json();
+  //   })
+  //   .then(body => {
+  //     console.log(body);
+  //   })
+  // }
 
   render(){
     return(
@@ -94,9 +93,8 @@ class Homepage extends React.Component {
           </section>
               <section className="signup" id="signup">
                 <p>Leave your email and we'll let you know when we're ready to go.</p>
-                <a href="https://slack.com/oauth/authorize?scope=identity.basic&client_id=your_client_id"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
+                <a href="https://slack.com/oauth/authorize?scope=identity.basic&client_id=586033553927.659635767442"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
 
-                <button onClick={this.handleClick}>Login</button>
               </section>
         </main>
       </div>

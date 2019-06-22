@@ -48,6 +48,7 @@ passport.use(new SlackStrategy({
     clientSecret: process.env.SLACK_CLIENT_SECRET
   }, (accessToken, refreshToken, profile, done) => {
     // optionally persist profile data
+    console.log('is this being hit');
     done(null, profile);
   }
 ));
@@ -63,6 +64,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // index route
+// I don't know how to pass this client id into my front end code
 app.get('/', function(req, res) {
   res.render('index', {client_id: process.env.SLACK_CLIENT_ID});
 });
@@ -78,9 +80,49 @@ app.get('/logoff',
 app.get('/auth/slack', passport.authenticate('slack'));
 
 app.get('/auth/slack/callback',
-  passport.authenticate('slack', { failureRedirect: '/login' }),
-  (req, res) => res.redirect('/profile')
+passport.authenticate('slack',
+  { successRedirect: '/setcookie', failureRedirect: '/' }
+));
+
+// on successful auth, a cookie is set before redirecting
+// to the success view
+app.get('/setcookie', requireUser,
+  function(req, res) {
+    res.cookie('slack-passport-example', new Date());
+    res.redirect('/success');
+  }
 );
+
+// if cookie exists, success. otherwise, user is redirected to index
+app.get('/success', requireLogin,
+  function(req, res) {
+    if(req.cookies['slack-passport-example']) {
+      res.redirect('/feed');
+    } else {
+      res.redirect('/');
+    }
+  }
+);
+
+function requireLogin (req, res, next) {
+  if (!req.cookies['slack-passport-example']) {
+    res.redirect('/');
+  } else {
+    console.log('hit requireLogin')
+    next();
+  }
+};
+
+function requireUser (req, res, next) {
+  if (!req.user) {
+    res.redirect('/');
+  } else {
+    console.log('hit requireUser')
+    next();
+  }
+};
+
+
 
 // get all objectives
 app.get('/api/objectives', function(req, res){
