@@ -18,6 +18,10 @@ class App extends React.Component {
     super();
       this.state = { isLoggedIn: false, currentUser: {} }
 
+      this.receiveNewUser = this.receiveNewUser.bind(this);
+      this.createNewUser = this.createNewUser.bind(this);
+      this.setCurrentUser = this.setCurrentUser.bind(this);
+
   }
 
   //setApp currentUser from slack sign in and db response
@@ -26,6 +30,29 @@ class App extends React.Component {
     this.setState({
       currentUser: user
     })
+  }
+
+  createNewUser(user){
+    fetch(`/api/users/create`, {
+      method: 'POST',
+      body: JSON.stringify({
+        username: user.username,
+        email: user.email,
+        password: user.password }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      console.log(body);
+    })
+  }
+
+  receiveNewUser(user){
+    console.log(user);
   }
 
   render(){
@@ -37,7 +64,7 @@ class App extends React.Component {
             <Route path="/" exact component={Homepage} />
             <Route path="/feed" component={Feed} currentUser={this.state.currentUser} />
             <Route path="/leaderboard" component={Leaderboard} currentUser={this.state.currentUser} />
-            <Route path="/users/new" component={NewUser} />
+            <Route path="/users/new" component={NewUser} receiveNewUser={this.receiveNewUser} />
             <PrivateRoute path="/students" component={Students} currentUser={this.state.currentUser} />
             <PrivateRoute path="/users/:username" component={Profile} currentUser={this.state.currentUser} />
           </Switch>

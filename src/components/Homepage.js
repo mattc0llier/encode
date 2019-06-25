@@ -81,9 +81,9 @@ class Homepage extends React.Component {
                 <p>1 of the first 10 applicants to get accepted into Lambda using encode will <b>win $100!</b></p>
               </div>
               <div className="button-cta">
-                <a href="#signup" id="button">
-                  <button type="button" name="button">Join the wait list</button>
-                </a>
+                <Link to='/users/new'>
+                  <button type="button" name="button">Sign up to wait list</button>
+                </Link>
                 <p>33 students ready to play</p>
               </div>
             </div>

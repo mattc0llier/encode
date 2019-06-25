@@ -47,8 +47,9 @@ class NewUser extends React.Component {
 
   handleCreateUserSubmit(event){
     event.preventDefault();
-    console.log(event);
+    this.props.receiveNewUser(this.state.newUser)
   }
+
 
   render(){
     return(
