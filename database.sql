@@ -23,14 +23,17 @@ CREATE TABLE users(
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
-  photo VARCHAR(500) NOT NULL UNIQUE,
+  photo VARCHAR(500),
   username VARCHAR(200) NOT NULL UNIQUE,
   email VARCHAR(200) NOT NULL UNIQUE,
   password VARCHAR(200) NOT NULL,
   tel VARCHAR(30) NOT NULL UNIQUE,
   bio VARCHAR(500) NOT NULL,
   location VARCHAR(500),
-  creation_date TIMESTAMP WITH TIME ZONE
+  creation_date TIMESTAMP WITH TIME ZONE,
+  slack_user_id VARCHAR(100) UNIQUE,
+  slack_team_id VARCHAR(100),
+  slack_display_name VARCHAR(100)
 );
 
 CREATE TABLE courses(
@@ -80,7 +83,7 @@ INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
   VALUES
   (3, 'Dmitri', 'Grabov', '/static/assets/images/Rolanddd.jpg', 'dmitri', 'testing@gmail.com', 'password', '01234567898', 'Constructor Labs founder', 'London, UK', '2018-10-23T10:37:33.735972Z');
-
+ALTER SEQUENCE users_id_seq RESTART WITH 4 INCREMENT BY 1;
 
 INSERT INTO organizations
   (id, name, url)
@@ -274,3 +277,4 @@ INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
   (9, 3, 3, FALSE, NULL);
+ALTER SEQUENCE activities_id_seq RESTART WITH 24 INCREMENT BY 1;

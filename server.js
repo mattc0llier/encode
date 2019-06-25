@@ -45,10 +45,30 @@ app.use(require('express-session')({
 
 passport.use(new SlackStrategy({
     clientID: process.env.SLACK_CLIENT_ID,
-    clientSecret: process.env.SLACK_CLIENT_SECRET
+    clientSecret: process.env.SLACK_CLIENT_SECRET,
+    skipUserProfile: false, // default
+    scope: ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team']
   }, (accessToken, refreshToken, profile, done) => {
     // optionally persist profile data
-    console.log('SlackStrategy is this being hit');
+    console.log('SlackStrategy is this being hit', accessToken);
+    console.log('SlackStrategy is this being hit', refreshToken);
+    console.log('profile', profile);
+    console.log('profile.id', profile.id);
+    console.log('profile.team', profile.team.id);
+    console.log('profile.displayName', profile.displayName);
+
+    db.one(
+          "INSERT INTO users (slack_user_id, slack_team_id, slack_display_name, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date) VALUES ($1, $2, $3, 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', CURRENT_TIMESTAMP) RETURNING id, slack_user_id, slack_team_id, slack_display_name", [profile.id, profile.team.id, profile.displayName]
+        )
+    .then((response) => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log({
+        error: error.message
+      });
+    });
+
     done(null, profile);
   }
 ));

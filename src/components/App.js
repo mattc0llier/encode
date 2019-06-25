@@ -6,6 +6,7 @@ import Students from './Students';
 import Leaderboard from './Leaderboard';
 import Feed from './Feed';
 import Footer from './Footer';
+import NewUser from './NewUser';
 import PrivateRoute from './PrivateRoute';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -19,6 +20,7 @@ class App extends React.Component {
 
   }
 
+  //setApp currentUser from slack sign in and db response
   setCurrentUser(user){
     console.log(user);
     this.setState({
@@ -33,8 +35,9 @@ class App extends React.Component {
           <Nav isLoggedIn={this.state.isLoggedIn} currentUser={this.state.currentUser}/>
           <Switch>
             <Route path="/" exact component={Homepage} />
-            <PrivateRoute path="/feed" component={Feed} currentUser={this.state.currentUser} />
+            <Route path="/feed" component={Feed} currentUser={this.state.currentUser} />
             <Route path="/leaderboard" component={Leaderboard} currentUser={this.state.currentUser} />
+            <Route path="/users/new" component={NewUser} />
             <PrivateRoute path="/students" component={Students} currentUser={this.state.currentUser} />
             <PrivateRoute path="/users/:username" component={Profile} currentUser={this.state.currentUser} />
           </Switch>
