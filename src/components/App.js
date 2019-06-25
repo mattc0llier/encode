@@ -64,7 +64,9 @@ class App extends React.Component {
             <Route path="/" exact component={Homepage} />
             <Route path="/feed" component={Feed} currentUser={this.state.currentUser} />
             <Route path="/leaderboard" component={Leaderboard} currentUser={this.state.currentUser} />
-            <Route path="/users/new" component={NewUser} receiveNewUser={this.receiveNewUser} />
+            <Route path="/users/new"
+              render={(props) => (<NewUser {...props} receiveNewUser={this.receiveNewUser} />)}
+            />
             <PrivateRoute path="/students" component={Students} currentUser={this.state.currentUser} />
             <PrivateRoute path="/users/:username" component={Profile} currentUser={this.state.currentUser} />
           </Switch>
