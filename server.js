@@ -73,17 +73,17 @@ app.use(require('express-session')({
 //   }
 // ));
 
-// passport.serializeUser(function(user, done) {
-//   console.log('serializeUser');
-//   done(null, user);
-// });
-// passport.deserializeUser(function(obj, done) {
-//   console.log('deserializeUser');
-//   done(null, obj);
-// });
+passport.serializeUser(function(user, done) {
+  console.log('serializeUser');
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  console.log('deserializeUser');
+  done(null, obj);
+});
 //
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // on clicking "logoff" the cookie is cleared
 // app.get('/logoff',
@@ -159,12 +159,19 @@ passport.use(new LocalStrategy(
     console.log('user', user);
     console.log('user.password', user.password);
     console.log('auth password', password);
-    function checkPasswordAgainstExisting(err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      if (bcrypt.compare(password, user.password)) { return done(null, false); }
-      return done(null, user);
-    };
+
+    if (!user) {
+      return done(null, false);
+    }
+
+    const passwordMatches = await bcrypt.compare(password, user.password)
+
+    if (passwordMatches) {
+      console.log(user)
+      done(null, user);
+    } else {
+      done(null, false);
+    }
   }
 ));
 

@@ -96,6 +96,11 @@ INSERT INTO courses
   VALUES
   (1, 'Web Development Precourse', 'https://apply.lambdaschool.com/courses/web-precourse/', 1);
 
+INSERT INTO courses
+  (id, name, url, organization_id)
+  VALUES
+  (1, 'Data Science Precourse', 'https://apply.lambdaschool.com/courses/ds-precourse/', 1);
+
 
 INSERT INTO lessons
   (id, name, url, course_id)

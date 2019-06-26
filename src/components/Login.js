@@ -1,4 +1,6 @@
 import React from 'react';
+import '../../styles/components/Login.scss';
+
 
 class Login extends React.Component {
   constructor(){
@@ -43,7 +45,7 @@ class Login extends React.Component {
       <div className="loginUser">
         <h2>loginUser</h2>
         <form  onSubmit={this.handleLoginUserSubmit}>
-          <input className="loginUser__input" onChange={this.handleUsernameChange} placeholder="username" />
+          <input className="loginUser__input" onChange={this.handleUsernameChange} placeholder="@ username" />
           <input className="loginUser__input" onChange={this.handlePasswordChange} placeholder="password" />
           <button type="submit" className="loginUser__button">Login</button>
         </form>
