@@ -21,14 +21,14 @@ CREATE TABLE organizations(
 
 CREATE TABLE users(
   id SERIAL PRIMARY KEY,
-  first_name VARCHAR(100) NOT NULL,
-  last_name VARCHAR(100) NOT NULL,
+  first_name VARCHAR(100),
+  last_name VARCHAR(100),
   photo VARCHAR(500),
   username VARCHAR(200) NOT NULL UNIQUE,
   email VARCHAR(200) NOT NULL UNIQUE,
   password VARCHAR(200) NOT NULL,
-  tel VARCHAR(30) NOT NULL UNIQUE,
-  bio VARCHAR(500) NOT NULL,
+  tel VARCHAR(30) UNIQUE,
+  bio VARCHAR(500),
   location VARCHAR(500),
   creation_date TIMESTAMP WITH TIME ZONE,
   slack_user_id VARCHAR(100) UNIQUE,

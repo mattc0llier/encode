@@ -18,7 +18,7 @@ const db = pgp({
 // passport
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
-// const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const SlackStrategy = require('passport-slack').Strategy;
 
 const connectEnsureLogin = require('connect-ensure-login');
@@ -57,6 +57,7 @@ passport.use(new SlackStrategy({
     console.log('profile.team', profile.team.id);
     console.log('profile.displayName', profile.displayName);
 
+    // this needs to be an update
     db.one(
           "INSERT INTO users (slack_user_id, slack_team_id, slack_display_name, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date) VALUES ($1, $2, $3, 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', CURRENT_TIMESTAMP) RETURNING id, slack_user_id, slack_team_id, slack_display_name", [profile.id, profile.team.id, profile.displayName]
         )
@@ -141,7 +142,21 @@ passport.authenticate('slack',
 //   }
 // };
 
-
+// create new users
+app.post('/api/users/create', function(req, res){
+  console.log(req.body);
+  const {username, email, password} = req.body
+  db.one("INSERT INTO users (username, email, password, creation_date) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING id, username, email", [username, email, password])
+  .then((data) => {
+    res.json(data)
+    res.status(200).send({update: "success"});
+  })
+  .catch(error => {
+    res.json({
+      error: error.message
+    });
+  });
+})
 
 // get all objectives
 app.get('/api/objectives', function(req, res){

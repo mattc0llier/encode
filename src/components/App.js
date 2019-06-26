@@ -48,11 +48,16 @@ class App extends React.Component {
     })
     .then(body => {
       console.log(body);
+      this.setState({
+        currentUser: body,
+        isLoggedIn: true
+      })
     })
   }
 
   receiveNewUser(user){
     console.log(user);
+    this.createNewUser(user)
   }
 
   render(){
@@ -61,14 +66,30 @@ class App extends React.Component {
         <React.Fragment>
           <Nav isLoggedIn={this.state.isLoggedIn} currentUser={this.state.currentUser}/>
           <Switch>
-            <Route path="/" exact component={Homepage} />
-            <Route path="/feed" component={Feed} currentUser={this.state.currentUser} />
-            <Route path="/leaderboard" component={Leaderboard} currentUser={this.state.currentUser} />
+            <Route path="/" exact
+              component={Homepage}
+            />
+            <Route path="/feed"
+              render={(props) => (<Feed {...props} currentUser={this.state.currentUser} />)}
+            />
+            <Route path="/leaderboard"
+              render={(props) => (<Leaderboard {...props} currentUser={this.state.currentUser} />)}
+            />
             <Route path="/users/new"
               render={(props) => (<NewUser {...props} receiveNewUser={this.receiveNewUser} />)}
             />
-            <PrivateRoute path="/students" component={Students} currentUser={this.state.currentUser} />
-            <PrivateRoute path="/users/:username" component={Profile} currentUser={this.state.currentUser} />
+            <PrivateRoute path="/students"
+              render={(props) => (<Students {...props}
+                currentUser={this.state.currentUser}
+                isLoggedIn={this.state.isLoggedIn}
+               />)}
+            />
+            <PrivateRoute path="/users/:username"
+              render={(props) => (<Profile {...props}
+                currentUser={this.state.currentUser}
+                isLoggedIn={this.state.isLoggedIn} 
+              />)}
+            />
           </Switch>
           <Footer />
         </React.Fragment>
