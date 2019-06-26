@@ -23,9 +23,8 @@ const SlackStrategy = require('passport-slack').Strategy;
 
 const connectEnsureLogin = require('connect-ensure-login');
 
-// I am going to set up passport with just slack oauth first - then username and logins.
-// const bcrypt = require('bcrypt');
-// const SALT_ROUNDS = 12;
+const bcrypt = require('bcrypt');
+const SALT_ROUNDS = 12;
 
 //managing session cookies
 const cookieExpirationDate = new Date();
@@ -142,14 +141,21 @@ passport.authenticate('slack',
 //   }
 // };
 
+// changing state even when not successful - need to add a catch
 // create new users
 app.post('/api/users/create', function(req, res){
   console.log(req.body);
   const {username, email, password} = req.body
-  db.one("INSERT INTO users (username, email, password, creation_date) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING id, username, email", [username, email, password])
-  .then((data) => {
-    res.json(data)
-    res.status(200).send({update: "success"});
+  bcrypt.genSalt(SALT_ROUNDS)
+  .then( salt => {
+    return bcrypt.hash(password, salt);
+  })
+  .then( hashedPassword => {
+    db.one("INSERT INTO users (username, email, password, creation_date) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING id, username, email", [username, email, hashedPassword])
+    .then((data) => {
+      res.json(data)
+      res.status(200).send({update: "success"});
+    })
   })
   .catch(error => {
     res.json({
