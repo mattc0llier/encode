@@ -6,26 +6,7 @@ import '../../styles/components/Homepage.scss';
 class Homepage extends React.Component {
   constructor(){
     super();
-
-    // this.handleClick = this.handleClick.bind(this);
   }
-
-  // handleClick(event){
-  //   console.log('login button');
-  //   return fetch(`/api/login`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({ username: "matt", password: "password" }),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //   .then(function(response) {
-  //     return response.json();
-  //   })
-  //   .then(body => {
-  //     console.log(body);
-  //   })
-  // }
 
   render(){
     return(

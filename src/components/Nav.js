@@ -12,7 +12,11 @@ class Nav extends React.Component {
   render(){
     return(
       <div className="nav">
-        <Link to='/'><h1>encode</h1></Link>
+        { this.props.isLoggedIn ? (
+          <Link to='/feed'><h1>encode</h1></Link>
+        ): (
+          <Link to='/'><h1>encode</h1></Link>
+        )}
         <ul className="right-nav">
           <Link to='/leaderboard'><li>leaderboard</li></Link>
           <Link to='/feed'><li>feed</li></Link>

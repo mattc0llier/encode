@@ -22,7 +22,7 @@ class App extends React.Component {
       this.receiveNewUser = this.receiveNewUser.bind(this);
       this.createNewUser = this.createNewUser.bind(this);
       this.setCurrentUser = this.setCurrentUser.bind(this);
-
+      this.receiveLoginUser = this.receiveLoginUser.bind(this);
   }
 
   //setApp currentUser from slack sign in and db response
@@ -33,28 +33,7 @@ class App extends React.Component {
     })
   }
 
-  createNewUser(user){
-    fetch(`/api/users/create`, {
-      method: 'POST',
-      body: JSON.stringify({
-        username: user.username,
-        email: user.email,
-        password: user.password }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(body => {
-      console.log(body);
-      this.setState({
-        currentUser: body,
-        isLoggedIn: true
-      })
-    })
-  }
+
 
   receiveNewUser(user){
     console.log(user);
@@ -77,11 +56,35 @@ class App extends React.Component {
       return response.json();
     })
     .then(body => {
-      console.log(body);
+      console.log('loggedInUser', body);
       this.setState({
         currentUser: body,
         isLoggedIn: true
       })
+    })
+  }
+
+  createNewUser(user, receiveLoginUser){
+    fetch(`/api/users/create`, {
+      method: 'POST',
+      body: JSON.stringify({
+        username: user.username,
+        email: user.email,
+        password: user.password }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      console.log('newUser', body);
+      this.receiveLoginUser(body)
+      // this.setState({
+      //   currentUser: body,
+      //   isLoggedIn: true
+      // })
     })
   }
 

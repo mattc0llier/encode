@@ -36,42 +36,10 @@ app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
 app.use(cookieParser());
 app.use(require('express-session')({
-  secret: 'some random text #^*%!!', // used to generate session ids
+  secret: process.env.EXPRESS_SESSION_STRING, // used to generate session ids
   resave: false,
   saveUninitialized: false
 }));
-
-// passport slack Strategy
-// passport.use(new SlackStrategy({
-//     clientID: process.env.SLACK_CLIENT_ID,
-//     clientSecret: process.env.SLACK_CLIENT_SECRET,
-//     skipUserProfile: false, // default
-//     scope: ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team']
-//   }, (accessToken, refreshToken, profile, done) => {
-//     // optionally persist profile data
-//     console.log('SlackStrategy is this being hit', accessToken);
-//     console.log('SlackStrategy is this being hit', refreshToken);
-//     console.log('profile', profile);
-//     console.log('profile.id', profile.id);
-//     console.log('profile.team', profile.team.id);
-//     console.log('profile.displayName', profile.displayName);
-//
-//     // this needs to be an update
-//     db.one(
-//           "INSERT INTO users (slack_user_id, slack_team_id, slack_display_name, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date) VALUES ($1, $2, $3, 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', CURRENT_TIMESTAMP) RETURNING id, slack_user_id, slack_team_id, slack_display_name", [profile.id, profile.team.id, profile.displayName]
-//         )
-//     .then((response) => {
-//       console.log(response);
-//     })
-//     .catch(error => {
-//       console.log({
-//         error: error.message
-//       });
-//     });
-//
-//     done(null, profile);
-//   }
-// ));
 
 passport.serializeUser(function(user, done) {
   console.log('serializeUser');
@@ -88,43 +56,19 @@ app.use(passport.session());
 // on clicking "logoff" the cookie is cleared
 // app.get('/logoff',
 //   function(req, res) {
-//     res.clearCookie('slack-passport-example');
+//     res.clearCookie('encode-passport');
 //     res.redirect('/');
 //   }
 // );
 
-// app.get('/auth/slack', passport.authenticate('slack'));
-//
-// app.get('/auth/slack/callback',
-// passport.authenticate('slack',
-//   { successRedirect: '/feed', failureRedirect: '/' }
-// ));
+// // PASSPORT route to log out users
+// app.get('/api/logout', (req, res) => {
+//   req.logout();
+//   res.json({ response: 'You have sucessfully logged out' });
+// });
 
-// on successful auth, a cookie is set before redirecting
-// // to the success view
-// app.get('/setcookie', requireUser,
-//   function(req, res) {
-//     res.cookie('encode-passport', new Date());
-//     console.log('setcookie');
-//     res.redirect('/success');
-//   }
-// );
-//
-// // if cookie exists, success. otherwise, user is redirected to index
-// app.get('/success', requireLogin,
-//   function(req, res) {
-//     if(req.cookies['encode-passport']) {
-//       console.log('cookie success');
-//       res.redirect('/feed');
-//     } else {
-//       console.log('cookie fail');
-//       res.redirect('/');
-//     }
-//   }
-// );
-//
 // function requireLogin (req, res, next) {
-//   if (!req.cookies['slack-passport-example']) {
+//   if (!req.cookies['encode-passport']) {
 //     res.redirect('/');
 //   } else {
 //     console.log('hit requireLogin')
@@ -140,6 +84,30 @@ app.use(passport.session());
 //     next();
 //   }
 // };
+//
+// // on successful auth, a cookie is set before redirecting
+// // // to the success view
+// app.get('/setcookie', requireUser,
+//   function(req, res) {
+//     res.cookie('encode-passport', new Date());
+//     console.log('setcookie');
+//     res.redirect('/success');
+//   }
+// );
+//
+// // // if cookie exists, success. otherwise, user is redirected to index
+// app.get('/success', requireLogin,
+//   function(req, res) {
+//     if(req.cookies['encode-passport']) {
+//       console.log('cookie success');
+//       res.redirect('/');
+//     } else {
+//       console.log('cookie fail');
+//       res.redirect('/');
+//     }
+//   }
+// );
+
 
 // helper function for Passport but should i just be using app.get(/user/:id)
 function getUserByUsername(username) {
@@ -163,8 +131,15 @@ passport.use(new LocalStrategy(
     if (!user) {
       return done(null, false);
     }
-
-    const passwordMatches = await bcrypt.compare(password, user.password)
+    // if passwords match make passwordMatches true else run await bcrypt compare
+    function testPassword(test_password, db_password) {
+      if (db_password == test_password) {
+        return true;
+      } else {
+        return bcrypt.compare(test_password, db_password)
+      }
+    }
+    const passwordMatches = await testPassword(password, user.password)
 
     if (passwordMatches) {
       console.log(user)
@@ -175,14 +150,9 @@ passport.use(new LocalStrategy(
   }
 ));
 
-// User login page
-app.get('/login', function(req, res){
-  res.render('login', {})
-})
-
 // PASSPORT route to accept logins
 app.post('/api/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
-  res.json(req.body);
+  res.json({ user_id: req.user.id, username: req.user.username, email: req.user.email });
 });
 
 
@@ -196,7 +166,7 @@ app.post('/api/users/create', function(req, res){
     return bcrypt.hash(password, salt);
   })
   .then( hashedPassword => {
-    db.one("INSERT INTO users (username, email, password, creation_date) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING id, username, email", [username, email, hashedPassword])
+    db.one("INSERT INTO users (username, email, password, creation_date) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING id, username, email, password", [username, email, hashedPassword])
     .then((data) => {
       res.json(data)
       res.status(200).send({update: "success"});
