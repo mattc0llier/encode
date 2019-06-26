@@ -74,7 +74,7 @@ CREATE TABLE activities(
 INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
   VALUES
-  (1, 'Matt', 'Collier', '/static/assets/images/Roland.jpg', 'matt', 'matt@encode.app', 'password', '01234567890', 'University drop out. Product / Code / Sales previously at @pusher @gocardless @mintdigital', 'Devon, UK', '2018-10-21T10:37:33.735972Z');
+  (1, 'Matt', 'Collier', '/static/assets/images/Roland.jpg', 'matt', 'matt@encode.app', '$2b$12$UtVNV8XoRRh0N5/MnPy3Tu8AIQMGda3VWXVjW03qUTMypLXY.sSOW', '01234567890', 'University drop out. Product / Code / Sales previously at @pusher @gocardless @mintdigital', 'Devon, UK', '2018-10-21T10:37:33.735972Z');
 INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
   VALUES

@@ -7,6 +7,7 @@ import Leaderboard from './Leaderboard';
 import Feed from './Feed';
 import Footer from './Footer';
 import NewUser from './NewUser';
+import Login from './Login';
 import PrivateRoute from './PrivateRoute';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -60,6 +61,26 @@ class App extends React.Component {
     this.createNewUser(user)
   }
 
+  receiveLoginUser(user){
+    console.log(user);
+    fetch(`/api/login`, {
+      method: 'POST',
+      body: JSON.stringify({
+        username: user.username,
+        password: user.password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      console.log(body);
+    })
+  }
+
   render(){
     return(
       <Router>
@@ -78,6 +99,9 @@ class App extends React.Component {
             <Route path="/users/new"
               render={(props) => (<NewUser {...props} receiveNewUser={this.receiveNewUser} />)}
             />
+            <Route path="/login"
+              render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} />)}
+            />
             <PrivateRoute path="/students"
               render={(props) => (<Students {...props}
                 currentUser={this.state.currentUser}
@@ -87,7 +111,7 @@ class App extends React.Component {
             <PrivateRoute path="/users/:username"
               render={(props) => (<Profile {...props}
                 currentUser={this.state.currentUser}
-                isLoggedIn={this.state.isLoggedIn} 
+                isLoggedIn={this.state.isLoggedIn}
               />)}
             />
           </Switch>

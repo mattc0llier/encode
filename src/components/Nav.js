@@ -28,6 +28,9 @@ class Nav extends React.Component {
               <Link to='/users/new'>
                 <button type="button" name="button">Sign up to wait list</button>
               </Link>
+              <Link to='/login'>
+                <button type="button" name="button">Login</button>
+              </Link>
             </div>
             </React.Fragment>
           )}

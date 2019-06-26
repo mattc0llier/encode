@@ -95,7 +95,6 @@ class Homepage extends React.Component {
           </section>
               <section className="signup" id="signup">
                 <p>Leave your email and we'll let you know when we're ready to go.</p>
-                <a href="https://slack.com/oauth/authorize?scope=identity.basic&client_id=586033553927.659635767442"><img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" /></a>
               </section>
         </main>
       </div>

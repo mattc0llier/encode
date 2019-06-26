@@ -19,9 +19,9 @@ const db = pgp({
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const LocalStrategy = require('passport-local').Strategy;
-const SlackStrategy = require('passport-slack').Strategy;
+// const SlackStrategy = require('passport-slack').Strategy;
 
-const connectEnsureLogin = require('connect-ensure-login');
+// const connectEnsureLogin = require('connect-ensure-login');
 
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 12;
@@ -41,64 +41,64 @@ app.use(require('express-session')({
   saveUninitialized: false
 }));
 
+// passport slack Strategy
+// passport.use(new SlackStrategy({
+//     clientID: process.env.SLACK_CLIENT_ID,
+//     clientSecret: process.env.SLACK_CLIENT_SECRET,
+//     skipUserProfile: false, // default
+//     scope: ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team']
+//   }, (accessToken, refreshToken, profile, done) => {
+//     // optionally persist profile data
+//     console.log('SlackStrategy is this being hit', accessToken);
+//     console.log('SlackStrategy is this being hit', refreshToken);
+//     console.log('profile', profile);
+//     console.log('profile.id', profile.id);
+//     console.log('profile.team', profile.team.id);
+//     console.log('profile.displayName', profile.displayName);
+//
+//     // this needs to be an update
+//     db.one(
+//           "INSERT INTO users (slack_user_id, slack_team_id, slack_display_name, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date) VALUES ($1, $2, $3, 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', CURRENT_TIMESTAMP) RETURNING id, slack_user_id, slack_team_id, slack_display_name", [profile.id, profile.team.id, profile.displayName]
+//         )
+//     .then((response) => {
+//       console.log(response);
+//     })
+//     .catch(error => {
+//       console.log({
+//         error: error.message
+//       });
+//     });
+//
+//     done(null, profile);
+//   }
+// ));
 
-passport.use(new SlackStrategy({
-    clientID: process.env.SLACK_CLIENT_ID,
-    clientSecret: process.env.SLACK_CLIENT_SECRET,
-    skipUserProfile: false, // default
-    scope: ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team']
-  }, (accessToken, refreshToken, profile, done) => {
-    // optionally persist profile data
-    console.log('SlackStrategy is this being hit', accessToken);
-    console.log('SlackStrategy is this being hit', refreshToken);
-    console.log('profile', profile);
-    console.log('profile.id', profile.id);
-    console.log('profile.team', profile.team.id);
-    console.log('profile.displayName', profile.displayName);
-
-    // this needs to be an update
-    db.one(
-          "INSERT INTO users (slack_user_id, slack_team_id, slack_display_name, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date) VALUES ($1, $2, $3, 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', 'temporary', CURRENT_TIMESTAMP) RETURNING id, slack_user_id, slack_team_id, slack_display_name", [profile.id, profile.team.id, profile.displayName]
-        )
-    .then((response) => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log({
-        error: error.message
-      });
-    });
-
-    done(null, profile);
-  }
-));
-
-passport.serializeUser(function(user, done) {
-  console.log('serializeUser');
-  done(null, user);
-});
-passport.deserializeUser(function(obj, done) {
-  console.log('deserializeUser');
-  done(null, obj);
-});
-
-app.use(passport.initialize());
-app.use(passport.session());
+// passport.serializeUser(function(user, done) {
+//   console.log('serializeUser');
+//   done(null, user);
+// });
+// passport.deserializeUser(function(obj, done) {
+//   console.log('deserializeUser');
+//   done(null, obj);
+// });
+//
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // on clicking "logoff" the cookie is cleared
-app.get('/logoff',
-  function(req, res) {
-    res.clearCookie('slack-passport-example');
-    res.redirect('/');
-  }
-);
+// app.get('/logoff',
+//   function(req, res) {
+//     res.clearCookie('slack-passport-example');
+//     res.redirect('/');
+//   }
+// );
 
-app.get('/auth/slack', passport.authenticate('slack'));
-
-app.get('/auth/slack/callback',
-passport.authenticate('slack',
-  { successRedirect: '/feed', failureRedirect: '/' }
-));
+// app.get('/auth/slack', passport.authenticate('slack'));
+//
+// app.get('/auth/slack/callback',
+// passport.authenticate('slack',
+//   { successRedirect: '/feed', failureRedirect: '/' }
+// ));
 
 // on successful auth, a cookie is set before redirecting
 // // to the success view
@@ -140,6 +140,44 @@ passport.authenticate('slack',
 //     next();
 //   }
 // };
+
+// helper function for Passport but should i just be using app.get(/user/:id)
+function getUserByUsername(username) {
+  console.log('username', username);
+  return db.one(
+    'SELECT id, username, email, password FROM users WHERE username=$1', [username]
+  )
+  .catch((error) => {
+    console.log('failed to get user', error);
+  });
+}
+
+passport.use(new LocalStrategy(
+  async (username, password, done) => {
+    // get user.password with username in the db
+    const user = await getUserByUsername(username);
+    console.log('user', user);
+    console.log('user.password', user.password);
+    console.log('auth password', password);
+    function checkPasswordAgainstExisting(err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (bcrypt.compare(password, user.password)) { return done(null, false); }
+      return done(null, user);
+    };
+  }
+));
+
+// User login page
+app.get('/login', function(req, res){
+  res.render('login', {})
+})
+
+// PASSPORT route to accept logins
+app.post('/api/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
+  res.json(req.body);
+});
+
 
 // changing state even when not successful - need to add a catch
 // create new users
