@@ -78,6 +78,10 @@ class App extends React.Component {
     })
     .then(body => {
       console.log(body);
+      this.setState({
+        currentUser: body,
+        isLoggedIn: true
+      })
     })
   }
 

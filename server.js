@@ -104,7 +104,7 @@ app.use(passport.session());
 // // to the success view
 // app.get('/setcookie', requireUser,
 //   function(req, res) {
-//     res.cookie('slack-passport-example', new Date());
+//     res.cookie('encode-passport', new Date());
 //     console.log('setcookie');
 //     res.redirect('/success');
 //   }
@@ -113,7 +113,7 @@ app.use(passport.session());
 // // if cookie exists, success. otherwise, user is redirected to index
 // app.get('/success', requireLogin,
 //   function(req, res) {
-//     if(req.cookies['slack-passport-example']) {
+//     if(req.cookies['encode-passport']) {
 //       console.log('cookie success');
 //       res.redirect('/feed');
 //     } else {
