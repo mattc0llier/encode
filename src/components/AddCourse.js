@@ -10,7 +10,7 @@ class AddCourse extends React.Component {
   render(){
     return(
       <div className="add-course">
-        <p>This a feed of all of the latest updates in your network</p>
+        <p>Select your course:</p>
       </div>
     )
   }

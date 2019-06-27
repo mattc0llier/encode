@@ -43,11 +43,15 @@ app.use(require('express-session')({
 
 passport.serializeUser(function(user, done) {
   console.log('serializeUser');
-  done(null, user);
+  done(null, user.id);
 });
-passport.deserializeUser(function(obj, done) {
-  console.log('deserializeUser');
-  done(null, obj);
+passport.deserializeUser(function(userId, done) {
+  // db call to get user
+  getUserByID(userId)
+  .then(user => {
+    console.log('deserializeUser', user);
+    done(null, user);
+  })
 });
 //
 app.use(passport.initialize());
@@ -67,6 +71,31 @@ app.use(passport.session());
 //   res.json({ response: 'You have sucessfully logged out' });
 // });
 
+// // on successful auth, a cookie is set before redirecting
+// // // to the success view
+// app.get('/setcookie', requireUser,
+//   function(req, res) {
+//     res.cookie('encode-passport', new Date());
+//     console.log('setcookie');
+//     res.redirect('/success');
+//   }
+// );
+//
+// // // if cookie exists, success. otherwise, user is redirected to index
+// // how do i call this everytime i refresh
+// app.get('/success', requireLogin,
+//   function(req, res) {
+//     if(req.cookies['encode-passport']) {
+//       console.log('cookie success');
+//       //this should stay on the page you were already on
+//       res.redirect('/feed');
+//     } else {
+//       console.log('cookie fail');
+//       res.redirect('/');
+//     }
+//   }
+// );
+//
 // function requireLogin (req, res, next) {
 //   if (!req.cookies['encode-passport']) {
 //     res.redirect('/');
@@ -84,29 +113,6 @@ app.use(passport.session());
 //     next();
 //   }
 // };
-//
-// // on successful auth, a cookie is set before redirecting
-// // // to the success view
-// app.get('/setcookie', requireUser,
-//   function(req, res) {
-//     res.cookie('encode-passport', new Date());
-//     console.log('setcookie');
-//     res.redirect('/success');
-//   }
-// );
-//
-// // // if cookie exists, success. otherwise, user is redirected to index
-// app.get('/success', requireLogin,
-//   function(req, res) {
-//     if(req.cookies['encode-passport']) {
-//       console.log('cookie success');
-//       res.redirect('/');
-//     } else {
-//       console.log('cookie fail');
-//       res.redirect('/');
-//     }
-//   }
-// );
 
 
 // helper function for Passport but should i just be using app.get(/user/:id)
@@ -114,6 +120,16 @@ function getUserByUsername(username) {
   console.log('username', username);
   return db.one(
     'SELECT id, username, email, password FROM users WHERE username=$1', [username]
+  )
+  .catch((error) => {
+    console.log('failed to get user', error);
+  });
+}
+// helper function for Passport but should i just be using app.get(/user/:id)
+function getUserByID(id) {
+  console.log('user id', id);
+  return db.one(
+    'SELECT id, username, email, password FROM users WHERE id=$1', [id]
   )
   .catch((error) => {
     console.log('failed to get user', error);
@@ -134,6 +150,7 @@ passport.use(new LocalStrategy(
     // if passwords match make passwordMatches true else run await bcrypt compare
     function testPassword(test_password, db_password) {
       if (db_password == test_password) {
+        // would this make passwordMatches truthy?
         return true;
       } else {
         return bcrypt.compare(test_password, db_password)
@@ -261,7 +278,7 @@ app.patch('/api/activities/:activityId', (req, res) => {
 // index route
 // I don't know how to pass this client id into my front end code
 app.get('/', function(req, res) {
-  res.render('index', {client_id: process.env.SLACK_CLIENT_ID});
+  res.render('index');
 });
 
 app.listen(9090, function(){

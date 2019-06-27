@@ -109,16 +109,16 @@ class App extends React.Component {
             <Route path="/login"
               render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} />)}
             />
-            <PrivateRoute path="/students"
+            <Route path="/students"
               render={(props) => (<Students {...props}
-                currentUser={this.state.currentUser}
-                isLoggedIn={this.state.isLoggedIn}
-               />)}
+              isLoggedIn={this.state.isLoggedIn}
+              currentUser={this.state.currentUser}
+              />)}
             />
-            <PrivateRoute path="/users/:username"
+            <Route path="/users/:username"
               render={(props) => (<Profile {...props}
-                currentUser={this.state.currentUser}
                 isLoggedIn={this.state.isLoggedIn}
+              currentUser={this.state.currentUser}
               />)}
             />
           </Switch>

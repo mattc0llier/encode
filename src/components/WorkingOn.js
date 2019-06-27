@@ -10,6 +10,7 @@ class WorkingOn extends React.Component {
   }
 
   render(){
+    console.log('this.props.userProfileObjectivesObject', this.props.userProfileObjectivesObject);
     const sortedObjectives = this.props.userProfileObjectivesObject.sort(function(a, b) {
       return a.number - b.number;
     });

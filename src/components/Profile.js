@@ -10,7 +10,7 @@ import '../../styles/components/Profile.scss';
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { userProfile: [], userProfileProfileObjectives: [], nextUserProfileObjective: {} };
+    this.state = { userProfile: [], userProfileObjectives: [], nextUserProfileObjective: {} };
 
     this.fetchUser = this.fetchUser.bind(this);
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
