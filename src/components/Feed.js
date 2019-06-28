@@ -1,6 +1,6 @@
 import React from 'react';
 import SortByUser from './SortByUser';
-import { startOfDay, compareDesc } from 'date-fns'
+import { startOfDay, compareDesc, isToday } from 'date-fns'
 import '../../styles/components/Feed.scss';
 
 
@@ -63,11 +63,13 @@ class Feed extends React.Component {
 
     return(
       <div className="feed">
-        <p>This a feed of all of the latest updates in your network</p>
-
         {this.state.groupedStatusesByDate.map(statuses => (
           <div key={statuses[0]}>
-            <h3>{statuses[0]}</h3>
+            { isToday(statuses[0]) ? (
+              <h3>Today</h3>
+            ) : (
+              <h3>{statuses[0]}</h3>
+            )}
             { console.log('statuses[1]', statuses[1])}
             <SortByUser objectivesGroupedByDate={statuses[1]}/>
           </div>
