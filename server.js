@@ -252,7 +252,7 @@ app.get('/api/activities', function(req, res){
 app.get('/api/users/:id/objectives', (req, res) => {
   const { id } = req.params;
   return db
-    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time FROM objectives, activities WHERE activities.objective_id = objectives.id AND activities.user_id=$1', [id])
+    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.user_id=$1', [id])
     .then(data => {
       res.json(data)
     })
@@ -285,7 +285,7 @@ app.get('/api/users/:id/scores', (req, res) => {
 })
 
 app.get('/api/activities/objectives/complete', (req, res) => {
-  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id FROM objectives, activities WHERE activities.objective_id = objectives.id AND activities.complete = true ORDER BY activities.completion_time DESC')
+  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.complete = true ORDER BY activities.completion_time DESC')
   .then(data => {
     res.json(data)
   })

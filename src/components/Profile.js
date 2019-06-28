@@ -149,7 +149,6 @@ class Profile extends React.Component {
             currentUserProfile={this.state.currentUserProfile}
           />
           <History
-            userProfileObject={this.state.userProfile}
             userProfileObjectivesObject={this.state.userProfileObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}
           />

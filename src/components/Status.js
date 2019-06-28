@@ -12,7 +12,9 @@ class Status extends React.Component {
 
   render(){
 
-    const latestObjectives = this.props.statusArray[1].sort(function(a, b) {
+    console.log('this.props.statusArray', this.props.statusArray);
+
+    const latestObjectives = this.props.statusArray.sort(function(a, b) {
       return a.completion_time - b.completion_time;
     });
 
@@ -26,13 +28,11 @@ class Status extends React.Component {
     return(
       <div className="status">
         <ul>
-          <h3>{this.props.statusArray[0]}</h3>
-
           <div className="status-content">
             <div className="status-header">
-              <img src={this.props.userProfileObject.photo} />
+              <img src={this.props.statusArray[0].photo} />
               <div className="header-info">
-                <p>{this.props.userProfileObject.first_name} {this.props.userProfileObject.last_name}</p>
+                <p>{this.props.statusArray[0].first_name} {this.props.statusArray[0].last_name}</p>
                 <p>🎓32 🔥23 ✅12</p>
               </div>
             </div>
