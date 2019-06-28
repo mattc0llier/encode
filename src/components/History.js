@@ -37,6 +37,7 @@ class History extends React.Component {
     })
 
 
+    console.log('filteredObjects',  filteredObjects);
     console.log('groupedObjectsArray',  groupedObjectsArray);
     console.log('sortedObjectives',  sortedObjectives);
 

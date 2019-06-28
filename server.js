@@ -284,8 +284,8 @@ app.get('/api/users/:id/scores', (req, res) => {
   .catch(error => res.json({ error: error.message }));
 })
 
-app.get('/api/activities/complete', (req, res) => {
-  db.any('SELECT * FROM activities WHERE complete = true ORDER BY completion_time DESC')
+app.get('/api/activities/objectives/complete', (req, res) => {
+  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id FROM objectives, activities WHERE activities.objective_id = objectives.id AND activities.complete = true ORDER BY activities.completion_time DESC')
   .then(data => {
     res.json(data)
   })
