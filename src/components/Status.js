@@ -15,7 +15,16 @@ class Status extends React.Component {
     const latestObjectives = this.props.statusArray[1].sort(function(a, b) {
       return a.completion_time - b.completion_time;
     });
+
+
+    const statusMasteryTotal = latestObjectives.reduce(function(acc, cur) {
+      return acc + cur.mastery_score
+    }, 0);
+
     console.log('latestObjectives', latestObjectives);
+
+
+    console.log('statusMasteryTotal', statusMasteryTotal);
     return(
       <div className="status">
         <ul>
@@ -38,7 +47,7 @@ class Status extends React.Component {
                 ))}
               </div>
               <div className="score-increase">
-                <p>+5</p>
+                <p>+{statusMasteryTotal}</p>
                 <h4>Mastery Score</h4>
               </div>
             </div>

@@ -11,6 +11,7 @@ DROP TABLE courses;
 DROP TABLE organizations;
 DROP TABLE users;
 DROP TABLE activities;
+DROP TABLE scores;
 
 -- Insert this code inside your better_change database
 CREATE TABLE organizations(
@@ -57,6 +58,7 @@ CREATE TABLE objectives(
   number INT,
   objective VARCHAR(1000) NOT NULL,
   url VARCHAR(1000) NOT NULL,
+  mastery_score INT,
   lesson_id INT,
   FOREIGN KEY (lesson_id) REFERENCES lessons (id)
 );
@@ -68,6 +70,15 @@ CREATE TABLE activities(
   complete BOOLEAN DEFAULT FALSE,
   completion_time TIMESTAMP WITH TIME ZONE,
   FOREIGN KEY (objective_id) REFERENCES objectives (id),
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+CREATE TABLE scores(
+  id SERIAL PRIMARY KEY,
+  user_id INT,
+  mastery INT,
+  streak INT,
+  objective_count INT,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
@@ -94,8 +105,7 @@ INSERT INTO organizations
 INSERT INTO courses
   (id, name, url, organization_id)
   VALUES
-  (1, 'Web Development Precourse', 'https://apply.lambdaschool.com/courses/web-precourse/', 1);
-
+  (2, 'Web Development Precourse', 'https://apply.lambdaschool.com/courses/web-precourse/', 1);
 INSERT INTO courses
   (id, name, url, organization_id)
   VALUES
@@ -121,73 +131,73 @@ INSERT INTO lessons
 
 
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (1, 1, 'Learn to “think like a Software Engineer”', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/learn-to-think-like-a-software-engineer/', 1);
+  (1, 1, 'Learn to “think like a Software Engineer”', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/learn-to-think-like-a-software-engineer/', 1, 1);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (2, 2, 'Quiz: What does it mean to “think like a software engineer?”', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/quiz-what-does-it-mean-to-think-like-a-software-engineer/', 1);
+  (2, 2, 'Quiz: What does it mean to “think like a software engineer?”', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/quiz-what-does-it-mean-to-think-like-a-software-engineer/', 3, 1);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (3, 3, 'Learn how web development fits into the Greater Software Hierarchy', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/learn-how-web-development-fits-into-the-greater-software-hierarchy/', 1);
+  (3, 3, 'Learn how web development fits into the Greater Software Hierarchy', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/learn-how-web-development-fits-into-the-greater-software-hierarchy/', 1, 1);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (4, 4, 'Reflection: Web Development', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/reflection-web-development/', 1);
+  (4, 4, 'Reflection: Web Development', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-web-development-fundamentals/topic/reflection-web-development/', 2, 1);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (5, 5, 'Learn what HTML is and what it is used for in Web Development', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-html-2/topic/learn-what-html-is-and-what-it-is-used-for-in-web-development/', 2);
+  (5, 5, 'Learn what HTML is and what it is used for in Web Development', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-html-2/topic/learn-what-html-is-and-what-it-is-used-for-in-web-development/', 1, 2);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (6, 6, 'Learn to utilize common HTML tags and attributes to mark up a basic page of content', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-html-2/topic/learn-to-utilize-common-html-tags-and-attributes-to-mark-up-a-basic-page-of-content/', 2);
+  (6, 6, 'Learn to utilize common HTML tags and attributes to mark up a basic page of content', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-html-2/topic/learn-to-utilize-common-html-tags-and-attributes-to-mark-up-a-basic-page-of-content/', 1, 2);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (7, 7, 'Learn about the Box Model and be able to explain its properties', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/learn-about-the-box-model-and-be-able-to-explain-its-properties/', 3);
+  (7, 7, 'Learn about the Box Model and be able to explain its properties', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/learn-about-the-box-model-and-be-able-to-explain-its-properties/', 1, 3);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (8, 8, 'Learn what CSS is and describe its place in Web Development', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/learn-what-css-is-and-describe-its-place-in-web-development/', 3);
+  (8, 8, 'Learn what CSS is and describe its place in Web Development', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/learn-what-css-is-and-describe-its-place-in-web-development/', 1, 3);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (9, 9, 'Quiz: HTML and CSS (1/3)', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/quiz-html-and-css-1-3/', 3);
+  (9, 9, 'Quiz: HTML and CSS (1/3)', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/quiz-html-and-css-1-3/', 3, 3);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (10, 10, 'Quiz: HTML and CSS (2/3)', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/quiz-html-and-css-2-3/', 3);
+  (10, 10, 'Quiz: HTML and CSS (2/3)', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/quiz-html-and-css-2-3/', 3, 3);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (11, 11, 'Quiz: HTML and CSS (3/3)', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/quiz-html-and-css-3-3/', 3);
+  (11, 11, 'Quiz: HTML and CSS (3/3)', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-css/topic/quiz-html-and-css-3-3/', 3, 3);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (12, 12, 'Learn what JavaScript is and be able to explain its uses in web development', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/learn-what-javascript-is-and-be-able-to-explain-its-uses-in-web-development/', 4);
+  (12, 12, 'Learn what JavaScript is and be able to explain its uses in web development', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/learn-what-javascript-is-and-be-able-to-explain-its-uses-in-web-development/', 1, 4);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (13, 13, 'Quiz: Variables and Primitive Data Types', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-variables-and-primitive-data-types/', 4);
+  (13, 13, 'Quiz: Variables and Primitive Data Types', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-variables-and-primitive-data-types/', 3, 4);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (14, 14, 'Learn to use Math, Properties, Methods and Global Objects in JavaScript', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/learn-to-use-math-properties-methods-and-global-objects-in-javascript/', 4);
+  (14, 14, 'Learn to use Math, Properties, Methods and Global Objects in JavaScript', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/learn-to-use-math-properties-methods-and-global-objects-in-javascript/', 1, 4);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (15, 15, 'Quiz: Math, Properties, Methods, and Global Objects', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-math-properties-methods-and-global-objects/', 4);
+  (15, 15, 'Quiz: Math, Properties, Methods, and Global Objects', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-math-properties-methods-and-global-objects/', 3, 4);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (16, 16, 'Learn to use basic control flow and if/else statements.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/learn-to-use-basic-control-flow-and-if-else-statements/', 4);
+  (16, 16, 'Learn to use basic control flow and if/else statements.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/learn-to-use-basic-control-flow-and-if-else-statements/', 1, 4);
 INSERT INTO objectives
-  (id, number, objective, url, lesson_id)
+  (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (17, 17, 'Quiz: Introduction to Control Flow', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-introduction-to-control-flow/', 4);
+  (17, 17, 'Quiz: Introduction to Control Flow', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-introduction-to-control-flow/', 3, 4);
 
 
 INSERT INTO activities
@@ -283,3 +293,17 @@ INSERT INTO activities
   VALUES
   (9, 3, 3, FALSE, NULL);
 ALTER SEQUENCE activities_id_seq RESTART WITH 24 INCREMENT BY 1;
+
+INSERT INTO scores
+  (id, user_id, mastery, streak, objective_count)
+  VALUES
+  (1, 1, 0, 0, 0);
+INSERT INTO scores
+  (id, user_id, mastery, streak, objective_count)
+  VALUES
+  (2, 2, 0, 0, 0);
+INSERT INTO scores
+  (id, user_id, mastery, streak, objective_count)
+  VALUES
+  (3, 3, 0, 0, 0);
+ALTER SEQUENCE scores_id_seq RESTART WITH 4 INCREMENT BY 1;

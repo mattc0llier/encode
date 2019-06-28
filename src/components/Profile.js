@@ -10,10 +10,11 @@ import '../../styles/components/Profile.scss';
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { userProfile: [], userProfileObjectives: [], nextUserProfileObjective: {} };
+    this.state = { userProfile: [], userProfileObjectives: [], userProfileScores: {}, nextUserProfileObjective: {} };
 
     this.fetchUser = this.fetchUser.bind(this);
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
+    this.fetchUserScores = this.fetchUserScores.bind(this);
     this.receiveObjectiveStatus = this.receiveObjectiveStatus.bind(this);
     this.receiveNextUserObjective = this.receiveNextUserObjective.bind(this);
     this.updateuserProfileObjectives = this.updateuserProfileObjectives.bind(this);
@@ -83,6 +84,20 @@ class Profile extends React.Component {
     .catch(error => console.log(error.message));
   }
 
+  fetchUserScores(id){
+    fetch(`/api/users/${id}/scores`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      this.setState({
+        userProfileScores: body
+      }, () => console.log(this.state.userProfileScores))
+
+    })
+    .catch(error => console.log(error.message));
+  }
+
   fetchUser(username){
     fetch(`/api/users/${username}`)
     .then(function(response) {
@@ -93,6 +108,7 @@ class Profile extends React.Component {
         { userProfile: body}
       )
       this.fetchUserObjectives(body.id)
+      this.fetchUserScores(body.id)
     })
     .catch(error => console.log(error.message));
   }
@@ -110,7 +126,7 @@ class Profile extends React.Component {
           <Activity />
         </div>
         <div className="right">
-          <Scores/>
+          <Scores userProfileScoresObject={this.state.userProfileScores}/>
           <WorkingOn
             userProfileObjectivesObject={this.state.userProfileObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}

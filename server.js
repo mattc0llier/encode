@@ -252,7 +252,7 @@ app.get('/api/activities', function(req, res){
 app.get('/api/users/:id/objectives', (req, res) => {
   const { id } = req.params;
   return db
-    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, activities.id AS activity_id, activities.complete, activities.completion_time FROM objectives, activities WHERE activities.objective_id = objectives.id AND activities.user_id=$1', [id])
+    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time FROM objectives, activities WHERE activities.objective_id = objectives.id AND activities.user_id=$1', [id])
     .then(data => {
       res.json(data)
     })
@@ -273,6 +273,15 @@ app.patch('/api/activities/:activityId', (req, res) => {
       error: error.message
     });
   });
+})
+
+app.get('/api/users/:id/scores', (req, res) => {
+  const { id } = req.params;
+  db.one('SELECT scores.id AS score_id, scores.user_id, scores.mastery, scores.streak, scores.objective_count FROM scores WHERE user_id=$1', [id])
+  .then(data => {
+    res.json(data)
+  })
+  .catch(error => res.json({ error: error.message }));
 })
 
 // index route
