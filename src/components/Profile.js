@@ -10,7 +10,7 @@ import '../../styles/components/Profile.scss';
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { userProfile: [], userProfileObjectives: [], userProfileScores: {}, nextUserProfileObjective: {} };
+    this.state = { userProfile: [], userProfileObjectives: [], userProfileScores: {}, nextUserProfileObjective: {}, currentUserProfile: false };
 
     this.fetchUser = this.fetchUser.bind(this);
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
@@ -18,6 +18,20 @@ class Profile extends React.Component {
     this.receiveObjectiveStatus = this.receiveObjectiveStatus.bind(this);
     this.receiveNextUserObjective = this.receiveNextUserObjective.bind(this);
     this.updateuserProfileObjectives = this.updateuserProfileObjectives.bind(this);
+    this.checkIfCurrentUserProfile = this.checkIfCurrentUserProfile.bind(this);
+  }
+
+  checkIfCurrentUserProfile(){
+    console.log('checking current_user', this.state.userProfile.id, this.props.currentUser.user_id);
+    this.state.userProfile.id === this.props.currentUser.user_id ? (
+      this.setState({
+        currentUserProfile: true
+      })
+    ) : (
+      this.setState({
+        currentUserProfile: false
+      })
+    )
   }
 
   receiveNextUserObjective(nextObjective){
@@ -48,7 +62,7 @@ class Profile extends React.Component {
         complete: activitiesResponse.complete,
         completion_time: activitiesResponse.completion_time
       })
-    }, () => console.log('new userProfileObjectives', this.state.userProfileObjectives));
+    });
   }
 
 // post objective complete to the database
@@ -109,6 +123,7 @@ class Profile extends React.Component {
       )
       this.fetchUserObjectives(body.id)
       this.fetchUserScores(body.id)
+      this.checkIfCurrentUserProfile();
     })
     .catch(error => console.log(error.message));
   }
@@ -131,6 +146,7 @@ class Profile extends React.Component {
             userProfileObjectivesObject={this.state.userProfileObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}
             receiveNextUserObjective={this.receiveNextUserObjective}
+            currentUserProfile={this.state.currentUserProfile}
           />
           <History
             userProfileObject={this.state.userProfile}

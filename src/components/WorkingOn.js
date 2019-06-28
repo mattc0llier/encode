@@ -26,6 +26,7 @@ class WorkingOn extends React.Component {
           <Objective
             objectiveObject={filteredObjects[0]}
             receiveObjectiveStatus={this.props.receiveObjectiveStatus}
+            currentUserProfile={this.props.currentUserProfile}
           />
         </div>
 

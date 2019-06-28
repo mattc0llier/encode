@@ -284,6 +284,14 @@ app.get('/api/users/:id/scores', (req, res) => {
   .catch(error => res.json({ error: error.message }));
 })
 
+app.get('/api/activities/complete', (req, res) => {
+  db.any('SELECT * FROM activities WHERE complete = true ORDER BY completion_time DESC')
+  .then(data => {
+    res.json(data)
+  })
+  .catch(error => res.json({ error: error.message }));
+})
+
 // index route
 // I don't know how to pass this client id into my front end code
 app.get('/', function(req, res) {

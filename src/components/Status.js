@@ -21,10 +21,8 @@ class Status extends React.Component {
       return acc + cur.mastery_score
     }, 0);
 
-    console.log('latestObjectives', latestObjectives);
 
 
-    console.log('statusMasteryTotal', statusMasteryTotal);
     return(
       <div className="status">
         <ul>

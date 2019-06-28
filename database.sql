@@ -89,11 +89,11 @@ INSERT INTO users
 INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
   VALUES
-  (2, 'Roland', 'Levy', '/static/assets/images/Rolandd.jpg', 'roland', 'test@gmail.com', 'password', '01234567899', 'Constructor Labs alumni, Bhuddist guru', 'London, UK', '2018-10-22T10:37:33.735972Z');
+  (2, 'Roland', 'Levy', '/static/assets/images/Rolandd.jpg', 'roland', 'test@gmail.com', '$2b$12$UtVNV8XoRRh0N5/MnPy3Tu8AIQMGda3VWXVjW03qUTMypLXY.sSOW', '01234567899', 'Constructor Labs alumni, Bhuddist guru', 'London, UK', '2018-10-22T10:37:33.735972Z');
 INSERT INTO users
   (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
   VALUES
-  (3, 'Dmitri', 'Grabov', '/static/assets/images/Rolanddd.jpg', 'dmitri', 'testing@gmail.com', 'password', '01234567898', 'Constructor Labs founder', 'London, UK', '2018-10-23T10:37:33.735972Z');
+  (3, 'Dmitri', 'Grabov', '/static/assets/images/Rolanddd.jpg', 'dmitri', 'testing@gmail.com', '$2b$12$UtVNV8XoRRh0N5/MnPy3Tu8AIQMGda3VWXVjW03qUTMypLXY.sSOW', '01234567898', 'Constructor Labs founder', 'London, UK', '2018-10-23T10:37:33.735972Z');
 ALTER SEQUENCE users_id_seq RESTART WITH 4 INCREMENT BY 1;
 
 INSERT INTO organizations
