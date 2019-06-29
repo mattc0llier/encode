@@ -34,35 +34,35 @@ class Nav extends React.Component {
   render(){
     return(
       <div className="nav">
-        { this.props.isLoggedIn ? (
-          <Link to='/feed'><h1>encode</h1></Link>
-        ): (
-          <Link to='/'><h1>encode</h1></Link>
-        )}
-        <ul className="right-nav">
-          <Link to='/leaderboard'><li>leaderboard</li></Link>
-          <Link to='/feed'><li>feed</li></Link>
+        <div className="nav-margin">
           { this.props.isLoggedIn ? (
-            <React.Fragment>
-              <Link to='/students'><li>students</li></Link>
-              <Link to={`/users/${this.props.currentUser.username}`}><li>{this.props.currentUser.username}'s profile</li></Link>
-              <p>🎓 32 🔥 23 ✅ 12</p>
-              <p>Log out</p>
-            </React.Fragment>
+            <Link to='/feed'><h1>encode</h1></Link>
           ): (
-            <React.Fragment>
-            <div className="button-cta">
-              <Link to='/users/new'>
-                <button type="button" name="button">Sign up to wait list</button>
-              </Link>
-              <Link to='/login'>
-                <button type="button" name="button">Login</button>
-              </Link>
-            </div>
-            </React.Fragment>
+            <Link to='/'><h1>encode</h1></Link>
           )}
+          <ul className="right-nav">
+            <Link to='/leaderboard'><li>leaderboard</li></Link>
+            <Link to='/feed'><li>feed</li></Link>
+            <Link to='/login'><p>Login</p></Link>
+            { this.props.isLoggedIn ? (
+              <React.Fragment>
+                <Link to='/students'><li>students</li></Link>
+                <Link to={`/users/${this.props.currentUser.username}`}><li>{this.props.currentUser.username}'s profile</li></Link>
+                <p>🎓 32 🔥 23 ✅ 12</p>
+                <p>Log out</p>
 
-        </ul>
+              </React.Fragment>
+            ): (
+              <React.Fragment>
+              <div className="button-cta">
+                <Link to='/users/new'>
+                  <button type="button" name="button">Sign up to wait list</button>
+                </Link>
+              </div>
+              </React.Fragment>
+            )}
+          </ul>
+        </div>
       </div>
     )
   }

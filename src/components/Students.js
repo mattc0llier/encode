@@ -32,6 +32,10 @@ class Students extends React.Component {
     return(
       <div className="students">
         <h1>Students</h1>
+
+        <h3>On the same question</h3>
+        <h3>Completed the question</h3>
+        <h3>Current students</h3>
         {this.state.allUsers.map(student => (
           <h3 key={student.id}>
             <Link to={`/users/${student.username}`}>{student.first_name} {student.last_name}</Link>

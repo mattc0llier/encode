@@ -1,11 +1,15 @@
 @import '../base.scss';
 
 .nav {
+  background-color: #3424AC;
+}
+
+.nav-margin {
+  margin: auto;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #3424AC;
-  padding: 0 3rem;
 }
 .nav a {
   text-decoration: none;
@@ -15,7 +19,13 @@
 .right-nav {
   display: flex;
   color: #FFFFFF;
+  align-items: center;
 }
 .right-nav li {
   color: #FFFFFF;
+}
+
+.button-cta {
+  display: flex;
+  flex-direction: row;
 }

@@ -8,6 +8,7 @@ import Feed from './Feed';
 import Footer from './Footer';
 import NewUser from './NewUser';
 import Login from './Login';
+import Start from './Start';
 import PrivateRoute from './PrivateRoute';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -93,35 +94,40 @@ class App extends React.Component {
       <Router>
         <React.Fragment>
           <Nav isLoggedIn={this.state.isLoggedIn} currentUser={this.state.currentUser}/>
-          <Switch>
-            <Route path="/" exact
-              component={Homepage}
-            />
-            <Route path="/feed"
-              render={(props) => (<Feed {...props} currentUser={this.state.currentUser} />)}
-            />
-            <Route path="/leaderboard"
-              render={(props) => (<Leaderboard {...props} currentUser={this.state.currentUser} />)}
-            />
-            <Route path="/users/new"
-              render={(props) => (<NewUser {...props} receiveNewUser={this.receiveNewUser} />)}
-            />
-            <Route path="/login"
-              render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} />)}
-            />
-            <Route path="/students"
-              render={(props) => (<Students {...props}
-              isLoggedIn={this.state.isLoggedIn}
-              currentUser={this.state.currentUser}
-              />)}
-            />
-            <Route path="/users/:username"
-              render={(props) => (<Profile {...props}
+          <main>
+            <Switch>
+              <Route path="/" exact
+                component={Homepage}
+              />
+              <Route path="/feed"
+                render={(props) => (<Feed {...props} currentUser={this.state.currentUser} />)}
+              />
+              <Route path="/leaderboard"
+                render={(props) => (<Leaderboard {...props} currentUser={this.state.currentUser} />)}
+              />
+              <Route path="/users/new"
+                render={(props) => (<NewUser {...props} receiveNewUser={this.receiveNewUser} />)}
+              />
+              <Route path="/login"
+                render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} />)}
+              />
+              <Route path="/students"
+                render={(props) => (<Students {...props}
                 isLoggedIn={this.state.isLoggedIn}
-              currentUser={this.state.currentUser}
-              />)}
-            />
-          </Switch>
+                currentUser={this.state.currentUser}
+                />)}
+              />
+              <Route path="/users/:username"
+                render={(props) => (<Profile {...props}
+                  isLoggedIn={this.state.isLoggedIn}
+                currentUser={this.state.currentUser}
+                />)}
+              />
+              <Route path="/start"
+                render={(props) => (<Start {...props} />)}
+              />
+            </Switch>
+          </main>
           <Footer />
         </React.Fragment>
       </Router>

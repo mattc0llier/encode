@@ -96,6 +96,7 @@ INSERT INTO users
   (3, 'Dmitri', 'Grabov', '/static/assets/images/dmitri.jpeg', 'dmitri', 'testing@gmail.com', '$2b$12$UtVNV8XoRRh0N5/MnPy3Tu8AIQMGda3VWXVjW03qUTMypLXY.sSOW', '01234567898', 'Constructor Labs founder', 'London, UK', '2018-10-23T10:37:33.735972Z');
 ALTER SEQUENCE users_id_seq RESTART WITH 4 INCREMENT BY 1;
 
+
 INSERT INTO organizations
   (id, name, url)
   VALUES
@@ -128,6 +129,26 @@ INSERT INTO lessons
   (id, name, url, course_id)
   VALUES
   (4, 'Introduction to Javascript', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/', 1);
+INSERT INTO lessons
+  (id, name, url, course_id)
+  VALUES
+  (5, 'JavaScript: Control Flow', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-control-flow-2/', 1);
+INSERT INTO lessons
+  (id, name, url, course_id)
+  VALUES
+  (6, 'JavaScript: Functions', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-functions-2/', 1);
+INSERT INTO lessons
+  (id, name, url, course_id)
+  VALUES
+  (7, 'JavaScript: Data Structures', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-data-structures-2/', 1);
+INSERT INTO lessons
+  (id, name, url, course_id)
+  VALUES
+  (8, 'JavaScript: Classes', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-classes-2/', 1);
+INSERT INTO lessons
+  (id, name, url, course_id)
+  VALUES
+  (9, 'JavaScript: Callback Functions', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-callback-functions/', 1);
 
 
 INSERT INTO objectives
@@ -198,6 +219,114 @@ INSERT INTO objectives
   (id, number, objective, url, mastery_score, lesson_id)
   VALUES
   (17, 17, 'Quiz: Introduction to Control Flow', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/introduction-to-javascript-2/topic/quiz-introduction-to-control-flow/', 3, 4);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (18, 18, 'Learn to write control flow using if/else statements', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-control-flow-2/topic/learn-to-write-control-flow-using-if-else-statements/', 1, 5);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (19, 19, 'Quiz: Control Flow Continued', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-control-flow-2/topic/quiz-control-flow-continued/', 3, 5);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (20, 20, 'Learn to write a basic for loop', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-control-flow-2/topic/learn-to-write-a-basic-for-loop/', 1, 5);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (21, 21, 'Quiz: For Loops', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-control-flow-2/topic/quiz-for-loops/', 3, 5);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (22, 22, 'Learn to use different operators.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-control-flow-2/topic/learn-to-use-different-operators/', 1, 5);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (23, 23, 'Learn why we use JavaScript Functions and be able to write correct function syntax.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-functions-2/topic/learn-why-we-use-javascript-functions-and-be-able-to-write-correct-function-syntax/', 1, 6);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (24, 24, 'Quiz: Anatomy of a Function', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-functions-2/topic/quiz-anatomy-of-a-function/', 3, 6);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (25, 25, 'Learn to write and call functions using arguments and parameters.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-functions-2/topic/learn-to-write-and-call-functions-using-arguments-and-parameters/', 1, 6);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (26, 26, 'Quiz: Arguments and Parameters', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-functions-2/topic/quiz-arguments-and-parameters/', 3, 6);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (27, 27, 'Learn to explain function scope and the return statement.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-functions-2/topic/learn-to-explain-function-scope-and-the-return-statement/', 2, 6);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (28, 28, 'Quiz: Scope and Return Statements', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-functions-2/topic/quiz-scope-and-return-statements/', 3, 6);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (29, 29, 'Learn to use arrays to store and access data.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-data-structures-2/topic/learn-to-use-arrays-to-store-and-access-data/', 1, 7);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (30, 30, 'Quiz: Intro to Arrays', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-data-structures-2/topic/quiz-intro-to-arrays/', 3, 7);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (31, 31, 'Learn to use Array methods and properties', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-data-structures-2/topic/learn-to-use-array-methods-and-properties/', 1, 7);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (32, 32, 'Quiz: Array Properies and Methods', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-data-structures-2/topic/quiz-array-properies-and-methods/', 3, 7);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (33, 33, 'Learn to use objects to store and access data', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-data-structures-2/topic/learn-to-use-objects-to-store-and-access-data/', 1, 7);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (34, 34, 'Quiz: Intro to Objects', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-data-structures-2/topic/quiz-intro-to-objects/', 3, 7);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (35, 35, 'Learn to create methods on Objects, and utilize the ‘this’ keyword.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-data-structures-2/topic/learn-to-create-methods-on-objects-and-utilize-the-this-keyword/', 1, 7);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (36, 36, 'Quiz: Methods, Loops, and the `this` Keyword', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-data-structures-2/topic/quiz-methods-loops-and-the-this-keyword/', 3, 7);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (37, 37, 'Learn to use classes, demonstrate when to use them and write and use ES5 class syntax.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-classes-2/topic/learn-to-use-classes-demonstrate-when-to-use-them-and-write-and-use-es5-class-syntax/', 1, 8);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (38, 38, 'Quiz: Intro to Classes', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-classes-2/topic/quiz-intro-to-classes/', 3, 8);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (39, 39, 'Learn to explain the prototype, how and why we use it.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-classes-2/topic/learn-to-explain-the-prototype-how-and-why-we-use-it/', 1, 8);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (40, 40, 'Quiz: The Class `prototype`', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-classes-2/topic/quiz-the-class-prototype/', 3, 8);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (41, 41, 'Learn to demonstrate understanding of and implement callbacks.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-callback-functions/topic/learn-to-demonstrate-understanding-of-and-implement-callbacks/', 2, 9);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (42, 42, 'Quiz: Intro to Callbacks', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-callback-functions/topic/quiz-intro-to-callbacks/', 3, 9);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (43, 43, 'Learn to use two basic array methods that use callbacks.', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-callback-functions/topic/learn-to-use-two-basic-array-methods-that-use-callbacks/', 1, 9);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (44, 44, 'Quiz: Using Callbacks in Array Methods', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-callback-functions/topic/quiz-using-callbacks-in-array-methods/', 3, 9);
 
 
 INSERT INTO activities
@@ -292,7 +421,115 @@ INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
   (9, 3, 3, FALSE, NULL);
-ALTER SEQUENCE activities_id_seq RESTART WITH 24 INCREMENT BY 1;
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (24, 18, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (25, 19, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (26, 20, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (27, 21, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (28, 22, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (29, 23, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (30, 24, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (31, 25, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (32, 26, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (33, 27, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (34, 28, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (35, 29, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (36, 30, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (37, 31, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (38, 32, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (39, 33, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (40, 34, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (41, 35, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (42, 36, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (43, 37, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (44, 38, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (45, 39, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (46, 40, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (47, 41, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (48, 42, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (49, 43, 1, FALSE, NULL);
+INSERT INTO activities
+  (id, objective_id, user_id, complete, completion_time)
+  VALUES
+  (50, 44, 1, FALSE, NULL);
+
 
 INSERT INTO scores
   (id, user_id, mastery, streak, objective_count)

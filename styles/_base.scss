@@ -3,8 +3,6 @@
 @import '_colors.scss';
 @import '_typography.scss';
 
-$mobile-max-width: 1200px;
-
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -23,6 +21,12 @@ body {
 
 button {
   background-color: $primary-pink
+}
+
+main {
+  margin: auto;
+  margin-top: 3rem;
+  max-width: 1200px;
 }
 
 // #root {
