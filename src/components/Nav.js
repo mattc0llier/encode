@@ -43,7 +43,6 @@ class Nav extends React.Component {
           <ul className="right-nav">
             <Link to='/leaderboard'><li>leaderboard</li></Link>
             <Link to='/feed'><li>feed</li></Link>
-            <Link to='/login'><p>Login</p></Link>
             { this.props.isLoggedIn ? (
               <React.Fragment>
                 <Link to='/students'><li>students</li></Link>
@@ -54,6 +53,7 @@ class Nav extends React.Component {
               </React.Fragment>
             ): (
               <React.Fragment>
+              <Link to='/login'><p>Login</p></Link>
               <div className="button-cta">
                 <Link to='/users/new'>
                   <button type="button" name="button">Sign up to wait list</button>

@@ -47,7 +47,7 @@ class History extends React.Component {
           {groupedObjectsArray.map(statuses => (
             <div key={statuses[0]}>
               <h3>{statuses[0]}</h3>
-              <Status statusArray={statuses[1]}/>
+              <Status statusArray={statuses[1]} completedObjectives={filteredObjects}/>
             </div>
           ))}
       </div>

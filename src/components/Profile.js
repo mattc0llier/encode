@@ -14,11 +14,12 @@ class Profile extends React.Component {
 
     this.fetchUser = this.fetchUser.bind(this);
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
-    this.fetchUserScores = this.fetchUserScores.bind(this);
+    // this.fetchUserScores = this.fetchUserScores.bind(this);
     this.receiveObjectiveStatus = this.receiveObjectiveStatus.bind(this);
     this.receiveNextUserObjective = this.receiveNextUserObjective.bind(this);
     this.updateuserProfileObjectives = this.updateuserProfileObjectives.bind(this);
     this.checkIfCurrentUserProfile = this.checkIfCurrentUserProfile.bind(this);
+    this.calculateUserScores = this.calculateUserScores.bind(this);
   }
 
   checkIfCurrentUserProfile(){
@@ -33,6 +34,42 @@ class Profile extends React.Component {
       })
     )
   }
+
+  calculateUserScores(){
+    // filter objects just for the completed objects
+    const filteredObjects = this.state.userProfileObjectives.filter(object => object.complete == true )
+
+    const profileMasteryTotal = filteredObjects.reduce(function(acc, cur) {
+      return acc + cur.mastery_score
+    }, 0);
+
+    const objectiveCount = filteredObjects.length
+
+    console.log('profileMasteryTotal', profileMasteryTotal);
+    console.log('objectiveCount', objectiveCount);
+
+    this.setState({
+      userProfileScores: {
+        mastery: profileMasteryTotal,
+        objective_count: objectiveCount,
+        streak: 0,
+        user_id: this.state.currentUserProfile.id
+      }
+    })
+
+    // fetch(`/api/users/${id}/scores`)
+    // .then(function(response) {
+    //   return response.json();
+    // })
+    // .then(body => {
+    //   this.setState({
+    //     userProfileScores: body
+    //   }, () => console.log(this.state.userProfileScores))
+    //
+    // })
+    // .catch(error => console.log(error.message));
+  }
+
 
   receiveNextUserObjective(nextObjective){
     console.log('nextObjective', nextObjective);
@@ -62,7 +99,7 @@ class Profile extends React.Component {
         complete: activitiesResponse.complete,
         completion_time: activitiesResponse.completion_time
       })
-    });
+    }, () => this.calculateUserScores());
   }
 
 // post objective complete to the database
@@ -93,21 +130,7 @@ class Profile extends React.Component {
     .then(body => {
       this.setState({
         userProfileObjectives: body
-      })
-    })
-    .catch(error => console.log(error.message));
-  }
-
-  fetchUserScores(id){
-    fetch(`/api/users/${id}/scores`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(body => {
-      this.setState({
-        userProfileScores: body
-      }, () => console.log(this.state.userProfileScores))
-
+      }, () => this.calculateUserScores())
     })
     .catch(error => console.log(error.message));
   }
@@ -119,11 +142,12 @@ class Profile extends React.Component {
     })
     .then(body => {
       this.setState(
-        { userProfile: body}
-      )
+        { userProfile: body
+        })
       this.fetchUserObjectives(body.id)
-      this.fetchUserScores(body.id)
       this.checkIfCurrentUserProfile();
+      this.fetchUserScores(body.id)
+
     })
     .catch(error => console.log(error.message));
   }
