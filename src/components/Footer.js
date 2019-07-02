@@ -10,7 +10,7 @@ class Info extends React.Component {
   render(){
     return(
       <div className="footer">
-        <p>Community empowerment inspired by <b><a href="https://getmakerlog.com/">Makerlog</a></b></p>
+        <p>Community empowerment inspired by <b><a href="https://getmakerlog.com/">Makerlog</a></b> & <b><a href="https://wip.chat/">WIP</a></b></p>
         <p>Made by <b><a href="https://twitter.com/mattc0llier">Matt</a></b></p>
       </div>
     )

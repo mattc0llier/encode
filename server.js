@@ -275,7 +275,7 @@ app.get('/api/users/:id/objectives', (req, res) => {
 app.get('/api/users/:id/objectives/complete/:lastestStatusTime', (req, res) => {
   const { id, lastestStatusTime } = req.params;
   return db
-    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.user_id=$1 AND activities.complete = true', [id])
+    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.user_id=$1 AND activities.complete = true ORDER BY activities.completion_time ASC', [id])
     .then(data => {
     // 1. take the status user id and pull out all their completed objectives
     // 2. filter those objectives for anything before the last status completed timeout
@@ -326,8 +326,9 @@ app.get('/api/users/:id/scores', (req, res) => {
   .catch(error => res.json({ error: error.message }));
 })
 
+// if change to desc then need to update status lastest objective completion_time
 app.get('/api/activities/objectives/complete', (req, res) => {
-  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.complete = true ORDER BY activities.completion_time DESC')
+  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.complete = true ORDER BY activities.completion_time ASC')
   .then(data => {
     res.json(data)
   })

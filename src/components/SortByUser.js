@@ -21,7 +21,7 @@ class SortByUser extends React.Component {
 
   var groupedPeople = groupBy(this.props.objectivesGroupedByDate, 'user_id');
 
-  console.log('groupedPeople', groupedPeople)
+  // console.log('groupedPeople', groupedPeople)
 
     return(
       <React.Fragment>

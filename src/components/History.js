@@ -33,13 +33,13 @@ class History extends React.Component {
     //still struggling to access the array dates and then sort by descending dates
     const sortedObjectives = groupedObjectsArray.sort(function(a){
       compareDesc(a[0])
-      console.log('a[0]', a[0]);
+      // console.log('a[0]', a[0]);
     })
 
 
-    console.log('filteredObjects',  filteredObjects);
-    console.log('groupedObjectsArray',  groupedObjectsArray);
-    console.log('sortedObjectives',  sortedObjectives);
+    // console.log('filteredObjects',  filteredObjects);
+    // console.log('groupedObjectsArray',  groupedObjectsArray);
+    // console.log('sortedObjectives',  sortedObjectives);
 
     return(
       <div className="history">

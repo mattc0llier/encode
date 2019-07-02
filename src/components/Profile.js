@@ -37,38 +37,19 @@ class Profile extends React.Component {
   }
 
   calculateUserScores(){
-    // filter objects just for the completed objects
-    const filteredObjects = this.state.userProfileObjectives.filter(object => object.complete == true )
+    const timeNow = Date.now()
 
-    const profileMasteryTotal = filteredObjects.reduce(function(acc, cur) {
-      return acc + cur.mastery_score
-    }, 0);
-
-    const objectiveCount = filteredObjects.length
-
-    console.log('profileMasteryTotal', profileMasteryTotal);
-    console.log('objectiveCount', objectiveCount);
-
-    this.setState({
-      userProfileScores: {
-        mastery: profileMasteryTotal,
-        objective_count: objectiveCount,
-        streak: 0,
-        user_id: this.state.currentUserProfile.id
-      }
+    fetch(`/api/users/${this.state.userProfile.id}/objectives/complete/${timeNow}`)
+    .then(function(response) {
+      return response.json();
     })
+    .then(body => {
+      this.setState({
+        userProfileScores: body
+      }, () => console.log(this.state.userProfileScores))
 
-    // fetch(`/api/users/${id}/scores`)
-    // .then(function(response) {
-    //   return response.json();
-    // })
-    // .then(body => {
-    //   this.setState({
-    //     userProfileScores: body
-    //   }, () => console.log(this.state.userProfileScores))
-    //
-    // })
-    // .catch(error => console.log(error.message));
+    })
+    .catch(error => console.log(error.message));
   }
 
 
@@ -163,7 +144,7 @@ class Profile extends React.Component {
       <div className="profile">
         <div className="left">
           <Info userProfileObject={this.state.userProfile}/>
-          { this.state.currentUserProfile ? <Link to='/settings'><p>Update profile</p></Link> : null}
+          { this.state.currentUserProfile ? <Link to='/settings'><p>Update your profile</p></Link> : null}
           <Activity />
         </div>
         <div className="right">

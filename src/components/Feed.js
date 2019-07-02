@@ -15,7 +15,7 @@ class Feed extends React.Component {
   }
 
   organizeStatuses(){
-    console.log('hit next');
+    // console.log('hit next');
 
     //group completed objects by the date they were completed by
     function groupByDate(objectArray, property) {
@@ -32,7 +32,7 @@ class Feed extends React.Component {
     //make those completed object dates into arrays to be mapped over.
     const groupedObjectsArray = Object.entries(groupByDate(this.state.allStatuses, 'completion_time'))
 
-    console.log('groupedObjectsArray - feed', groupedObjectsArray);
+    // console.log('groupedObjectsArray - feed', groupedObjectsArray);
 
     groupedObjectsArray
     this.setState({
@@ -41,7 +41,7 @@ class Feed extends React.Component {
   }
 
   allStatuses(){
-    console.log('hit');
+    // console.log('hit');
     fetch(`/api/activities/objectives/complete`)
     .then(function(response) {
       return response.json();
@@ -70,7 +70,6 @@ class Feed extends React.Component {
             ) : (
               <h3>{statuses[0]}</h3>
             )}
-            { console.log('statuses[1]', statuses[1])}
             <SortByUser objectivesGroupedByDate={statuses[1]}/>
           </div>
         ))}

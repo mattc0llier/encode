@@ -7,28 +7,10 @@ import '../../styles/components/Nav.scss';
 class Nav extends React.Component {
   constructor(){
     super();
-
-    this.state = { currentUserScores: {} }
-
-    this.currentUserScores = this.currentUserScores.bind(this);
   }
 
-  currentUserScores(){
-    fetch(`/api/users/${this.props.currentUser.user_id}/scores`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(body => {
-      this.setState({
-        currentUserScores: body
-      }, () => console.log('currentUserScores', this.state.currentUserScores))
-
-    })
-    .catch(error => console.log(error.message));
-  }
 
   componentDidMount(){
-    this.currentUserScores()
   }
 
   render(){
@@ -47,9 +29,8 @@ class Nav extends React.Component {
               <React.Fragment>
                 <Link to='/students'><li>students</li></Link>
                 <Link to={`/users/${this.props.currentUser.username}`}><li>{this.props.currentUser.username}'s profile</li></Link>
-                <p>🎓 32 🔥 23 ✅ 12</p>
+                <p>🎓 {this.props.currentUserScores.mastery} 🔥 {this.props.currentUserScores.streak} ✅ {this.props.currentUserScores.objectives}</p>
                 <Link to='/logout'><p>Log out</p></Link>
-
               </React.Fragment>
             ): (
               <React.Fragment>

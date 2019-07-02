@@ -19,21 +19,13 @@ class App extends React.Component {
 
   constructor(){
     super();
-      this.state = { isLoggedIn: false, currentUser: {} }
+      this.state = { isLoggedIn: false, currentUser: {}, currentUserScores: {} }
 
       this.receiveNewUser = this.receiveNewUser.bind(this);
       this.createNewUser = this.createNewUser.bind(this);
-      this.setCurrentUser = this.setCurrentUser.bind(this);
       this.receiveLoginUser = this.receiveLoginUser.bind(this);
       this.checkLoggedIn = this.checkLoggedIn.bind(this);
-  }
-
-  //setApp currentUser from slack sign in and db response
-  setCurrentUser(user){
-    console.log(user);
-    this.setState({
-      currentUser: user
-    })
+      this.calculateCurrentUserScores = this.calculateCurrentUserScores.bind(this);
   }
 
   receiveNewUser(user){
@@ -62,6 +54,7 @@ class App extends React.Component {
         currentUser: body,
         isLoggedIn: true
       })
+      this.calculateCurrentUserScores()
     })
   }
 
@@ -90,7 +83,7 @@ class App extends React.Component {
       // })
     })
   }
-
+  // this needs to check for a cookie and see if user is already logged in
   checkLoggedIn(){
     fetch(`/api/auth/account`)
     .then((response) => {
@@ -101,6 +94,24 @@ class App extends React.Component {
       })
   }
 
+  calculateCurrentUserScores(){
+    console.log('CurrentUserScores hit')
+    const timeNow = Date.now()
+
+    console.log('timeNow', timeNow);
+    fetch(`/api/users/${this.state.currentUser.user_id}/objectives/complete/${timeNow}`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      this.setState({
+        currentUserScores: body
+      })
+
+    })
+    .catch(error => console.log(error.message));
+  }
+
   componentDidMount(){
     // this.checkLoggedIn()
   }
@@ -109,7 +120,7 @@ class App extends React.Component {
     return(
       <Router>
         <React.Fragment>
-          <Nav isLoggedIn={this.state.isLoggedIn} currentUser={this.state.currentUser}/>
+          <Nav isLoggedIn={this.state.isLoggedIn} currentUser={this.state.currentUser} currentUserScores={this.state.currentUserScores}/>
           <main>
             <Switch>
               <Route path="/" exact

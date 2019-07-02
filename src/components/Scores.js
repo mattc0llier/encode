@@ -8,7 +8,7 @@ class Scores extends React.Component {
   render(){
     return(
       <div className="scores">
-        <h2>🎓 {this.props.userProfileScoresObject.mastery} 🔥 {this.props.userProfileScoresObject.streak} ✅ {this.props.userProfileScoresObject.objective_count}</h2>
+        <h2>🎓 {this.props.userProfileScoresObject.mastery} 🔥 {this.props.userProfileScoresObject.streak} ✅ {this.props.userProfileScoresObject.objectives}</h2>
       </div>
     )
   }

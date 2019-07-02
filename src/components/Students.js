@@ -42,9 +42,14 @@ class Students extends React.Component {
           <h3>Current students</h3>
         </div>
         {this.state.allUsers.map(student => (
-          <h3 key={student.id}>
-            <Link to={`/users/${student.username}`}>{student.first_name} {student.last_name}</Link>
-          </h3>
+
+            <Link to={`/users/${student.username}`}>
+            <div className="student" key={student.id}>
+              <img src={student.photo} alt={student.username} />
+              <h3>{student.first_name} {student.last_name}</h3>
+            </div>
+            </Link>
+
         ))}
 
 
