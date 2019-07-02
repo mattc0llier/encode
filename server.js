@@ -21,7 +21,7 @@ const cookieParser = require('cookie-parser');
 const LocalStrategy = require('passport-local').Strategy;
 // const SlackStrategy = require('passport-slack').Strategy;
 
-// const connectEnsureLogin = require('connect-ensure-login');
+const connectEnsureLogin = require('connect-ensure-login');
 
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 12;
@@ -57,8 +57,13 @@ passport.deserializeUser(function(userId, done) {
 app.use(passport.initialize());
 app.use(passport.session());
 
+// app.get('/api/auth/account',
+//     connectEnsureLogin.ensureLoggedIn(),
+//     // AuthController.account
+// )
+
 // on clicking "logoff" the cookie is cleared
-// app.get('/logoff',
+// app.get('/logout',
 //   function(req, res) {
 //     res.clearCookie('encode-passport');
 //     res.redirect('/');
@@ -215,6 +220,14 @@ app.get('/api/organizations', function(req, res){
 // get all courses
 app.get('/api/courses', function(req, res){
   db.any('SELECT * FROM courses')
+  .then(data => res.json(data))
+  .catch(error => res.json({ error: error.message }));
+});
+
+// get objectives for given course
+app.get('/api/courses/:id/objectives', function(req, res){
+  const { id } = req.params;
+  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.lesson_id, lessons.course_id FROM objectives, lessons WHERE objectives.lesson_id = lessons.id AND lessons.course_id=$1', [id])
   .then(data => res.json(data))
   .catch(error => res.json({ error: error.message }));
 });

@@ -24,6 +24,7 @@ class App extends React.Component {
       this.createNewUser = this.createNewUser.bind(this);
       this.setCurrentUser = this.setCurrentUser.bind(this);
       this.receiveLoginUser = this.receiveLoginUser.bind(this);
+      this.checkLoggedIn = this.checkLoggedIn.bind(this);
   }
 
   //setApp currentUser from slack sign in and db response
@@ -33,8 +34,6 @@ class App extends React.Component {
       currentUser: user
     })
   }
-
-
 
   receiveNewUser(user){
     console.log(user);
@@ -87,6 +86,20 @@ class App extends React.Component {
       //   isLoggedIn: true
       // })
     })
+  }
+
+  checkLoggedIn(){
+    fetch(`/api/auth/account`)
+    .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(`HTTP Error ${response.status} (${response.statusText})`);
+      })
+  }
+
+  componentDidMount(){
+    // this.checkLoggedIn()
   }
 
   render(){

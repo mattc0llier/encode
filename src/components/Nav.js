@@ -48,7 +48,7 @@ class Nav extends React.Component {
                 <Link to='/students'><li>students</li></Link>
                 <Link to={`/users/${this.props.currentUser.username}`}><li>{this.props.currentUser.username}'s profile</li></Link>
                 <p>🎓 32 🔥 23 ✅ 12</p>
-                <p>Log out</p>
+                <Link to='/logout'><p>Log out</p></Link>
 
               </React.Fragment>
             ): (

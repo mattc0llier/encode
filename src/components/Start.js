@@ -5,20 +5,29 @@ class Start extends React.Component {
   constructor(){
     super();
 
-    this.state = { courses: [], objectives: [], selectedCourse: {}, selectedObjective: {} }
+    this.state = { courses: [], objectives: [], selectedCourseId: 0, selectedObjectiveId: 0 }
 
     this.fetchCourses = this.fetchCourses.bind(this);
     this.handleCourseChange = this.handleCourseChange.bind(this);
+    this.fetchObjectives = this.fetchObjectives.bind(this);
+    this.handleObjectiveChange = this.handleObjectiveChange.bind(this);
+    this.handleUserStartPointSubmit = this.handleUserStartPointSubmit.bind(this);
   }
 
-  handleCourseChange(event){
+  handleUserStartPointSubmit(event){
+    event.preventDefault();
+    console.log(this.state.selectedCourseId, this.state.selectedObjectiveId);
+  }
+
+  handleObjectiveChange(event){
+    console.log('event', event);
     console.log(event.target.value);
     this.setState({
-      selectedCourse: event.target.value
+      selectedObjectiveId: event.target.value
     })
   }
 
-  fetchObjectives(){
+  fetchObjectives(id){
     fetch(`/api/courses/${id}/objectives`)
     .then(function(response) {
       return response.json();
@@ -30,6 +39,15 @@ class Start extends React.Component {
       })
     })
     .catch(error => console.log(error.message));
+  }
+
+  handleCourseChange(event){
+    console.log(event.target.value);
+    this.setState({
+      selectedCourseId: event.target.value,
+      selectedObjectiveId: 0
+    })
+    this.fetchObjectives(event.target.value)
   }
 
   fetchCourses(){
@@ -56,25 +74,24 @@ class Start extends React.Component {
 
         <label for="course-select">Select your course:</label>
 
-        <form>
+        <form onSubmit={this.handleUserStartPointSubmit}>
           <select id="course-select" onChange={this.handleCourseChange}>
             <option value="">--Please choose an option--</option>
             {this.state.courses.map(course => (
               <React.Fragment key={course.id} >
-                <option value={course.name} >{course.name}</option>
+                <option value={course.id} >{course.name}</option>
               </React.Fragment>
             ))}
           </select>
-          <select id="objective-select">
+          <select id="objective-select" onChange={this.handleObjectiveChange}>
             <option value="">--Please choose an option--</option>
             {this.state.objectives.map(objective => (
-              <React.Fragment>
-                <option value={objective.id}>{objective.name}</option>
-                <input type="hidden" value={objective.id} />
+              <React.Fragment key={objective.objective_id}>
+                <option value={objective.objective_id}>{objective.number} - {objective.objective}</option>
               </React.Fragment>
             ))}
           </select>
-          <Link to='/user/matt'><button type="submit" className="start__button">Let's go</button></Link>
+          <button type="submit" className="start__button">Let's go</button>
         </form>
       </div>
     )

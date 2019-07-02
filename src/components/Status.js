@@ -17,13 +17,11 @@ class Status extends React.Component {
   fetchObjectivesScores(latestObjectives){
 
     const lastestStatusTime = Date.parse(new Date(latestObjectives[latestObjectives.length - 1].completion_time))
-    console.log('lastestStatusTime', lastestStatusTime);
     fetch(`/api/users/${this.props.statusArray[0].user_id}/objectives/complete/${lastestStatusTime}`)
     .then(function(response) {
       return response.json();
     })
     .then(body => {
-      console.log('fetched completedObjectives', body);
       this.setState({
         statusScores: body
       })
@@ -32,9 +30,6 @@ class Status extends React.Component {
   }
 
   render(){
-
-    console.log('this.props.statusArray', this.props.statusArray);
-
     const statusMasteryIncrease = this.props.statusArray.reduce(function(acc, cur) {
       return acc + cur.mastery_score
     }, 0);

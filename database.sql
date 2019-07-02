@@ -106,11 +106,11 @@ INSERT INTO organizations
 INSERT INTO courses
   (id, name, url, organization_id)
   VALUES
-  (2, 'Web Development Precourse', 'https://apply.lambdaschool.com/courses/web-precourse/', 1);
+  (1, 'Web Development Precourse', 'https://apply.lambdaschool.com/courses/web-precourse/', 1);
 INSERT INTO courses
   (id, name, url, organization_id)
   VALUES
-  (1, 'Data Science Precourse', 'https://apply.lambdaschool.com/courses/ds-precourse/', 1);
+  (2, 'Data Science Precourse', 'https://apply.lambdaschool.com/courses/ds-precourse/', 1);
 
 
 INSERT INTO lessons

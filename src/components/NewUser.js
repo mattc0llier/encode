@@ -60,7 +60,7 @@ class NewUser extends React.Component {
           <input className="newUser__input" onChange={this.handleCreateUsernameChange} placeholder="@ username" />
           <input className="newUser__input" onChange={this.handleCreateEmailChange} placeholder="email" />
           <input className="newUser__input" onChange={this.handleCreatePasswordChange} placeholder="password" />
-          <button type="submit" className="newUser__button">Create user</button>
+          <Link to='/start'><button type="submit" className="newUser__button">Create user</button></Link>
         </form>
       </div>
     )
