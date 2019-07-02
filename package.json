@@ -38,7 +38,8 @@
     "pg-promise": "^8.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "streaker-js": "0.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

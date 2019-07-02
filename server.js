@@ -258,6 +258,35 @@ app.get('/api/users/:id/objectives', (req, res) => {
     })
     .catch(error => res.json({ error: error.message }));
 });
+// get all previous objectives and activity info for a given User Id and last objective time
+app.get('/api/users/:id/objectives/complete/:lastestStatusTime', (req, res) => {
+  const { id, lastestStatusTime } = req.params;
+  return db
+    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.user_id=$1 AND activities.complete = true', [id])
+    .then(data => {
+    // 1. take the status user id and pull out all their completed objectives
+    // 2. filter those objectives for anything before the last status completed timeout
+    // 3. Once you have this array, find the objective score by finding the length of the array
+    // 4. find the mastery score for that user at that point in time by reducing over the objectives.mastery_score
+
+      const previousCompletedObjectives = data.filter(status => {
+        const previousObjectiveTimes = new Date(status.completion_time)
+         if (Date.parse(previousObjectiveTimes) <= lastestStatusTime) {
+           return true
+         } else {
+           return false
+         }
+      })
+
+      const statusObjectivesScore = previousCompletedObjectives.length
+      const statusMasteryScore = previousCompletedObjectives.reduce(function(acc, cur) {
+        return acc + cur.mastery_score
+      }, 0);
+
+      res.json({ mastery: statusMasteryScore, objectives: statusObjectivesScore });
+    })
+    .catch(error => res.json({ error: error.message }));
+});
 
 app.patch('/api/activities/:activityId', (req, res) => {
   const activityId = req.params.activityId

@@ -8,45 +8,42 @@ import '../../styles/components/Status.scss';
 class Status extends React.Component {
   constructor(){
     super();
+
+    this.state = { statusScores: {} }
+
+    this.fetchObjectivesScores = this.fetchObjectivesScores.bind(this);
+  }
+
+  fetchObjectivesScores(latestObjectives){
+
+    const lastestStatusTime = Date.parse(new Date(latestObjectives[latestObjectives.length - 1].completion_time))
+    console.log('lastestStatusTime', lastestStatusTime);
+    fetch(`/api/users/${this.props.statusArray[0].user_id}/objectives/complete/${lastestStatusTime}`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      console.log('fetched completedObjectives', body);
+      this.setState({
+        statusScores: body
+      })
+    })
+    .catch(error => console.log(error.message))
   }
 
   render(){
 
     console.log('this.props.statusArray', this.props.statusArray);
 
+    const statusMasteryIncrease = this.props.statusArray.reduce(function(acc, cur) {
+      return acc + cur.mastery_score
+    }, 0);
+
     const latestObjectives = this.props.statusArray.sort(function(a, b) {
       return a.completion_time - b.completion_time;
     });
 
-
-    const statusMasteryTotal = latestObjectives.reduce(function(acc, cur) {
-      return acc + cur.mastery_score
-    }, 0);
-
-    console.log('completedObjectives', this.props.completedObjectives)
-
-    const cumulativeCompletedObjectives = this.props.completedObjectives.filter(status => {
-      console.log(new Date(status.completion_time))
-      const lastestStatusTime = new Date(latestObjectives[latestObjectives.length - 1].completion_time)
-      const previousObjectiveTimes = new Date(status.completion_time)
-      console.log('Date.parse(previousObjectiveTimes)', Date.parse(previousObjectiveTimes));
-      console.log('lastestStatusTime.getDate()', Date.parse(lastestStatusTime));
-       if (Date.parse(previousObjectiveTimes) <= Date.parse(lastestStatusTime)) {
-         return true
-       } else {
-         return false
-       }
-    })
-    console.log('cumulativeCompletedObjectives', cumulativeCompletedObjectives);
-    const statusObjectivesScore = cumulativeCompletedObjectives.length
-    console.log('statusObjectivesScore', statusObjectivesScore);
-    const statusMasteryScore = cumulativeCompletedObjectives.reduce(function(acc, cur) {
-      return acc + cur.mastery_score
-    }, 0);
-    console.log('statusMasteryScore', statusMasteryScore);
-
-
-
+    this.fetchObjectivesScores(latestObjectives)
 
     return(
       <div className="status">
@@ -56,7 +53,7 @@ class Status extends React.Component {
               <img src={this.props.statusArray[0].photo} />
               <div className="header-info">
                 <p>{this.props.statusArray[0].first_name} {this.props.statusArray[0].last_name}</p>
-                <p>🎓{statusMasteryScore} 🔥23 ✅{statusObjectivesScore}</p>
+                <p>🎓{this.state.statusScores.mastery} 🔥23 ✅{this.state.statusScores.objectives}</p>
               </div>
             </div>
             <div className="status-completed">
@@ -68,7 +65,7 @@ class Status extends React.Component {
                 ))}
               </div>
               <div className="score-increase">
-                <p>+{statusMasteryTotal}</p>
+                <p>+{statusMasteryIncrease}</p>
                 <h4>Mastery Score</h4>
               </div>
             </div>

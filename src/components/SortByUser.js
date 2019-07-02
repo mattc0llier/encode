@@ -27,7 +27,7 @@ class SortByUser extends React.Component {
       <React.Fragment>
         {groupedPeople.map(person => (
           <div key={person.objective_id}>
-            <Status statusArray={person}/>
+            <Status statusArray={person} />
           </div>
         ))}
       </React.Fragment>
