@@ -9,6 +9,7 @@ import Footer from './Footer';
 import NewUser from './NewUser';
 import Login from './Login';
 import Start from './Start';
+import Settings from './Settings';
 import PrivateRoute from './PrivateRoute';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -68,6 +69,8 @@ class App extends React.Component {
     fetch(`/api/users/create`, {
       method: 'POST',
       body: JSON.stringify({
+        first_name: user.first_name,
+        last_name: user.last_name,
         username: user.username,
         email: user.email,
         password: user.password }),
@@ -138,6 +141,9 @@ class App extends React.Component {
               />
               <Route path="/start"
                 render={(props) => (<Start {...props} />)}
+              />
+              <Route path="/settings"
+                render={(props) => (<Settings {...props} />)}
               />
             </Switch>
           </main>

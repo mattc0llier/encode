@@ -182,13 +182,13 @@ app.post('/api/login', passport.authenticate('local', { failureRedirect: '/login
 // create new users
 app.post('/api/users/create', function(req, res){
   console.log(req.body);
-  const {username, email, password} = req.body
+  const {first_name, last_name, username, email, password} = req.body
   bcrypt.genSalt(SALT_ROUNDS)
   .then( salt => {
     return bcrypt.hash(password, salt);
   })
   .then( hashedPassword => {
-    db.one("INSERT INTO users (username, email, password, creation_date) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING id, username, email, password", [username, email, hashedPassword])
+    db.one("INSERT INTO users (first_name, last_name, username, email, password, creation_date) VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP) RETURNING id, first_name, last_name, username, email, password", [first_name, last_name, username, email, hashedPassword])
     .then((data) => {
       res.json(data)
       res.status(200).send({update: "success"});

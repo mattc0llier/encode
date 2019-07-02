@@ -6,21 +6,49 @@ class NewUser extends React.Component {
     super();
 
     this.state = { newUser: {
+      first_name: "",
+      last_name: "",
       username: "",
       email: "",
       password: ""
     }
   }
 
+    this.handleCreateFirstNameChange = this.handleCreateFirstNameChange.bind(this)
+    this.handleCreateLastNameChange = this.handleCreateLastNameChange.bind(this)
     this.handleCreateUsernameChange = this.handleCreateUsernameChange.bind(this)
     this.handleCreateEmailChange = this.handleCreateEmailChange.bind(this)
     this.handleCreatePasswordChange = this.handleCreatePasswordChange.bind(this)
     this.handleCreateUserSubmit = this.handleCreateUserSubmit.bind(this)
   }
 
+  handleCreateFirstNameChange(event){
+    this.setState({
+      newUser: {
+        first_name: event.target.value,
+        last_name: this.state.newUser.last_name,
+        username: this.state.newUser.email,
+        email: this.state.newUser.email,
+        password: this.state.newUser.password
+      }
+    })
+  }
+  handleCreateLastNameChange(event){
+    this.setState({
+      newUser: {
+        first_name: this.state.newUser.first_name,
+        last_name: event.target.value,
+        username: event.target.value,
+        email: this.state.newUser.email,
+        password: this.state.newUser.password
+      }
+    })
+  }
   handleCreateUsernameChange(event){
     this.setState({
       newUser: {
+        first_name: this.state.newUser.first_name,
+        last_name: this.state.newUser.last_name,
         username: event.target.value,
         email: this.state.newUser.email,
         password: this.state.newUser.password
@@ -30,6 +58,8 @@ class NewUser extends React.Component {
   handleCreateEmailChange(event){
     this.setState({
       newUser: {
+        first_name: this.state.newUser.first_name,
+        last_name: this.state.newUser.last_name,
         username: this.state.newUser.username,
         email: event.target.value,
         password: this.state.newUser.password
@@ -39,6 +69,8 @@ class NewUser extends React.Component {
   handleCreatePasswordChange(event){
     this.setState({
       newUser: {
+        first_name: this.state.newUser.first_name,
+        last_name: this.state.newUser.last_name,
         username: this.state.newUser.username,
         email: this.state.newUser.email,
         password: event.target.value
@@ -57,10 +89,12 @@ class NewUser extends React.Component {
       <div className="newUser">
         <h2>Learn with us</h2>
         <form  onSubmit={this.handleCreateUserSubmit}>
+          <input className="newUser__input" onChange={this.handleCreateFirstNameChange} placeholder="first name" />
+          <input className="newUser__input" onChange={this.handleCreateLastNameChange} placeholder="last name" />
           <input className="newUser__input" onChange={this.handleCreateUsernameChange} placeholder="@ username" />
           <input className="newUser__input" onChange={this.handleCreateEmailChange} placeholder="email" />
           <input className="newUser__input" onChange={this.handleCreatePasswordChange} placeholder="password" />
-          <Link to='/start'><button type="submit" className="newUser__button">Create user</button></Link>
+          <button type="submit" className="newUser__button">Create user</button>
         </form>
       </div>
     )

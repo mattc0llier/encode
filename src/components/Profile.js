@@ -4,6 +4,7 @@ import Info from './Info';
 import WorkingOn from './WorkingOn';
 import History from './History';
 import Activity from './Activity';
+import { Link } from 'react-router-dom';
 import '../../styles/components/Profile.scss';
 
 
@@ -162,6 +163,7 @@ class Profile extends React.Component {
       <div className="profile">
         <div className="left">
           <Info userProfileObject={this.state.userProfile}/>
+          { this.state.currentUserProfile ? <Link to='/settings'><p>Update profile</p></Link> : null}
           <Activity />
         </div>
         <div className="right">

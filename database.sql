@@ -24,7 +24,7 @@ CREATE TABLE users(
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(100),
   last_name VARCHAR(100),
-  photo VARCHAR(500),
+  photo VARCHAR(500) DEFAULT '/static/assets/images/default-profile.png',
   username VARCHAR(200) NOT NULL UNIQUE,
   email VARCHAR(200) NOT NULL UNIQUE,
   password VARCHAR(200) NOT NULL,
