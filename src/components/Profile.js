@@ -100,6 +100,7 @@ class Profile extends React.Component {
     })
     .then(body => {
         this.updateuserProfileObjectives(body, completedObjective)
+        this.props.receiveCurrentUserObjectiveUpdate()
     })
     .catch(error => console.log(error.message));
   }

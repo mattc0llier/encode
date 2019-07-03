@@ -4,6 +4,7 @@ console.log('.env working?', process.env.DB_USERNAME);
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const { summary } = require('date-streaks');
 const app = express();
 
 const pgp = require('pg-promise')();
@@ -291,12 +292,20 @@ app.get('/api/users/:id/objectives/complete/:lastestStatusTime', (req, res) => {
          }
       })
 
+      const dates = previousCompletedObjectives.map(objective => (
+        objective.completion_time
+      ))
+      console.log('dates', dates);
+      const statusStreakSummary = summary({ dates });
+      console.log('statusStreakSummary', statusStreakSummary);
+
+
       const statusObjectivesScore = previousCompletedObjectives.length
       const statusMasteryScore = previousCompletedObjectives.reduce(function(acc, cur) {
         return acc + cur.mastery_score
       }, 0);
 
-      res.json({ mastery: statusMasteryScore, objectives: statusObjectivesScore });
+      res.json({ mastery: statusMasteryScore, streak: statusStreakSummary.currentStreak,  objectives: statusObjectivesScore });
     })
     .catch(error => res.json({ error: error.message }));
 });

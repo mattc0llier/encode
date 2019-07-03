@@ -26,6 +26,12 @@ class App extends React.Component {
       this.receiveLoginUser = this.receiveLoginUser.bind(this);
       this.checkLoggedIn = this.checkLoggedIn.bind(this);
       this.calculateCurrentUserScores = this.calculateCurrentUserScores.bind(this);
+      this.receiveCurrentUserObjectiveUpdate = this.receiveCurrentUserObjectiveUpdate.bind(this);
+  }
+
+  receiveCurrentUserObjectiveUpdate(){
+    console.log('receive update');
+    this.calculateCurrentUserScores()
   }
 
   receiveNewUser(user){
@@ -94,6 +100,7 @@ class App extends React.Component {
       })
   }
 
+
   calculateCurrentUserScores(){
     console.log('CurrentUserScores hit')
     const timeNow = Date.now()
@@ -112,9 +119,9 @@ class App extends React.Component {
     .catch(error => console.log(error.message));
   }
 
-  componentDidMount(){
-    // this.checkLoggedIn()
-  }
+  // componentDidMount(){
+  //   // this.checkLoggedIn()
+  // }
 
   render(){
     return(
@@ -148,6 +155,7 @@ class App extends React.Component {
                 render={(props) => (<Profile {...props}
                   isLoggedIn={this.state.isLoggedIn}
                 currentUser={this.state.currentUser}
+                receiveCurrentUserObjectiveUpdate={this.receiveCurrentUserObjectiveUpdate}
                 />)}
               />
               <Route path="/start"

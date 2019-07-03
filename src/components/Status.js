@@ -48,7 +48,7 @@ class Status extends React.Component {
               <img src={this.props.statusArray[0].photo} />
               <div className="header-info">
                 <p>{this.props.statusArray[0].first_name} {this.props.statusArray[0].last_name}</p>
-                <p>🎓{this.state.statusScores.mastery} 🔥23 ✅{this.state.statusScores.objectives}</p>
+                <p>🎓{this.state.statusScores.mastery} 🔥{this.state.statusScores.streak} ✅{this.state.statusScores.objectives}</p>
               </div>
             </div>
             <div className="status-completed">
