@@ -16,7 +16,7 @@ class Start extends React.Component {
   }
 
   createUserActivities(){
-    fetch(`/api/users/create`, {
+    fetch(`/api/users/activities/create`, {
       method: 'POST',
       body: JSON.stringify({
         currentUser: this.props.currentUser,
@@ -94,8 +94,9 @@ class Start extends React.Component {
   }
 
   render(){
-    if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
-     else return(
+    // if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
+    //  else
+     return(
       <div className="start">
 
         <label for="course-select">Select your course:</label>

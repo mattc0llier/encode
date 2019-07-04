@@ -5,6 +5,7 @@ console.log('.env working?', process.env.DB_USERNAME);
 const express = require('express');
 const bodyParser = require('body-parser');
 const { summary } = require('date-streaks');
+const format = require('pg-format');
 const app = express();
 
 const pgp = require('pg-promise')();
@@ -331,15 +332,59 @@ app.get('/api/activities/objectives/complete', (req, res) => {
   .catch(error => res.json({ error: error.message }));
 })
 
+//get all objectives for a course helper method
+function getObjectivesByCourseId(id) {
+  return db.any(
+    'SELECT objectives.id AS objective_id, objectives.number AS objective_number, objectives.lesson_id, lessons.id AS lesson_id, lessons.course_id FROM objectives, lessons, courses WHERE objectives.lesson_id = lessons.id AND lessons.course_id = courses.id AND courses.id = $1', [id]
+  )
+  .catch((error) => {
+    console.log('failed to get user', error);
+  });
+}
+
 // create user activities when they enroll in a course
-app.get('/api/users/activities/create', (req, res) => {
+app.post('/api/users/activities/create', (req, res) => {
+  // theses aren't match proparly yet
   const { user, course, objective } = req.body;
-  
-  db.one("INSERT INTO activities (objective_id, user_id, complete, completion_time) VALUES ($1, $2, $3, $4) RETURNING id, objective_id, user_id, complete, completion_time", [objective.id, user.id, false, null])
-  .then(data => {
-    res.json(data)
-  })
-  .catch(error => res.json({ error: error.message }));
+  console.log('user', user);
+  console.log('course', course);
+  console.log('objective', objective);
+
+  // const newActivities = async (course) => {
+  //   const allCourseObjectives = await getObjectivesByCourseId(course.id)
+  //   console.log('allCourseObjectives', allCourseObjectives);
+  //
+  //   let newActivities = allCourseObjectives.map( objective => (
+  //     [objective.objective_id, user.id, false, null]
+  //   ))
+  //   console.log('newActivities', newActivities);
+  //
+  //   return newActivities
+  // }
+  //
+  //   console.log('newActivities', newActivities;
+
+//   let query1 = format("INSERT INTO activities (objective_id, user_id, complete, completion_time) VALUES %L RETURNING id, objective_id, user_id, complete, completion_time", newActivities)
+//
+//   async function run() {
+//   let client;
+//   try {
+//     client = new pg.Client({
+//       connectionString: 'postgresql://localhost/encode'
+//     });
+//     await client.connect();
+//     let {rows} = await client.query(query1);
+//     console.log(rows);
+//   } catch (e) {
+//     console.error(e);
+//   } finally {
+//     client.end();
+//   }
+// }
+//
+// run();
+
+
 })
 
 // index route
