@@ -39,7 +39,7 @@ class Students extends React.Component {
           <h3>All students</h3>
           <h3>On the same question</h3>
           <h3>Completed the question</h3>
-          <h3>Current students</h3>
+          <h3>Current Lambda School students</h3>
         </div>
         {this.state.allUsers.map(student => (
 

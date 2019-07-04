@@ -29,7 +29,7 @@ CREATE TABLE users(
   email VARCHAR(200) NOT NULL UNIQUE,
   password VARCHAR(200) NOT NULL,
   tel VARCHAR(30) UNIQUE,
-  bio VARCHAR(500) DEFAULT 'Update your bio in the settings below',
+  bio VARCHAR(500) DEFAULT 'Change your bio in the update profile link below',
   location VARCHAR(500),
   creation_date TIMESTAMP WITH TIME ZONE,
   slack_user_id VARCHAR(100) UNIQUE,

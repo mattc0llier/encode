@@ -43,14 +43,12 @@ app.use(require('express-session')({
 }));
 
 passport.serializeUser(function(user, done) {
-  console.log('serializeUser');
   done(null, user.id);
 });
 passport.deserializeUser(function(userId, done) {
   // db call to get user
   getUserByID(userId)
   .then(user => {
-    console.log('deserializeUser', user);
     done(null, user);
   })
 });
@@ -123,7 +121,6 @@ app.use(passport.session());
 
 // helper function for Passport but should i just be using app.get(/user/:id)
 function getUserByUsername(username) {
-  console.log('username', username);
   return db.one(
     'SELECT id, username, email, password FROM users WHERE username=$1', [username]
   )
@@ -133,7 +130,6 @@ function getUserByUsername(username) {
 }
 // helper function for Passport but should i just be using app.get(/user/:id)
 function getUserByID(id) {
-  console.log('user id', id);
   return db.one(
     'SELECT id, username, email, password FROM users WHERE id=$1', [id]
   )
@@ -146,9 +142,6 @@ passport.use(new LocalStrategy(
   async (username, password, done) => {
     // get user.password with username in the db
     const user = await getUserByUsername(username);
-    console.log('user', user);
-    console.log('user.password', user.password);
-    console.log('auth password', password);
 
     if (!user) {
       return done(null, false);
@@ -165,7 +158,6 @@ passport.use(new LocalStrategy(
     const passwordMatches = await testPassword(password, user.password)
 
     if (passwordMatches) {
-      console.log(user)
       done(null, user);
     } else {
       done(null, false);
@@ -182,7 +174,6 @@ app.post('/api/login', passport.authenticate('local', { failureRedirect: '/login
 // changing state even when not successful - need to add a catch
 // create new users
 app.post('/api/users/create', function(req, res){
-  console.log(req.body);
   const {first_name, last_name, username, email, password} = req.body
   bcrypt.genSalt(SALT_ROUNDS)
   .then( salt => {
@@ -204,8 +195,6 @@ app.post('/api/users/create', function(req, res){
 
 // get all objectives
 app.get('/api/objectives', function(req, res){
-  // console.log('getting here');
-  // .then(data => res.json({hello: 'world'))
   db.any('SELECT * FROM objectives')
   .then(data => res.json(data))
   .catch(error => res.json({ error: error.message }));
@@ -295,9 +284,7 @@ app.get('/api/users/:id/objectives/complete/:lastestStatusTime', (req, res) => {
       const dates = previousCompletedObjectives.map(objective => (
         objective.completion_time
       ))
-      console.log('dates', dates);
       const statusStreakSummary = summary({ dates });
-      console.log('statusStreakSummary', statusStreakSummary);
 
 
       const statusObjectivesScore = previousCompletedObjectives.length
@@ -338,6 +325,17 @@ app.get('/api/users/:id/scores', (req, res) => {
 // if change to desc then need to update status lastest objective completion_time
 app.get('/api/activities/objectives/complete', (req, res) => {
   db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.complete = true ORDER BY activities.completion_time ASC')
+  .then(data => {
+    res.json(data)
+  })
+  .catch(error => res.json({ error: error.message }));
+})
+
+// create user activities when they enroll in a course
+app.get('/api/users/activities/create', (req, res) => {
+  const { user, course, objective } = req.body;
+  
+  db.one("INSERT INTO activities (objective_id, user_id, complete, completion_time) VALUES ($1, $2, $3, $4) RETURNING id, objective_id, user_id, complete, completion_time", [objective.id, user.id, false, null])
   .then(data => {
     res.json(data)
   })

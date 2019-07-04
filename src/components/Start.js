@@ -5,17 +5,42 @@ class Start extends React.Component {
   constructor(){
     super();
 
-    this.state = { courses: [], objectives: [], selectedCourseId: 0, selectedObjectiveId: 0 }
+    this.state = { courses: [], objectives: [], selectedCourseId: 0, selectedObjectiveId: 0, redirect: false }
 
     this.fetchCourses = this.fetchCourses.bind(this);
     this.handleCourseChange = this.handleCourseChange.bind(this);
     this.fetchObjectives = this.fetchObjectives.bind(this);
     this.handleObjectiveChange = this.handleObjectiveChange.bind(this);
     this.handleUserStartPointSubmit = this.handleUserStartPointSubmit.bind(this);
+    this.createUserActivities = this.createUserActivities.bind(this);
+  }
+
+  createUserActivities(){
+    fetch(`/api/users/create`, {
+      method: 'POST',
+      body: JSON.stringify({
+        currentUser: this.props.currentUser,
+        course_id: this.state.selectedCourseId,
+        objective_id: this.state.selectedObjectiveId
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      console.log('newUser', body);
+    })
   }
 
   handleUserStartPointSubmit(event){
     event.preventDefault();
+    this.createUserActivities()
+    this.setState({
+      redirect: true
+    })
     console.log(this.state.selectedCourseId, this.state.selectedObjectiveId);
   }
 
@@ -69,7 +94,8 @@ class Start extends React.Component {
   }
 
   render(){
-    return(
+    if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
+     else return(
       <div className="start">
 
         <label for="course-select">Select your course:</label>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class NewUser extends React.Component {
   constructor(){
@@ -11,7 +11,8 @@ class NewUser extends React.Component {
       username: "",
       email: "",
       password: ""
-    }
+    },
+    redirect: false
   }
 
     this.handleCreateFirstNameChange = this.handleCreateFirstNameChange.bind(this)
@@ -81,22 +82,29 @@ class NewUser extends React.Component {
   handleCreateUserSubmit(event){
     event.preventDefault();
     this.props.receiveNewUser(this.state.newUser)
+    this.setState({
+      redirect: true
+    })
   }
 
 
   render(){
-    return(
-      <div className="newUser">
-        <h2>Learn with us</h2>
-        <form  onSubmit={this.handleCreateUserSubmit}>
-          <input className="newUser__input" onChange={this.handleCreateFirstNameChange} placeholder="first name" />
-          <input className="newUser__input" onChange={this.handleCreateLastNameChange} placeholder="last name" />
-          <input className="newUser__input" onChange={this.handleCreateUsernameChange} placeholder="@ username" />
-          <input className="newUser__input" onChange={this.handleCreateEmailChange} placeholder="email" />
-          <input className="newUser__input" onChange={this.handleCreatePasswordChange} placeholder="password" />
-          <button type="submit" className="newUser__button">Create user</button>
-        </form>
-      </div>
+
+      if (this.state.redirect) return(<Redirect to='/start' />)
+       else return(
+        <div className="newUser">
+          <h2>Learn with us</h2>
+          <form  onSubmit={this.handleCreateUserSubmit}>
+            <input className="newUser__input" onChange={this.handleCreateFirstNameChange} placeholder="first name" />
+            <input className="newUser__input" onChange={this.handleCreateLastNameChange} placeholder="last name" />
+            <input className="newUser__input" onChange={this.handleCreateUsernameChange} placeholder="@ username" />
+            <input className="newUser__input" onChange={this.handleCreateEmailChange} placeholder="email" />
+            <input className="newUser__input" onChange={this.handleCreatePasswordChange} placeholder="password" />
+            <button type="submit" className="newUser__button">Create user</button>
+          </form>
+        </div>
+
+
     )
   }
 }

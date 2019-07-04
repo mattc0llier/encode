@@ -159,10 +159,10 @@ class App extends React.Component {
                 />)}
               />
               <Route path="/start"
-                render={(props) => (<Start {...props} />)}
+                render={(props) => (<Start {...props} currentUser={this.state.currentUser} />)}
               />
               <Route path="/settings"
-                render={(props) => (<Settings {...props} />)}
+                render={(props) => (<Settings {...props} currentUser={this.state.currentUser} />)}
               />
             </Switch>
           </main>
