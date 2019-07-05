@@ -79,7 +79,7 @@ class Activity extends React.Component {
         <div className="activity-chart-2">
         <Calendar
           width={400}
-          height={200}
+          height={100}
           margin={margin}
           from={firstDay}
           to={today}
