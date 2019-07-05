@@ -8,63 +8,90 @@ import '../../styles/components/Activity.scss';
 class Activity extends React.Component {
   constructor(){
     super();
+
+    this.organizeDays = this.organizeDays.bind()
+  }
+
+  organizeDays(filteredObjectives){
+  //
+    //group completed objects by the date they were completed by
+    function groupByDate(objectArray, property) {
+      return objectArray.reduce(function (acc, obj) {
+        var key = startOfDay(obj[property]).toISOString().split('T')[0]
+        if (!acc[key]) {
+          acc[key] = []
+        }
+        acc[key].push(obj);
+        return acc
+      }, {})
+    }
+
+    //make those completed object dates into arrays to be mapped over.
+    const groupedObjectsArray = Object.entries(groupByDate(filteredObjectives, 'completion_time'))
+    console.log(groupedObjectsArray)
+
+    const dailySummary = groupedObjectsArray.map(objectiveGroup => {
+      const dailyMasteryScore = objectiveGroup[1].reduce(function(acc, cur) {
+        return acc + cur.mastery_score
+      }, 0);
+      console.log('dailyMasteryScore', dailyMasteryScore);
+      return {
+        day: objectiveGroup[0], value: dailyMasteryScore
+      }
+    })
+
+    console.log('dailySummary', dailySummary)
+
+    return dailySummary
   }
 
   render(){
 
-    // const filteredObjectives = this.props.userProfileObjectivesObject.filter(object => object.complete == true )
-    //
-    // const reformattedObjectives = filteredObjectives.map(objective => (
-    //
-    // ))
+    const filteredObjectives = this.props.userProfileObjectivesObject.filter(object => object.complete == true )
+    console.log('filteredObjectives', filteredObjectives)
 
-    const data = [
-      {
-        day: "2015-03-06",
-        value: 385
-      },
-      {
-        day: "2016-03-06",
-        value: 385
-      },
-      {
-        day: "2016-06-28",
-        value: 196
-      },
-      {
-        day: "2016-07-22",
-        value: 392
-      },
-      {
-        day: "2017-07-22",
-        value: 392
-      }
-    ];
+    const dailySummary = this.organizeDays(filteredObjectives)
+    //
+    //
+    // const dailySummary = dailySummary.map(objective => (
+    //   {
+    //     day: startOfDay(objective.completion_time).toISOString().split('T')[0],
+    //     value: objective.mastery_score
+    //   }
+    // ))
+    // console.log('reformattedObjectives', reformattedObjectives);
 
     const margin = {
-      top: 30,
-      right: 10,
-      bottom: 10,
-      left: 60
+      top: 0,
+      right: 20,
+      bottom: 0,
+      left: 0
     };
 
     const today = startOfDay(new Date())
     console.log(today);
+    const firstDay = "2019-07-01"
 
     return(
       <div className="activity">
         <div className="activity-chart">
-          <h3>Last month activity</h3>
-
+          <h3>Daily activity</h3>
         <div className="activity-chart-2">
         <Calendar
-          width={600}
-          height={400}
+          width={400}
+          height={200}
           margin={margin}
-          from="2016-01-01"
+          from={firstDay}
           to={today}
-          data={data}
+          emptyColor="#eeeeee"
+          data={dailySummary}
+          colors={[ '#3424AC', '#FF5352' ]}
+          yearSpacing={40}
+          monthBorderColor="#ffffff"
+          dayBorderWidth={2}
+          dayBorderColor="#ffffff"
         />
+        </div>
       </div>
     </div>
     )

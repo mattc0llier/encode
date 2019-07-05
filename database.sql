@@ -332,27 +332,27 @@ INSERT INTO objectives
 INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (1, 1, 1, TRUE, '2018-10-28T10:37:33.735972Z');
+  (1, 1, 1, TRUE, '2019-06-29T10:37:33.735972Z');
 INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (2, 2, 1, TRUE, '2018-10-28T10:37:34.735972Z');
+  (2, 2, 1, TRUE, '2019-06-29T10:37:33.735972Z');
 INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (3, 3, 1, TRUE, '2018-10-28T10:37:35.735972Z');
+  (3, 3, 1, TRUE, '2019-06-29T10:37:33.735972Z');
 INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (10, 4, 1, TRUE, '2018-10-29T10:40:33.735972Z');
+  (10, 4, 1, TRUE, '2019-07-03T10:37:33.735972Z');
 INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (11, 5, 1, TRUE, '2018-10-29T10:40:34.735972Z');
+  (11, 5, 1, TRUE, '2019-07-04T10:37:33.735972Z');
 INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (12, 6, 1, TRUE, '2018-10-30T10:40:37.735972Z');
+  (12, 6, 1, TRUE, '2019-07-05T10:37:33.735972Z');
 INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
@@ -400,7 +400,7 @@ INSERT INTO activities
 INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
-  (4, 1, 2, TRUE, '2018-10-28T10:37:33.735972Z');
+  (4, 1, 2, TRUE, '2019-06-29T10:37:33.735972Z');
 INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
