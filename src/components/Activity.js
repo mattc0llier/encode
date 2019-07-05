@@ -28,19 +28,15 @@ class Activity extends React.Component {
 
     //make those completed object dates into arrays to be mapped over.
     const groupedObjectsArray = Object.entries(groupByDate(filteredObjectives, 'completion_time'))
-    console.log(groupedObjectsArray)
 
     const dailySummary = groupedObjectsArray.map(objectiveGroup => {
       const dailyMasteryScore = objectiveGroup[1].reduce(function(acc, cur) {
         return acc + cur.mastery_score
       }, 0);
-      console.log('dailyMasteryScore', dailyMasteryScore);
       return {
         day: objectiveGroup[0], value: dailyMasteryScore
       }
     })
-
-    console.log('dailySummary', dailySummary)
 
     return dailySummary
   }
@@ -48,18 +44,8 @@ class Activity extends React.Component {
   render(){
 
     const filteredObjectives = this.props.userProfileObjectivesObject.filter(object => object.complete == true )
-    console.log('filteredObjectives', filteredObjectives)
 
     const dailySummary = this.organizeDays(filteredObjectives)
-    //
-    //
-    // const dailySummary = dailySummary.map(objective => (
-    //   {
-    //     day: startOfDay(objective.completion_time).toISOString().split('T')[0],
-    //     value: objective.mastery_score
-    //   }
-    // ))
-    // console.log('reformattedObjectives', reformattedObjectives);
 
     const margin = {
       top: 0,
@@ -69,7 +55,6 @@ class Activity extends React.Component {
     };
 
     const today = startOfDay(new Date())
-    console.log(today);
     const firstDay = "2019-07-01"
 
     return(
@@ -78,14 +63,14 @@ class Activity extends React.Component {
           <h3>Daily activity</h3>
         <div className="activity-chart-2">
         <Calendar
-          width={400}
-          height={100}
+          width={800}
+          height={200}
           margin={margin}
           from={firstDay}
           to={today}
           emptyColor="#eeeeee"
           data={dailySummary}
-          colors={[ '#3424AC', '#FF5352' ]}
+          colors={[ '#3424AC','#673096','#9A3C7F','#CC4769','#FF5352' ]}
           yearSpacing={40}
           monthBorderColor="#ffffff"
           dayBorderWidth={2}

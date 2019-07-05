@@ -1,7 +1,7 @@
 import React from 'react';
 import Status from './Status'
 import Objective from './Objective'
-import { startOfDay, compareDesc } from 'date-fns'
+import { startOfDay, compareDesc, parse, format } from 'date-fns'
 import '../../styles/components/History.scss';
 
 
@@ -35,11 +35,6 @@ class History extends React.Component {
       compareDesc(a[0])
       // console.log('a[0]', a[0]);
     })
-
-
-    // console.log('filteredObjects',  filteredObjects);
-    // console.log('groupedObjectsArray',  groupedObjectsArray);
-    // console.log('sortedObjectives',  sortedObjectives);
 
     return(
       <div className="history">

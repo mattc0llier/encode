@@ -146,10 +146,11 @@ class Profile extends React.Component {
         <div className="left">
           <Info userProfileObject={this.state.userProfile}/>
           { this.state.currentUserProfile ? <Link to='/settings'><p>**Update your profile**</p></Link> : null}
-          <Activity userProfileObjectivesObject={this.state.userProfileObjectives}/>
         </div>
         <div className="right">
           <Scores userProfileScoresObject={this.state.userProfileScores}/>
+          <Activity userProfileObjectivesObject={this.state.userProfileObjectives}/>
+
           <WorkingOn
             userProfileObjectivesObject={this.state.userProfileObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}
