@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Start extends React.Component {
   constructor(){
@@ -94,9 +94,8 @@ class Start extends React.Component {
   }
 
   render(){
-    // if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
-    //  else
-     return(
+    if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
+     else return(
       <div className="start">
 
         <label for="course-select">Select your course:</label>

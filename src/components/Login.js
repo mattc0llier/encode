@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
+
 import '../../styles/components/Login.scss';
 
 
@@ -9,7 +11,8 @@ class Login extends React.Component {
     this.state = { loginUser: {
       username: "",
       password: ""
-    }
+    },
+    redirect: false
   }
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this)
@@ -37,11 +40,15 @@ class Login extends React.Component {
   handleLoginUserSubmit(event){
     event.preventDefault();
     this.props.receiveLoginUser(this.state.loginUser)
+    this.setState({
+      redirect: true
+    })
   }
 
 
   render(){
-    return(
+    if (this.state.redirect) return(<Redirect to='/feed' />)
+     else return(
       <div className="loginUser">
         <h2>loginUser</h2>
         <form  onSubmit={this.handleLoginUserSubmit}>

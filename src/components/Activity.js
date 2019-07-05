@@ -60,10 +60,9 @@ class Activity extends React.Component {
     return(
       <div className="activity">
         <div className="activity-chart">
-          <h3>Daily activity</h3>
         <div className="activity-chart-2">
         <Calendar
-          width={800}
+          width={900}
           height={200}
           margin={margin}
           from={firstDay}

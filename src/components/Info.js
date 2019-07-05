@@ -14,6 +14,7 @@ class Info extends React.Component {
         <h3>{this.props.userProfileObject.first_name} {this.props.userProfileObject.last_name} </h3>
         <p>{this.props.userProfileObject.bio}</p>
         <p>{this.props.userProfileObject.location}</p>
+        <img src="/static/assets/images/Organizations.png"/>
       </div>
     )
   }

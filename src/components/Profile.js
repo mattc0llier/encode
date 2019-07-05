@@ -150,7 +150,6 @@ class Profile extends React.Component {
         <div className="right">
           <Scores userProfileScoresObject={this.state.userProfileScores}/>
           <Activity userProfileObjectivesObject={this.state.userProfileObjectives}/>
-
           <WorkingOn
             userProfileObjectivesObject={this.state.userProfileObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}

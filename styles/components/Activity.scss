@@ -1,5 +1,10 @@
 @import '../base.scss';
 
+.activity-chart {
+  display: flex;
+  justify-content: center;
+}
+
 .activity-chart-2 {
   min-height: 200px;
   min-width: 800px;
