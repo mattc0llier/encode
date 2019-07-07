@@ -49,13 +49,17 @@ class Login extends React.Component {
   render(){
     if (this.state.redirect) return(<Redirect to='/feed' />)
      else return(
-      <div className="loginUser">
-        <h2>loginUser</h2>
-        <form  onSubmit={this.handleLoginUserSubmit}>
-          <input className="loginUser__input" onChange={this.handleUsernameChange} placeholder="@ username" />
-          <input className="loginUser__input" onChange={this.handlePasswordChange} placeholder="password" />
-          <button type="submit" className="loginUser__button">Login</button>
-        </form>
+      <div className="form-center">
+        <div className="loginUser">
+          <h2>Enter login details</h2>
+          <form  onSubmit={this.handleLoginUserSubmit}>
+            <label for="username">Enter your username</label>
+            <input name="username" type="text" className="loginUser__input" onChange={this.handleUsernameChange} placeholder="@ username" />
+            <label for="username">and your password</label>
+            <input name="password" type="password" className="loginUser__input" onChange={this.handlePasswordChange} placeholder="password" />
+            <button type="submit" className="loginUser__button">Login</button>
+          </form>
+        </div>
       </div>
     )
   }

@@ -71,7 +71,7 @@ main {
 //   }
 // }
 
-form {
+form, select {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   max-width: 400px;
@@ -89,6 +89,9 @@ form {
       margin: 1rem 0;
     }
   }
+  label {
+    margin-bottom: 0.25rem;
+  }
   input {
     background-color: rgb(255, 255, 255);
     border: 0.2rem solid rgb(209, 209, 209);
@@ -97,8 +100,9 @@ form {
     border: 1px solid $background-mid-grey;
     border-radius: 0.3rem;
     letter-spacing: 0.03rem;
-    min-width: 12rem;
-    width: 85%;
+    min-width: 20rem;
+    width: 100%;
+    margin-bottom: 1rem;
   }
   // Formik validation styles //
   .errorInput {
@@ -127,6 +131,14 @@ form {
   .fas {
     // font-size: 1.8rem;
   }
+
+
+}
+
+.form-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* helper styles */
 // .visuallyhidden {

@@ -29,8 +29,7 @@ class Nav extends React.Component {
               <React.Fragment>
                 <Link to='/students'><li>students</li></Link>
                 <Link to={`/users/${this.props.currentUser.username}`}><li>{this.props.currentUser.username}'s profile</li></Link>
-                <p>🎓 {this.props.currentUserScores.mastery} 🔥 {this.props.currentUserScores.streak} ✅ {this.props.currentUserScores.objectives}</p>
-                <Link to='/logout'><p>Log out</p></Link>
+                <p>🎓{this.props.currentUserScores.mastery} 🔥{this.props.currentUserScores.streak} ✅{this.props.currentUserScores.objectives}</p>
               </React.Fragment>
             ): (
               <React.Fragment>

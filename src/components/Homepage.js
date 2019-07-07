@@ -74,9 +74,6 @@ class Homepage extends React.Component {
               <img id="screenshot" src="https://encode-app-public.s3-us-west-2.amazonaws.com/landing-page-assets/screenshot.svg" alt="Encode status updates" />
             </a>
           </section>
-              <section className="signup" id="signup">
-                <p>Leave your email and we'll let you know when we're ready to go.</p>
-              </section>
         </main>
       </div>
     )

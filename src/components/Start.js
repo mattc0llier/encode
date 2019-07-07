@@ -101,29 +101,31 @@ class Start extends React.Component {
   render(){
     if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
      else return(
-      <div className="start">
+      <div className="form-center">
+        <div className="start">
 
-        <label for="course-select">Select your course:</label>
+        <h2>Select your course</h2>
 
-        <form onSubmit={this.handleUserStartPointSubmit}>
-          <select id="course-select" onChange={this.handleCourseChange}>
-            <option value="">--Please choose an option--</option>
-            {this.state.courses.map(course => (
-              <React.Fragment key={course.id} >
-                <option value={course.id} >{course.name}</option>
-              </React.Fragment>
-            ))}
-          </select>
-          <select id="objective-select" onChange={this.handleObjectiveChange}>
-            <option value="">--Please choose an option--</option>
-            {this.state.objectives.map(objective => (
-              <React.Fragment key={objective.objective_id}>
-                <option value={objective.number}>{objective.number} - {objective.objective}</option>
-              </React.Fragment>
-            ))}
-          </select>
-          <button type="submit" className="start__button">Let's go</button>
-        </form>
+          <form onSubmit={this.handleUserStartPointSubmit}>
+            <select id="course-select" onChange={this.handleCourseChange}>
+              <option value="">--Please choose an option--</option>
+              {this.state.courses.map(course => (
+                <React.Fragment key={course.id} >
+                  <option value={course.id} >{course.name}</option>
+                </React.Fragment>
+              ))}
+            </select>
+            <select id="objective-select" onChange={this.handleObjectiveChange}>
+              <option value="">--Please choose an option--</option>
+              {this.state.objectives.map(objective => (
+                <React.Fragment key={objective.objective_id}>
+                  <option value={objective.number}>{objective.number} - {objective.objective}</option>
+                </React.Fragment>
+              ))}
+            </select>
+            <button type="submit" className="start__button">Let's go</button>
+          </form>
+        </div>
       </div>
     )
   }

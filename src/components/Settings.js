@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
+  
 class Settings extends React.Component {
   constructor(){
     super();
@@ -42,6 +43,8 @@ class Settings extends React.Component {
     return(
       <div className="settings">
         <h3>Your settings</h3>
+        <Link to='/logout'><p>Log out</p></Link>
+
         <form  onSubmit={this.handleUpdateSettingsSubmit}>
           <input className="settings__input" onChange={this.handleProfilePictureChange} placeholder="profile picture url" />
           <input className="settings__input" onChange={this.handleBioChange} placeholder="your bio" />

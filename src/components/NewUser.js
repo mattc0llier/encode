@@ -92,16 +92,24 @@ class NewUser extends React.Component {
 
       if (this.state.redirect) return(<Redirect to='/start' />)
        else return(
-        <div className="newUser">
-          <h2>Learn with us</h2>
-          <form  onSubmit={this.handleCreateUserSubmit}>
-            <input className="newUser__input" onChange={this.handleCreateFirstNameChange} placeholder="first name" />
-            <input className="newUser__input" onChange={this.handleCreateLastNameChange} placeholder="last name" />
-            <input className="newUser__input" onChange={this.handleCreateUsernameChange} placeholder="@ username" />
-            <input className="newUser__input" onChange={this.handleCreateEmailChange} placeholder="email" />
-            <input className="newUser__input" onChange={this.handleCreatePasswordChange} placeholder="password" />
-            <button type="submit" className="newUser__button">Create user</button>
-          </form>
+         <div className="form-center" >
+          <div className="newUser">
+            <h2>Learn with us</h2>
+              <form  onSubmit={this.handleCreateUserSubmit}>
+                <label for="first-name">First name</label>
+                <input name="first-name" type="text" className="newUser__input" onChange={this.handleCreateFirstNameChange} placeholder="first name" />
+                <label for="last-name">Last name</label>
+                <input name="last-name" type="text" className="newUser__input" onChange={this.handleCreateLastNameChange} placeholder="last name" />
+                <br />
+                <label for="username">Pick a username</label>
+                <input name="username" type="text" className="newUser__input" onChange={this.handleCreateUsernameChange} placeholder="@ username" />
+                <label for="email">Confirm email</label>
+                <input name="email" type="email" className="newUser__input" onChange={this.handleCreateEmailChange} placeholder="email" />
+                <label for="password">Pick a password</label>
+                <input name="password" type="password" className="newUser__input" onChange={this.handleCreatePasswordChange} placeholder="password" />
+                <button type="submit" className="newUser__button">Create user</button>
+              </form>
+            </div>
         </div>
 
 
