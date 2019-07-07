@@ -529,7 +529,7 @@ INSERT INTO activities
   (id, objective_id, user_id, complete, completion_time)
   VALUES
   (50, 44, 1, FALSE, NULL);
-
+ALTER SEQUENCE activities_id_seq RESTART WITH 51 INCREMENT BY 1;
 
 INSERT INTO scores
   (id, user_id, mastery, streak, objective_count)

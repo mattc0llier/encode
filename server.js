@@ -342,53 +342,56 @@ function getObjectivesByCourseId(id) {
   });
 }
 
+const newActivities = async (userId, courseId, selectiveObjectiveNumber) => {
+  const allCourseObjectives = await getObjectivesByCourseId(courseId)
+
+  console.log('userId', userId);
+  console.log('courseId', courseId);
+  console.log('selectiveObjectiveNumber before', selectiveObjectiveNumber);
+  //for any objective where objective.number < slectedobjective.number then
+  // completed is true and completed time is now
+  const isoDateNow = new Date().toISOString()
+
+  const formatedActivities = allCourseObjectives.map(function(objective) {
+    console.log('isoDateNow', isoDateNow)
+    console.log('objective in formatted', objective)
+    console.log('selectiveObjectiveNumber after', selectiveObjectiveNumber)
+    if(objective.objective_number < selectiveObjectiveNumber){
+      return [objective.objective_id, userId, true, isoDateNow]
+    } else {
+      return [objective.objective_id, userId, false, null]
+    }
+  })
+
+  console.log('formatedActivities', await formatedActivities);
+
+  return formatedActivities
+}
+
+const insertActivities = async (activities) => {
+  const query1 = format("INSERT INTO activities (objective_id, user_id, complete, completion_time) VALUES %L RETURNING id, objective_id, user_id, complete, completion_time", activities)
+
+    const  {rows} = await db.query(query1);
+    return rows
+}
+
 // create user activities when they enroll in a course
-app.post('/api/users/activities/create', (req, res) => {
+app.post('/api/users/activities/create', async (req, res) => {
   // theses aren't match proparly yet
-  const { user, course, objective } = req.body;
-  console.log('user', user);
-  console.log('course', course);
-  console.log('objective', objective);
-
-  // const newActivities = async (course) => {
-  //   const allCourseObjectives = await getObjectivesByCourseId(course.id)
-  //   console.log('allCourseObjectives', allCourseObjectives);
-  //
-  //   let newActivities = allCourseObjectives.map( objective => (
-  //     [objective.objective_id, user.id, false, null]
-  //   ))
-  //   console.log('newActivities', newActivities);
-  //
-  //   return newActivities
-  // }
-  //
-  //   console.log('newActivities', newActivities;
-
-//   let query1 = format("INSERT INTO activities (objective_id, user_id, complete, completion_time) VALUES %L RETURNING id, objective_id, user_id, complete, completion_time", newActivities)
-//
-//   async function run() {
-//   let client;
-//   try {
-//     client = new pg.Client({
-//       connectionString: 'postgresql://localhost/encode'
-//     });
-//     await client.connect();
-//     let {rows} = await client.query(query1);
-//     console.log(rows);
-//   } catch (e) {
-//     console.error(e);
-//   } finally {
-//     client.end();
-//   }
-// }
-//
-// run();
-
+  const { currentUser, course, objective } = req.body;
+  console.log('objective number from body', objective);
+  try {
+    const formattedActivitiesToInsert = await newActivities(currentUser.user_id, course.id, objective.number)
+    const rows = await insertActivities(formattedActivitiesToInsert)
+    res.status(200).send({update: "success"});
+    res.end()
+  } catch (error) {
+    res.status(500).send({update: "Activities not created"});
+  }
 
 })
 
 // index route
-// I don't know how to pass this client id into my front end code
 app.get('/', function(req, res) {
   res.render('index');
 });

@@ -5,7 +5,7 @@ class Start extends React.Component {
   constructor(){
     super();
 
-    this.state = { courses: [], objectives: [], selectedCourseId: 0, selectedObjectiveId: 0, redirect: false }
+    this.state = { courses: [], objectives: [], selectedCourseId: 0, selectedObjectiveNumber: 0, redirect: false }
 
     this.fetchCourses = this.fetchCourses.bind(this);
     this.handleCourseChange = this.handleCourseChange.bind(this);
@@ -16,12 +16,17 @@ class Start extends React.Component {
   }
 
   createUserActivities(){
+    console.log('createUserActivities');
     fetch(`/api/users/activities/create`, {
       method: 'POST',
       body: JSON.stringify({
         currentUser: this.props.currentUser,
-        course_id: this.state.selectedCourseId,
-        objective_id: this.state.selectedObjectiveId
+        course: {
+          id: this.state.selectedCourseId
+        },
+        objective: {
+          number: this.state.selectedObjectiveNumber
+        }
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -41,14 +46,14 @@ class Start extends React.Component {
     this.setState({
       redirect: true
     })
-    console.log(this.state.selectedCourseId, this.state.selectedObjectiveId);
+    console.log(this.state.selectedCourseId, this.state.selectedObjectiveNumber);
   }
 
   handleObjectiveChange(event){
     console.log('event', event);
     console.log(event.target.value);
     this.setState({
-      selectedObjectiveId: event.target.value
+      selectedObjectiveNumber: event.target.value
     })
   }
 
@@ -70,7 +75,7 @@ class Start extends React.Component {
     console.log(event.target.value);
     this.setState({
       selectedCourseId: event.target.value,
-      selectedObjectiveId: 0
+      selectedObjectiveNumber: 0
     })
     this.fetchObjectives(event.target.value)
   }
@@ -113,7 +118,7 @@ class Start extends React.Component {
             <option value="">--Please choose an option--</option>
             {this.state.objectives.map(objective => (
               <React.Fragment key={objective.objective_id}>
-                <option value={objective.objective_id}>{objective.number} - {objective.objective}</option>
+                <option value={objective.number}>{objective.number} - {objective.objective}</option>
               </React.Fragment>
             ))}
           </select>
