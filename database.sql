@@ -73,6 +73,7 @@ CREATE TABLE activities(
   user_id INT,
   complete BOOLEAN DEFAULT FALSE,
   completion_time TIMESTAMP WITH TIME ZONE,
+  created_at TIMESTAMP WITH TIME ZONE,
   FOREIGN KEY (objective_id) REFERENCES objectives (id),
   FOREIGN KEY (lesson_id) REFERENCES lessons (id),
   FOREIGN KEY (course_id) REFERENCES courses (id),
@@ -336,206 +337,210 @@ INSERT INTO objectives
 
 
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (1, 'objective', 1, NULL, NULL, 1, TRUE, '2019-06-29T10:37:33.735972Z');
+  (1, 'objective', 1, NULL, NULL, 1, TRUE, '2019-06-29T10:37:33.735972Z', '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (2, 'objective', 2, NULL, NULL, 1, TRUE, '2019-06-29T10:37:33.735972Z');
+  (2, 'objective', 2, NULL, NULL, 1, TRUE, '2019-06-29T10:37:33.735972Z', '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (3, 'objective', 3, NULL, NULL, 1, TRUE, '2019-06-29T10:37:33.735972Z');
+  (3, 'objective', 3, NULL, NULL, 1, TRUE, '2019-06-29T10:37:33.735972Z', '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (10, 'objective', 4, NULL, NULL, 1, TRUE, '2019-07-03T10:37:33.735972Z');
+  (10, 'objective', 4, NULL, NULL, 1, TRUE, '2019-07-03T10:37:33.735972Z', '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (11, 'objective', 5, NULL, NULL, 1, TRUE, '2019-07-04T10:37:33.735972Z');
+  (11, 'objective', 5, NULL, NULL, 1, TRUE, '2019-07-04T10:37:33.735972Z', '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (12, 'objective', 6, NULL, NULL, 1, TRUE, '2019-07-05T10:37:33.735972Z');
+  (12, 'objective', 6, NULL, NULL, 1, TRUE, '2019-07-05T10:37:33.735972Z', '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (13, 'objective', 7, NULL, NULL, 1, FALSE, NULL);
+  (13, 'objective', 7, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (14, 'objective', 8, NULL, NULL, 1, FALSE, NULL);
+  (14, 'objective', 8, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (15, 'objective', 9, NULL, NULL, 1, FALSE, NULL);
+  (15, 'objective', 9, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (16, 'objective', 10, NULL, NULL, 1, FALSE, NULL);
+  (16, 'objective', 10, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (17, 'objective', 11, NULL, NULL, 1, FALSE, NULL);
+  (17, 'objective', 11, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (18, 'objective', 12, NULL, NULL, 1, FALSE, NULL);
+  (18, 'objective', 12, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (19, 'objective', 13, NULL, NULL, 1, FALSE, NULL);
+  (19, 'objective', 13, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (20, 'objective', 14, NULL, NULL, 1, FALSE, NULL);
+  (20, 'objective', 14, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (21, 'objective', 15, NULL, NULL, 1, FALSE, NULL);
+  (21, 'objective', 15, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (22, 'objective', 16, NULL, NULL, 1, FALSE, NULL);
+  (22, 'objective', 16, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (23, 'objective', 17, NULL, NULL, 1, FALSE, NULL);
+  (23, 'objective', 17, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (4, 'objective', 1, NULL, NULL, 2, TRUE, '2019-06-29T10:37:33.735972Z');
+  (4, 'objective', 1, NULL, NULL, 2, TRUE, '2019-06-29T10:37:33.735972Z', '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (5, 'objective', 2, NULL, NULL, 2, FALSE, NULL);
+  (5, 'objective', 2, NULL, NULL, 2, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (6, 'objective', 3, NULL, NULL, 2, FALSE, NULL);
+  (6, 'objective', 3, NULL, NULL, 2, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (7, 'objective', 1, NULL, NULL, 3, FALSE, NULL);
+  (7, 'objective', 1, NULL, NULL, 3, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (8, 'objective', 2, NULL, NULL, 3, FALSE, NULL);
+  (8, 'objective', 2, NULL, NULL, 3, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (9, 'objective', 3, NULL, NULL, 3, FALSE, NULL);
+  (9, 'objective', 3, NULL, NULL, 3, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (24, 'objective', 18, NULL, NULL, 1, FALSE, NULL);
+  (24, 'objective', 18, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (25, 'objective', 19, NULL, NULL, 1, FALSE, NULL);
+  (25, 'objective', 19, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (26, 'objective', 20, NULL, NULL, 1, FALSE, NULL);
+  (26, 'objective', 20, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (27, 'objective', 21, NULL, NULL, 1, FALSE, NULL);
+  (27, 'objective', 21, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (28, 'objective', 22, NULL, NULL, 1, FALSE, NULL);
+  (28, 'objective', 22, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (29, 'objective', 23, NULL, NULL, 1, FALSE, NULL);
+  (29, 'objective', 23, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (30, 'objective', 24, NULL, NULL, 1, FALSE, NULL);
+  (30, 'objective', 24, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (31, 'objective', 25, NULL, NULL, 1, FALSE, NULL);
+  (31, 'objective', 25, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (32, 'objective', 26, NULL, NULL, 1, FALSE, NULL);
+  (32, 'objective', 26, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (33, 'objective', 27, NULL, NULL, 1, FALSE, NULL);
+  (33, 'objective', 27, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (34, 'objective', 28, NULL, NULL, 1, FALSE, NULL);
+  (34, 'objective', 28, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (35, 'objective', 29, NULL, NULL, 1, FALSE, NULL);
+  (35, 'objective', 29, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (36, 'objective', 30, NULL, NULL, 1, FALSE, NULL);
+  (36, 'objective', 30, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (37, 'objective', 31, NULL, NULL, 1, FALSE, NULL);
+  (37, 'objective', 31, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (38, 'objective', 32, NULL, NULL, 1, FALSE, NULL);
+  (38, 'objective', 32, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (39, 'objective', 33, NULL, NULL, 1, FALSE, NULL);
+  (39, 'objective', 33, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (40, 'objective', 34, NULL, NULL, 1, FALSE, NULL);
+  (40, 'objective', 34, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (41, 'objective', 35, NULL, NULL, 1, FALSE, NULL);
+  (41, 'objective', 35, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (42, 'objective', 36, NULL, NULL, 1, FALSE, NULL);
+  (42, 'objective', 36, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (43, 'objective', 37, NULL, NULL, 1, FALSE, NULL);
+  (43, 'objective', 37, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (44, 'objective', 38, NULL, NULL, 1, FALSE, NULL);
+  (44, 'objective', 38, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (45, 'objective', 39, NULL, NULL, 1, FALSE, NULL);
+  (45, 'objective', 39, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (46, 'objective', 40, NULL, NULL, 1, FALSE, NULL);
+  (46, 'objective', 40, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (47, 'objective', 41, NULL, NULL, 1, FALSE, NULL);
+  (47, 'objective', 41, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (48, 'objective', 42, NULL, NULL, 1, FALSE, NULL);
+  (48, 'objective', 42, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (49, 'objective', 43, NULL, NULL, 1, FALSE, NULL);
+  (49, 'objective', 43, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 INSERT INTO activities
-  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time)
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
-  (50, 'objective', 44, NULL, NULL, 1, FALSE, NULL);
-ALTER SEQUENCE activities_id_seq RESTART WITH 51 INCREMENT BY 1;
+  (50, 'objective', 44, NULL, NULL, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
+INSERT INTO activities
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
+  VALUES
+  (51, 'course', NULL, NULL, 1, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
+ALTER SEQUENCE activities_id_seq RESTART WITH 52 INCREMENT BY 1;
 
 INSERT INTO scores
   (id, user_id, mastery, streak, objective_count)
