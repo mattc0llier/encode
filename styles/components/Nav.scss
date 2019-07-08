@@ -14,6 +14,7 @@
 .nav a {
   text-decoration: none;
   padding: 1rem;
+  color: white;
 }
 
 .right-nav {
@@ -28,4 +29,8 @@
 .button-cta {
   display: flex;
   flex-direction: row;
+}
+
+.nav p {
+  color: white;
 }

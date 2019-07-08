@@ -109,6 +109,8 @@ class NewUser extends React.Component {
                 <input name="password" type="password" className="newUser__input" onChange={this.handleCreatePasswordChange} placeholder="password" />
                 <button type="submit" className="newUser__button">Create user</button>
               </form>
+              <p>Already have an account? <b><Link to='/login'>Login</Link></b></p>
+
             </div>
         </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { Formik, Field } from "formik";
 
 import '../../styles/components/Login.scss';
 
@@ -59,7 +60,9 @@ class Login extends React.Component {
             <input name="password" type="password" className="loginUser__input" onChange={this.handlePasswordChange} placeholder="password" />
             <button type="submit" className="loginUser__button">Login</button>
           </form>
+          <p>Don't have an account? <b><Link to='/users/new'>Sign up</Link></b></p>
         </div>
+    
       </div>
     )
   }

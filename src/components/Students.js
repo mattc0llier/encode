@@ -8,9 +8,16 @@ class Students extends React.Component {
   constructor(){
     super();
 
-    this.state = { allUsers: [] }
+    this.state = { allUsers: [], filterView: "all" }
 
     this.fetchAllStudents = this.fetchAllStudents.bind(this);
+    this.handleFilterClick = this.handleFilterClick.bind(this);
+  }
+
+  handleFilterClick(event){
+    this.setState({
+      filterView: event.target.value
+    })
   }
 
   fetchAllStudents(){
@@ -35,11 +42,11 @@ class Students extends React.Component {
     return(
       <div className="students">
         <h1>Students</h1>
-        <div className="student-filters">
-          <h3>All students</h3>
-          <h3>On the same question</h3>
-          <h3>Completed the question</h3>
-          <h3>Current Lambda School students</h3>
+        <div className="title-filters">
+          <h4 value="all" onClick={this.handleFilterClick}>All students</h4>
+          <h4 value="same" onClick={this.handleFilterClick}>On the same question</h4>
+          <h4 value="further" onClick={this.handleFilterClick}>Completed the question</h4>
+          <h4 value="full-students" onClick={this.handleFilterClick}>Current Lambda School students</h4>
         </div>
         {this.state.allUsers.map(student => (
 

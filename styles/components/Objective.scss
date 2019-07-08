@@ -26,3 +26,7 @@ span {
 input[type="checkbox"]:checked + label{
   background-color:#FF5352;
 }
+
+.objective p {
+  color: $primary-blue;
+}

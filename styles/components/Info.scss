@@ -4,11 +4,20 @@
   max-width: 25vw;
 }
 
-.info img {
+.info b {
+  color: $primary-blue;
+}
+
+.profile-pic {
   max-width: 150px;
   max-height: 150px;
   display: block;
   border-radius: 100px;
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
+}
+
+.courses {
+  display: flex;
+  align-items: center;
 }

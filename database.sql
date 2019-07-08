@@ -41,6 +41,7 @@ CREATE TABLE courses(
   id SERIAL PRIMARY KEY,
   name VARCHAR(500) NOT NULL,
   url VARCHAR(1000) NOT NULL,
+  badge VARCHAR(500),
   organization_id INT,
   FOREIGN KEY (organization_id) REFERENCES organizations (id)
 );
@@ -65,11 +66,16 @@ CREATE TABLE objectives(
 
 CREATE TABLE activities(
   id SERIAL PRIMARY KEY,
+  type VARCHAR(100),
   objective_id INT,
+  lesson_id INT,
+  course_id INT,
   user_id INT,
   complete BOOLEAN DEFAULT FALSE,
   completion_time TIMESTAMP WITH TIME ZONE,
   FOREIGN KEY (objective_id) REFERENCES objectives (id),
+  FOREIGN KEY (lesson_id) REFERENCES lessons (id),
+  FOREIGN KEY (course_id) REFERENCES courses (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
@@ -104,13 +110,13 @@ INSERT INTO organizations
 
 
 INSERT INTO courses
-  (id, name, url, organization_id)
+  (id, name, url, badge, organization_id)
   VALUES
-  (1, 'Web Development Precourse', 'https://apply.lambdaschool.com/courses/web-precourse/', 1);
+  (1, 'Web Development Precourse', 'https://apply.lambdaschool.com/courses/web-precourse/', '/static/assets/images/lambda-precourse-logo.svg', 1);
 INSERT INTO courses
-  (id, name, url, organization_id)
+  (id, name, url, badge, organization_id)
   VALUES
-  (2, 'Data Science Precourse', 'https://apply.lambdaschool.com/courses/ds-precourse/', 1);
+  (2, 'Data Science Precourse', 'https://apply.lambdaschool.com/courses/ds-precourse/', '/static/assets/images/lambda-precourse-logo.svg', 1);
 
 
 INSERT INTO lessons

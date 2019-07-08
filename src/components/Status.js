@@ -1,6 +1,7 @@
 import React from 'react';
 import Objective from './Objective';
-import { isToday } from 'date-fns'
+import { Link } from 'react-router-dom';
+
 
 import '../../styles/components/Status.scss';
 
@@ -44,6 +45,7 @@ class Status extends React.Component {
       <div className="status">
         <ul>
           <div className="status-content">
+          <Link to={`/users/${this.props.statusArray[0].username}`}>
             <div className="status-header">
               <img src={this.props.statusArray[0].photo} />
               <div className="header-info">
@@ -51,6 +53,7 @@ class Status extends React.Component {
                 <p>🎓{this.state.statusScores.mastery} 🔥{this.state.statusScores.streak} ✅{this.state.statusScores.objectives}</p>
               </div>
             </div>
+            </Link>
             <div className="status-completed">
               <div className="status-objectives">
                 {latestObjectives.map(objective => (
