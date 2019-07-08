@@ -357,9 +357,9 @@ const newActivities = async (userId, courseId, selectiveObjectiveNumber) => {
     console.log('objective in formatted', objective)
     console.log('selectiveObjectiveNumber after', selectiveObjectiveNumber)
     if(objective.objective_number < selectiveObjectiveNumber){
-      return [objective.objective_id, userId, true, isoDateNow]
+      return ['objective', objective.objective_id, userId, true, isoDateNow]
     } else {
-      return [objective.objective_id, userId, false, null]
+      return ['objective', objective.objective_id, userId, false, null]
     }
   })
 
@@ -369,7 +369,7 @@ const newActivities = async (userId, courseId, selectiveObjectiveNumber) => {
 }
 
 const insertActivities = async (activities) => {
-  const query1 = format("INSERT INTO activities (objective_id, user_id, complete, completion_time) VALUES %L RETURNING id, objective_id, user_id, complete, completion_time", activities)
+  const query1 = format("INSERT INTO activities (type, objective_id, user_id, complete, completion_time) VALUES %L RETURNING id, type, objective_id, user_id, complete, completion_time", activities)
 
     const  {rows} = await db.query(query1);
     return rows
