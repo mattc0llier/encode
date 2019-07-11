@@ -57,67 +57,24 @@ passport.deserializeUser(function(userId, done) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.get('/api/auth/account',
-//     connectEnsureLogin.ensureLoggedIn(),
-//     // AuthController.account
-// )
+app.get('/api/auth/account', requireUser, (req, res) => {
+  res.json({ user_id: req.user.id, username: req.user.username, email: req.user.email });
+})
 
-// on clicking "logoff" the cookie is cleared
-// app.get('/logout',
-//   function(req, res) {
-//     res.clearCookie('encode-passport');
-//     res.redirect('/');
-//   }
-// );
+app.post('/logout', function (req, res){
+  req.session.destroy(function (err) {
+    res.json('logged out'); //Inside a callback… bulletproof!
+  });
+});
 
-// // PASSPORT route to log out users
-// app.get('/api/logout', (req, res) => {
-//   req.logout();
-//   res.json({ response: 'You have sucessfully logged out' });
-// });
-
-// // on successful auth, a cookie is set before redirecting
-// // // to the success view
-// app.get('/setcookie', requireUser,
-//   function(req, res) {
-//     res.cookie('encode-passport', new Date());
-//     console.log('setcookie');
-//     res.redirect('/success');
-//   }
-// );
-//
-// // // if cookie exists, success. otherwise, user is redirected to index
-// // how do i call this everytime i refresh
-// app.get('/success', requireLogin,
-//   function(req, res) {
-//     if(req.cookies['encode-passport']) {
-//       console.log('cookie success');
-//       //this should stay on the page you were already on
-//       res.redirect('/feed');
-//     } else {
-//       console.log('cookie fail');
-//       res.redirect('/');
-//     }
-//   }
-// );
-//
-// function requireLogin (req, res, next) {
-//   if (!req.cookies['encode-passport']) {
-//     res.redirect('/');
-//   } else {
-//     console.log('hit requireLogin')
-//     next();
-//   }
-// };
-//
-// function requireUser (req, res, next) {
-//   if (!req.user) {
-//     res.redirect('/');
-//   } else {
-//     console.log('hit requireUser')
-//     next();
-//   }
-// };
+function requireUser (req, res, next) {
+  if (!req.user) {
+    res.status(401).send('Not Authenticated')
+  } else {
+    console.log('hit requireUser')
+    next();
+  }
+};
 
 
 // helper function for Passport but should i just be using app.get(/user/:id)
@@ -252,11 +209,42 @@ app.get('/api/activities', function(req, res){
   .catch(error => res.json({ error: error.message }));
 });
 
-// get objectives and activity info for a given User Id
+// get objectives from activities for a given User Id
 app.get('/api/users/:id/objectives', (req, res) => {
   const { id } = req.params;
   return db
     .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo, users.username FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.user_id=$1', [id])
+    .then(data => {
+      res.json(data)
+    })
+    .catch(error => res.json({ error: error.message }));
+});
+
+// get all completed activties after a given time
+app.get('/api/actvties/since/:earliestCompletionTime', (req, res) => {
+  const { earliestCompletionTime } = req.params;
+  return db
+    .any('SELECT * FROM activities WHERE activities.complete = true ')
+    .then(data => {
+      const timeFilteredObjectives = data.filter(activity => {
+        const objectiveTimes = Date.parse(new Date(activity.completion_time))
+         if (objectiveTimes >= earliestCompletionTime) {
+           return true
+         } else {
+           return false
+         }
+      })
+      res.json(timeFilteredObjectives);
+    })
+    .catch(error => res.json({ error: error.message }));
+
+})
+
+// get course from activities info for a given User Id
+app.get('/api/users/:id/courses', (req, res) => {
+  const { id } = req.params;
+  return db
+    .any('SELECT courses.id AS course_id, courses.name, courses.url, courses.badge, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, activities.created_at, users.username FROM courses, activities, users WHERE activities.course_id = courses.id AND activities.user_id = users.id AND activities.user_id=$1', [id])
     .then(data => {
       res.json(data)
     })
@@ -305,7 +293,6 @@ app.patch('/api/activities/:activityId', (req, res) => {
   db.one(`UPDATE activities SET complete = $1, completion_time = CURRENT_TIMESTAMP WHERE id = $2 RETURNING id AS activity_id, complete, completion_time`, [complete, activityId])
   .then((data) => {
     res.json(data)
-    res.status(200).send({update: "success"});
   })
   .catch(error => {
     res.json({
@@ -325,7 +312,7 @@ app.get('/api/users/:id/scores', (req, res) => {
 
 // if change to desc then need to update status lastest objective completion_time
 app.get('/api/activities/objectives/complete', (req, res) => {
-  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.complete = true ORDER BY activities.completion_time ASC')
+  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo, users.username FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.complete = true ORDER BY activities.completion_time ASC')
   .then(data => {
     res.json(data)
   })
@@ -390,6 +377,42 @@ app.post('/api/users/activities/create', async (req, res) => {
   }
 
 })
+
+app.patch('/api/users/:id/update', (req, res) => {
+  const userId = req.params.id
+  const {updatedInfo} = req.body
+
+  console.log(userId, updatedInfo);
+
+  db.one(`UPDATE users SET bio = $2, location = $3, photo = $4 WHERE id = $1 RETURNING *`, [userId, updatedInfo.bio, updatedInfo.location, updatedInfo.profilePicture])
+  .then((data) => {
+    res.json(data)
+    res.status(200).send({update: "success"});
+  })
+  .catch(error => {
+    res.json({
+      error: error.message
+    });
+  });
+})
+
+app.get('/api/users/:id/settings', (req, res) => {
+  const { id } = req.params;
+  db.one('SELECT users.id AS user_id, users.photo, users.bio, users.location FROM users WHERE id=$1', [id])
+  .then(data => {
+    console.log(data);
+    res.json(data)
+  })
+  .catch(error => res.json({ error: error.message }));
+})
+
+// app.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname, './views/index.hbs'), function(err) {
+//     if (err) {
+//       res.status(500).send(err)
+//     }
+//   })
+// })
 
 // index route
 app.get('/', function(req, res) {

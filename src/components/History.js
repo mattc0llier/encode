@@ -1,7 +1,7 @@
 import React from 'react';
 import Status from './Status'
 import Objective from './Objective'
-import { startOfDay, compareDesc, parse, format } from 'date-fns'
+import { startOfDay, compareDesc, parse, format, isYesterday, isToday } from 'date-fns'
 import '../../styles/components/History.scss';
 
 
@@ -31,16 +31,20 @@ class History extends React.Component {
     const groupedObjectsArray = Object.entries(groupByDate(filteredObjects, 'completion_time'))
 
     //still struggling to access the array dates and then sort by descending dates
-    const sortedObjectives = groupedObjectsArray.sort(function(a){
-      compareDesc(a[0])
+    const sortedObjectives = groupedObjectsArray.sort(function(a, b){
+      return compareDesc(a[0], b[0])
       // console.log('a[0]', a[0]);
     })
 
     return(
       <div className="history">
-          {groupedObjectsArray.map(statuses => (
+          {sortedObjectives.map(statuses => (
             <div key={statuses[0]}>
-              <h3>{statuses[0]}</h3>
+            { isYesterday(statuses[0]) ? (
+              <h3>Today</h3>
+            ) : (
+              <h3>{ format(statuses[0], 'dddd Do MMMM')}</h3>
+            )}
               <Status statusArray={statuses[1]} completedObjectives={filteredObjects}/>
             </div>
           ))}

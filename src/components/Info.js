@@ -1,29 +1,19 @@
 import React from 'react';
+import Courses from './Courses';
 import '../../styles/components/Info.scss';
 
 
-class Info extends React.Component {
-  constructor(){
-    super();
-  }
+const Info = ({ userProfileObject, userProfileCourses }) => {
 
-  render(){
     return(
       <div className="info">
-        <img className="profile-pic" src={this.props.userProfileObject.photo} alt="profile picture" />
-        <h3>{this.props.userProfileObject.first_name} {this.props.userProfileObject.last_name} </h3>
-        <p>{this.props.userProfileObject.bio}</p>
-        <p>{this.props.userProfileObject.location}</p>
-        <div className="courses">
-          <span><img src="/static/assets/images/lambda-precourse-logo.svg"/></span>
-          <div className="course-title">
-            <b><p>Web Precourse</p></b>
-            <p>Lambda School</p>
-          </div>
-        </div>
+        <img className="profile-pic" src={userProfileObject.photo} alt="profile picture" />
+        <h3>{userProfileObject.first_name} {userProfileObject.last_name} </h3>
+        <p>{userProfileObject.bio}</p>
+        <p>{userProfileObject.location}</p>
+        <Courses userProfileCourses={userProfileCourses}/>
       </div>
     )
   }
-}
 
 export default Info;

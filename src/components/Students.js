@@ -1,5 +1,7 @@
 import React from 'react';
+import Courses from './Courses';
 import { Link } from 'react-router-dom'
+import cx from 'classnames';
 
 import '../../styles/components/Students.scss';
 
@@ -11,12 +13,19 @@ class Students extends React.Component {
     this.state = { allUsers: [], filterView: "all" }
 
     this.fetchAllStudents = this.fetchAllStudents.bind(this);
-    this.handleFilterClick = this.handleFilterClick.bind(this);
+    this.handleAllFilterClick = this.handleAllFilterClick.bind(this);
   }
 
-  handleFilterClick(event){
+  // handleFilterClick(event){
+  //   console.log(event);
+  //   this.setState({
+  //     filterView: event.target.value
+  //   })
+  // }
+  handleAllFilterClick(event){
+    console.log(event.target.innerHTML);
     this.setState({
-      filterView: event.target.value
+      filterView: event.target.innerHTML
     })
   }
 
@@ -39,27 +48,35 @@ class Students extends React.Component {
   }
 
   render(){
+    const active = this.state.filterView = '' ? '-active' : ''
+    const classState = cx('title-active', active);
     return(
       <div className="students">
-        <h1>Students</h1>
-        <div className="title-filters">
-          <h4 value="all" onClick={this.handleFilterClick}>All students</h4>
-          <h4 value="same" onClick={this.handleFilterClick}>On the same question</h4>
-          <h4 value="further" onClick={this.handleFilterClick}>Completed the question</h4>
-          <h4 value="full-students" onClick={this.handleFilterClick}>Current Lambda School students</h4>
-        </div>
-        {this.state.allUsers.map(student => (
-
-            <Link to={`/users/${student.username}`}>
-            <div className="student" key={student.id}>
-              <img src={student.photo} alt={student.username} />
-              <h3>{student.first_name} {student.last_name}</h3>
+      <div className="table-center">
+            <div className="table-nav">
+              <h1>Students</h1>
+              <div className="title-filters">
+                <h4 onClick={this.handleAllFilterClick}>All students</h4>
+                <h4 onClick={this.handleAllFilterClick}>Same objective</h4>
+                <h4 onClick={this.handleAllFilterClick}>Completed objective</h4>
+                <h4 onClick={this.handleAllFilterClick}>Current LS students</h4>
+              </div>
             </div>
-            </Link>
+            <table>
 
-        ))}
-
-
+              <tbody>
+                {this.state.allUsers.map(student => (
+                  <tr className="leader">
+                    <Link to={`/users/${student.username}`}>
+                    <td><img src={student.photo} alt="profile pic"/></td>
+                    <td><h3>{student.first_name} {student.last_name}</h3></td>
+                    <td><Courses /></td>
+                    </Link>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+        </div>
       </div>
     )
   }

@@ -27,6 +27,7 @@ class App extends React.Component {
       this.checkLoggedIn = this.checkLoggedIn.bind(this);
       this.calculateCurrentUserScores = this.calculateCurrentUserScores.bind(this);
       this.receiveCurrentUserObjectiveUpdate = this.receiveCurrentUserObjectiveUpdate.bind(this);
+      this.receiveLoggedOutUser = this.receiveLoggedOutUser.bind(this);
   }
 
   receiveCurrentUserObjectiveUpdate(){
@@ -64,6 +65,27 @@ class App extends React.Component {
     })
   }
 
+  receiveLoggedOutUser(){
+    console.log('logout hit');
+      fetch(`/logout`, {
+        method: 'POST',
+        body: JSON.stringify(),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(body => {
+        this.setState({
+          currentUser: {},
+          isLoggedIn: false
+        })
+        console.log('logout finished');
+      })
+  }
+
   createNewUser(user, receiveLoginUser){
     fetch(`/api/users/create`, {
       method: 'POST',
@@ -98,6 +120,14 @@ class App extends React.Component {
         }
         throw new Error(`HTTP Error ${response.status} (${response.statusText})`);
       })
+      .then(body => {
+        console.log('loggedInUser', body);
+        this.setState({
+          currentUser: body,
+          isLoggedIn: true
+        })
+        this.calculateCurrentUserScores()
+      })
   }
 
 
@@ -119,9 +149,9 @@ class App extends React.Component {
     .catch(error => console.log(error.message));
   }
 
-  // componentDidMount(){
-  //   // this.checkLoggedIn()
-  // }
+  componentDidMount(){
+    this.checkLoggedIn()
+  }
 
   render(){
     return(
@@ -137,7 +167,7 @@ class App extends React.Component {
                 render={(props) => (<Feed {...props} currentUser={this.state.currentUser} />)}
               />
               <Route path="/leaderboard"
-                render={(props) => (<Leaderboard {...props} currentUser={this.state.currentUser} />)}
+                render={(props) => (<Leaderboard {...props} currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn}/>)}
               />
               <Route path="/users/new"
                 render={(props) => (<NewUser {...props} receiveNewUser={this.receiveNewUser} />)}
@@ -162,7 +192,7 @@ class App extends React.Component {
                 render={(props) => (<Start {...props} currentUser={this.state.currentUser} />)}
               />
               <Route path="/settings"
-                render={(props) => (<Settings {...props} currentUser={this.state.currentUser} />)}
+                render={(props) => (<Settings {...props} currentUser={this.state.currentUser} receiveLoggedOutUser={this.receiveLoggedOutUser}/>)}
               />
             </Switch>
           </main>

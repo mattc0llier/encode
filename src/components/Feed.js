@@ -1,6 +1,6 @@
 import React from 'react';
 import SortByUser from './SortByUser';
-import { startOfDay, compareDesc, isToday, parse, format } from 'date-fns'
+import { startOfDay, compareDesc, isToday, parse, format, isYesterday } from 'date-fns'
 import '../../styles/components/Feed.scss';
 
 
@@ -33,10 +33,14 @@ class Feed extends React.Component {
     const groupedObjectsArray = Object.entries(groupByDate(this.state.allStatuses, 'completion_time'))
 
     // console.log('groupedObjectsArray - feed', groupedObjectsArray);
+    //still struggling to access the array dates and then sort by descending dates
+    const sortedObjectives = groupedObjectsArray.sort(function(a, b){
+      return compareDesc(a[0], b[0])
+      // console.log('a[0]', a[0]);
+    })
 
-    groupedObjectsArray
     this.setState({
-      groupedStatusesByDate: groupedObjectsArray
+      groupedStatusesByDate: sortedObjectives
     })
   }
 
@@ -61,19 +65,39 @@ class Feed extends React.Component {
 
   render(){
 
-
     return(
       <div className="feed">
+      <div className="feed-left">
+        <div className="feed-content">
+          <div className="feed-summary-header">
+            <h4>Community progress</h4>
+          </div>
+          <div className="feed-kpi">
+            <div className="this-week">
+              <p>This Week: </p>
+              <p>Accepted to Lambda school: 0 </p>
+              <p>Total mastery points earnt: 1345</p>
+            </div>
+            <div className="last-week">
+              <p>Last Week: </p>
+              <p>Accepted to Lambda school: 0 </p>
+              <p>Total mastery points earnt: 2000</p>
+            </div>
+          </div>
+        </div>
+
         {this.state.groupedStatusesByDate.map(statuses => (
           <div key={statuses[0]}>
-            { isToday(statuses[0]) ? (
+            { isYesterday(statuses[0]) ? (
               <h3>Today</h3>
             ) : (
-              <h3>{ statuses[0] }</h3>
+              <h3>{ format(statuses[0], 'dddd Do MMMM')}</h3>
             )}
             <SortByUser objectivesGroupedByDate={statuses[1]}/>
           </div>
         ))}
+      </div>
+
       </div>
     )
   }

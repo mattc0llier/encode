@@ -118,6 +118,14 @@ INSERT INTO courses
   (id, name, url, badge, organization_id)
   VALUES
   (2, 'Data Science Precourse', 'https://apply.lambdaschool.com/courses/ds-precourse/', '/static/assets/images/lambda-precourse-logo.svg', 1);
+INSERT INTO courses
+  (id, name, url, badge, organization_id)
+  VALUES
+  (3, 'Web Development Full Time', 'https://apply.lambdaschool.com/courses/web/', '/static/assets/images/lambda-fulltime-logo.svg', 1);
+INSERT INTO courses
+  (id, name, url, badge, organization_id)
+  VALUES
+  (4, 'Data Science Full Time', 'https://apply.lambdaschool.com/courses/ds/', '/static/assets/images/lambda-fulltime-logo.svg', 1);
 
 
 INSERT INTO lessons
@@ -540,7 +548,15 @@ INSERT INTO activities
   (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
   (51, 'course', NULL, NULL, 1, 1, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
-ALTER SEQUENCE activities_id_seq RESTART WITH 52 INCREMENT BY 1;
+INSERT INTO activities
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
+  VALUES
+  (52, 'course', NULL, NULL, 1, 2, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
+INSERT INTO activities
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
+  VALUES
+  (53, 'course', NULL, NULL, 1, 3, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
+ALTER SEQUENCE activities_id_seq RESTART WITH 54 INCREMENT BY 1;
 
 INSERT INTO scores
   (id, user_id, mastery, streak, objective_count)

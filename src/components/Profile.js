@@ -11,16 +11,16 @@ import '../../styles/components/Profile.scss';
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { userProfile: [], userProfileObjectives: [], userProfileScores: {}, nextUserProfileObjective: {}, currentUserProfile: false };
+    this.state = { userProfile: [], userProfileObjectives: [], userProfileScores: {}, nextUserProfileObjective: {}, currentUserProfile: false, userProfileCourses: [] };
 
     this.fetchUser = this.fetchUser.bind(this);
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
-    // this.fetchUserScores = this.fetchUserScores.bind(this);
     this.receiveObjectiveStatus = this.receiveObjectiveStatus.bind(this);
     this.receiveNextUserObjective = this.receiveNextUserObjective.bind(this);
     this.updateuserProfileObjectives = this.updateuserProfileObjectives.bind(this);
     this.checkIfCurrentUserProfile = this.checkIfCurrentUserProfile.bind(this);
     this.calculateUserScores = this.calculateUserScores.bind(this);
+    this.fetchUserCourses = this.fetchUserCourses.bind(this);
   }
 
   checkIfCurrentUserProfile(){
@@ -105,6 +105,21 @@ class Profile extends React.Component {
     .catch(error => console.log(error.message));
   }
 
+  fetchUserCourses(id){
+    console.log('courses hit');
+    fetch(`/api/users/${id}/courses`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(body => {
+      this.setState({
+        userProfileCourses: body
+      })
+      console.log('userProfileCourses', this.state.userProfileCourses);
+    })
+    .catch(error => console.log(error.message));
+  }
+
   fetchUserObjectives(id){
     fetch(`/api/users/${id}/objectives`)
     .then(function(response) {
@@ -129,7 +144,7 @@ class Profile extends React.Component {
         })
       this.fetchUserObjectives(body.id)
       this.checkIfCurrentUserProfile();
-      this.fetchUserScores(body.id)
+      this.fetchUserCourses(body.id)
 
     })
     .catch(error => console.log(error.message));
@@ -144,7 +159,7 @@ class Profile extends React.Component {
     return(
       <div className="profile">
         <div className="left">
-          <Info userProfileObject={this.state.userProfile}/>
+          <Info userProfileObject={this.state.userProfile} userProfileCourses={this.state.userProfileCourses}/>
           { this.state.currentUserProfile ? <Link to='/settings'><p>**Update your profile**</p></Link> : null}
         </div>
         <div className="right">
