@@ -6,14 +6,15 @@ import '../../styles/components/History.scss';
 
 
 
-class History extends React.Component {
-  constructor(){
-    super();
+const History = ({ userProfileObjectivesObject, receiveObjectiveStatus }) => {
+
+
+  if (!userProfileObjectivesObject.length) {
+    return <p>no activity</p>
   }
 
-  render(){
     // filter objects just for the completed objects
-    const filteredObjects = this.props.userProfileObjectivesObject.filter(object => object.complete == true )
+    const filteredObjects = userProfileObjectivesObject.filter(object => object.complete == true )
 
     //group completed objects by the date they were completed by
     function groupByDate(objectArray, property) {
@@ -51,6 +52,5 @@ class History extends React.Component {
       </div>
     )
   }
-}
 
 export default History;

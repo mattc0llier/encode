@@ -92,8 +92,7 @@ class Settings extends React.Component {
      else return(
       <div className="form-center" >
         <div className="settings">
-        //onclick fire log out that hits the server post request for logout that gets a a reponse ok. code 204
-          <button onClick={this.handleLogout}>Log out</button>
+          <button className="logout" onClick={this.handleLogout}>Log out</button>
           <h3>Your settings</h3>
           <form  onSubmit={this.handleUpdateSettingsSubmit}>
             <label for="photo">Profile picture url</label>

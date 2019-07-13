@@ -62,7 +62,7 @@ class Leaderboard extends React.Component {
               <tr className="leader">
                 <th>
                   <div className="rank-cell">
-                    <h4>Rank</h4>
+                    <p>Rank</p>
                   </div>
                 </th>
                 <th>
@@ -72,17 +72,17 @@ class Leaderboard extends React.Component {
                 </th>
                 <th>
                   <div className="username-cell">
-                    <h4>Username</h4>
+                    <p>Username</p>
                   </div>
                 </th>
                 <th>
                   <div className="course-cell">
-                    <h4>Course</h4>
+                    <p>Course</p>
                   </div>
                 </th>
                 <th>
                   <div className="mastery-cell">
-                    <h4>Mastery score</h4>
+                    <p>Mastery score</p>
                   </div>
                 </th>
               </tr>
