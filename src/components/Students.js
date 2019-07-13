@@ -70,7 +70,7 @@ class Students extends React.Component {
                     <Link to={`/users/${student.username}`}>
                     <td><img src={student.photo} alt="profile pic"/></td>
                     <td><h3>{student.first_name} {student.last_name}</h3></td>
-                    <td><p>Web Precourse</p></td>
+                    <td><p>Web Precourses</p></td>
                     </Link>
                   </tr>
                 ))}
