@@ -419,6 +419,7 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.listen(9090, function(){
-  console.log('Listening on port 9090');
+const port = process.env.PORT || 9090;
+app.listen( port, function(){
+  console.log(`Listening on port number ${port}`);
 });
