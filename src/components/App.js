@@ -31,17 +31,14 @@ class App extends React.Component {
   }
 
   receiveCurrentUserObjectiveUpdate(){
-    console.log('receive update');
     this.calculateCurrentUserScores()
   }
 
   receiveNewUser(user){
-    console.log(user);
     this.createNewUser(user)
   }
 
   receiveLoginUser(user){
-    console.log(user);
     fetch(`/api/login`, {
       method: 'POST',
       body: JSON.stringify({
@@ -56,7 +53,6 @@ class App extends React.Component {
       return response.json();
     })
     .then(body => {
-      console.log('loggedInUser', body);
       this.setState({
         currentUser: body,
         isLoggedIn: true
@@ -66,7 +62,6 @@ class App extends React.Component {
   }
 
   receiveLoggedOutUser(){
-    console.log('logout hit');
       fetch(`/logout`, {
         method: 'POST',
         body: JSON.stringify(),
@@ -82,7 +77,6 @@ class App extends React.Component {
           currentUser: {},
           isLoggedIn: false
         })
-        console.log('logout finished');
       })
   }
 
@@ -103,7 +97,6 @@ class App extends React.Component {
       return response.json();
     })
     .then(body => {
-      console.log('newUser', body);
       this.receiveLoginUser(body)
       // this.setState({
       //   currentUser: body,
@@ -121,7 +114,6 @@ class App extends React.Component {
         throw new Error(`HTTP Error ${response.status} (${response.statusText})`);
       })
       .then(body => {
-        console.log('loggedInUser', body);
         this.setState({
           currentUser: body,
           isLoggedIn: true
@@ -132,10 +124,7 @@ class App extends React.Component {
 
 
   calculateCurrentUserScores(){
-    console.log('CurrentUserScores hit')
     const timeNow = Date.now()
-
-    console.log('timeNow', timeNow);
     fetch(`/api/users/${this.state.currentUser.user_id}/objectives/complete/${timeNow}`)
     .then(function(response) {
       return response.json();

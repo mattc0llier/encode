@@ -1,6 +1,4 @@
 require('dotenv').config();
-console.log('.env working?', process.env.DB_USERNAME);
-
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -71,7 +69,6 @@ function requireUser (req, res, next) {
   if (!req.user) {
     res.status(401).send('Not Authenticated')
   } else {
-    console.log('hit requireUser')
     next();
   }
 };
@@ -332,25 +329,19 @@ function getObjectivesByCourseId(id) {
 const newActivities = async (userId, courseId, selectiveObjectiveNumber) => {
   const allCourseObjectives = await getObjectivesByCourseId(courseId)
 
-  console.log('userId', userId);
-  console.log('courseId', courseId);
-  console.log('selectiveObjectiveNumber before', selectiveObjectiveNumber);
+
   //for any objective where objective.number < slectedobjective.number then
   // completed is true and completed time is now
   const isoDateNow = new Date().toISOString()
 
   const formatedActivities = allCourseObjectives.map(function(objective) {
-    console.log('isoDateNow', isoDateNow)
-    console.log('objective in formatted', objective)
-    console.log('selectiveObjectiveNumber after', selectiveObjectiveNumber)
+
     if(objective.objective_number < selectiveObjectiveNumber){
       return ['objective', objective.objective_id, userId, true, isoDateNow, isoDateNow]
     } else {
       return ['objective', objective.objective_id, userId, false, null, isoDateNow]
     }
   })
-
-  console.log('formatedActivities', await formatedActivities);
 
   return formatedActivities
 }
@@ -366,7 +357,6 @@ const insertActivities = async (activities) => {
 app.post('/api/users/activities/create', async (req, res) => {
   // theses aren't match proparly yet
   const { currentUser, course, objective } = req.body;
-  console.log('objective number from body', objective);
   try {
     const formattedActivitiesToInsert = await newActivities(currentUser.user_id, course.id, objective.number)
     const rows = await insertActivities(formattedActivitiesToInsert)
@@ -382,7 +372,6 @@ app.patch('/api/users/:id/update', (req, res) => {
   const userId = req.params.id
   const {updatedInfo} = req.body
 
-  console.log(userId, updatedInfo);
 
   db.one(`UPDATE users SET bio = $2, location = $3, photo = $4 WHERE id = $1 RETURNING *`, [userId, updatedInfo.bio, updatedInfo.location, updatedInfo.profilePicture])
   .then((data) => {
@@ -400,7 +389,6 @@ app.get('/api/users/:id/settings', (req, res) => {
   const { id } = req.params;
   db.one('SELECT users.id AS user_id, users.photo, users.bio, users.location FROM users WHERE id=$1', [id])
   .then(data => {
-    console.log(data);
     res.json(data)
   })
   .catch(error => res.json({ error: error.message }));

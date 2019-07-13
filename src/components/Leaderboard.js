@@ -34,7 +34,6 @@ class Leaderboard extends React.Component {
       this.setState(
         { allUsers: body}
       )
-      console.log(this.state.allUsers);
     })
     .catch(error => console.log(error.message));
   }

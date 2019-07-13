@@ -15,7 +15,6 @@ class Feed extends React.Component {
   }
 
   organizeStatuses(){
-    // console.log('hit next');
 
     //group completed objects by the date they were completed by
     function groupByDate(objectArray, property) {
@@ -32,11 +31,9 @@ class Feed extends React.Component {
     //make those completed object dates into arrays to be mapped over.
     const groupedObjectsArray = Object.entries(groupByDate(this.state.allStatuses, 'completion_time'))
 
-    // console.log('groupedObjectsArray - feed', groupedObjectsArray);
     //still struggling to access the array dates and then sort by descending dates
     const sortedObjectives = groupedObjectsArray.sort(function(a, b){
       return compareDesc(a[0], b[0])
-      // console.log('a[0]', a[0]);
     })
 
     this.setState({
@@ -45,7 +42,6 @@ class Feed extends React.Component {
   }
 
   allStatuses(){
-    // console.log('hit');
     fetch(`/api/activities/objectives/complete`)
     .then(function(response) {
       return response.json();

@@ -24,7 +24,6 @@ class Profile extends React.Component {
   }
 
   checkIfCurrentUserProfile(){
-    console.log('checking current_user', this.state.userProfile.id, this.props.currentUser.user_id);
     this.state.userProfile.id === this.props.currentUser.user_id ? (
       this.setState({
         currentUserProfile: true
@@ -46,7 +45,7 @@ class Profile extends React.Component {
     .then(body => {
       this.setState({
         userProfileScores: body
-      }, () => console.log(this.state.userProfileScores))
+      })
 
     })
     .catch(error => console.log(error.message));
@@ -66,7 +65,6 @@ class Profile extends React.Component {
     }
 
     const updatedUserObjectives = this.state.userProfileObjectives.filter(removeComplete)
-    console.log('updatedUserObjectives', updatedUserObjectives);
 
 
     // // add the updated completed objective into the user objective state
@@ -86,8 +84,6 @@ class Profile extends React.Component {
 
 // post objective complete to the database
   receiveObjectiveStatus(completedObjective){
-    console.log('completedObjective', completedObjective);
-
     return fetch(`/api/activities/${completedObjective.activity_id}`, {
       method: 'PATCH',
       body: JSON.stringify({ complete: true }),
@@ -106,7 +102,6 @@ class Profile extends React.Component {
   }
 
   fetchUserCourses(id){
-    console.log('courses hit');
     fetch(`/api/users/${id}/courses`)
     .then(function(response) {
       return response.json();
@@ -115,7 +110,6 @@ class Profile extends React.Component {
       this.setState({
         userProfileCourses: body
       })
-      console.log('userProfileCourses', this.state.userProfileCourses);
     })
     .catch(error => console.log(error.message));
   }

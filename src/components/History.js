@@ -34,7 +34,6 @@ const History = ({ userProfileObjectivesObject, receiveObjectiveStatus }) => {
     //still struggling to access the array dates and then sort by descending dates
     const sortedObjectives = groupedObjectsArray.sort(function(a, b){
       return compareDesc(a[0], b[0])
-      // console.log('a[0]', a[0]);
     })
 
     return(
