@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "Lambda school precourse game",
   "main": "index.js",
+  "engines": {
+    "node": "10.16.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "nodemon server.js",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "start": "server.js",
+    "start-dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -70,8 +74,5 @@
       "@babel/preset-react",
       "@babel/preset-env"
     ]
-  },
-  "engines": {
-  "node": "9.10.1"
   }
 }
