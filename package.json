@@ -4,7 +4,7 @@
   "description": "Lambda school precourse game",
   "main": "index.js",
   "engines": {
-    "node": "10.16.0"
+    "node": "v10.16.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
