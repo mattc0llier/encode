@@ -79,7 +79,7 @@ function getUserByUsername(username) {
   return db.one(
     'SELECT id, username, email, password FROM users WHERE username=$1', [username]
   )
-  .catch((error) => {
+  .catch((error)  => {
     console.log('failed to get user', error);
   });
 }
@@ -154,6 +154,8 @@ app.get('/api/objectives', function(req, res){
   .then(data => res.json(data))
   .catch(error => res.json({ error: error.message }));
 });
+
+
 
 // get all organizations
 app.get('/api/organizations', function(req, res){
@@ -394,18 +396,15 @@ app.get('/api/users/:id/settings', (req, res) => {
   .catch(error => res.json({ error: error.message }));
 })
 
-// app.get('/*', function(req, res) {
-//   res.sendFile(path.join(__dirname, './views/index.hbs'), function(err) {
-//     if (err) {
-//       res.status(500).send(err)
-//     }
-//   })
-// })
-
 // index route
 app.get('/', function(req, res) {
   res.render('index');
 });
+
+app.get('*', function(req, res) {
+  res.render('index');
+});
+
 
 const port = process.env.PORT || 9090;
 app.listen( port, function(){

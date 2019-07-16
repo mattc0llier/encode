@@ -11,6 +11,7 @@ import Login from './Login';
 import Start from './Start';
 import Settings from './Settings';
 import PrivateRoute from './PrivateRoute';
+import CelebrationAnimation from './CelebrationAnimation';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import '../../styles/components/App.scss';
@@ -19,7 +20,7 @@ class App extends React.Component {
 
   constructor(){
     super();
-      this.state = { isLoggedIn: false, currentUser: {}, currentUserScores: {} }
+      this.state = { isLoggedIn: false, currentUser: {}, currentUserScores: {}, celebration: false }
 
       this.receiveNewUser = this.receiveNewUser.bind(this);
       this.createNewUser = this.createNewUser.bind(this);
@@ -32,6 +33,11 @@ class App extends React.Component {
 
   receiveCurrentUserObjectiveUpdate(){
     this.calculateCurrentUserScores()
+    console.log('do animation');
+    this.setState({
+      celebration: true
+    })
+
   }
 
   receiveNewUser(user){
@@ -185,6 +191,7 @@ class App extends React.Component {
               />
             </Switch>
           </main>
+          <CelebrationAnimation celebration={this.state.celebration} />
           <Footer />
         </React.Fragment>
       </Router>

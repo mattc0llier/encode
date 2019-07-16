@@ -42,6 +42,7 @@ CREATE TABLE courses(
   name VARCHAR(500) NOT NULL,
   url VARCHAR(1000) NOT NULL,
   badge VARCHAR(500),
+  mastery_score INT,
   organization_id INT,
   FOREIGN KEY (organization_id) REFERENCES organizations (id)
 );
@@ -50,6 +51,7 @@ CREATE TABLE lessons(
   id SERIAL PRIMARY KEY,
   name VARCHAR(500) NOT NULL,
   url VARCHAR(1000) NOT NULL,
+  mastery_score INT,
   course_id INT,
   FOREIGN KEY (course_id) REFERENCES courses (id)
 );
@@ -556,7 +558,11 @@ INSERT INTO activities
   (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
   (53, 'course', NULL, NULL, 1, 3, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
-ALTER SEQUENCE activities_id_seq RESTART WITH 54 INCREMENT BY 1;
+INSERT INTO activities
+  (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
+  VALUES
+  (54, 'course', NULL, NULL, 1, 12, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
+ALTER SEQUENCE activities_id_seq RESTART WITH 55 INCREMENT BY 1;
 
 INSERT INTO scores
   (id, user_id, mastery, streak, objective_count)
