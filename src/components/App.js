@@ -20,7 +20,7 @@ class App extends React.Component {
 
   constructor(){
     super();
-      this.state = { isLoggedIn: false, currentUser: {}, currentUserScores: {}, celebration: false }
+      this.state = { isLoggedIn: false, currentUser: {}, currentUserScores: {}, celebration: "achievement-wrapper" }
 
       this.receiveNewUser = this.receiveNewUser.bind(this);
       this.createNewUser = this.createNewUser.bind(this);
@@ -35,7 +35,7 @@ class App extends React.Component {
     this.calculateCurrentUserScores()
     console.log('do animation');
     this.setState({
-      celebration: true
+      celebration: 'achievement-wrapper animation'
     })
 
   }

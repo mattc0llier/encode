@@ -4,17 +4,13 @@ import '../../styles/_animation.scss';
 class CelebrationAnimation extends React.Component {
   constructor(props){
     super(props);
-    this.animationWrapperRef = React.createRef();
   }
 
   render(){
 
-  // this.animationWrapperRef.classList.remove("animation");
-  // setTimeout(() => this.animationWrapperRef.classList.add("animation"), 100);
-
     return(
       <div className="celebration-animation">
-        <div className="achievement-wrapper" ref={this.animationWrapperRef}>
+        <div className={this.props.celebration}>
           <div className="achievement-super">
             <div className="achievement-body">
               <p className="achievement-text">Lambda school</p>
