@@ -95,8 +95,10 @@ class Profile extends React.Component {
       return response.json();
     })
     .then(body => {
+      console.log('body', body);
+      console.log('completedObjective', completedObjective);
         this.updateuserProfileObjectives(body, completedObjective)
-        this.props.receiveCurrentUserObjectiveUpdate()
+        this.props.receiveCurrentUserObjectiveUpdate(completedObjective)
     })
     .catch(error => console.log(error.message));
   }

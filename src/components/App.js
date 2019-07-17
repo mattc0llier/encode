@@ -20,7 +20,7 @@ class App extends React.Component {
 
   constructor(){
     super();
-      this.state = { isLoggedIn: false, currentUser: {}, currentUserScores: {}, celebration: "achievement-wrapper" }
+      this.state = { isLoggedIn: false, currentUser: {}, currentUserScores: {}, celebration: "achievement-wrapper", completedObjective: {} }
 
       this.receiveNewUser = this.receiveNewUser.bind(this);
       this.createNewUser = this.createNewUser.bind(this);
@@ -31,10 +31,11 @@ class App extends React.Component {
       this.receiveLoggedOutUser = this.receiveLoggedOutUser.bind(this);
   }
 
-  receiveCurrentUserObjectiveUpdate(){
+  receiveCurrentUserObjectiveUpdate(completedObjective){
     this.calculateCurrentUserScores()
     console.log('do animation');
     this.setState({
+      completedObjective: completedObjective,
       celebration: 'achievement-wrapper animation'
     })
 
@@ -170,15 +171,17 @@ class App extends React.Component {
               <Route path="/login"
                 render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} />)}
               />
-              <Route path="/students"
+              <PrivateRoute path="/students"
+                isLoggedIn={this.state.isLoggedIn}
                 render={(props) => (<Students {...props}
                 isLoggedIn={this.state.isLoggedIn}
                 currentUser={this.state.currentUser}
                 />)}
               />
-              <Route path="/users/:username"
+              <PrivateRoute path="/users/:username"
+                isLoggedIn={this.state.isLoggedIn}
                 render={(props) => (<Profile {...props}
-                  isLoggedIn={this.state.isLoggedIn}
+                isLoggedIn={this.state.isLoggedIn}
                 currentUser={this.state.currentUser}
                 receiveCurrentUserObjectiveUpdate={this.receiveCurrentUserObjectiveUpdate}
                 />)}
@@ -191,7 +194,7 @@ class App extends React.Component {
               />
             </Switch>
           </main>
-          <CelebrationAnimation celebration={this.state.celebration} />
+          <CelebrationAnimation celebration={this.state.celebration} completedObjective={this.state.completedObjective} />
           <Footer />
         </React.Fragment>
       </Router>

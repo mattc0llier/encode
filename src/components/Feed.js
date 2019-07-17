@@ -71,11 +71,13 @@ class Feed extends React.Component {
           <div className="feed-kpi">
             <div className="this-week">
               <p>This Week: </p>
+              <p>encode master: ?</p>
               <p>Accepted to Lambda school: 0 </p>
               <p>Total mastery points earnt: 1345</p>
             </div>
             <div className="last-week">
               <p>Last Week: </p>
+              <p>encode master: @tom</p>
               <p>Accepted to Lambda school: 0 </p>
               <p>Total mastery points earnt: 2000</p>
             </div>

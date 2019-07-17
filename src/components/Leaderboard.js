@@ -51,8 +51,8 @@ class Leaderboard extends React.Component {
           <div className="table-nav">
             <h1>Leaderboard</h1>
             <div className="title-filters">
+              <h4>Today</h4>
               <h4>This week</h4>
-              <h4>This month</h4>
               <h4>All time</h4>
             </div>
           </div>
