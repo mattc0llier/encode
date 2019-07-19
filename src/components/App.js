@@ -34,11 +34,13 @@ class App extends React.Component {
   receiveCurrentUserObjectiveUpdate(completedObjective){
     this.calculateCurrentUserScores()
     console.log('do animation');
-    this.setState({
+    this.setState(prevState => ({
+      completedObjective: !prevState.completedObjective,
+      celebration: !prevState.celebration
+    }), () => this.setState({
       completedObjective: completedObjective,
       celebration: 'achievement-wrapper animation'
-    })
-
+    }))
   }
 
   receiveNewUser(user){
