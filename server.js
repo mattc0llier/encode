@@ -396,6 +396,25 @@ app.get('/api/users/:id/settings', (req, res) => {
   .catch(error => res.json({ error: error.message }));
 })
 
+//BROWSER extension
+
+//receive current context tab information
+app.get('/api/tabContext', (req, res) => {
+
+  console.log('ext receive', req.params);
+  console.log('req.query.url', req.query.url);
+  const tabUrl = req.query.url
+  db.one('SELECT * FROM objectives WHERE url=$1', [tabUrl])
+  .then(data => {
+    console.log('data', data);
+    res.json(data)
+  })
+  .catch(error => res.json({ error: error.message }));
+  // pusher.trigger('globalContext', 'update-context', {
+  //   "message": req.body
+  // });
+})
+
 // index route
 app.get('/', function(req, res) {
   res.render('index');

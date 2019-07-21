@@ -44,6 +44,7 @@
     "passport-slack": "0.0.7",
     "pg-format": "^1.0.4",
     "pg-promise": "^8.7.4",
+    "pusher": "^2.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
