@@ -12,15 +12,29 @@ class Leaderboard extends React.Component {
     this.sortByUser = this.sortByUser.bind(this)
     this.fetchActivties = this.fetchActivties.bind(this)
     this.calculateMasteryScores = this.calculateMasteryScores.bind(this)
+    this.handleTodayClick = this.handleTodayClick.bind(this)
+    this.handleThisWeekClick = this.handleThisWeekClick.bind(this)
+    this.handleAllTimeClick = this.handleAllTimeClick.bind(this)
   }
 
-  //Get all activities for the last Week
-  // after todays date - 1 Week
-  // group activities by users
-  // Add up user mastery score
-  // Sort users by mastery score and show top 10
-  // var result = subWeeks(new Date(2014, 8, 1), 4)
-
+  handleTodayClick(){
+    console.log('today')
+    this.setState({
+      timeRange: 'day'
+    }, () => this.fetchActivties())
+  }
+  handleThisWeekClick(){
+    console.log('week')
+    this.setState({
+      timeRange: 'week'
+    }, () => this.fetchActivties())
+  }
+  handleAllTimeClick(){
+    console.log('all time')
+    this.setState({
+      timeRange: 'allTime'
+    }, () => this.fetchActivties())
+  }
 
 
   timeCalculator(){
@@ -112,9 +126,9 @@ class Leaderboard extends React.Component {
           <div className="table-nav">
             <h1>Leaderboard</h1>
             <div className="title-filters">
-              <h4>Today</h4>
-              <h4>This week</h4>
-              <h4>All time</h4>
+              <h4 onClick={this.handleTodayClick}>Today</h4>
+              <h4 onClick={this.handleThisWeekClick}>This week</h4>
+              <h4 onClick={this.handleAllTimeClick}>All time</h4>
             </div>
           </div>
           <table>
@@ -167,22 +181,22 @@ class Leaderboard extends React.Component {
                   </td>
                   <td>
                     <div className="username-cell">
-                      <h3>{user.username}</h3>
+                      <p>{user.username}</p>
                     </div>
                   </td>
                   <td>
                     <div className="course-cell">
-                      <h3>Web Precourse</h3>
+                      <p>Web Precourse</p>
                     </div>
                   </td>
                   <td>
                     <div className="location-cell">
-                      <h3>{!!user.location ? user.location : "unkown"}</h3>
+                      <p>{!!user.location ? user.location : "unkown"}</p>
                     </div>
                   </td>
                   <td>
                     <div className="mastery-cell">
-                      <h3>+ {user.mastery_score}</h3>
+                      <p>+ {user.mastery_score}</p>
                     </div>
                   </td>
                 </tr>

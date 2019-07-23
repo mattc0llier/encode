@@ -5,7 +5,7 @@ class Settings extends React.Component {
   constructor(){
     super();
 
-    this.state = { profilePicture: "", bio: "", location: ""}
+    this.state = { profilePicture: "", bio: "", location: "", redirect: ""}
 
     this.handleProfilePictureChange = this.handleProfilePictureChange.bind(this);
     this.handleBioChange = this.handleBioChange.bind(this);
@@ -16,6 +16,9 @@ class Settings extends React.Component {
 
   handleLogout(){
     this.props.receiveLoggedOutUser()
+    this.setState({
+      redirect: 'logout'
+    })
   }
 
   handleProfilePictureChange(event){
@@ -30,7 +33,7 @@ class Settings extends React.Component {
   }
   handleLocationChange(event){
     this.setState({
-      location: event.target.value
+      location: event.target.value,
     })
   }
 
@@ -63,7 +66,7 @@ class Settings extends React.Component {
     console.log('updated user info', updatedInfo);
     this.updateUserSettings(updatedInfo)
     this.setState({
-      redirect: true
+      redirect: 'profile'
     })
   }
 
@@ -88,8 +91,12 @@ class Settings extends React.Component {
   }
 
   render(){
-    if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
-     else return(
+    if (this.state.redirect == 'profile') {
+      return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
+    } else if (this.state.redirect == 'logout') {
+      return(<Redirect to={`/login`} />)
+    } else {
+      return(
       <div className="form-center" >
         <div className="settings">
           <button className="logout" onClick={this.handleLogout}>Log out</button>
@@ -106,6 +113,7 @@ class Settings extends React.Component {
         </div>
       </div>
       )
+    }
   }
 }
 
