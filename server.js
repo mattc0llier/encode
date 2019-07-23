@@ -336,20 +336,24 @@ const newActivities = async (userId, courseId, selectiveObjectiveNumber) => {
   // completed is true and completed time is now
   const isoDateNow = new Date().toISOString()
 
-  const formatedActivities = allCourseObjectives.map(function(objective) {
+  const objectiveActivities = allCourseObjectives.map(function(objective) {
 
     if(objective.objective_number < selectiveObjectiveNumber){
-      return ['objective', objective.objective_id, userId, true, isoDateNow, isoDateNow]
+      return ['objective', objective.objective_id, null, null, userId, true, isoDateNow, isoDateNow]
     } else {
-      return ['objective', objective.objective_id, userId, false, null, isoDateNow]
+      return ['objective', objective.objective_id, null, null, userId, false, null, isoDateNow]
     }
   })
+  const courseActivity = [['course', null, null, Number(courseId), userId, false, null, isoDateNow]]
+  console.log('courseActivity', courseActivity);
+   const combinedActivites = objectiveActivities.concat(courseActivity)
+   console.log('combinedActivites', combinedActivites);
 
-  return formatedActivities
+  return  combinedActivites
 }
 
 const insertActivities = async (activities) => {
-  const query1 = format("INSERT INTO activities (type, objective_id, user_id, complete, completion_time, created_at) VALUES %L RETURNING id, type, objective_id, user_id, complete, completion_time, created_at", activities)
+  const query1 = format("INSERT INTO activities (type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at) VALUES %L RETURNING id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at", activities)
 
     const  {rows} = await db.query(query1);
     return rows

@@ -1,12 +1,14 @@
-// chrome.runtime.onMessage.addListener(
-//   function(request, sender, sendResponse) {
-//     if( request.message === "clicked_browser_action" ) {
-//       var firstHref = "hello";
-//       document.body.addEventListener('click', clicked, true);
-//       console.log(firstHref);
-//     }
-//   }
-// )
+console.log("content script is running");
+
+// why does this not listen to the event being sen from background?
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    return console.log(request.body);
+  }
+)
 
 document.body.addEventListener('submit', event => {
   if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
@@ -15,7 +17,7 @@ document.body.addEventListener('submit', event => {
 });
 document.body.addEventListener('click', event => {
   if(event.target.matches('.prev-link, .next-link')){
-    alert(event.target.className)
+    console.log(event.target.className)
     console.log('run animation');
     // const animation = document.createElement("div");
     // animation.setAttribute('class', 'celebration-animation');
