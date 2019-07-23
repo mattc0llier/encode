@@ -1,5 +1,5 @@
 import React from 'react';
-import {compareDesc, isToday, parse, format, subWeeks, startOfDay, getTime } from 'date-fns';
+import {compareDesc, isToday, parse, format, subWeeks, startOfDay, getTime, startOfWeek } from 'date-fns';
 
 import '../../styles/components/Leaderboard.scss';
 
@@ -25,9 +25,17 @@ class Leaderboard extends React.Component {
 
   timeCalculator(){
     const timeNow = Date.now()
-    const earliestCompletionTime = getTime(startOfDay(timeNow))
+    if (this.state.timeRange == 'day'){
+      const earliestCompletionTime = getTime(startOfDay(timeNow))
+      return earliestCompletionTime
+    } else if (this.state.timeRange == 'week') {
+      const earliestCompletionTime = getTime(startOfWeek(timeNow))
+      return earliestCompletionTime
+    } else if (this.state.timeRange == 'allTime') {
+      const earliestCompletionTime = 0
+      return earliestCompletionTime
+    }
 
-    return earliestCompletionTime
   }
 
   fetchActivties(){
@@ -73,6 +81,7 @@ class Leaderboard extends React.Component {
         id: user[0].user_id,
         username: user[0].username,
         photo: user[0].photo,
+        location:user[0].location,
         mastery_score: (
           user.reduce(function(acc, cur) {
            return acc + cur.mastery_score
@@ -82,7 +91,7 @@ class Leaderboard extends React.Component {
     ))
     console.log('mapEachUser', mapEachUser);
     const userSortedByMasteryScore = mapEachUser.sort(function(a, b){
-      a.mastery_score - b.mastery_score
+      return b.mastery_score - a.mastery_score
     })
     console.log('userSortedByMasteryScore', userSortedByMasteryScore);
     this.setState({
@@ -132,6 +141,11 @@ class Leaderboard extends React.Component {
                   </div>
                 </th>
                 <th>
+                  <div className="location-cell">
+                    <p>Location</p>
+                  </div>
+                </th>
+                <th>
                   <div className="mastery-cell">
                     <p>Mastery score</p>
                   </div>
@@ -140,7 +154,7 @@ class Leaderboard extends React.Component {
             </thead>
             <tbody>
               {this.state.allUsers.map(user => (
-                <tr className="leader">
+                <tr className="leader" style={{background: (!!this.props.isLoggedIn && this.props.currentUser.user_id === user.id) ? '#E8E8E6' : '#ffffff' }}>
                   <td>
                     <div className="rank-cell">
                       <p>{this.state.allUsers.indexOf(user) + 1}</p>
@@ -159,6 +173,11 @@ class Leaderboard extends React.Component {
                   <td>
                     <div className="course-cell">
                       <h3>Web Precourse</h3>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="location-cell">
+                      <h3>{!!user.location ? user.location : "unkown"}</h3>
                     </div>
                   </td>
                   <td>
