@@ -220,10 +220,10 @@ app.get('/api/users/:id/objectives', (req, res) => {
 });
 
 // get all completed activties after a given time
-app.get('/api/actvties/since/:earliestCompletionTime', (req, res) => {
+app.get('/api/activties/since/:earliestCompletionTime', (req, res) => {
   const { earliestCompletionTime } = req.params;
   return db
-    .any('SELECT * FROM activities WHERE activities.complete = true ')
+    .any('SELECT activities.user_id, activities.id AS activity_id, activities.objective_id, activities.lesson_id, activities.course_id, activities.complete, activities.completion_time, users.username, users.photo, users.first_name, users.last_name, users.location, objectives.mastery_score FROM activities, users, objectives WHERE activities.complete = true AND activities.user_id = users.id AND objectives.id = activities.objective_id')
     .then(data => {
       const timeFilteredObjectives = data.filter(activity => {
         const objectiveTimes = Date.parse(new Date(activity.completion_time))

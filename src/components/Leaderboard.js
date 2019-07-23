@@ -1,12 +1,17 @@
 import React from 'react';
+import {compareDesc, isToday, parse, format, subWeeks, startOfDay, getTime } from 'date-fns';
+
 import '../../styles/components/Leaderboard.scss';
 
 class Leaderboard extends React.Component {
   constructor(){
     super();
-    this.state = { allUsers: [] }
+    this.state = { allUsers: [], timeRange: 'day', timeRangeCompletedObjectives: [] }
 
-    this.fetchAllStudents = this.fetchAllStudents.bind(this)
+    this.timeCalculator = this.timeCalculator.bind(this)
+    this.sortByUser = this.sortByUser.bind(this)
+    this.fetchActivties = this.fetchActivties.bind(this)
+    this.calculateMasteryScores = this.calculateMasteryScores.bind(this)
   }
 
   //Get all activities for the last Week
@@ -14,32 +19,79 @@ class Leaderboard extends React.Component {
   // group activities by users
   // Add up user mastery score
   // Sort users by mastery score and show top 10
+  // var result = subWeeks(new Date(2014, 8, 1), 4)
 
-  // fetchActivties(){
-  //   fetch(`/api/activties/since/${earliestCompletionTime}`).
-  //   .then(function(response) {
-  //     return response.json()
-  //   })
-  //   .then(body => {
-  //     console.log(body);
-  //   })
-  // }
 
-  fetchAllStudents(){
-    fetch(`/api/users`)
+
+  timeCalculator(){
+    const timeNow = Date.now()
+    const earliestCompletionTime = getTime(startOfDay(timeNow))
+
+    return earliestCompletionTime
+  }
+
+  fetchActivties(){
+    const earliestCompletionTime = this.timeCalculator()
+    fetch(`/api/activties/since/${earliestCompletionTime}`)
     .then(function(response) {
-      return response.json();
+      return response.json()
     })
     .then(body => {
-      this.setState(
-        { allUsers: body}
-      )
+      console.log(body);
+      this.setState({
+        timeRangeCompletedObjectives: body
+      }, () => this.sortByUser())
     })
     .catch(error => console.log(error.message));
   }
 
+  sortByUser(){
+    console.log("hit");
+      function groupBy(objectArray, property) {
+        return objectArray.reduce(function (acc, obj) {
+          var key = obj[property];
+          if (!acc[key]) {
+            acc[key] = [];
+          }
+          acc[key].push(obj);
+          return acc;
+        }, []);
+      }
+
+    var groupedPeople = groupBy(this.state.timeRangeCompletedObjectives, 'user_id');
+    console.log('groupedPeople', groupedPeople);
+    const filteredGroupedPeople = groupedPeople.filter(user => !!user)
+    console.log('filteredGroupedPeople', filteredGroupedPeople);
+    this.setState({
+      allUsers: filteredGroupedPeople
+    }, () => this.calculateMasteryScores())
+  }
+  calculateMasteryScores(){
+    const mapEachUser = this.state.allUsers.map(user => (
+
+     {
+        id: user[0].user_id,
+        username: user[0].username,
+        photo: user[0].photo,
+        mastery_score: (
+          user.reduce(function(acc, cur) {
+           return acc + cur.mastery_score
+          }, 0)
+        )
+      }
+    ))
+    console.log('mapEachUser', mapEachUser);
+    const userSortedByMasteryScore = mapEachUser.sort(function(a, b){
+      a.mastery_score - b.mastery_score
+    })
+    console.log('userSortedByMasteryScore', userSortedByMasteryScore);
+    this.setState({
+      allUsers: userSortedByMasteryScore
+    })
+  }
+
   componentDidMount(){
-    this.fetchAllStudents()
+    this.fetchActivties()
   }
 
 
@@ -111,7 +163,7 @@ class Leaderboard extends React.Component {
                   </td>
                   <td>
                     <div className="mastery-cell">
-                      <h3>+46</h3>
+                      <h3>+ {user.mastery_score}</h3>
                     </div>
                   </td>
                 </tr>
