@@ -34,7 +34,7 @@ class CelebrationAnimation extends React.Component {
               <p className="achievement-subtext">{this.props.completedObjective.objective}</p>
             </div>
             <div className="achievement-title">
-              <span>+ {this.props.completedObjective.mastery_score}</span>
+              <h3>+ {this.props.completedObjective.mastery_score}</h3>
             </div>
           </div>
         </div>

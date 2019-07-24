@@ -22,13 +22,16 @@
         "https://*.lambdaschool.com/*"
       ],
       "all_frames": true,
-      "js": ["content.js", "celebrationAnimation.js"]
+      "js": ["content.js"]
     }
   ],
   "browser_action": {
      "default_icon": "./assets/images/encode-ext-icon16.png",
      "default_title": "encode"
   },
+  "web_accessible_resources": [
+    "animation.scss"
+  ],
   "commands": {
     "update-context": {
       "suggested_key": {

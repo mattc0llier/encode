@@ -29,8 +29,14 @@
   min-width: 15rem;
 }
 
-.mastery-cell {
+.location-cell {
+  min-width: 15rem;
 }
+
+.mastery-cell {
+  min-width: 5rem;
+}
+
 .mastery-cell p {
   color: $primary-pink;
   font-weight: 600;

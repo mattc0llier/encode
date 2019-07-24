@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles/components/Scores.scss';
 
 class Scores extends React.Component {
   constructor(){
@@ -8,7 +9,18 @@ class Scores extends React.Component {
   render(){
     return(
       <div className="scores">
-        <h2>🎓 {this.props.userProfileScoresObject.mastery} 🔥 {this.props.userProfileScoresObject.streak} ✅ {this.props.userProfileScoresObject.objectives}</h2>
+        <div className="score">
+          <p>Mastery Score</p>
+          <h2>🎓 {this.props.userProfileScoresObject.mastery}</h2>
+        </div>
+        <div className="score">
+          <p>Streak</p>
+          <h2>🔥 {this.props.userProfileScoresObject.streak}</h2>
+        </div>
+        <div className="score">
+          <p>Objectives</p>
+          <h2>✅ {this.props.userProfileScoresObject.objectives}</h2>
+        </div>
       </div>
     )
   }

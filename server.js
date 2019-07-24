@@ -28,7 +28,7 @@ const SALT_ROUNDS = 12;
 
 //managing session cookies
 const cookieExpirationDate = new Date();
-const cookieExpirationDays = 20;
+const cookieExpirationDays = 30;
 cookieExpirationDate.setDate(cookieExpirationDate.getDate() + cookieExpirationDays);
 
 app.use(bodyParser.json());

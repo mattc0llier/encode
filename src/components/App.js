@@ -191,8 +191,12 @@ class App extends React.Component {
               <Route path="/start"
                 render={(props) => (<Start {...props} currentUser={this.state.currentUser} />)}
               />
-              <Route path="/settings"
-                render={(props) => (<Settings {...props} currentUser={this.state.currentUser} receiveLoggedOutUser={this.receiveLoggedOutUser}/>)}
+              <PrivateRoute path="/settings"
+                isLoggedIn={this.state.isLoggedIn}
+                render={(props) => (<Settings {...props}
+                currentUser={this.state.currentUser}
+                receiveLoggedOutUser={this.receiveLoggedOutUser}
+                />)}
               />
             </Switch>
           </main>

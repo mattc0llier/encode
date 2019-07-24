@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import '../../styles/components/Settings.scss';
+
 
 class Settings extends React.Component {
   constructor(){
