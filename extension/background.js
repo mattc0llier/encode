@@ -1,10 +1,10 @@
 console.log('background file exists');
 
-// chrome.browserAction.onClicked.addListener(function(tab) {
-//   chrome.tabs.executeScript({
-//     file: "./celebrationAnimation.js"
-//   });
-// });
+chrome.browserAction.onClicked.addListener(function(tab) {
+  chrome.tabs.executeScript({
+    file: "./celebrationAnimation.js"
+  });
+});
 
 
 // update context on loading in a new page and send through response objective to content.js

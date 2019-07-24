@@ -285,6 +285,7 @@ app.get('/api/users/:id/objectives/complete/:lastestStatusTime', (req, res) => {
     .catch(error => res.json({ error: error.message }));
 });
 
+// update completed activities
 app.patch('/api/activities/:activityId', (req, res) => {
   const activityId = req.params.activityId
   const {complete} = req.body

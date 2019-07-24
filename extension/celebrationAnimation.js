@@ -69,6 +69,8 @@ styleEl.innerHTML = `.achievement-wrapper {
   border-radius: 32px;
   line-height: 64px;
   color: #fff;
+  font-size: 2.5rem;
+  font-weight: 600;
   margin: 0 auto;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -461,8 +463,8 @@ animation.innerHTML = `
 <div class="achievement-wrapper animation">
   <div class="achievement-super">
     <div class="achievement-body">
-      <p class="achievement-text">Type of mastery</p>
-      <p class="achievement-subtext">Objective</p>
+      <p class="achievement-text">Quiz: HTML and CSS (1/3)</p>
+      <p class="achievement-subtext">js - html - css</p>
     </div>
     <div class="achievement-title">
       <span>+3</span>

@@ -91,6 +91,8 @@ document.body.addEventListener('click', event => {
       border-radius: 32px;
       line-height: 64px;
       color: #fff;
+      font-size: 2.5rem;
+      font-weight: 600;
       margin: 0 auto;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
