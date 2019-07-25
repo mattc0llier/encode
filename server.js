@@ -403,13 +403,27 @@ app.get('/api/users/:id/settings', (req, res) => {
 
 //BROWSER extension
 
-//receive current context tab information
-app.get('/api/tabContext', (req, res) => {
+//get all activity data from browser url
+function getActivitiesByUrlAndUserId(tabUrl) {
+  console.log('getActivitiesByUrlAndUserId tabUrl', tabUrl);
+  return db.one('SELECT * FROM objectives WHERE url=$1', [tabUrl])
+  .catch((error) => {
+    console.log('failed to get user', error);
+  });
+}
+
+//receive current context tab activities
+app.get('/api/tabContext', async (req, res)  => {
 
   console.log('ext receive', req.params);
   console.log('req.query.url', req.query.url);
   const tabUrl = req.query.url
-  db.one('SELECT * FROM objectives WHERE url=$1', [tabUrl])
+  const user_id = 13
+
+  const tabObjective = await getActivitiesByUrlAndUserId(tabUrl)
+  console.log('confirmedObjective tabObjective', tabObjective);
+
+  db.any('SELECT activities.id AS activity_id, activities.objective_id, objectives.number, objectives.objective, objectives.url, objectives.mastery_score, objectives.lesson_id, activities.complete, activities.completion_time, activities.user_id FROM activities, objectives  WHERE objectives.url=$1 AND activities.user_id=$2 AND activities.objective_id=$3', [tabUrl, user_id, tabObjective.id])
   .then(data => {
     console.log('data', data);
     res.json(data)

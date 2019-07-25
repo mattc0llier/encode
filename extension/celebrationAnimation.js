@@ -48,6 +48,7 @@ styleEl.innerHTML = `.achievement-wrapper {
   font-size: 16px;
   opacity: 0;
   margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 .achievement-body .achievement-subtext {
@@ -56,6 +57,7 @@ styleEl.innerHTML = `.achievement-wrapper {
   font-weight: 300;
   opacity: 0;
   margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 .achievement-title {
@@ -71,6 +73,7 @@ styleEl.innerHTML = `.achievement-wrapper {
   color: #fff;
   font-size: 2.5rem;
   font-weight: 600;
+  font-family: "Roboto", sans-serif;
   margin: 0 auto;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

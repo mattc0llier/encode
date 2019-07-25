@@ -6,6 +6,7 @@
   "permissions": [
     "tabs",
     "activeTab",
+    "webRequest",
     "http://localhost:9090/"
   ],
   "background": {

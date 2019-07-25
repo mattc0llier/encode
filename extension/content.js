@@ -28,6 +28,7 @@ document.body.addEventListener('click', event => {
       right: 0;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
+      font-family: 'Roboto';
     }
 
     .achievement-super {
@@ -496,5 +497,11 @@ document.body.addEventListener('click', event => {
     `
     document.body.appendChild(animation);
 
+    // chrome.webRequest.onBeforeRequest.addListener(
+    //     function(details) {
+    //       return setTimeout(() => return, 6000);;
+    //     },
+    //     {urls: [“<all_urls>”]},
+    //     [“requestBody”]);
   }
 });

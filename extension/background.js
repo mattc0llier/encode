@@ -1,9 +1,25 @@
 console.log('background file exists');
+let currentActivity = []
 
 chrome.browserAction.onClicked.addListener(function(tab) {
   chrome.tabs.executeScript({
     file: "./celebrationAnimation.js"
   });
+  fetch(`/api/activities/${completedObjective.activity_id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ complete: true }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(body => {
+    console.log('body', body);
+    console.log('completedObjective', completedObjective);
+  })
+  .catch(error => console.log(error.message));
 });
 
 
@@ -22,6 +38,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
         console.log('body', body);
         console.log('tab.id', tab.id);
         let msg = { txt: "hello" }
+        let activityState = body
 
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
           console.log('tabs[0].id', tabs[0].id);
