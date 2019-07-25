@@ -33,6 +33,7 @@
   "web_accessible_resources": [
     "animation.scss"
   ],
+  "key": "ddddddddd2d=",
   "commands": {
     "update-context": {
       "suggested_key": {

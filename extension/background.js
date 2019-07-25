@@ -5,7 +5,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   chrome.tabs.executeScript({
     file: "./celebrationAnimation.js"
   });
-  fetch(`/api/activities/${completedObjective.activity_id}`, {
+   return fetch(`http://localhost:9090/api/activities/470`, {
     method: 'PATCH',
     body: JSON.stringify({ complete: true }),
     headers: {
@@ -17,7 +17,6 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   })
   .then(body => {
     console.log('body', body);
-    console.log('completedObjective', completedObjective);
   })
   .catch(error => console.log(error.message));
 });
@@ -37,12 +36,11 @@ chrome.browserAction.onClicked.addListener(function(tab) {
       .then(body => {
         console.log('body', body);
         console.log('tab.id', tab.id);
-        let msg = { txt: "hello" }
-        let activityState = body
+        let currentActivity = body
 
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
           console.log('tabs[0].id', tabs[0].id);
-          chrome.tabs.sendMessage(tabs[0].id, msg)
+          chrome.tabs.sendMessage(tabs[0].id, currentActivity)
         });
 
 
