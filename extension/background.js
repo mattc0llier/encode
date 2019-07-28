@@ -1,9 +1,19 @@
+// auth the user for chrome extension
+
+// chrome.identity.launchWebAuthFlow(
+//   {'url': 'https://localhost:9090/login', 'interactive': true},
+//   function(redirect_url) { /* Extract token from redirect_url */ });
+
+
+
+
+
 console.log('background file exists');
 let currentActivity = []
 
 chrome.browserAction.onClicked.addListener(function(tab) {
   chrome.tabs.executeScript({
-    file: "./celebrationAnimation.js"
+    file: "./celebrationAnimation2.js"
   });
    return fetch(`http://localhost:9090/api/activities/470`, {
     method: 'PATCH',

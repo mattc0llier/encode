@@ -5,6 +5,7 @@ import WorkingOn from './WorkingOn';
 import History from './History';
 import Activity from './Activity';
 import { Link } from 'react-router-dom';
+import Pusher from 'pusher-js';
 import '../../styles/components/Profile.scss';
 
 
@@ -149,6 +150,18 @@ class Profile extends React.Component {
   componentDidMount() {
     const { match } = this.props;
     this.fetchUser(match.params.username);
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('afc88b08b01a286ce8f6', {
+      cluster: 'us3',
+      forceTLS: true
+    });
+
+    const context = pusher.subscribe('activityUpdate');
+    context.bind('activityComplete', (data) => {
+      console.log("recieved activityUpdate event", data.message);
+      this.receiveCurrentUserObjectiveUpdate(data.message)
+    });
   }
 
   render(){

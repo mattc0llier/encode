@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { summary } = require('date-streaks');
 const format = require('pg-format');
 const app = express();
+const Pusher = require('pusher');
 
 const pgp = require('pg-promise')();
 const db = pgp({
@@ -13,6 +14,15 @@ const db = pgp({
     database: process.env.DB_NAME,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD
+});
+
+//Pusher
+const pusher = new Pusher({
+  appId: '826493',
+  key: 'afc88b08b01a286ce8f6',
+  secret: process.env.PUSHER_SECRET,
+  cluster: 'us3',
+  encrypted: true
 });
 
 // passport
@@ -292,6 +302,9 @@ app.patch('/api/activities/:activityId', (req, res) => {
 
   db.one(`UPDATE activities SET complete = $1, completion_time = CURRENT_TIMESTAMP WHERE id = $2 RETURNING id AS activity_id, complete, completion_time`, [complete, activityId])
   .then((data) => {
+    pusher.trigger('activityUpdate', 'activityComplete', {
+      "message": data
+    });
     res.json(data)
   })
   .catch(error => {
@@ -383,7 +396,6 @@ app.patch('/api/users/:id/update', (req, res) => {
   db.one(`UPDATE users SET bio = $2, location = $3, photo = $4 WHERE id = $1 RETURNING *`, [userId, updatedInfo.bio, updatedInfo.location, updatedInfo.profilePicture])
   .then((data) => {
     res.json(data)
-    res.status(200).send({update: "success"});
   })
   .catch(error => {
     res.json({
@@ -413,26 +425,26 @@ function getActivitiesByUrlAndUserId(tabUrl) {
 }
 
 //receive current context tab activities
-app.get('/api/tabContext', async (req, res)  => {
-
-  console.log('ext receive', req.params);
-  console.log('req.query.url', req.query.url);
-  const tabUrl = req.query.url
-  const user_id = 13
-
-  const tabObjective = await getActivitiesByUrlAndUserId(tabUrl)
-  console.log('confirmedObjective tabObjective', tabObjective);
-
-  db.any('SELECT activities.id AS activity_id, activities.objective_id, objectives.number, objectives.objective, objectives.url, objectives.mastery_score, objectives.lesson_id, activities.complete, activities.completion_time, activities.user_id FROM activities, objectives  WHERE objectives.url=$1 AND activities.user_id=$2 AND activities.objective_id=$3', [tabUrl, user_id, tabObjective.id])
-  .then(data => {
-    console.log('data', data);
-    res.json(data)
-  })
-  .catch(error => res.json({ error: error.message }));
-  // pusher.trigger('globalContext', 'update-context', {
-  //   "message": req.body
-  // });
-})
+// app.get('/api/tabContext', async (req, res)  => {
+//
+//   console.log('ext receive', req.params);
+//   console.log('req.query.url', req.query.url);
+//   const tabUrl = req.query.url
+//   const user_id = 13
+//
+//   const tabObjective = await getActivitiesByUrlAndUserId(tabUrl)
+//   console.log('confirmedObjective tabObjective', tabObjective);
+//
+//   db.any('SELECT activities.id AS activity_id, activities.objective_id, objectives.number, objectives.objective, objectives.url, objectives.mastery_score, objectives.lesson_id, activities.complete, activities.completion_time, activities.user_id FROM activities, objectives  WHERE objectives.url=$1 AND activities.user_id=$2 AND activities.objective_id=$3', [tabUrl, user_id, tabObjective.id])
+//   .then(data => {
+//     console.log('data', data);
+//     res.json(data)
+//   })
+//   .catch(error => res.json({ error: error.message }));
+//   // pusher.trigger('globalContext', 'update-context', {
+//   //   "message": req.body
+//   // });
+// })
 
 // index route
 app.get('/', function(req, res) {

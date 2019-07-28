@@ -161,9 +161,6 @@ class App extends React.Component {
               <Route path="/" exact
                 component={Homepage}
               />
-              <Route path="/feed"
-                render={(props) => (<Feed {...props} currentUser={this.state.currentUser} />)}
-              />
               <Route path="/leaderboard"
                 render={(props) => (<Leaderboard {...props} currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn}/>)}
               />
@@ -172,13 +169,6 @@ class App extends React.Component {
               />
               <Route path="/login"
                 render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} />)}
-              />
-              <PrivateRoute path="/students"
-                isLoggedIn={this.state.isLoggedIn}
-                render={(props) => (<Students {...props}
-                isLoggedIn={this.state.isLoggedIn}
-                currentUser={this.state.currentUser}
-                />)}
               />
               <PrivateRoute path="/users/:username"
                 isLoggedIn={this.state.isLoggedIn}

@@ -12,7 +12,8 @@
   "background": {
     "matches": [
       "http://*.lambdaschool.com/*",
-      "https://*.lambdaschool.com/*"
+      "https://*.lambdaschool.com/*",
+      "https://*.encode.app/*"
     ],
     "scripts": ["background.js"]
   },
@@ -20,14 +21,19 @@
     {
       "matches": [
         "http://*.lambdaschool.com/*",
-        "https://*.lambdaschool.com/*"
+        "https://*.lambdaschool.com/*",
+        "https://*.encode.app/*"
       ],
       "all_frames": true,
       "js": ["content.js"]
     }
   ],
+  "icons": {
+    "16": "./assets/images/encode-ext-icon16.png",
+    "48": "./assets/images/encode-ext-icon48.png",
+    "128": "./assets/images/encode-ext-icon128.png"
+  },
   "browser_action": {
-     "default_icon": "./assets/images/encode-ext-icon16.png",
      "default_title": "encode"
   },
   "web_accessible_resources": [
