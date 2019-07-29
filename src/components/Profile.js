@@ -12,7 +12,7 @@ import '../../styles/components/Profile.scss';
 class Profile extends React.Component {
   constructor() {
     super();
-    this.state = { userProfile: [], userProfileObjectives: [], userProfileScores: {}, nextUserProfileObjective: {}, currentUserProfile: false, userProfileCourses: [] };
+    this.state = { userProfile: [], userProfileObjectives: [], userProfileScores: {}, nextUserProfileObjective: {}, currentUserProfile: false, userProfileCourses: [], completedObjective: {} };
 
     this.fetchUser = this.fetchUser.bind(this);
     this.fetchUserObjectives = this.fetchUserObjectives.bind(this);
@@ -22,6 +22,7 @@ class Profile extends React.Component {
     this.checkIfCurrentUserProfile = this.checkIfCurrentUserProfile.bind(this);
     this.calculateUserScores = this.calculateUserScores.bind(this);
     this.fetchUserCourses = this.fetchUserCourses.bind(this);
+    this.receiveCompletedActivity = this.receiveCompletedActivity.bind(this);
   }
 
   checkIfCurrentUserProfile(){
@@ -59,8 +60,6 @@ class Profile extends React.Component {
 
 //take db complete response and update userProfileObjectives state
   updateuserProfileObjectives(activitiesResponse, completedObjective){
-
-
     function removeComplete(userObjective) {
       return userObjective.activity_id !== activitiesResponse.activity_id
     }
@@ -96,12 +95,18 @@ class Profile extends React.Component {
       return response.json();
     })
     .then(body => {
-      console.log('body', body);
-      console.log('completedObjective', completedObjective);
-        this.updateuserProfileObjectives(body, completedObjective)
-        this.props.receiveCurrentUserObjectiveUpdate(completedObjective)
-    })
+        console.log('body', body);
+        console.log('completedObjective', completedObjective);
+        this.setState({
+          completedObjective: completedObjective
+        })
+      })
     .catch(error => console.log(error.message));
+  }
+
+  receiveCompletedActivity(completedActivity){
+    this.updateuserProfileObjectives(completedActivity, this.state.completedObjective)
+    this.props.receiveCurrentUserObjectiveUpdate(this.state.completedObjective)
   }
 
   fetchUserCourses(id){
@@ -157,11 +162,12 @@ class Profile extends React.Component {
       forceTLS: true
     });
 
+    // need to get the completed objective data somehow to make this work
     const context = pusher.subscribe('activityUpdate');
     context.bind('activityComplete', (data) => {
       console.log("recieved activityUpdate event", data.message);
-      this.receiveCurrentUserObjectiveUpdate(data.message)
-    });
+      this.receiveCompletedActivity(data.message)
+    })
   }
 
   render(){

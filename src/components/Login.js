@@ -48,7 +48,7 @@ class Login extends React.Component {
 
 
   render(){
-    if (this.state.redirect) return(<Redirect to='/feed' />)
+    if (this.state.redirect) return(<Redirect to={`/users/${this.state.loginUser.username}`} />)
      else return(
       <div className="form-center">
         <div className="loginUser">
@@ -62,7 +62,7 @@ class Login extends React.Component {
           </form>
           <p>Don't have an account? <b><Link to='/users/new'>Sign up</Link></b></p>
         </div>
-    
+
       </div>
     )
   }

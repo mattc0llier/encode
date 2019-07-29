@@ -305,7 +305,6 @@ app.patch('/api/activities/:activityId', (req, res) => {
     pusher.trigger('activityUpdate', 'activityComplete', {
       "message": data
     });
-    res.json(data)
   })
   .catch(error => {
     res.json({

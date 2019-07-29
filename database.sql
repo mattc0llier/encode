@@ -82,13 +82,17 @@ CREATE TABLE activities(
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-CREATE TABLE scores(
+CREATE TABLE tags(
   id SERIAL PRIMARY KEY,
-  user_id INT,
-  mastery INT,
-  streak INT,
-  objective_count INT,
-  FOREIGN KEY (user_id) REFERENCES users (id)
+  topic VARCHAR(100)
+);
+
+CREATE TABLE objective_tags (
+  id SERIAL PRIMARY KEY,
+  objective_id INT NOT NULL,
+  tag_id INT NOT NULL,
+  FOREIGN KEY (objective_id) REFERENCES objectives (id),
+  FOREIGN KEY (tag_id) REFERENCES tags (id)
 );
 
 INSERT INTO users
@@ -564,16 +568,38 @@ INSERT INTO activities
   (54, 'course', NULL, NULL, 1, 12, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 ALTER SEQUENCE activities_id_seq RESTART WITH 55 INCREMENT BY 1;
 
-INSERT INTO scores
-  (id, user_id, mastery, streak, objective_count)
+INSERT INTO tags
+  (id, topic)
   VALUES
-  (1, 1, 0, 0, 0);
-INSERT INTO scores
-  (id, user_id, mastery, streak, objective_count)
+  (1, 'Software development');
+INSERT INTO tags
+  (id, topic)
   VALUES
-  (2, 2, 0, 0, 0);
-INSERT INTO scores
-  (id, user_id, mastery, streak, objective_count)
+  (2, 'Programming');
+INSERT INTO tags
+  (id, topic)
   VALUES
-  (3, 3, 0, 0, 0);
+  (3, 'HTML');
+INSERT INTO tags
+  (id, topic)
+  VALUES
+  (4, 'CSS');
+INSERT INTO tags
+  (id, topic)
+  VALUES
+  (5, 'JavaScript');
+ALTER SEQUENCE scores_id_seq RESTART WITH 6 INCREMENT BY 1;
+
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (1, 1, 1);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (2, 1, 2);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (3, 1, 3);
 ALTER SEQUENCE scores_id_seq RESTART WITH 4 INCREMENT BY 1;
