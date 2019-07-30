@@ -16,7 +16,7 @@ document.body.addEventListener('submit', event => {
   }
 });
 document.body.addEventListener('mouseover', event => {
-  if(event.target.matches('.prev-link, .next-link, .learndash_mark_complete_button, .gform_button button')){
+  if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
     console.log(event.target.className)
     console.log('run animation');
 
