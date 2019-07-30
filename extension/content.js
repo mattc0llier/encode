@@ -15,28 +15,29 @@ document.body.addEventListener('submit', event => {
     alert(event.target.className)
   }
 });
+
+var COLORS = [
+  "https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
+  "https://media2.giphy.com/media/slOhiKAVFgwr6/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
+  "https://media0.giphy.com/media/fdyZ3qI0GVZC0/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
+  "https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
+  "https://media2.giphy.com/media/slOhiKAVFgwr6/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
+  "https://media0.giphy.com/media/fdyZ3qI0GVZC0/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
+];
+
+function getGif() {
+  var index = Math.floor(Math.random() * 6);
+
+  return COLORS[index];
+}
+
+const randomGif = getGif();
+console.log('randomGif', randomGif);
+
 document.body.addEventListener('mouseover', event => {
   if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
     console.log(event.target.className)
     console.log('run animation');
-
-    var COLORS = [
-      "https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-      "https://media2.giphy.com/media/slOhiKAVFgwr6/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-      "https://media0.giphy.com/media/fdyZ3qI0GVZC0/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-      "https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-      "https://media2.giphy.com/media/slOhiKAVFgwr6/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-      "https://media0.giphy.com/media/fdyZ3qI0GVZC0/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-    ];
-
-    function getGif() {
-      var index = Math.floor(Math.random() * 6);
-
-      return COLORS[index];
-    }
-
-    const randomGif = getGif();
-    console.log('randomGif', randomGif);
 
     var styleEl = document.createElement('style');
     styleEl.innerHTML = `.notifications {
@@ -138,7 +139,7 @@ document.body.addEventListener('mouseover', event => {
     document.head.appendChild(styleEl);
 
     const animation = document.createElement("div");
-    animation.setAttribute('class', 'overlay');
+    animation.setAttribute('class', 'overlay-427542754');
     animation.innerHTML = `
         <div class="notifications" id="slide">
           <div class="main-notfiication">
@@ -166,9 +167,7 @@ document.body.addEventListener('mouseover', event => {
             <p class="topic-notfication" >Job roles</p>
             <p class="topic-notfication" >Javascript</p>
           </div>
-          <div class="media-content">
-            <img src=${randomGif}>
-          </div>
+
         </div>
     `
 
@@ -185,28 +184,27 @@ document.body.addEventListener('mouseover', event => {
 });
 
 
-document.body.addEventListener('onmousedown', event => {
+document.body.addEventListener('mousedown', event => {
   console.log('mouse down hit');
-  if(event.target.matches('.prev-link, .next-link')){
-    console.log('mouse down target prev next hit')
+  if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
+    console.log('mouse down target next hit')
 
     const animation2 = document.createElement("div");
-    animation2.setAttribute('class', 'overlay-2');
+    animation2.setAttribute('class', 'overlay-983y58y43');
     animation2.innerHTML = `
       <div class="media-content">
-        <img src=${randomGif}>
+        <img src="https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif">
       </div>
     `
-    document.body.appendChild(animation2);
+    const overlay = document.getElementsByClassName("overlay-427542754")[0];
+    overlay.appendChild(animation2);
   }
 });
 
 document.body.addEventListener('mouseout', event => {
-  console.log('mouse out hit');
-  if(event.target.matches('.prev-link, .next-link')){
-    console.log('mouse out target prev next hit')
+  if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
 
-    const removeAnimation = document.getElementByClassName("overlay")[0];
+    const removeAnimation = document.getElementsByClassName("overlay-427542754")[0];
     document.body.removeChild(removeAnimation);
   }
 });

@@ -17,6 +17,19 @@
   -moz-border-radius: 100px;
 }
 
+.info .name {
+  display: flex;
+  align-items: baseline;
+}
+.info #private {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+.info #lock {
+  margin-right: 0.3rem;
+}
+
 .courses {
   display: flex;
   align-items: center;
