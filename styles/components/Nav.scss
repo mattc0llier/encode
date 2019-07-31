@@ -1,7 +1,7 @@
 @import '../base.scss';
 
 .nav {
-  background-color: #3424AC;
+  background-color: $primary-color;
 }
 
 .nav-margin {
@@ -26,7 +26,7 @@
   color: #FFFFFF;
 }
 
-.button-cta {
+nav .button-cta {
   display: flex;
   flex-direction: row;
 }

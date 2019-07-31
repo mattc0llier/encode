@@ -58,48 +58,56 @@ p {
 
 @media only screen and (min-width: 650px) {
 
-.mobile {
-  display: none;
-}
-
 #encode-logo {
   max-width: 200px;
   margin: 0 0 0 1rem;
 }
 
-.email {
-  width: 200px;
-  height: 40px;
-  border: 1px solid var(--highlight-color);
-  border-radius: 5px;
+.homepage {
+  width: 100%;
 }
 
 .hero {
   display: flex;
+  flex-direction: column;
   margin: 5rem 0 2rem 0;
-  align-items: start;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
 }
 
 .cta {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .value-props {
  display: flex;
  flex-direction: column;
+ max-width: 700px;
 }
 
 .value-prop {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 1rem;
+}
+
+.homepage .info {
+  max-width: 300px;
 }
 
 .text {
   display: flex;
   flex-direction: column;
   margin: 0 2rem 0 1rem;
+}
+.text h2 {
+  margin-bottom: 0.5rem;
 }
 
 .screenshot {
@@ -108,18 +116,6 @@ p {
 .students {
   background-color: var(--headline-color);
   color: var(--color-bg-text-color);
-}
-
-.signup {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  /* background-color: var(--link-color); */
-  padding: 1rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
 }
 
 .button-cta {
@@ -133,10 +129,10 @@ p {
   padding-top: 0.5rem;
 }
 
-.win {
+.how {
   margin-bottom: 2rem;
 }
-.win p {
+.how p {
   margin-bottom: 0;
 }
 
@@ -171,61 +167,22 @@ button:hover {
 .numberCircle {
     border-radius: 50%;
 
-    width: 36px;
-    height: 36px;
+    width: 56px;
+    height: 56px;
     padding: 8px;
 
-    background: #3424AC;
-    border: 2px solid #3424AC;
+    background: $primary-blue;
+    border: 2px solid $primary-blue;
     color: #fff;
     text-align: center;
 
     font: 32px Roboto, sans-serif;
 }
 
-#mc-embedded-subscribe {
-  font-family: 'Exo', sans-serif;
-  border-radius: 5px;
-  background-color: var(--primary-button);
-  height: auto;
-  padding: 8px 12px 8px 12px;
-  text-align: center;
-  color: white;
-  margin-top: 20px;
-  box-shadow: 2px 2px 4px 0px rgba(73, 103, 255, 0.1), 1px 2px 3px rgba(63, 37, 127, 0.2);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-ul {
-  /* margin-top: 2rem; */
-}
-
-li {
-
-}
-
 footer {
   padding: 1rem;
   text-align: center;
   color: grey;
-}
-
-#matt-profile {
-  width: 100%;
-  height: auto;
-}
-
-.cta {
-  display: flex;
-  flex-direction: row;
-}
-
-.value-prop {
-  display: flex;
-  flex-direction: row;
 }
 
 }

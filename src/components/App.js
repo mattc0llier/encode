@@ -155,43 +155,45 @@ class App extends React.Component {
     return(
       <Router>
         <React.Fragment>
-          <Nav isLoggedIn={this.state.isLoggedIn} currentUser={this.state.currentUser} currentUserScores={this.state.currentUserScores}/>
-          <main>
-            <Switch>
-              <Route path="/" exact
-                component={Homepage}
-              />
-              <Route path="/leaderboard"
-                render={(props) => (<Leaderboard {...props} currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn}/>)}
-              />
-              <Route path="/users/new"
-                render={(props) => (<NewUser {...props} receiveNewUser={this.receiveNewUser} />)}
-              />
-              <Route path="/login"
-                render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} />)}
-              />
-              <PrivateRoute path="/users/:username"
-                isLoggedIn={this.state.isLoggedIn}
-                render={(props) => (<Profile {...props}
-                isLoggedIn={this.state.isLoggedIn}
-                currentUser={this.state.currentUser}
-                receiveCurrentUserObjectiveUpdate={this.receiveCurrentUserObjectiveUpdate}
-                />)}
-              />
-              <Route path="/start"
-                render={(props) => (<Start {...props} currentUser={this.state.currentUser} />)}
-              />
-              <PrivateRoute path="/settings"
-                isLoggedIn={this.state.isLoggedIn}
-                render={(props) => (<Settings {...props}
-                currentUser={this.state.currentUser}
-                receiveLoggedOutUser={this.receiveLoggedOutUser}
-                />)}
-              />
-            </Switch>
-          </main>
-          <CelebrationAnimation celebration={this.state.celebration} completedObjective={this.state.completedObjective} />
-          <Footer />
+          <div className="app">
+            <Nav isLoggedIn={this.state.isLoggedIn} currentUser={this.state.currentUser} currentUserScores={this.state.currentUserScores}/>
+            <main>
+              <Switch>
+                <Route path="/" exact
+                  component={Homepage}
+                />
+                <Route path="/leaderboard"
+                  render={(props) => (<Leaderboard {...props} currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn}/>)}
+                />
+                <Route path="/users/new"
+                  render={(props) => (<NewUser {...props} receiveNewUser={this.receiveNewUser} />)}
+                />
+                <Route path="/login"
+                  render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} />)}
+                />
+                <PrivateRoute path="/users/:username"
+                  isLoggedIn={this.state.isLoggedIn}
+                  render={(props) => (<Profile {...props}
+                  isLoggedIn={this.state.isLoggedIn}
+                  currentUser={this.state.currentUser}
+                  receiveCurrentUserObjectiveUpdate={this.receiveCurrentUserObjectiveUpdate}
+                  />)}
+                />
+                <Route path="/start"
+                  render={(props) => (<Start {...props} currentUser={this.state.currentUser} />)}
+                />
+                <PrivateRoute path="/settings"
+                  isLoggedIn={this.state.isLoggedIn}
+                  render={(props) => (<Settings {...props}
+                  currentUser={this.state.currentUser}
+                  receiveLoggedOutUser={this.receiveLoggedOutUser}
+                  />)}
+                />
+              </Switch>
+            </main>
+            <CelebrationAnimation celebration={this.state.celebration} completedObjective={this.state.completedObjective} />
+            <Footer />
+          </div>
         </React.Fragment>
       </Router>
     )

@@ -69,7 +69,7 @@ class Activity extends React.Component {
           to={today}
           emptyColor="#eeeeee"
           data={dailySummary}
-          colors={[ '#3424AC','#673096','#9A3C7F','#CC4769','#FF5352' ]}
+          colors={[ '#5214FF','#673096','#9A3C7F','#CC4769','#FF5352' ]}
           yearSpacing={40}
           monthBorderColor="#ffffff"
           dayBorderWidth={2}

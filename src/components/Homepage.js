@@ -13,8 +13,8 @@ class Homepage extends React.Component {
       <div className="homepage">
         <main>
           <section className="hero">
-            <h1>Get into Lambda School by playing</h1>
-            <img id="encode-logo" src="https://encode-app-public.s3-us-west-2.amazonaws.com/landing-page-assets/logo-test.svg" alt="encode-logo" />
+            <h1>encode</h1>
+            <h3>Your personal learning log</h3>
           </section>
           <section className="cta">
             <div className="value-props">
@@ -23,9 +23,8 @@ class Homepage extends React.Component {
                   <div className="numberCircle">1</div>
                 </div>
                 <div className="text">
-                  <h2>Smash the pre-course</h2>
-                  <p>Boost your Mastery Score by working through the objectives and
-                    sharing your pre-course progress</p>
+                  <h2>Log your educational progress all in one place</h2>
+                  <p>Boost your Mastery Score™ by working through the course objectives and automatically logging your learning resources</p>
                 </div>
               </div>
               <div className="value-prop">
@@ -33,9 +32,8 @@ class Homepage extends React.Component {
                   <div className="numberCircle">2</div>
                 </div>
                 <div className="text">
-                  <h2>Learn with your peers</h2>
-                  <p>Our dedicated community of learners and private study groups keep
-                    each other accountable to finishing</p>
+                  <h2>Get instant feedback on your learning</h2>
+                  <p>encode analyses your logged activities and gives you instant feedback on your progress and graphs your efforts</p>
                 </div>
               </div>
               <div className="value-prop">
@@ -43,29 +41,40 @@ class Homepage extends React.Component {
                   <div className="numberCircle">3</div>
                 </div>
                 <div className="text">
-                  <h2>Prove your progress to Lambda School</h2>
-                  <p>We’re not going to fake hard work for you, but we can help you
-                    prove the progress you have made</p>
-                  <p>Log your learning activities with encode and build a historic summary of your efforts</p>
+                  <h2>Prove your effort to Lambda School</h2>
+                  <p>We’re not going to fake hard work for you, but we can help you prove the progress you have made by publically summarising your activity</p>
+                  <p>What you share is up to you</p>
                 </div>
               </div>
             </div>
             <div className="info">
               <div className="price">
-                <div className="win">
-                  <h2>How to win:</h2>
+                <p>Your learning profile is private by default. Feel free to make mistakes, it’s how we progress.</p>
+                <div className="how">
                   <p>✅ Complete the precourse objectives</p>
                   <p>🔥 Keep up your activity streaks</p>
-                  <p>🎓 Increase your Mastery Score - It's a secret 🤐</p>
+                  <p>🎓 Increase your <b>Mastery Score™</b></p>
                 </div>
-                <p>Show you are someone Lambda School can invest in.</p>
-                <p>1 of the first 10 applicants to get accepted into Lambda using encode will <b>win $100!</b></p>
               </div>
               <div className="button-cta">
                 <Link to='/users/new'>
                   <button type="button" name="button">Sign up to wait list</button>
                 </Link>
-                <p>33 students ready to play</p>
+                <p>67 students in queue</p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div className="current-schools">
+              <div className="school-logo">
+              </div>
+            </div>
+            <div class="coming-soon">
+              <div className="school-logo">
+              </div>
+              <div className="school-logo">
+              </div>
+              <div className="school-logo">
               </div>
             </div>
           </section>

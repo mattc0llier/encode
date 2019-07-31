@@ -14,7 +14,7 @@ input[type="checkbox"]{
   width:25px;
   display:block;
   border-radius:5px;
-  border:2px solid #3424AC;
+  border:2px solid $primary-blue;
   cursor: pointer;
   margin-right: 1rem;
 }
@@ -28,5 +28,5 @@ input[type="checkbox"]:checked + label{
 }
 
 .objective p {
-  color: $primary-blue;
+  color: $text-black;
 }
