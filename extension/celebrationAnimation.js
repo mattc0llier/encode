@@ -27,7 +27,7 @@ styleEl.innerHTML = `.achievement-wrapper {
   box-sizing: border-box;
   text-align: center;
   border-radius: 32px;
-  background-color: #3424AC;
+  background-color: #5214FF;
   background-image: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 0%,

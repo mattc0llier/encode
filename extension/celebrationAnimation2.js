@@ -15,7 +15,7 @@ styleEl.innerHTML = `.notifications {
       border-radius: 10px;
       width: 30rem;
       height: 7rem;
-      background-color: #3424AC;
+      background-color: #5214FF;
       color: #ffffff;
     }
     .topic-notifications {
