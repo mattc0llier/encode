@@ -22,6 +22,7 @@ CREATE TABLE organizations(
 
 CREATE TABLE users(
   id SERIAL PRIMARY KEY,
+  type VARCHAR(100),
   first_name VARCHAR(100),
   last_name VARCHAR(100),
   photo VARCHAR(500) DEFAULT '/static/assets/images/default-profile.png',
@@ -96,15 +97,15 @@ CREATE TABLE objective_tags (
 );
 
 INSERT INTO users
-  (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
+  (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date, type)
   VALUES
   (1, 'Matt', 'Collier', '/static/assets/images/matt.png', 'matt', 'matt@encode.app', '$2b$12$UtVNV8XoRRh0N5/MnPy3Tu8AIQMGda3VWXVjW03qUTMypLXY.sSOW', '01234567890', 'University drop out. Product / Code / Sales previously at @pusher @gocardless @mintdigital', 'Devon, UK', '2018-10-21T10:37:33.735972Z');
 INSERT INTO users
-  (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
+  (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date, type)
   VALUES
   (2, 'Roland', 'Levy', '/static/assets/images/Roland.jpg', 'roland', 'test@gmail.com', '$2b$12$UtVNV8XoRRh0N5/MnPy3Tu8AIQMGda3VWXVjW03qUTMypLXY.sSOW', '01234567899', 'Constructor Labs alumni, Bhuddist guru', 'London, UK', '2018-10-22T10:37:33.735972Z');
 INSERT INTO users
-  (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date)
+  (id, first_name, last_name, photo, username, email, password, tel, bio, location, creation_date, type)
   VALUES
   (3, 'Dmitri', 'Grabov', '/static/assets/images/dmitri.jpeg', 'dmitri', 'testing@gmail.com', '$2b$12$UtVNV8XoRRh0N5/MnPy3Tu8AIQMGda3VWXVjW03qUTMypLXY.sSOW', '01234567898', 'Constructor Labs founder', 'London, UK', '2018-10-23T10:37:33.735972Z');
 ALTER SEQUENCE users_id_seq RESTART WITH 4 INCREMENT BY 1;
@@ -568,27 +569,253 @@ INSERT INTO activities
   (54, 'course', NULL, NULL, 1, 12, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 ALTER SEQUENCE activities_id_seq RESTART WITH 55 INCREMENT BY 1;
 
-INSERT INTO tags
-  (id, topic)
-  VALUES
-  (1, 'Software development');
-INSERT INTO tags
-  (id, topic)
-  VALUES
-  (2, 'Programming');
-INSERT INTO tags
-  (id, topic)
-  VALUES
-  (3, 'HTML');
-INSERT INTO tags
-  (id, topic)
-  VALUES
-  (4, 'CSS');
-INSERT INTO tags
-  (id, topic)
-  VALUES
-  (5, 'JavaScript');
-ALTER SEQUENCE scores_id_seq RESTART WITH 6 INCREMENT BY 1;
+INSERT INTO tags (id, topic) VALUES (1, 'javascript');
+INSERT INTO tags (id, topic) VALUES (2, 'java');
+INSERT INTO tags (id, topic) VALUES (3, 'c#');
+INSERT INTO tags (id, topic) VALUES (4, 'php');
+INSERT INTO tags (id, topic) VALUES (5, 'python');
+INSERT INTO tags (id, topic) VALUES (6, 'android');
+INSERT INTO tags (id, topic) VALUES (7, 'jquery');
+INSERT INTO tags (id, topic) VALUES (8, 'html');
+INSERT INTO tags (id, topic) VALUES (9, 'c++');
+INSERT INTO tags (id, topic) VALUES (10, 'ios');
+INSERT INTO tags (id, topic) VALUES (11, 'css');
+INSERT INTO tags (id, topic) VALUES (12, 'mysql');
+INSERT INTO tags (id, topic) VALUES (13, 'sql');
+INSERT INTO tags (id, topic) VALUES (14, 'asp.net');
+INSERT INTO tags (id, topic) VALUES (15, 'ruby-on-rails');
+INSERT INTO tags (id, topic) VALUES (16, 'c');
+INSERT INTO tags (id, topic) VALUES (17, 'arrays');
+INSERT INTO tags (id, topic) VALUES (18, 'r');
+INSERT INTO tags (id, topic) VALUES (19, 'objective-c');
+INSERT INTO tags (id, topic) VALUES (20, '.net');
+INSERT INTO tags (id, topic) VALUES (21, 'node.js');
+INSERT INTO tags (id, topic) VALUES (22, 'json');
+INSERT INTO tags (id, topic) VALUES (23, 'sql-server');
+INSERT INTO tags (id, topic) VALUES (24, 'angularjs');
+INSERT INTO tags (id, topic) VALUES (25, 'swift');
+INSERT INTO tags (id, topic) VALUES (26, 'iphone');
+INSERT INTO tags (id, topic) VALUES (27, 'regex');
+INSERT INTO tags (id, topic) VALUES (28, 'ruby');
+INSERT INTO tags (id, topic) VALUES (29, 'django');
+INSERT INTO tags (id, topic) VALUES (30, 'ajax');
+INSERT INTO tags (id, topic) VALUES (31, 'excel');
+INSERT INTO tags (id, topic) VALUES (32, 'xml');
+INSERT INTO tags (id, topic) VALUES (33, 'asp.net-mvc');
+INSERT INTO tags (id, topic) VALUES (34, 'linux');
+INSERT INTO tags (id, topic) VALUES (35, 'angular');
+INSERT INTO tags (id, topic) VALUES (36, 'python-3.x');
+INSERT INTO tags (id, topic) VALUES (37, 'database');
+INSERT INTO tags (id, topic) VALUES (38, 'spring');
+INSERT INTO tags (id, topic) VALUES (39, 'wordpress');
+INSERT INTO tags (id, topic) VALUES (40, 'wpf');
+INSERT INTO tags (id, topic) VALUES (41, 'reactjs');
+INSERT INTO tags (id, topic) VALUES (42, 'vba');
+INSERT INTO tags (id, topic) VALUES (43, 'string');
+INSERT INTO tags (id, topic) VALUES (44, 'xcode');
+INSERT INTO tags (id, topic) VALUES (45, 'windows');
+INSERT INTO tags (id, topic) VALUES (46, 'vb.net');
+INSERT INTO tags (id, topic) VALUES (47, 'laravel');
+INSERT INTO tags (id, topic) VALUES (48, 'html5');
+INSERT INTO tags (id, topic) VALUES (49, 'eclipse');
+INSERT INTO tags (id, topic) VALUES (50, 'multithreading');
+INSERT INTO tags (id, topic) VALUES (51, 'mongodb');
+INSERT INTO tags (id, topic) VALUES (52, 'bash');
+INSERT INTO tags (id, topic) VALUES (53, 'pandas');
+INSERT INTO tags (id, topic) VALUES (54, 'git');
+INSERT INTO tags (id, topic) VALUES (55, 'oracle');
+INSERT INTO tags (id, topic) VALUES (56, 'postgresql');
+INSERT INTO tags (id, topic) VALUES (57, 'forms');
+INSERT INTO tags (id, topic) VALUES (58, 'twitter-bootstrap');
+INSERT INTO tags (id, topic) VALUES (59, 'image');
+INSERT INTO tags (id, topic) VALUES (60, 'macos');
+INSERT INTO tags (id, topic) VALUES (61, 'algorithm');
+INSERT INTO tags (id, topic) VALUES (62, 'python-2.7');
+INSERT INTO tags (id, topic) VALUES (63, 'scala');
+INSERT INTO tags (id, topic) VALUES (64, 'list');
+INSERT INTO tags (id, topic) VALUES (65, 'visual-studio');
+INSERT INTO tags (id, topic) VALUES (66, 'typescript');
+INSERT INTO tags (id, topic) VALUES (67, 'winforms');
+INSERT INTO tags (id, topic) VALUES (68, 'apache');
+INSERT INTO tags (id, topic) VALUES (69, 'matlab');
+INSERT INTO tags (id, topic) VALUES (70, 'facebook');
+INSERT INTO tags (id, topic) VALUES (71, 'performance');
+INSERT INTO tags (id, topic) VALUES (72, 'excel-vba');
+INSERT INTO tags (id, topic) VALUES (73, 'entity-framework');
+INSERT INTO tags (id, topic) VALUES (74, 'css3');
+INSERT INTO tags (id, topic) VALUES (75, 'hibernate');
+INSERT INTO tags (id, topic) VALUES (76, 'amazon-web-services');
+INSERT INTO tags (id, topic) VALUES (77, 'sqlite');
+INSERT INTO tags (id, topic) VALUES (78, 'function');
+INSERT INTO tags (id, topic) VALUES (79, 'linq');
+INSERT INTO tags (id, topic) VALUES (80, 'firebase');
+INSERT INTO tags (id, topic) VALUES (81, 'azure');
+INSERT INTO tags (id, topic) VALUES (82, 'swing');
+INSERT INTO tags (id, topic) VALUES (83, 'rest');
+INSERT INTO tags (id, topic) VALUES (84, 'shell');
+INSERT INTO tags (id, topic) VALUES (85, 'qt');
+INSERT INTO tags (id, topic) VALUES (86, 'powershell');
+INSERT INTO tags (id, topic) VALUES (87, 'api');
+INSERT INTO tags (id, topic) VALUES (88, 'maven');
+INSERT INTO tags (id, topic) VALUES (89, '.htaccess');
+INSERT INTO tags (id, topic) VALUES (90, 'file');
+INSERT INTO tags (id, topic) VALUES (91, 'unit-testing');
+INSERT INTO tags (id, topic) VALUES (92, 'selenium');
+INSERT INTO tags (id, topic) VALUES (93, 'loops');
+INSERT INTO tags (id, topic) VALUES (94, 'codeigniter');
+INSERT INTO tags (id, topic) VALUES (95, 'perl');
+INSERT INTO tags (id, topic) VALUES (96, 'spring-boot');
+INSERT INTO tags (id, topic) VALUES (97, 'csv');
+INSERT INTO tags (id, topic) VALUES (98, 'symfony');
+INSERT INTO tags (id, topic) VALUES (99, 'numpy');
+INSERT INTO tags (id, topic) VALUES (100, 'google-maps');
+INSERT INTO tags (id, topic) VALUES (101, 'docker');
+INSERT INTO tags (id, topic) VALUES (102, 'uitableview');
+INSERT INTO tags (id, topic) VALUES (103, 'class');
+INSERT INTO tags (id, topic) VALUES (104, 'web-services');
+INSERT INTO tags (id, topic) VALUES (105, 'cordova');
+INSERT INTO tags (id, topic) VALUES (106, 'google-chrome');
+INSERT INTO tags (id, topic) VALUES (107, 'tsql');
+INSERT INTO tags (id, topic) VALUES (108, 'sorting');
+INSERT INTO tags (id, topic) VALUES (109, 'validation');
+INSERT INTO tags (id, topic) VALUES (110, 'date');
+INSERT INTO tags (id, topic) VALUES (111, 'android-studio');
+INSERT INTO tags (id, topic) VALUES (112, 'sockets');
+INSERT INTO tags (id, topic) VALUES (113, 'ruby-on-rails-3');
+INSERT INTO tags (id, topic) VALUES (114, 'react-native');
+INSERT INTO tags (id, topic) VALUES (115, 'express');
+INSERT INTO tags (id, topic) VALUES (116, 'http');
+INSERT INTO tags (id, topic) VALUES (117, 'xaml');
+INSERT INTO tags (id, topic) VALUES (118, 'sql-server-2008');
+INSERT INTO tags (id, topic) VALUES (119, 'android-layout');
+INSERT INTO tags (id, topic) VALUES (120, 'dataframe');
+INSERT INTO tags (id, topic) VALUES (121, 'apache-spark');
+INSERT INTO tags (id, topic) VALUES (122, 'spring-mvc');
+INSERT INTO tags (id, topic) VALUES (123, 'opencv');
+INSERT INTO tags (id, topic) VALUES (124, 'email');
+INSERT INTO tags (id, topic) VALUES (125, 'jsp');
+INSERT INTO tags (id, topic) VALUES (126, 'datetime');
+INSERT INTO tags (id, topic) VALUES (127, 'wcf');
+INSERT INTO tags (id, topic) VALUES (128, 'oop');
+INSERT INTO tags (id, topic) VALUES (129, 'listview');
+INSERT INTO tags (id, topic) VALUES (130, 'c++11');
+INSERT INTO tags (id, topic) VALUES (131, 'security');
+INSERT INTO tags (id, topic) VALUES (132, 'dictionary');
+INSERT INTO tags (id, topic) VALUES (133, 'parsing');
+INSERT INTO tags (id, topic) VALUES (134, 'visual-studio-2010');
+INSERT INTO tags (id, topic) VALUES (135, 'object');
+INSERT INTO tags (id, topic) VALUES (136, 'user-interface');
+INSERT INTO tags (id, topic) VALUES (137, 'ubuntu');
+INSERT INTO tags (id, topic) VALUES (138, 'batch-file');
+INSERT INTO tags (id, topic) VALUES (139, 'for-loop');
+INSERT INTO tags (id, topic) VALUES (140, 'tensorflow');
+INSERT INTO tags (id, topic) VALUES (141, 'delphi');
+INSERT INTO tags (id, topic) VALUES (142, 'unity3d');
+INSERT INTO tags (id, topic) VALUES (143, 'pointers');
+INSERT INTO tags (id, topic) VALUES (144, 'templates');
+INSERT INTO tags (id, topic) VALUES (145, 'google-app-engine');
+INSERT INTO tags (id, topic) VALUES (146, 'ms-access');
+INSERT INTO tags (id, topic) VALUES (147, 'variables');
+INSERT INTO tags (id, topic) VALUES (148, 'if-statement');
+INSERT INTO tags (id, topic) VALUES (149, 'debugging');
+INSERT INTO tags (id, topic) VALUES (150, 'asp.net-mvc-4');
+INSERT INTO tags (id, topic) VALUES (151, 'unix');
+INSERT INTO tags (id, topic) VALUES (152, 'haskell');
+INSERT INTO tags (id, topic) VALUES (153, 'actionscript-3');
+INSERT INTO tags (id, topic) VALUES (154, 'hadoop');
+INSERT INTO tags (id, topic) VALUES (155, 'session');
+INSERT INTO tags (id, topic) VALUES (156, 'authentication');
+INSERT INTO tags (id, topic) VALUES (157, 'matplotlib');
+INSERT INTO tags (id, topic) VALUES (158, 'pdf');
+INSERT INTO tags (id, topic) VALUES (159, 'android-fragments');
+INSERT INTO tags (id, topic) VALUES (160, 'elasticsearch');
+INSERT INTO tags (id, topic) VALUES (161, 'go');
+INSERT INTO tags (id, topic) VALUES (162, 'ssl');
+INSERT INTO tags (id, topic) VALUES (163, 'jpa');
+INSERT INTO tags (id, topic) VALUES (164, 'jquery-ui');
+INSERT INTO tags (id, topic) VALUES (165, 'vue.js');
+INSERT INTO tags (id, topic) VALUES (166, 'asp.net-mvc-3');
+INSERT INTO tags (id, topic) VALUES (167, 'tomcat');
+INSERT INTO tags (id, topic) VALUES (168, 'cocoa');
+INSERT INTO tags (id, topic) VALUES (169, 'generics');
+INSERT INTO tags (id, topic) VALUES (170, 'internet-explorer');
+INSERT INTO tags (id, topic) VALUES (171, 'magento');
+INSERT INTO tags (id, topic) VALUES (172, 'xamarin');
+INSERT INTO tags (id, topic) VALUES (173, 'web');
+INSERT INTO tags (id, topic) VALUES (174, 'nginx');
+INSERT INTO tags (id, topic) VALUES (175, 'asynchronous');
+INSERT INTO tags (id, topic) VALUES (176, 'url');
+INSERT INTO tags (id, topic) VALUES (177, 'animation');
+INSERT INTO tags (id, topic) VALUES (178, 'ruby-on-rails-4');
+INSERT INTO tags (id, topic) VALUES (179, 'jenkins');
+INSERT INTO tags (id, topic) VALUES (180, 'testing');
+INSERT INTO tags (id, topic) VALUES (181, 'curl');
+INSERT INTO tags (id, topic) VALUES (182, 'ionic-framework');
+INSERT INTO tags (id, topic) VALUES (183, 'flash');
+INSERT INTO tags (id, topic) VALUES (184, 'firefox');
+INSERT INTO tags (id, topic) VALUES (185, 'cocoa-touch');
+INSERT INTO tags (id, topic) VALUES (186, 'ipad');
+INSERT INTO tags (id, topic) VALUES (187, 'redirect');
+INSERT INTO tags (id, topic) VALUES (188, 'jsf');
+INSERT INTO tags (id, topic) VALUES (189, 'inheritance');
+INSERT INTO tags (id, topic) VALUES (190, 'winapi');
+INSERT INTO tags (id, topic) VALUES (191, 'selenium-webdriver');
+INSERT INTO tags (id, topic) VALUES (192, 'laravel-5');
+INSERT INTO tags (id, topic) VALUES (193, 'gradle');
+INSERT INTO tags (id, topic) VALUES (194, 'recursion');
+INSERT INTO tags (id, topic) VALUES (195, 'exception');
+INSERT INTO tags (id, topic) VALUES (196, 'post');
+INSERT INTO tags (id, topic) VALUES (197, 'd3.js');
+INSERT INTO tags (id, topic) VALUES (198, 'github');
+INSERT INTO tags (id, topic) VALUES (199, 'facebook-graph-api');
+INSERT INTO tags (id, topic) VALUES (200, 'asp.net-core');
+INSERT INTO tags (id, topic) VALUES (201, 'math');
+INSERT INTO tags (id, topic) VALUES (202, 'join');
+INSERT INTO tags (id, topic) VALUES (203, 'dom');
+INSERT INTO tags (id, topic) VALUES (204, 'xslt');
+INSERT INTO tags (id, topic) VALUES (205, 'opengl');
+INSERT INTO tags (id, topic) VALUES (206, 'events');
+INSERT INTO tags (id, topic) VALUES (207, 'select');
+INSERT INTO tags (id, topic) VALUES (208, 'svg');
+INSERT INTO tags (id, topic) VALUES (209, 'caching');
+INSERT INTO tags (id, topic) VALUES (210, 'iis');
+INSERT INTO tags (id, topic) VALUES (211, 'button');
+INSERT INTO tags (id, topic) VALUES (212, 'machine-learning');
+INSERT INTO tags (id, topic) VALUES (213, 'gcc');
+INSERT INTO tags (id, topic) VALUES (214, 'image-processing');
+INSERT INTO tags (id, topic) VALUES (215, 'asp.net-web-api');
+INSERT INTO tags (id, topic) VALUES (216, 'heroku');
+INSERT INTO tags (id, topic) VALUES (217, 'servlets');
+INSERT INTO tags (id, topic) VALUES (218, 'assembly');
+INSERT INTO tags (id, topic) VALUES (219, 'search');
+INSERT INTO tags (id, topic) VALUES (220, 'logging');
+INSERT INTO tags (id, topic) VALUES (221, 'matrix');
+INSERT INTO tags (id, topic) VALUES (222, 'intellij-idea');
+INSERT INTO tags (id, topic) VALUES (223, 'stored-procedures');
+INSERT INTO tags (id, topic) VALUES (224, 'javafx');
+INSERT INTO tags (id, topic) VALUES (225, 'mod-rewrite');
+INSERT INTO tags (id, topic) VALUES (226, 'cakephp');
+INSERT INTO tags (id, topic) VALUES (227, 'networking');
+INSERT INTO tags (id, topic) VALUES (228, 'xpath');
+INSERT INTO tags (id, topic) VALUES (229, 'canvas');
+INSERT INTO tags (id, topic) VALUES (230, 'amazon-s3');
+INSERT INTO tags (id, topic) VALUES (231, 'audio');
+INSERT INTO tags (id, topic) VALUES (232, 'encryption');
+INSERT INTO tags (id, topic) VALUES (233, 'flask');
+INSERT INTO tags (id, topic) VALUES (234, 'java-ee');
+INSERT INTO tags (id, topic) VALUES (235, 'optimization');
+INSERT INTO tags (id, topic) VALUES (236, 'memory');
+INSERT INTO tags (id, topic) VALUES (237, 'ggplot2');
+INSERT INTO tags (id, topic) VALUES (238, 'video');
+INSERT INTO tags (id, topic) VALUES (239, 'grails');
+INSERT INTO tags (id, topic) VALUES (240, 'razor');
+INSERT INTO tags (id, topic) VALUES (241, 'model-view-controller');
+INSERT INTO tags (id, topic) VALUES (242, 'cookies');
+INSERT INTO tags (id, topic) VALUES (243, 'android-intent');
+INSERT INTO tags (id, topic) VALUES (244, 'meteor');
+INSERT INTO tags (id, topic) VALUES (245, 'iframe');
+INSERT INTO tags (id, topic) VALUES (246, 'arraylist');
+ALTER SEQUENCE scores_id_seq RESTART WITH 247 INCREMENT BY 1;
 
 INSERT INTO objective_tags
   (id, objective_id, tag_id)
