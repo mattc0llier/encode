@@ -90,7 +90,7 @@ class NewUser extends React.Component {
 
   render(){
 
-      if (this.state.redirect) return(<Redirect to='/start' />)
+      if (this.state.redirect) return(<Redirect to='/onboarding' />)
        else return(
          <div className="form-center" >
           <div className="newUser">

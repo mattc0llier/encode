@@ -1,5 +1,5 @@
 import React from 'react';
-import Courses from './Courses';
+import Organizations from './Organizations';
 import '../../styles/components/Info.scss';
 
 
@@ -14,7 +14,8 @@ const Info = ({ userProfileObject, userProfileCourses }) => {
         </div>
         <p>{userProfileObject.bio}</p>
         <p>{userProfileObject.location}</p>
-        <Courses userProfileCourses={userProfileCourses}/>
+        <a href="#"><p>Build your public profile (coming soon)</p></a>
+        <Organizations userProfileCourses={userProfileCourses}/>
       </div>
     )
   }

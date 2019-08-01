@@ -1,17 +1,17 @@
 @import '../base.scss';
 
-.courses {
+.organizations {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-.course-list{
+.organization-list{
   display: flex;
   flex-direction: row;
 }
 
-.course-title {
+.organization-title {
   margin-left: 1rem;
   padding: 0.2rem;
 }

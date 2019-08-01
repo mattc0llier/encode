@@ -12,6 +12,7 @@ import Start from './Start';
 import Settings from './Settings';
 import PrivateRoute from './PrivateRoute';
 import CelebrationAnimation from './CelebrationAnimation';
+import Onboarding from './Onboarding'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import '../../styles/components/App.scss';
@@ -188,6 +189,9 @@ class App extends React.Component {
                   currentUser={this.state.currentUser}
                   receiveLoggedOutUser={this.receiveLoggedOutUser}
                   />)}
+                />
+                <Route path="/onboarding"
+                  render={(props) => (<Onboarding {...props} currentUser={this.state.currentUser} />)}
                 />
               </Switch>
             </main>

@@ -6,7 +6,7 @@ import '../../styles/components/Leaderboard.scss';
 class Leaderboard extends React.Component {
   constructor(){
     super();
-    this.state = { allUsers: [], timeRange: 'day', timeRangeCompletedObjectives: [] }
+    this.state = { allUsers: [], timeRange: 'week', timeRangeCompletedObjectives: [] }
 
     this.timeCalculator = this.timeCalculator.bind(this)
     this.sortByUser = this.sortByUser.bind(this)

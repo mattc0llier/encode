@@ -23,7 +23,7 @@ class Nav extends React.Component {
             <Link to='/'><h1>encode</h1></Link>
           )}
           <ul className="right-nav">
-            <Link to='/leaderboard'><li>leaderboard</li></Link>
+            <Link to='/leaderboard'><li>Leaderboard</li></Link>
             { this.props.isLoggedIn ? (
               <React.Fragment>
                 <Link to={`/users/${this.props.currentUser.username}`}><li>{this.props.currentUser.username}'s profile</li></Link>
