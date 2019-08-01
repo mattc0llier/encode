@@ -139,13 +139,13 @@ app.post('/api/login', passport.authenticate('local', { failureRedirect: '/login
 // changing state even when not successful - need to add a catch
 // create new users
 app.post('/api/users/create', function(req, res){
-  const {first_name, last_name, username, email, password} = req.body
+  const {first_name, last_name, username, email, password, type} = req.body
   bcrypt.genSalt(SALT_ROUNDS)
   .then( salt => {
     return bcrypt.hash(password, salt);
   })
   .then( hashedPassword => {
-    db.one("INSERT INTO users (first_name, last_name, username, email, password, creation_date) VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP) RETURNING id, first_name, last_name, username, email, password", [first_name, last_name, username, email, hashedPassword])
+    db.one("INSERT INTO users (first_name, last_name, username, email, password, type, creation_date) VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP) RETURNING id, first_name, last_name, username, email, password, type", [first_name, last_name, username, email, hashedPassword, type])
     .then((data) => {
       res.json(data)
       res.status(200).send({update: "success"});

@@ -99,7 +99,7 @@ class App extends React.Component {
         username: user.username,
         email: user.email,
         password: user.password,
-        type: 'waitlist' 
+        type: 'waitlist'
       }),
       headers: {
         'Content-Type': 'application/json'
