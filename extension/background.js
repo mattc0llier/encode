@@ -4,38 +4,12 @@
 //   {'url': 'https://localhost:9090/login', 'interactive': true},
 //   function(redirect_url) { /* Extract token from redirect_url */ });
 
-
-
-
-
 console.log('background file exists');
-let currentActivity = []
-
-chrome.browserAction.onClicked.addListener(function(tab) {
-  chrome.tabs.executeScript({
-    file: "./celebrationAnimation2.js"
-  });
-   return fetch(`http://localhost:9090/api/activities/470`, {
-    method: 'PATCH',
-    body: JSON.stringify({ complete: true }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(function(response) {
-    return response.json();
-  })
-  .then(body => {
-    console.log('body', body);
-  })
-  .catch(error => console.log(error.message));
-});
-
 
 // update context on loading in a new page and send through response objective to content.js
  chrome.tabs.onUpdated.addListener( function(tabId, changeInfo, tab) {
-   console.log('tab.url', tab.url);
-  if(changeInfo.status == "loading"){
+  if(changeInfo.status == "loading" && tab.url.includes("lambdaschool.com")){
+    console.log('tab.url', tab.url);
 
      fetch(`http://localhost:9090/api/tabContext?url=${tab.url}`, {
         mode: "cors"
@@ -46,13 +20,31 @@ chrome.browserAction.onClicked.addListener(function(tab) {
       .then(body => {
         console.log('body', body);
         console.log('tab.id', tab.id);
-        let currentActivity = body
 
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-          console.log('tabs[0].id', tabs[0].id);
-          chrome.tabs.sendMessage(tabs[0].id, currentActivity)
-        });
+        // send activity info to content.js.
+        
 
+        //recieves message when item is marked complete
+        chrome.runtime.onMessage.addListener(
+          function(request, sender, sendResponse) {
+              console.log('activity_complete');
+
+            // to be triggered when completed objective click from content script
+               return fetch(`http://localhost:9090/api/activities/${body[0].activity_id}`, {
+                method: 'PATCH',
+                body: JSON.stringify({ complete: true }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+              .then(function(response) {
+                return response.json();
+              })
+              .then(body => {
+                console.log('body', body);
+              })
+              .catch(error => console.log(error.message));
+          });
 
       })
       .catch(error => console.log(error.message));

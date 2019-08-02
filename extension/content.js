@@ -1,14 +1,14 @@
 console.log("content script is running");
 
-// why does this not listen to the event being sent from background?
+//recieve objective activity details
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
-    return console.log(request.body);
-  }
-)
+    if (request.greeting == "hello")
+      sendResponse({farewell: "goodbye"});
+  });
 
 document.body.addEventListener('submit', event => {
   if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
@@ -206,5 +206,13 @@ document.body.addEventListener('mouseout', event => {
 
     const removeAnimation = document.getElementsByClassName("overlay-427542754")[0];
     document.body.removeChild(removeAnimation);
+  }
+});
+document.body.addEventListener('click', event => {
+  if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
+
+    chrome.runtime.sendMessage({activity_complete: true}, function(response) {
+      console.log(response);
+    });
   }
 });
