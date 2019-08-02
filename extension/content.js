@@ -1,19 +1,23 @@
 console.log("content script is running");
 
 //recieve objective activity details
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-    if (request.greeting == "hello")
-      sendResponse({farewell: "goodbye"});
-  });
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//
+//     console.log('request.activity', request.activity);
+//     sendResponse({activity: "received"});
+//   });
 
 document.body.addEventListener('submit', event => {
   if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
     alert(event.target.className)
   }
+});
+
+var port = chrome.runtime.connect({name: "url_activities"});
+port.postMessage({content_loaded: true});
+port.onMessage.addListener(function(response) {
+  console.log(response);
 });
 
 var COLORS = [

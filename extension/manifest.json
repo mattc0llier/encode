@@ -47,5 +47,8 @@
       },
       "description": "Send a 'context' event to the extension"
     }
+  },
+  "externally_connectable": {
+    "matches": ["*://*.lambdaschool.com/*"]
   }
 }
