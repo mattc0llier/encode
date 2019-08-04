@@ -20,6 +20,8 @@ port.onMessage.addListener(function(response) {
   console.log(response);
   console.log(response.activity[0]);
   const activity = response.activity[0]
+  if(activity.complete == false) {
+
   var COLORS = [
     "https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
     "https://media2.giphy.com/media/slOhiKAVFgwr6/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
@@ -204,7 +206,6 @@ port.onMessage.addListener(function(response) {
       document.body.removeChild(removeAnimation);
     }
   });
-  if(activity.complete == false) {
     document.body.addEventListener('click', event => {
       if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
 

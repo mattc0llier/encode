@@ -24,7 +24,7 @@ class Homepage extends React.Component {
                   <div className="numberCircle">1</div>
                 </div>
                 <div className="text">
-                  <h2>Log your educational progress all in one place</h2>
+                  <h2>Log your educational progress</h2>
                   <p>Boost your Mastery Score™ by working through the course objectives and automatically logging the learning resources you find along the way</p>
                 </div>
               </div>
@@ -34,7 +34,7 @@ class Homepage extends React.Component {
                 </div>
                 <div className="text">
                   <h2>Get instant feedback on your learning</h2>
-                  <p>encode analyses your logged activities and gives you instant feedback on your progress and graphs your efforts</p>
+                  <p>encode analyses your activity to give you feedback on your progress and graphs your efforts</p>
                 </div>
               </div>
               <div className="value-prop">
