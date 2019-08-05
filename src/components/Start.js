@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import '../../styles/components/Start.scss';
+
 
 class Start extends React.Component {
   constructor(){
@@ -8,7 +10,7 @@ class Start extends React.Component {
     this.state = { courses: [], objectives: [], selectedCourseId: 0, selectedObjectiveNumber: 0, redirect: false }
 
     this.fetchCourses = this.fetchCourses.bind(this);
-    this.handleCourseChange = this.handleCourseChange.bind(this);
+    this.handleCourseClick = this.handleCourseClick.bind(this);
     this.fetchObjectives = this.fetchObjectives.bind(this);
     this.handleObjectiveChange = this.handleObjectiveChange.bind(this);
     this.handleUserStartPointSubmit = this.handleUserStartPointSubmit.bind(this);
@@ -71,8 +73,12 @@ class Start extends React.Component {
     .catch(error => console.log(error.message));
   }
 
-  handleCourseChange(event){
-    console.log(event.target.value);
+  handleCourseClick(event){
+    console.log('event', event);
+    console.log('event.target', event.target);
+    console.log('event.currentTarget', event.currentTarget);
+    console.log('event.target.innerHTML', event.target.innerHTML);
+    console.log('event.target.value', event.target.value);
     this.setState({
       selectedCourseId: event.target.value,
       selectedObjectiveNumber: 0
@@ -107,14 +113,14 @@ class Start extends React.Component {
         <h2>Select your course</h2>
 
           <form onSubmit={this.handleUserStartPointSubmit}>
-            <select id="course-select" onChange={this.handleCourseChange}>
-              <option value="">--Please choose an option--</option>
+            <div id="course-select" >
               {this.state.courses.map(course => (
-                <React.Fragment key={course.id} >
-                  <option value={course.id} >{course.name}</option>
-                </React.Fragment>
+                <div key={course.id} className="course-summary">
+                  <img src={course.badge} onClick={this.handleCourseClick} value={course.id} className="course-badge"/>
+                  <div onClick={this.handleCourseClick} value={course.id} >{course.name}</div>
+                </div>
               ))}
-            </select>
+            </div>
             <select id="objective-select" onChange={this.handleObjectiveChange}>
               <option value="">--Please choose an option--</option>
               {this.state.objectives.map(objective => (

@@ -829,4 +829,28 @@ INSERT INTO objective_tags
   (id, objective_id, tag_id)
   VALUES
   (3, 1, 3);
-ALTER SEQUENCE scores_id_seq RESTART WITH 4 INCREMENT BY 1;
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (4, 2, 1);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (5, 2, 4);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (6, 2, 6);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (7, 25, 1);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (8, 25, 2);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (9, 25, 3);
+ALTER SEQUENCE objective_tags_id_seq RESTART WITH 10 INCREMENT BY 1;

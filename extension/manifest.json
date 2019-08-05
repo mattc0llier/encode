@@ -8,7 +8,9 @@
     "activeTab",
     "webRequest",
     "storage",
-    "http://localhost:9090/"
+    "http://localhost:9090/",
+    "http://*.lambdaschool.com/*",
+    "http://*.encode.app/*"
   ],
   "background": {
     "matches": [

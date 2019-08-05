@@ -1,9 +1,11 @@
-// auth the user for chrome extension
-
-// chrome.identity.launchWebAuthFlow(
-//   {'url': 'https://localhost:9090/login', 'interactive': true},
-//   function(redirect_url) { /* Extract token from redirect_url */ });
-
+//
+// var client_id = '<CLIENT_ID>';
+// var redirectUri = chrome.identity.getRedirectURL("oauth2");
+// var auth_url = "https://www.pushbullet.com/authorize?client_id=" + client_id + "&redirect_uri=" + redirectUri + "&response_type=token";
+//
+//     chrome.identity.launchWebAuthFlow({'url':auth_url,'interactive':true}, function(redirect_url){
+//         console.log(redirect_url)
+//     });
 
 
 

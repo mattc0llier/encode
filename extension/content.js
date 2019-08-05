@@ -1,13 +1,5 @@
 console.log("content script is running");
 
-//recieve objective activity details
-// chrome.runtime.onMessage.addListener(
-//   function(request, sender, sendResponse) {
-//
-//     console.log('request.activity', request.activity);
-//     sendResponse({activity: "received"});
-//   });
-
 document.body.addEventListener('submit', event => {
   if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
     alert(event.target.className)
@@ -17,28 +9,67 @@ document.body.addEventListener('submit', event => {
 var port = chrome.runtime.connect({name: "url_activities"});
 port.postMessage({content_loaded: true});
 port.onMessage.addListener(function(response) {
-  console.log(response);
-  console.log(response.activity[0]);
-  const activity = response.activity[0]
+  console.log('response', response);
+  console.log('activities', response.activity[0]);
+  console.log('activity', response.activity[0][0]);
+  console.log('topics', response.activity[1]);
+  const activity = response.activity[0][0]
+  const topics = response.activity[1]
   if(activity.complete == false) {
 
-  var COLORS = [
-    "https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-    "https://media2.giphy.com/media/slOhiKAVFgwr6/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-    "https://media0.giphy.com/media/fdyZ3qI0GVZC0/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-    "https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-    "https://media2.giphy.com/media/slOhiKAVFgwr6/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-    "https://media0.giphy.com/media/fdyZ3qI0GVZC0/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
-  ];
+    //Verbs needed for blooms taxonomy
+    //should be random array with one primary verb.
 
-  function getGif() {
-    var index = Math.floor(Math.random() * 6);
+    const remember = ["remember", "define", "duplicate", "list", "memorize", "repeat", "state",]
+    const understand = ["understand", "classify", "describe", "discuss", "explain", "identify", "locate", "recognize", "report", "select", "translate"]
+    const apply = ["apply", "execute", "implement", "solve", "use", "demonstrate", "interpret", "operate", "schedule", "sketch"]
+    const analyze = ["analyze", "differentiate", "organize", "relate", "compare", "contrast", "distinguish", "examine", "experiment", "question", "test"]
+    const evaluate = ["evaluate", "appraise", "argue", "judge", "defend", "select", "support", "value", "critique", "weigh"]
+    const create = ["create", "design", "assemble", "construct", "conjecture", "develop", "formulate", "author", "investigate"]
 
-    return COLORS[index];
-  }
 
-  const randomGif = getGif();
-  console.log('randomGif', randomGif);
+    const bloomsMethods = {
+      1: remember,
+      2: understand,
+      3: apply,
+      4: analyze,
+      5: evaluate,
+      6: create
+    }
+    function getBlooms(mastery_score){
+      console.log(mastery_score);
+      const primaryVerb = bloomsMethods[mastery_score][0]
+      console.log('primaryVerb', primaryVerb);
+      const index1 = Math.floor(Math.random() * 6);
+      const index2 = Math.floor(Math.random() * 6);
+      const secondaryVerb = bloomsMethods[mastery_score][index1]
+      console.log('secondaryVerb', secondaryVerb);
+      const thirdVerb = bloomsMethods[mastery_score][index2]
+      console.log('thirdVerb', thirdVerb);
+
+      return [primaryVerb, secondaryVerb, thirdVerb]
+    }
+
+    const bloomsCategories = getBlooms(activity.mastery_score)
+
+    console.log('bloomsCategories', bloomsCategories);
+
+  // const COLORS = [
+  //   "https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
+  //   "https://media2.giphy.com/media/slOhiKAVFgwr6/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
+  //   "https://media0.giphy.com/media/fdyZ3qI0GVZC0/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif"
+  // ];
+  //
+  // function getGif() {
+  //   const index = Math.floor(Math.random() * 6);
+  //
+  //   return COLORS[index];
+  // }
+  //
+  // const randomGif = getGif();
+
+
+  // adding document event listeners
 
   document.body.addEventListener('mouseover', event => {
     if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
@@ -61,7 +92,6 @@ port.onMessage.addListener(function(response) {
             box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
             border-radius: 10px;
             width: 30rem;
-            height: 7rem;
             background-color: #5214FF;
             color: #ffffff;
           }
@@ -144,6 +174,7 @@ port.onMessage.addListener(function(response) {
       `;
       document.head.appendChild(styleEl);
 
+      //should be mapping over the topics depending how many there are
       const animation = document.createElement("div");
       animation.setAttribute('class', 'overlay-427542754');
       animation.innerHTML = `
@@ -158,20 +189,16 @@ port.onMessage.addListener(function(response) {
                     ${activity.objective}
                   </p>
                 </div>
-                <div class="blooms-categories-wut">
-                  <p>
-                    apply - implement - test
-                  </p>
-                </div>
+                
               </div>
               <div class="progress-iewfni">
                 <span>${activity.number}/44</span>
               </div>
             </div>
             <div class="topic-notifications">
-              <p class="topic-notfication" >Software engineering</p>
-              <p class="topic-notfication" >Job roles</p>
-              <p class="topic-notfication" >Javascript</p>
+              <p class="topic-notfication" >${topics[0].topic}</p>
+              <p class="topic-notfication" >${topics[1].topic}</p>
+              <p class="topic-notfication" >${topics[2].topic}</p>
             </div>
 
           </div>

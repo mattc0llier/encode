@@ -416,14 +416,31 @@ app.get('/api/users/:id/settings', (req, res) => {
 
 //get all activity data from browser url
 function getActivitiesByUrlAndUserId(tabUrl) {
-  console.log('getActivitiesByUrlAndUserId tabUrl', tabUrl);
   return db.one('SELECT * FROM objectives WHERE url=$1', [tabUrl])
   .catch((error) => {
     console.log('failed to get user', error);
   });
 }
 
-//receive current context tab activities
+// get all tags for given objective
+function getTagsByObjectiveId(id) {
+  return db.any('SELECT tags.topic, tags.id AS tag_id from tags, objective_tags WHERE tags.id = objective_tags.tag_id AND objective_tags.objective_id=$1', [id])
+  .catch((error) => {
+    console.log('failed to get tags', error);
+  });
+}
+
+//get tags for a given objectives
+app.get('/api/objective/:id/tags', (req, res) => {
+  const { id } = req.params;
+  db.any('SELECT tags.topic, tags.id AS tag_id from tags, objective_tags WHERE tags.id = objective_tags.tag_id AND objective_tags.objective_id=$1', [id])
+  .then(data => {
+    res.json(data)
+  })
+  .catch(error => res.json({ error: error.message }));
+})
+
+//receive current context tab activities and topics
 app.get('/api/tabContext', async (req, res)  => {
 
   console.log('ext receive', req.params);
@@ -435,9 +452,15 @@ app.get('/api/tabContext', async (req, res)  => {
   console.log('confirmedObjective tabObjective', tabObjective);
 
   db.any('SELECT activities.id AS activity_id, activities.objective_id, objectives.number, objectives.objective, objectives.url, objectives.mastery_score, objectives.lesson_id, activities.complete, activities.completion_time, activities.user_id FROM activities, objectives  WHERE objectives.url=$1 AND activities.user_id=$2 AND activities.objective_id=$3', [tabUrl, user_id, tabObjective.id])
-  .then(data => {
-    console.log('data', data);
-    res.json(data)
+  .then(async activityData =>  {
+    console.log('activityData 1', activityData);
+    const objective_id  = activityData[0].objective_id
+    const objectiveTags = await getTagsByObjectiveId(objective_id)
+    console.log('activityData 2', activityData);
+    console.log('objectiveTags', objectiveTags);
+    const extData = [activityData, objectiveTags]
+    console.log('extData', extData);
+    return res.json(extData)
   })
   .catch(error => res.json({ error: error.message }));
 })

@@ -59,27 +59,39 @@ class Profile extends React.Component {
   }
 
 //take db complete response and update userProfileObjectives state
+// var add = async function(x) { // async function expression assigned to a variable
+//   var a = await removeComplete();
+//   var b = await updatedUserProfileObjectives();
+//   return setState;
+// };
   updateuserProfileObjectives(activitiesResponse, completedObjective){
     function removeComplete(userObjective) {
       return userObjective.activity_id !== activitiesResponse.activity_id
     }
 
     const updatedUserObjectives = this.state.userProfileObjectives.filter(removeComplete)
+    console.log('updatedUserObjectives 1', updatedUserObjectives);
+    console.log('this.state.userProfileObjectives 2', this.state.userProfileObjectives);
 
+    const updatedUserProfileObjectives = updatedUserObjectives.concat({
+      objective_id: completedObjective.objective_id,
+      lesson_id: completedObjective.lesson_id,
+      number: completedObjective.number,
+      objective: completedObjective.objective,
+      url: completedObjective.url,
+      activity_id: completedObjective.activity_id,
+      complete: activitiesResponse.complete,
+      completion_time: activitiesResponse.completion_time
+    })
+    console.log('updatedUserObjectives 1', updatedUserObjectives);
 
     // // add the updated completed objective into the user objective state
-    this.setState({
-      userProfileObjectives: updatedUserObjectives.concat({
-        objective_id: completedObjective.objective_id,
-        lesson_id: completedObjective.lesson_id,
-        number: completedObjective.number,
-        objective: completedObjective.objective,
-        url: completedObjective.url,
-        activity_id: completedObjective.activity_id,
-        complete: activitiesResponse.complete,
-        completion_time: activitiesResponse.completion_time
-      })
-    }, () => this.calculateUserScores());
+    return this.setState({
+      userProfileObjectives: updatedUserProfileObjectives
+    }, () => {
+          console.log('this.state.userProfileObjectives 3', this.state.userProfileObjectives);
+          this.calculateUserScores()
+    });
   }
 
 // post objective complete to the database
@@ -189,6 +201,7 @@ class Profile extends React.Component {
           <History
             userProfileObjectivesObject={this.state.userProfileObjectives}
             receiveObjectiveStatus={this.receiveObjectiveStatus}
+            currentUserProfile={this.state.currentUserProfile}
           />
         </div>
       </div>

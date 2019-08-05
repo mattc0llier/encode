@@ -7,7 +7,7 @@ import '../../styles/components/History.scss';
 
 
 const History = ({ userProfileObjectivesObject, receiveObjectiveStatus }) => {
-
+console.log('userProfileObjectivesObject 4', userProfileObjectivesObject);
 
   if (!userProfileObjectivesObject.length) {
     return <p>no activity</p>
