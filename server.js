@@ -324,7 +324,7 @@ app.get('/api/users/:id/scores', (req, res) => {
 
 // if change to desc then need to update status lastest objective completion_time
 app.get('/api/activities/objectives/complete', (req, res) => {
-  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo, users.username FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.complete = true ORDER BY activities.completion_time ASC')
+  db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo, users.username FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.complete = true ORDER BY activities.completion_time DESC')
   .then(data => {
     res.json(data)
   })

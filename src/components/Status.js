@@ -41,9 +41,19 @@ class Status extends React.Component {
 
     this.fetchObjectivesScores(latestObjectives)
 
+    const firstObjective = this.props.statusArray.find(function(element) {
+      return element.number == 1;
+    });
+    const lastObjective = this.props.statusArray.find(function(element) {
+      return element.number == 44;
+    });
+
     return(
       <div className="status">
         <ul>
+          { !!lastObjective ? (
+            <img id="enrolled" src="../../static/assets/images/lambda-web-journey-start.jpg" alt="your journey starts here" />
+          ) : null}
           <div className="status-content">
           <Link to={`/users/${this.props.statusArray[0].username}`}>
             <div className="status-header">
@@ -68,7 +78,9 @@ class Status extends React.Component {
               </div>
             </div>
           </div>
-
+          { !!firstObjective ? (
+            <img id="enrolled" src="../../static/assets/images/lambda-web-journey-start.jpg" alt="your journey starts here" />
+          ) : null}
         </ul>
       </div>
     )

@@ -73,17 +73,13 @@ class Start extends React.Component {
     .catch(error => console.log(error.message));
   }
 
-  handleCourseClick(event){
-    console.log('event', event);
-    console.log('event.target', event.target);
-    console.log('event.currentTarget', event.currentTarget);
-    console.log('event.target.innerHTML', event.target.innerHTML);
-    console.log('event.target.value', event.target.value);
+  handleCourseClick(id){
+    console.log('id', typeof id);
     this.setState({
-      selectedCourseId: event.target.value,
+      selectedCourseId: id,
       selectedObjectiveNumber: 0
     })
-    this.fetchObjectives(event.target.value)
+    this.fetchObjectives(id)
   }
 
   fetchCourses(){
@@ -115,9 +111,9 @@ class Start extends React.Component {
           <form onSubmit={this.handleUserStartPointSubmit}>
             <div id="course-select" >
               {this.state.courses.map(course => (
-                <div key={course.id} className="course-summary">
-                  <img src={course.badge} onClick={this.handleCourseClick} value={course.id} className="course-badge"/>
-                  <div onClick={this.handleCourseClick} value={course.id} >{course.name}</div>
+                <div key={course.id} className="course-summary" onClick={() => this.handleCourseClick(course.id)}>
+                  <img src={course.badge}  className="course-badge"/>
+                  <div>{course.name}</div>
                 </div>
               ))}
             </div>
