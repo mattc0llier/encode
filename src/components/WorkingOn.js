@@ -5,11 +5,17 @@ import '../../styles/components/WorkingOn.scss';
 
 const WorkingOn = ({ userProfileObjectivesObject, receiveNextUserObjective, receiveObjectiveStatus, currentUserProfile }) => {
 
-  if (!userProfileObjectivesObject.length) {
+  const allActivitiesComplete = userProfileObjectivesObject.find(function(element) {
+    return element.complete !== true;
+  });
+  console.log('allActivitiesComplete', allActivitiesComplete);
+
+  if (!userProfileObjectivesObject.length || !allActivitiesComplete) {
     return (
       <div className="workingOn">
         <h3>Working On</h3>
-        <div className="next-objective">
+        <div className="next-course">
+          <p id="what-to-learn" >What would you like to learn?</p>
           <div className="button-cta">
             <Link to='/start'>
               <button type="button" name="button">Start a new course</button>

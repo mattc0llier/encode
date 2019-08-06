@@ -19,6 +19,12 @@
   margin-bottom: 1rem;
   margin-top: 2rem;
 }
+.status #complete {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
 
 .status-content {
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
@@ -69,4 +75,25 @@
   font-size: 1rem;
   font-weight: 400;
   color: $primary-blue;
+}
+
+.topic-notifications {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding-right: 1rem;
+}
+.topic-notfication {
+  display: flex;
+  border-radius: 10px;
+  background-color: #FF6363;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  padding: 0.8rem;
+  margin: 0.7rem 0 0 0.7rem;
 }

@@ -52,7 +52,7 @@ class Status extends React.Component {
       <div className="status">
         <ul>
           { !!lastObjective ? (
-            <img id="enrolled" src="../../static/assets/images/lambda-web-journey-start.jpg" alt="your journey starts here" />
+            <img id="complete" src="../../static/assets/images/lamda-web-precourse-complete.jpg" alt="your journey starts here" />
           ) : null}
           <div className="status-content">
           <Link to={`/users/${this.props.statusArray[0].username}`}>
@@ -67,11 +67,26 @@ class Status extends React.Component {
             <div className="status-completed">
               <div className="status-objectives">
                 {latestObjectives.map(objective => (
-                  <React.Fragment key={objective.objective_id}>
+                  <div key={objective.objective_id} className="status-objective">
                     <Objective objectiveObject={objective}/>
-                  </React.Fragment>
+                  </div>
                 ))}
+                <div class="topic-notifications">
+                  <p class="topic-notfication" >Javascript</p>
+                  <p class="topic-notfication" >Software Engineering</p>
+                  <p class="topic-notfication" >Job roles</p>
+                  <p class="topic-notfication" >Javascript</p>
+                  <p class="topic-notfication" >Software Engineering</p>
+                  <p class="topic-notfication" >Job roles</p>
+                  <p class="topic-notfication" >Javascript</p>
+                  <p class="topic-notfication" >Software Engineering</p>
+                  <p class="topic-notfication" >Job roles</p>
+                  <p class="topic-notfication" >Javascript</p>
+                  <p class="topic-notfication" >Software Engineering</p>
+                  <p class="topic-notfication" >Job roles</p>
+                </div>
               </div>
+
               <div className="score-increase">
                 <p>+{statusMasteryIncrease}</p>
                 <h4>Mastery Score</h4>
@@ -79,7 +94,7 @@ class Status extends React.Component {
             </div>
           </div>
           { !!firstObjective ? (
-            <img id="enrolled" src="../../static/assets/images/lambda-web-journey-start.jpg" alt="your journey starts here" />
+            <img id="enrolled" src="../../static/assets/images/lambda-web-development-precourse-started.jpg" alt="your journey starts here" />
           ) : null}
         </ul>
       </div>

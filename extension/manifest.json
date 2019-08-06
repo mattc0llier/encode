@@ -37,7 +37,8 @@
     "128": "./assets/images/encode-ext-icon128.png"
   },
   "browser_action": {
-     "default_title": "encode"
+     "default_title": "encode",
+     "default_popup": "popup.html"
   },
   "web_accessible_resources": [
     "animation.scss"
