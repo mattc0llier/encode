@@ -20,15 +20,15 @@ port.onMessage.addListener(function(response) {
     // const createTitle = function(title, url) {
     //   return `<a href="${url}"><h2>${title}</h2></a>`;
     // };
-    const createTopics = function(topics) {
-      return topics.map(topic => (
-        `<p class="topic-notfication" >${topic.topic}</p>`
-      ))
-    }
-
-    createTopics()
-
-    console.log('createTopics', createTopics);
+    // const createTopics = function(topics) {
+    //   return topics.map(topic => (
+    //     `<p class="topic-notfication" >${topic.topic}</p>`
+    //   ))
+    // }
+    //
+    // createTopics()
+    //
+    // console.log('createTopics', createTopics);
 
     //Verbs needed for blooms taxonomy
     //should be random array with one primary verb.
@@ -85,7 +85,7 @@ port.onMessage.addListener(function(response) {
   // adding document event listeners
 
   document.body.addEventListener('mouseover', event => {
-    if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
+    if(event.target.matches('.prev-link, .next-link, .learndash_mark_complete_button, .gform_button button')){
       console.log(event.target.className)
       console.log('run animation');
 
@@ -208,16 +208,6 @@ port.onMessage.addListener(function(response) {
                 <span>${activity.number}/44</span>
               </div>
             </div>
-
-            <div class="topic-notifications">
-              
-            </div>
-            <div class="topic-notifications">
-              <p class="topic-notfication" >${topics[0].topic}</p>
-              <p class="topic-notfication" >${topics[1].topic}</p>
-              <p class="topic-notfication" >${topics[2].topic}</p>
-            </div>
-
           </div>
       `
 

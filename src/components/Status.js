@@ -77,6 +77,12 @@ class Status extends React.Component {
                   <p class="topic-notfication" >Javascript</p>
                   <p class="topic-notfication" >Software Engineering</p>
                   <p class="topic-notfication" >Job roles</p>
+                  <p class="topic-notfication" >Javascript</p>
+                  <p class="topic-notfication" >Software Engineering</p>
+                  <p class="topic-notfication" >Job roles</p>
+                  <p class="topic-notfication" >Javascript</p>
+                  <p class="topic-notfication" >Software Engineering</p>
+                  <p class="topic-notfication" >Job roles</p>
                 </div>
               </div>
 
