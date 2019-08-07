@@ -853,4 +853,52 @@ INSERT INTO objective_tags
   (id, objective_id, tag_id)
   VALUES
   (9, 25, 3);
-ALTER SEQUENCE objective_tags_id_seq RESTART WITH 10 INCREMENT BY 1;
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (10, 3, 6);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (11, 4, 1);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (12, 5, 2);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (13, 6, 3);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (14, 7, 6);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (15, 8, 1);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (16, 9, 2);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (17, 10, 3);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (18, 11, 6);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (19, 12, 1);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (20, 13, 2);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (21, 14, 3);
+ALTER SEQUENCE objective_tags_id_seq RESTART WITH 22 INCREMENT BY 1;

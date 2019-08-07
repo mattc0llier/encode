@@ -36,17 +36,19 @@ class Status extends React.Component {
     }, 0);
 
     const latestObjectives = this.props.statusArray.sort(function(a, b) {
-      return a.completion_time - b.completion_time;
+      return b.completion_time - a.completion_time;
     });
 
-    this.fetchObjectivesScores(latestObjectives)
 
+    //manual settings for when images should show
     const firstObjective = this.props.statusArray.find(function(element) {
       return element.number == 1;
     });
     const lastObjective = this.props.statusArray.find(function(element) {
       return element.number == 44;
     });
+
+    this.fetchObjectivesScores(latestObjectives)
 
     return(
       <div className="status">
@@ -72,15 +74,6 @@ class Status extends React.Component {
                   </div>
                 ))}
                 <div class="topic-notifications">
-                  <p class="topic-notfication" >Javascript</p>
-                  <p class="topic-notfication" >Software Engineering</p>
-                  <p class="topic-notfication" >Job roles</p>
-                  <p class="topic-notfication" >Javascript</p>
-                  <p class="topic-notfication" >Software Engineering</p>
-                  <p class="topic-notfication" >Job roles</p>
-                  <p class="topic-notfication" >Javascript</p>
-                  <p class="topic-notfication" >Software Engineering</p>
-                  <p class="topic-notfication" >Job roles</p>
                   <p class="topic-notfication" >Javascript</p>
                   <p class="topic-notfication" >Software Engineering</p>
                   <p class="topic-notfication" >Job roles</p>

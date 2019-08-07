@@ -17,6 +17,19 @@ port.onMessage.addListener(function(response) {
   const topics = response.activity[1]
   if(activity.complete == false) {
 
+    // const createTitle = function(title, url) {
+    //   return `<a href="${url}"><h2>${title}</h2></a>`;
+    // };
+    const createTopics = function(topics) {
+      return topics.map(topic => (
+        `<p class="topic-notfication" >${topic.topic}</p>`
+      ))
+    }
+
+    createTopics()
+
+    console.log('createTopics', createTopics);
+
     //Verbs needed for blooms taxonomy
     //should be random array with one primary verb.
 
@@ -189,11 +202,15 @@ port.onMessage.addListener(function(response) {
                     ${activity.objective}
                   </p>
                 </div>
-                
+
               </div>
               <div class="progress-iewfni">
                 <span>${activity.number}/44</span>
               </div>
+            </div>
+
+            <div class="topic-notifications">
+              
             </div>
             <div class="topic-notifications">
               <p class="topic-notfication" >${topics[0].topic}</p>

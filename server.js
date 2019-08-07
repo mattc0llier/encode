@@ -295,15 +295,27 @@ app.get('/api/users/:id/objectives/complete/:lastestStatusTime', (req, res) => {
     .catch(error => res.json({ error: error.message }));
 });
 
+//get objective info from activity id
+function getObjectivesByActivityId(id) {
+  return db.any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo, users.username FROM activities, objectives, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.id=$1', [id])
+  .catch((error) => {
+    console.log('failed to get objectives', error);
+  });
+}
+
+
 // update completed activities
 app.patch('/api/activities/:activityId', (req, res) => {
   const activityId = req.params.activityId
   const {complete} = req.body
 
   db.one(`UPDATE activities SET complete = $1, completion_time = CURRENT_TIMESTAMP WHERE id = $2 RETURNING id AS activity_id, complete, completion_time`, [complete, activityId])
-  .then((data) => {
+  .then(async data => {
+    console.log('data', data);
+    const objectiveInfo =  await getObjectivesByActivityId(data.activity_id)
+    const activityUpdateData = [data, objectiveInfo]
     pusher.trigger('activityUpdate', 'activityComplete', {
-      "message": data
+      "message": activityUpdateData
     });
   })
   .catch(error => {

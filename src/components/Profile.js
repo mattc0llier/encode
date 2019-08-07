@@ -65,6 +65,8 @@ class Profile extends React.Component {
 //   return setState;
 // };
   updateuserProfileObjectives(activitiesResponse, completedObjective){
+    console.log('updateuserProfileObjectives completedActivity', activitiesResponse);
+    console.log('updateuserProfileObjectives completedObjective', completedObjective);
     function removeComplete(userObjective) {
       return userObjective.activity_id !== activitiesResponse.activity_id
     }
@@ -116,9 +118,11 @@ class Profile extends React.Component {
     .catch(error => console.log(error.message));
   }
 
-  receiveCompletedActivity(completedActivity){
-    this.updateuserProfileObjectives(completedActivity, this.state.completedObjective)
-    this.props.receiveCurrentUserObjectiveUpdate(this.state.completedObjective)
+  receiveCompletedActivity(completedActivity, completedObjective){
+    console.log('receiveCompletedActivity completedActivity', completedActivity);
+    console.log('receiveCompletedActivity completedObjective', completedObjective);
+    this.updateuserProfileObjectives(completedActivity, completedObjective)
+    this.props.receiveCurrentUserObjectiveUpdate(completedObjective)
   }
 
   fetchUserCourses(id){
@@ -176,9 +180,13 @@ class Profile extends React.Component {
 
     // need to get the completed objective data somehow to make this work
     const context = pusher.subscribe('activityUpdate');
-    context.bind('activityComplete', (data) => {
-      console.log("recieved activityUpdate event", data.message);
-      this.receiveCompletedActivity(data.message)
+    context.bind('activityComplete', (activityUpdateData) => {
+      console.log("recieved activityUpdate event", activityUpdateData.message);
+      console.log("recieved activityUpdate event", activityUpdateData.message[0]);
+      console.log("recieved activityUpdate event", activityUpdateData.message[1]);
+      const completedActivity = activityUpdateData.message[0]
+      const completedObjective = activityUpdateData.message[1][0]
+      this.receiveCompletedActivity(completedActivity, completedObjective)
     })
   }
 
