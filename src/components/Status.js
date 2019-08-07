@@ -1,5 +1,6 @@
 import React from 'react';
 import Objective from './Objective';
+import Tags from './Tags';
 import { Link } from 'react-router-dom';
 
 
@@ -10,9 +11,49 @@ class Status extends React.Component {
   constructor(){
     super();
 
-    this.state = { statusScores: {} }
+    this.state = { statusScores: {}, statusMasteryIncrease: 0, latestObjectives: [], statusTags: [] }
 
+    this.sortLatestObjective = this.sortLatestObjective.bind(this);
     this.fetchObjectivesScores = this.fetchObjectivesScores.bind(this);
+    this.calculateMasteryIncrease = this.calculateMasteryIncrease.bind(this);
+    this.fetchObjectiveTags = this.fetchObjectiveTags.bind(this);
+  }
+
+  fetchObjectiveTags(){
+    this.props.statusArray.map(objective => (
+      fetch(`/api/objective/${objective.objective_id}/tags`)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(body => {
+        console.log('status tags', body);
+        this.setState({
+          statusTags: this.state.statusTags.concat(body)
+        })
+      })
+      .catch(error => console.log(error.message))
+    ))
+
+
+  }
+
+  sortLatestObjective(){
+    const latestObjectives = this.props.statusArray.sort(function(a, b) {
+      return b.completion_time - a.completion_time;
+    })
+    this.setState({
+      latestObjectives: latestObjectives
+    }, () => this.fetchObjectivesScores(latestObjectives))
+
+  }
+
+  calculateMasteryIncrease(){
+    const statusMasteryIncrease = this.props.statusArray.reduce(function(acc, cur) {
+      return acc + cur.mastery_score
+    }, 0);
+    this.setState({
+      statusMasteryIncrease: statusMasteryIncrease
+    }, () => this.fetchObjectiveTags())
   }
 
   fetchObjectivesScores(latestObjectives){
@@ -25,19 +66,17 @@ class Status extends React.Component {
     .then(body => {
       this.setState({
         statusScores: body
-      })
+      }, () => this.calculateMasteryIncrease())
     })
     .catch(error => console.log(error.message))
   }
 
-  render(){
-    const statusMasteryIncrease = this.props.statusArray.reduce(function(acc, cur) {
-      return acc + cur.mastery_score
-    }, 0);
+  componentDidMount(){
+    this.sortLatestObjective()
+  }
 
-    const latestObjectives = this.props.statusArray.sort(function(a, b) {
-      return b.completion_time - a.completion_time;
-    });
+
+  render(){
 
 
     //manual settings for when images should show
@@ -47,8 +86,6 @@ class Status extends React.Component {
     const lastObjective = this.props.statusArray.find(function(element) {
       return element.number == 44;
     });
-
-    this.fetchObjectivesScores(latestObjectives)
 
     return(
       <div className="status">
@@ -68,26 +105,16 @@ class Status extends React.Component {
             </Link>
             <div className="status-completed">
               <div className="status-objectives">
-                {latestObjectives.map(objective => (
+                {this.state.latestObjectives.map(objective => (
                   <div key={objective.objective_id} className="status-objective">
                     <Objective objectiveObject={objective}/>
                   </div>
                 ))}
-                <div class="topic-notifications">
-                  <p class="topic-notfication" >Javascript</p>
-                  <p class="topic-notfication" >Software Engineering</p>
-                  <p class="topic-notfication" >Job roles</p>
-                  <p class="topic-notfication" >Javascript</p>
-                  <p class="topic-notfication" >Software Engineering</p>
-                  <p class="topic-notfication" >Job roles</p>
-                  <p class="topic-notfication" >Javascript</p>
-                  <p class="topic-notfication" >Software Engineering</p>
-                  <p class="topic-notfication" >Job roles</p>
-                </div>
+                <Tags statusTags={this.state.statusTags}/>
               </div>
 
               <div className="score-increase">
-                <p>+{statusMasteryIncrease}</p>
+                <p>+{this.state.statusMasteryIncrease}</p>
                 <h4>Mastery Score</h4>
               </div>
             </div>

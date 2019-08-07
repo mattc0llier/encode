@@ -76,6 +76,9 @@ class Profile extends React.Component {
     console.log('this.state.userProfileObjectives 2', this.state.userProfileObjectives);
 
     const updatedUserProfileObjectives = updatedUserObjectives.concat({
+      first_name: completedObjective.first_name,
+      last_name: completedObjective.last_name,
+      mastery_score: completedObjective.mastery_score,
       objective_id: completedObjective.objective_id,
       lesson_id: completedObjective.lesson_id,
       number: completedObjective.number,
