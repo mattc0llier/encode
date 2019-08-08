@@ -23,15 +23,15 @@ class Objective extends React.Component {
         <div className="checkbox">
           { this.props.currentUserProfile ? (
             <React.Fragment>
-              <input value="1" type="checkbox" id="objective" name="objective" />
-              <label onClick={this.handleClick} id="checklabel" for="mycheck" style={{display: this.props.objectiveObject.complete ? 'none' : 'block' }}></label>
+              <span style={{display: this.props.objectiveObject.complete ? 'none' : 'block' }}><img className="favicon" src="/static/assets/images/lambda-logo-favicon.svg" /></span>
             </React.Fragment>
           ) : (
             <span style={{display: this.props.objectiveObject.complete ? 'none' : 'block' }}><img src="/static/assets/images/workingOn.svg" /></span>
           )}
 
-          <span style={{display: this.props.objectiveObject.complete ? 'block' : 'none' }}><img src="/static/assets/images/doubleChecks.svg" /></span>
+          <span style={{display: this.props.objectiveObject.complete ? 'block' : 'none' }}><img className="favicon" src="/static/assets/images/lambda-logo-favicon.svg" /></span>
           <p for="objective">{this.props.objectiveObject.objective} ({this.props.objectiveObject.number})</p>
+          <span className="doubleChecks" style={{display: this.props.objectiveObject.complete ? 'block' : 'none' }}><img src="/static/assets/images/doubleChecks.svg" /></span>
         </div>
         </React.Fragment>
 

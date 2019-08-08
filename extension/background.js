@@ -26,8 +26,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     fetchActivities(tabs[0].url)
     .then(body => {
+      console.log('body before', body);
+      console.log('body[0].activity_id ', body[0][0].activity_id);
      // to be triggered when completed objective click from content script
-      return fetch(`http://localhost:9090/api/activities/${body[0].activity_id}`, {
+      return fetch(`http://localhost:9090/api/activities/${body[0][0].activity_id}`, {
         method: 'PATCH',
         body: JSON.stringify({ complete: true }),
         headers: {

@@ -27,9 +27,11 @@ class Status extends React.Component {
       })
       .then(body => {
         console.log('status tags', body);
-        this.setState({
-          statusTags: this.state.statusTags.concat(body)
-        })
+        this.state.statusTags.includes(body) ? null : (
+          this.setState({
+            statusTags: this.state.statusTags.concat(body)
+          })
+        )
       })
       .catch(error => console.log(error.message))
     ))
@@ -96,7 +98,7 @@ class Status extends React.Component {
           <div className="status-content">
           <Link to={`/users/${this.props.statusArray[0].username}`}>
             <div className="status-header">
-              <img src={this.props.statusArray[0].photo} />
+              <img id="profilePicture" src={this.props.statusArray[0].photo} />
               <div className="header-info">
                 <p>{this.props.statusArray[0].first_name} {this.props.statusArray[0].last_name}</p>
                 <p>🎓 {this.state.statusScores.mastery} 🔥 {this.state.statusScores.streak} ✅ {this.state.statusScores.objectives}</p>

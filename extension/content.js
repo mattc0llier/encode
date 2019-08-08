@@ -17,6 +17,16 @@ port.onMessage.addListener(function(response) {
   const topics = response.activity[1]
   if(activity.complete == false) {
 
+    // if (!topics.length) {
+    //   return null
+    // } else {
+    //   const topicString = topics.forEach(function(topic) {
+    //     const buildString = `<p class="topic-notfication" >${topic.topic}</p>`
+    //     return topicString.concat(buildString)
+    //   });
+    //   console.log(topicString);
+    // }
+
     // const createTitle = function(title, url) {
     //   return `<a href="${url}"><h2>${title}</h2></a>`;
     // };
@@ -33,39 +43,39 @@ port.onMessage.addListener(function(response) {
     //Verbs needed for blooms taxonomy
     //should be random array with one primary verb.
 
-    const remember = ["remember", "define", "duplicate", "list", "memorize", "repeat", "state",]
-    const understand = ["understand", "classify", "describe", "discuss", "explain", "identify", "locate", "recognize", "report", "select", "translate"]
-    const apply = ["apply", "execute", "implement", "solve", "use", "demonstrate", "interpret", "operate", "schedule", "sketch"]
-    const analyze = ["analyze", "differentiate", "organize", "relate", "compare", "contrast", "distinguish", "examine", "experiment", "question", "test"]
-    const evaluate = ["evaluate", "appraise", "argue", "judge", "defend", "select", "support", "value", "critique", "weigh"]
-    const create = ["create", "design", "assemble", "construct", "conjecture", "develop", "formulate", "author", "investigate"]
-
-
-    const bloomsMethods = {
-      1: remember,
-      2: understand,
-      3: apply,
-      4: analyze,
-      5: evaluate,
-      6: create
-    }
-    function getBlooms(mastery_score){
-      console.log(mastery_score);
-      const primaryVerb = bloomsMethods[mastery_score][0]
-      console.log('primaryVerb', primaryVerb);
-      const index1 = Math.floor(Math.random() * 6);
-      const index2 = Math.floor(Math.random() * 6);
-      const secondaryVerb = bloomsMethods[mastery_score][index1]
-      console.log('secondaryVerb', secondaryVerb);
-      const thirdVerb = bloomsMethods[mastery_score][index2]
-      console.log('thirdVerb', thirdVerb);
-
-      return [primaryVerb, secondaryVerb, thirdVerb]
-    }
-
-    const bloomsCategories = getBlooms(activity.mastery_score)
-
-    console.log('bloomsCategories', bloomsCategories);
+    // const remember = ["remember", "define", "duplicate", "list", "memorize", "repeat", "state",]
+    // const understand = ["understand", "classify", "describe", "discuss", "explain", "identify", "locate", "recognize", "report", "select", "translate"]
+    // const apply = ["apply", "execute", "implement", "solve", "use", "demonstrate", "interpret", "operate", "schedule", "sketch"]
+    // const analyze = ["analyze", "differentiate", "organize", "relate", "compare", "contrast", "distinguish", "examine", "experiment", "question", "test"]
+    // const evaluate = ["evaluate", "appraise", "argue", "judge", "defend", "select", "support", "value", "critique", "weigh"]
+    // const create = ["create", "design", "assemble", "construct", "conjecture", "develop", "formulate", "author", "investigate"]
+    //
+    //
+    // const bloomsMethods = {
+    //   1: remember,
+    //   2: understand,
+    //   3: apply,
+    //   4: analyze,
+    //   5: evaluate,
+    //   6: create
+    // }
+    // function getBlooms(mastery_score){
+    //   console.log(mastery_score);
+    //   const primaryVerb = bloomsMethods[mastery_score][0]
+    //   console.log('primaryVerb', primaryVerb);
+    //   const index1 = Math.floor(Math.random() * 6);
+    //   const index2 = Math.floor(Math.random() * 6);
+    //   const secondaryVerb = bloomsMethods[mastery_score][index1]
+    //   console.log('secondaryVerb', secondaryVerb);
+    //   const thirdVerb = bloomsMethods[mastery_score][index2]
+    //   console.log('thirdVerb', thirdVerb);
+    //
+    //   return [primaryVerb, secondaryVerb, thirdVerb]
+    // }
+    //
+    // const bloomsCategories = getBlooms(activity.mastery_score)
+    //
+    // console.log('bloomsCategories', bloomsCategories);
 
   // const COLORS = [
   //   "https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif",
@@ -115,6 +125,7 @@ port.onMessage.addListener(function(response) {
           }
           .topic-notfication {
             display: flex;
+            justify-content: space-between;
             box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
             border-radius: 10px;
             background-color: #FF6363;
@@ -125,6 +136,10 @@ port.onMessage.addListener(function(response) {
             line-height: 21px;
             padding: 0.8rem;
             margin: 0.7rem 0 0.7rem 0.7rem;
+          }
+          .lhs-information{
+            display: flex;
+            justify-content: flex-start;
           }
             .mastery_score-wut {
               padding: 1rem;
@@ -138,6 +153,8 @@ port.onMessage.addListener(function(response) {
             }
             .info-test-diff {
               padding: 0.5rem 1rem;
+              display: flex;
+              align-items: center;
             }
             .info-test-diff p {
               margin-bottom: 0;
@@ -193,22 +210,30 @@ port.onMessage.addListener(function(response) {
       animation.innerHTML = `
           <div class="notifications" id="slide">
             <div class="main-notfiication">
-              <div class="mastery_score-wut">
-                <h1>+${activity.mastery_score}</h1>
-              </div>
-              <div class="info-test-diff">
-                <div class="title-test-hello">
-                  <p>
-                    ${activity.objective}
-                  </p>
+            <div class="lhs-information" >
+                <div class="mastery_score-wut">
+                  <h1>+${activity.mastery_score}</h1>
                 </div>
+                <div class="info-test-diff">
+                  <div class="title-test-hello">
+                    <p>
+                      ${activity.objective}
+                    </p>
+                  </div>
 
+                </div>
               </div>
               <div class="progress-iewfni">
                 <span>${activity.number}/44</span>
               </div>
             </div>
+            <div class="topic-notifications">
+              <p class="topic-notfication" >${topics[0].topic}</p>
+              <p class="topic-notfication" >${topics[1].topic}</p>
+              <p class="topic-notfication" >${topics[2].topic}</p>
+            </div>
           </div>
+
       `
 
       document.body.appendChild(animation);
@@ -234,7 +259,7 @@ port.onMessage.addListener(function(response) {
   });
 
   document.body.addEventListener('mouseout', event => {
-    if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
+    if(event.target.matches('.prev-link, .next-link, .learndash_mark_complete_button, .gform_button button')){
 
       const removeAnimation = document.getElementsByClassName("overlay-427542754")[0];
       document.body.removeChild(removeAnimation);

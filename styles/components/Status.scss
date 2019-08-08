@@ -8,6 +8,9 @@
   max-width: 150px;
   max-height: 150px;
   display: block;
+}
+.status #profilePicture {
+  display: block;
   border-radius: 100px;
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
@@ -96,5 +99,5 @@
   font-size: 18px;
   line-height: 21px;
   padding: 0.8rem;
-  margin: 0.7rem 0 0 0.7rem;
+  margin: 0.7rem 0.7rem 0 0;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 
 const Tags = ({ statusTags }) => {
   if (!statusTags.length) {
-    return <p>no tags</p>
+    return null
   }
 
     return(
