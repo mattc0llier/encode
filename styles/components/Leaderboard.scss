@@ -1,7 +1,64 @@
 @import '../base.scss';
 
+.table-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.table-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-filters {
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: flex-end;
+  min-width: 1000px;
+}
+
+.title-filters h4 {
+  padding: 1rem, 0rem;
+  margin-right: 2rem;
+  text-decoration: none;
+  border-bottom: solid 3px white;
+}
+
+.title-filters h4:hover {
+  border-bottom: solid 3px $primary-pink;
+  cursor: pointer;
+}
+
+.title-active {
+  border-bottom: solid 3px $primary-pink;
+  padding: 1rem;
+}
+
+table {
+  min-width: 1000px;
+  max-width: 1200px;
+}
+
+tr {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid $background-light-grey;
+}
 .leader {
   padding: 0.5rem;
+  border-bottom: dotted 2px $text-black;
+}
+th {
+  color: $text-black;
+  padding: 0 1rem 0 1rem;
+}
+td {
+  padding: 0 1rem 0 1rem;
 }
 
 .leader img {
@@ -14,30 +71,36 @@
 }
 
 .rank-cell {
-  min-width: 4rem;
+  min-width: 100px;
+  text-align: center;
 }
 
 .photo-cell {
-  min-width: 6rem;
+  min-width: 100px;
+  text-align: left;
 }
 
 .username-cell {
-  min-width: 10rem;
+  min-width: 150px;
+  text-align: left;
+  font-weight: 600;
 }
 
 .course-cell {
-  min-width: 15rem;
+  min-width: 250px;
+  text-align: left;
 }
 
 .location-cell {
-  min-width: 15rem;
+  min-width: 150px;
+  text-align: left;
 }
 
 .mastery-cell {
-  min-width: 5rem;
+  min-width: 100px;
+  text-align: left;
 }
 
 .mastery-cell p {
-  color: $primary-pink;
   font-weight: 600;
 }

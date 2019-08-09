@@ -976,25 +976,25 @@ INSERT INTO objective_tags
 INSERT INTO objective_tags
   (id, objective_id, tag_id)
   VALUES
-  (40, 40, 87);
+  (40, 40, 81);
 INSERT INTO objective_tags
   (id, objective_id, tag_id)
   VALUES
-  (41, 40, 91);
+  (41, 40, 99);
 INSERT INTO objective_tags
   (id, objective_id, tag_id)
   VALUES
-  (42, 40, 92);
+  (42, 40, 23);
 INSERT INTO objective_tags
   (id, objective_id, tag_id)
   VALUES
-  (43, 41, 87);
+  (43, 41, 199);
 INSERT INTO objective_tags
   (id, objective_id, tag_id)
   VALUES
-  (44, 41, 91);
+  (44, 41, 37);
 INSERT INTO objective_tags
   (id, objective_id, tag_id)
   VALUES
-  (45, 41, 92);
-ALTER SEQUENCE objective_tags_id_seq RESTART WITH 40 INCREMENT BY 1;
+  (45, 41, 57);
+ALTER SEQUENCE objective_tags_id_seq RESTART WITH 46 INCREMENT BY 1;

@@ -25,7 +25,8 @@ class Homepage extends React.Component {
                 </div>
                 <div className="text">
                   <h2>Log your educational progress</h2>
-                  <p>Boost your Mastery Score™ by working through the course objectives and automatically logging the learning resources you find along the way</p>
+                  <p>Work through the course objectives on Lambda School and Repl.it as your normally would and encode will automatically log it for you.</p>
+                  <p>Along the way, add useful learning resources you find anywhere on the web.</p>
                 </div>
               </div>
               <div className="value-prop">
@@ -34,7 +35,7 @@ class Homepage extends React.Component {
                 </div>
                 <div className="text">
                   <h2>Get instant feedback on your learning</h2>
-                  <p>encode analyses your activity to give you feedback on your progress and graphs your efforts</p>
+                  <p>Boost your Mastery Score™ by working through the course objectives and encode will analyse your activity to give you constent feedback on your learning strategy.</p>
                 </div>
               </div>
               <div className="value-prop">
@@ -43,8 +44,8 @@ class Homepage extends React.Component {
                 </div>
                 <div className="text">
                   <h2>Prove your personal growth to Lambda School</h2>
-                  <p>We’re not going to fake hard work for you, but we can help you prove the progress you have made by publically summarising your activity</p>
-                  <p>What you share is up to you</p>
+                  <p>We can help you prove the progress you have made by automatically summarising your learning activity.</p>
+                  <p>Build your ideal public educational profile and what you share is up to you.</p>
                 </div>
               </div>
             </div>
