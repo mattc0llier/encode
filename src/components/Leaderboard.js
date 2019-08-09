@@ -126,7 +126,7 @@ class Leaderboard extends React.Component {
           <div className="table-nav">
             <h1>Leaderboard</h1>
             <div className="title-filters">
-              <h4 onClick={this.handleTodayClick}>Today</h4>
+              <h4 onClick={this.handleTodayClick} style={this.state.timeRange == 'today' ? {'border-bottom': 'solid 3px #FF5352'}: null }>Today</h4>
               <h4 onClick={this.handleThisWeekClick}>This week</h4>
               <h4 onClick={this.handleAllTimeClick}>All time</h4>
             </div>
@@ -168,7 +168,7 @@ class Leaderboard extends React.Component {
             </thead>
             <tbody>
               {this.state.allUsers.map(user => (
-                <tr className="leader" style={{background: (!!this.props.isLoggedIn && this.props.currentUser.user_id === user.id) ? '#E8E8E6' : '#ffffff' }}>
+                <tr className="leader" style={!!this.props.isLoggedIn && this.props.currentUser.user_id === user.id ? {background: '#C3C3C3'}: null }>
                   <td>
                     <div className="rank-cell">
                       <p>{this.state.allUsers.indexOf(user) + 1}</p>

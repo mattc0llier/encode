@@ -172,7 +172,7 @@ class App extends React.Component {
                   render={(props) => (<NewUser {...props} receiveNewUser={this.receiveNewUser} />)}
                 />
                 <Route path="/login"
-                  render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} />)}
+                  render={(props) => (<Login {...props} receiveLoginUser={this.receiveLoginUser} currentUser={this.state.currentUser}/>)}
                 />
                 <PrivateRoute path="/users/:username"
                   isLoggedIn={this.state.isLoggedIn}

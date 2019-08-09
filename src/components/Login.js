@@ -9,12 +9,7 @@ class Login extends React.Component {
   constructor(){
     super();
 
-    this.state = { loginUser: {
-      username: "",
-      password: ""
-    },
-    redirect: false
-  }
+    this.state = { redirect: false, loginUser: {username: "", password: ""}}
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this)
     this.handlePasswordChange = this.handlePasswordChange.bind(this)
@@ -40,15 +35,19 @@ class Login extends React.Component {
 
   handleLoginUserSubmit(event){
     event.preventDefault();
-    this.props.receiveLoginUser(this.state.loginUser)
+    console.log('hit 1');
+    debugger
     this.setState({
       redirect: true
     })
+    this.props.receiveLoginUser(this.state.loginUser)
+    console.log('hit 2');
+
   }
 
 
   render(){
-    if (this.state.redirect) return(<Redirect to={`/users/${this.state.loginUser.username}`} />)
+    if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
      else return(
       <div className="form-center">
         <div className="loginUser">

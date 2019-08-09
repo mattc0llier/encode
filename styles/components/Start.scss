@@ -4,6 +4,15 @@
 .course-summary {
   display: flex;
   align-items: center;
+  border-radius: 10px;
+  border: solid 2px $background-mid-grey;
+  margin: 1rem 0;
+  padding: 1rem;
+  min-width: 600px;
+}
+.course-summary:hover {
+  border: solid 2px $primary-blue;
+  cursor: pointer;
 }
 
 .course-badge {

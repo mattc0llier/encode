@@ -18,7 +18,7 @@ class Nav extends React.Component {
       <div className="nav">
         <div className="nav-margin">
           { this.props.isLoggedIn ? (
-            <Link to='/leaderboard'><h1>encode</h1></Link>
+            <Link to={`/users/${this.props.currentUser.username}`}><h1>encode</h1></Link>
           ): (
             <Link to='/'><h1>encode</h1></Link>
           )}
