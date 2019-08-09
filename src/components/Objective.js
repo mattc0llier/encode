@@ -30,7 +30,7 @@ class Objective extends React.Component {
           )}
 
           <span style={{display: this.props.objectiveObject.complete ? 'block' : 'none' }}><img className="favicon" src="/static/assets/images/lambda-logo-favicon.svg" /></span>
-          <p for="objective">{this.props.objectiveObject.objective} ({this.props.objectiveObject.number})</p>
+          <a href={this.props.objectiveObject.url} ><p for="objective">{this.props.objectiveObject.objective} ({this.props.objectiveObject.number})</p></a>
           <span className="doubleChecks" style={{display: this.props.objectiveObject.complete ? 'block' : 'none' }}><img src="/static/assets/images/doubleChecks.svg" /></span>
         </div>
         </React.Fragment>

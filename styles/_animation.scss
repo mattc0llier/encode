@@ -73,6 +73,11 @@
   box-sizing: border-box;
   padding: 16px;
 }
+.achievement-title h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
 
 .achievement-wrapper.animation {
   animation: slideUp 750ms cubic-bezier(0.75, -0.5, 0, 1.75) 0s 1 forwards,

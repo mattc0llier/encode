@@ -198,7 +198,7 @@ class Profile extends React.Component {
       <div className="profile">
         <div className="left">
           <Info userProfileObject={this.state.userProfile} userProfileCourses={this.state.userProfileCourses}/>
-          { this.state.currentUserProfile ? <Link to='/settings'><p>**Update your profile**</p></Link> : null}
+          { this.state.currentUserProfile ? <Link to='/settings'><p>- Update your private profile</p></Link> : null}
         </div>
         <div className="right">
           <Scores userProfileScoresObject={this.state.userProfileScores}/>

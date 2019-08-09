@@ -13,9 +13,12 @@ const Info = ({ userProfileObject, userProfileCourses }) => {
           <span id="private"><img src="../../static/assets/images/Lock.svg" id="lock"/><p>Private</p></span>
         </div>
         <p>{userProfileObject.bio}</p>
-        <p>{userProfileObject.location}</p>
-        <a href="#"><p>Build your public profile (coming soon)</p></a>
+        <div className="location">
+          <span><img src="../../static/assets/images/location.svg" /></span><p>{userProfileObject.location}</p>
+        </div>
         <Organizations userProfileCourses={userProfileCourses}/>
+        <p>Actions</p>
+        <a href="#"><p>- Build your public profile (coming soon)</p></a>
       </div>
     )
   }

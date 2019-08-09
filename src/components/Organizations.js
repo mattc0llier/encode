@@ -10,12 +10,10 @@ const Organizations = ({ userProfileCourses }) => {
 
   return(
     <div className="organizations">
-      <h4>Schools</h4>
       <div className="organization-list">
         <img src={userProfileCourses[0].badge} />
         <div className="organization-title">
           <b><p>{userProfileCourses[0].name}</p></b>
-          <p>Lambda School</p>
         </div>
       </div>
     </div>

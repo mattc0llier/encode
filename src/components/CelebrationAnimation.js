@@ -30,8 +30,7 @@ class CelebrationAnimation extends React.Component {
         <div className={this.props.celebration}>
           <div className="achievement-super">
             <div className="achievement-body">
-              <p className="achievement-text">{celebrationCopy}</p>
-              <p className="achievement-subtext">{this.props.completedObjective.objective}</p>
+              <p className="achievement-text">{this.props.completedObjective.objective}</p>
             </div>
             <div className="achievement-title">
               <h3>+ {this.props.completedObjective.mastery_score}</h3>

@@ -35,7 +35,7 @@
 }
 .status-completed {
   display: flex;
-  padding: 1rem;
+  padding: 1rem 1rem 1.5rem 1.5rem;
   justify-content: space-between;
 }
 .status-objectives {
@@ -91,13 +91,12 @@
 }
 .topic-notfication {
   display: flex;
-  border-radius: 10px;
-  background-color: #FF6363;
+  border-radius: 3px;
+  background-color: $background-mid-grey;
   color: #ffffff;
-  font-style: normal;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
-  padding: 0.8rem;
+  font-size: 1rem;
+  line-height: 10px;
+  padding: 0.6rem;
   margin: 0.7rem 0.7rem 0 0;
 }
