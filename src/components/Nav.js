@@ -15,7 +15,7 @@ class Nav extends React.Component {
 
   render(){
     return(
-      <div className="nav">
+      <div className="nav" role="navigation">
         <div className="nav-margin">
           { this.props.isLoggedIn ? (
             <Link to={`/users/${this.props.currentUser.username}`}><h1>encode</h1></Link>
@@ -26,7 +26,13 @@ class Nav extends React.Component {
             <Link to='/leaderboard'><li>Leaderboard</li></Link>
             { this.props.isLoggedIn ? (
               <React.Fragment>
-                <Link to={`/users/${this.props.currentUser.username}`}><li>{this.props.currentUser.username}'s profile</li></Link>
+                  <li><a href="#" aria-haspopup="true">{this.props.currentUser.username}</a>
+                    <ul class="dropdown" aria-label="submenu">
+                      <li><Link to={`/users/${this.props.currentUser.username}`}>Your Profile</Link></li>
+                      <li><Link to={`/settings`}>Settings</Link></li>
+                      <li><Link to={`/settings`}>Logout</Link></li>
+                    </ul>
+                  </li>
                 <p>🎓{this.props.currentUserScores.mastery} 🔥{this.props.currentUserScores.streak} ✅{this.props.currentUserScores.objectives}</p>
               </React.Fragment>
             ): (

@@ -85,7 +85,7 @@ CREATE TABLE activities(
 
 CREATE TABLE tags(
   id SERIAL PRIMARY KEY,
-  topic VARCHAR(100)
+  topic VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE objective_tags (
@@ -815,6 +815,12 @@ INSERT INTO tags (id, topic) VALUES (243, 'android-intent');
 INSERT INTO tags (id, topic) VALUES (244, 'meteor');
 INSERT INTO tags (id, topic) VALUES (245, 'iframe');
 INSERT INTO tags (id, topic) VALUES (246, 'arraylist');
+INSERT INTO tags (id, topic) VALUES (247, 'callback');
+INSERT INTO tags (id, topic) VALUES (248, 'array.map');
+INSERT INTO tags (id, topic) VALUES (249, 'array.forEach');
+INSERT INTO tags (id, topic) VALUES (250, 'annonymous-function');
+INSERT INTO tags (id, topic) VALUES (251, 'array-method');
+
 ALTER SEQUENCE scores_id_seq RESTART WITH 247 INCREMENT BY 1;
 
 INSERT INTO objective_tags
@@ -997,4 +1003,44 @@ INSERT INTO objective_tags
   (id, objective_id, tag_id)
   VALUES
   (45, 41, 57);
-ALTER SEQUENCE objective_tags_id_seq RESTART WITH 46 INCREMENT BY 1;
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (46, 43, 1);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (47, 43, 78);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (48, 43, 17);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (49, 43, 247);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (50, 43, 248);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (51, 43, 249);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (52, 43, 250);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (53, 44, 248);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (54, 44, 249);
+INSERT INTO objective_tags
+  (id, objective_id, tag_id)
+  VALUES
+  (55, 44, 250);
+ALTER SEQUENCE objective_tags_id_seq RESTART WITH 56 INCREMENT BY 1;

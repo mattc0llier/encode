@@ -8,6 +8,7 @@
     "activeTab",
     "webRequest",
     "storage",
+    "identity",
     "http://localhost:9090/",
     "http://*.lambdaschool.com/*",
     "http://*.encode.app/*"

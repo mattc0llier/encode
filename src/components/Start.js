@@ -117,8 +117,9 @@ class Start extends React.Component {
                 </div>
               ))}
             </div>
+            <h2>What objective are you currently on?</h2>
+
             <select id="objective-select" onChange={this.handleObjectiveChange}>
-              <option value="">--Please choose an option--</option>
               {this.state.objectives.map(objective => (
                 <React.Fragment key={objective.objective_id}>
                   <option value={objective.number}>{objective.number} - {objective.objective}</option>

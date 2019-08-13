@@ -1,11 +1,11 @@
+
+// const client_id = 'mkhkokcinbeehocehnfenpgjfamooaib';
+// const redirectUri = "http://localhost:9090/leaderboard"
+// var auth_url = "https://localhost:9090/api/auth/account?client_id=" + client_id + "&redirect_uri=" + redirectUri + "&response_type=token";
 //
-// var client_id = '<CLIENT_ID>';
-// var redirectUri = chrome.identity.getRedirectURL("oauth2");
-// var auth_url = "https://www.pushbullet.com/authorize?client_id=" + client_id + "&redirect_uri=" + redirectUri + "&response_type=token";
-//
-//     chrome.identity.launchWebAuthFlow({'url':auth_url,'interactive':true}, function(redirect_url){
-//         console.log(redirect_url)
-//     });
+// chrome.identity.launchWebAuthFlow({'url':auth_url,'interactive':true}, function(redirect_url){
+//     console.log(redirect_url)
+//   });
 
 
 
@@ -47,23 +47,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
    })
 });
 
-// on new opage
-// get activities
-// send message to content script
-
-  // send activity info to content.js.
-  // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-  //   console.log('tabs', tabs);
-  //   console.log('tabs[0].id', tabs[0].id);
-  //   console.log('activity: body', body);
-  //   chrome.tabs.sendMessage(tabs[0].id, {activity: body});
-  // });
-
-  //recieves message when item is marked complete
-
-// update context on loading in a new page and send through response objective to content.js
-
-
 chrome.runtime.onConnect.addListener((port) => {
   console.assert(port.name === "url_activities")
 
@@ -90,7 +73,21 @@ chrome.runtime.onConnect.addListener((port) => {
   })
  })
 
+ // on new opage
+ // get activities
+ // send message to content script
 
+   // send activity info to content.js.
+   // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+   //   console.log('tabs', tabs);
+   //   console.log('tabs[0].id', tabs[0].id);
+   //   console.log('activity: body', body);
+   //   chrome.tabs.sendMessage(tabs[0].id, {activity: body});
+   // });
+
+   //recieves message when item is marked complete
+
+ // update context on loading in a new page and send through response objective to content.js
 
  //     fetch(`http://localhost:9090/api/tabContext?url=${tab.url}`, {
  //        mode: "cors"

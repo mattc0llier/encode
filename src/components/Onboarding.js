@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import '../../styles/components/Nav.scss';
+import '../../styles/components/Onboarding.scss';
 
 
 class Oboarding extends React.Component {
@@ -32,13 +32,15 @@ class Oboarding extends React.Component {
     else if (this.state.display == "setup") return(
       <div className="onboarding">
         <div className="how-encode-works">
+          <h2>Get started in less than a minute</h2>
           <div className="value-props">
             <div className="value-prop">
               <div className="number">
                 <div className="numberCircle">1</div>
               </div>
               <div className="text">
-                <h2>Install the chrome extension</h2>
+                <h2>Set up an account</h2>
+                <p>jfe</p>
               </div>
             </div>
             <div className="value-prop">
@@ -46,7 +48,18 @@ class Oboarding extends React.Component {
                 <div className="numberCircle">2</div>
               </div>
               <div className="text">
-                <h2>Tell encode where you are currently up to with the Lambda school precourse</h2>
+                <h2>Install the chrome extension</h2>
+                <p>Find it in the Chrome store <a href="https://chrome.google.com/webstore/category/extensions">here</a></p>
+                <p>And log in to your encode account</p>
+              </div>
+            </div>
+            <div className="value-prop">
+              <div className="number">
+                <div className="numberCircle">2</div>
+              </div>
+              <div className="text">
+                <h2>Tell us where you're up too</h2>
+                <p>If you have started the course already - tell encode where you are currently up to with the Lambda school precourse and we'll catch up your profile.</p>
               </div>
             </div>
             <div className="button-cta">
@@ -65,7 +78,9 @@ class Oboarding extends React.Component {
                 <div className="numberCircle">1</div>
               </div>
               <div className="text">
-                <h2>You tell encode what course you're doing</h2>
+                <h2>Learn as you normally would</h2>
+                <p>The overlay provides valuable instant feedback on your personal learning activities.</p>
+                <p>The learning log let's you share your progress, view your history and analyse your educational activities day by day to see your progress.</p>
               </div>
             </div>
             <div className="value-prop">
@@ -73,7 +88,12 @@ class Oboarding extends React.Component {
                 <div className="numberCircle">2</div>
               </div>
               <div className="text">
-                <h2>Encode's browser extension logs when you complete a course and sends it to your profile</h2>
+                <h2>encode is made up of an informative overlay and personal learning log</h2>
+                <div className="screenshots">
+                  <img src="../../static/assets/images/notifications.gif" alt="overlay and log screenshot" />
+                </div>
+                <p>The overlay provides valuable instant feedback on your personal learning activities.</p>
+                <p>The learning log let's you share your progress, view your history and analyse your educational activities day by day to see your progress.</p>
               </div>
             </div>
             <div className="value-prop">
@@ -81,7 +101,10 @@ class Oboarding extends React.Component {
                 <div className="numberCircle">3</div>
               </div>
               <div className="text">
-                <h2>Your learning activity history can be reviewed and analysed</h2>
+                <h2>encode's Mastery Score™ gives you instant feedback on the effectness of your learning strategy</h2>
+                <p>Mastery Score™ analyses and ranks your educational activities by how effective they are at enabling you to master your understanding of a concept and topic.</p>
+                <p>Encode uses several industry-leading concepts from neuroscience and pedagogy to detirmine. It will constantly update to get better over time.</p>
+                <p>Find out more about your how your Mastery Score™ is calculated here.</p>
               </div>
             </div>
             <div className="button-cta">

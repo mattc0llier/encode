@@ -16,9 +16,7 @@ const Info = ({ userProfileObject, userProfileCourses }) => {
         <div className="location">
           <span><img src="../../static/assets/images/location.svg" /></span><p>{userProfileObject.location}</p>
         </div>
-        <Organizations userProfileCourses={userProfileCourses}/>
-        <p>Actions</p>
-        <a href="#"><p>- Build your public profile (coming soon)</p></a>
+        <Organizations userProfileCourses={userProfileCourses}/>        
       </div>
     )
   }

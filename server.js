@@ -356,7 +356,6 @@ function getObjectivesByCourseId(id) {
 const newActivities = async (userId, courseId, selectiveObjectiveNumber) => {
   const allCourseObjectives = await getObjectivesByCourseId(courseId)
 
-
   //for any objective where objective.number < slectedobjective.number then
   // completed is true and completed time is now
   const isoDateNow = new Date().toISOString()
@@ -451,6 +450,15 @@ app.get('/api/objective/:id/tags', (req, res) => {
   })
   .catch(error => res.json({ error: error.message }));
 })
+
+//add new tags to objective with objective_tag
+
+// add array of new topic tags to topic
+// app.post('/api/tags', (req, res) => {
+//   const {newTags, objective_id} = req.body
+//   db.one('INSERT INTO tags ( course_id, user_id, complete, completion_time, created_at) VALUES %L RETURNING id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at', [])
+//
+// })
 
 //receive current context tab activities and topics
 app.get('/api/tabContext', async (req, res)  => {

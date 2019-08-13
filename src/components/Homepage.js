@@ -70,19 +70,27 @@ class Homepage extends React.Component {
             <div className="current-schools">
               <p>Currently supports</p>
               <div className="school-logo">
-                <img src="../../static/assets/images/lambda-logo.svg" />
+                <a href="https://lambdaschool.com">
+                  <img src="../../static/assets/images/lambda-logo.svg" />
+                </a>
               </div>
             </div>
             <div class="coming-soon">
               <p>Coming soon</p>
               <div className="school-logo">
-                <img src="../../static/assets/images/khan-academy-logo.svg" />
+                <a href="https://www.khanacademy.org/">
+                  <img src="../../static/assets/images/khan-academy-logo.svg" />
+                </a>
               </div>
               <div className="school-logo">
-                <img src="../../static/assets/images/superhi-logo.svg" />
+                <a href="https://www.superhi.com/">
+                  <img src="../../static/assets/images/superhi-logo.svg" />
+                </a>
               </div>
               <div className="school-logo">
-                <img src="../../static/assets/images/udemy-logo.svg" />
+                <a href="https://www.udemy.com/">
+                  <img src="../../static/assets/images/udemy-logo.svg" />
+                </a>
               </div>
             </div>
           </section>
