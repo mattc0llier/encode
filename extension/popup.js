@@ -1,6 +1,8 @@
 const formNode = document.querySelector("form");
 
+const searchTagsNode = document.querySelector(".search-tags");
 const newTagsNode = document.querySelector(".new-tags");
+var submitAllTagsButton = document.getElementById('submit-all-tags');
 
 let oldTags = []
 // onreceiving message add existing topics into old tags
@@ -20,10 +22,33 @@ const charCount = function(input) {
 formNode.addEventListener("keyup", function(event) {
   const inputText = document.querySelector(".text-area-input");
   charCount(inputText.textLength);
+  let searchTagArr = []
 
+  // newTagsNode.removeChild(event.target.parentElement);
   // fetch all tags that includes what has been written so far and filter for those that already match
+  fetch(`http://localhost:9090/api/tags/search?q=${inputText.value}%`, {
+    mode: "cors"
+  })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(body => {
+    console.log('body', body);
+    searchTagArr = body
+    searchTagArr.forEach(tag => {
+      console.log('tag', tag);
+      const currentSearchTagNode = document.createElement("div");
+      currentSearchTagNode.className = "currentTag";
+      currentSearchTagNode.innerHTML = `<span>${tag.topic}</span> `;
+      searchTagsNode.appendChild(currentSearchTagNode);
+    })
 
+
+
+  })
+  .catch(error => console.log(error.message));
   // display returned filtered array in dropdown
+
 });
 
 // add a tag into the
@@ -64,14 +89,37 @@ formNode.addEventListener("submit", function(event) {
   event.preventDefault();
   const inputText = document.querySelector(".text-area-input");
   if (currentCharCount > 0) {
-    // submit tag and tag_id
-    //if no tag_id submit inputText.value
+    // submit tag and tag_id from filterArr
+    //if filterArr is empty submit inputText.value
+    const newTag = function(){
+      if (!searchTagsNode.length) {
+        return {
+          tag_id: null,
+          topic: inputText.value
+        }
+      } else {
+        return {
+          tag_id: searchTagsNode.tag_id,
+          topic: searchTagsNode.topic
+        }
+      }
+    }
+
+
+    console.log('newTag', newTag);
     submitTag(inputText.value);
     console.log('input submit', inputText.value);
   }
   inputText.value = "";
 });
 
+// submit all new tags to the db
+submitAllTagsButton.addEventListener("submit", function(event) {
+  event.preventDefault();
+  console.log('Submit all tags');
+});
+
+// Add the new tags arr to the db
 const submitNewTagsToDb = function(newTags) {
   fetch(`/api/tags`, {
     method: 'POST',

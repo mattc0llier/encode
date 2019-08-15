@@ -17,15 +17,24 @@ port.onMessage.addListener(function(response) {
   const topics = response.activity[1]
   if(activity.complete == false) {
 
-    // if (!topics.length) {
-    //   return null
-    // } else {
-    //   const topicString = topics.forEach(function(topic) {
-    //     const buildString = `<p class="topic-notfication" >${topic.topic}</p>`
-    //     return topicString.concat(buildString)
-    //   });
-    //   console.log(topicString);
-    // }
+    if (!topics.length) {
+      const notifications = null
+      return notifications
+    } else {
+      // const topicString = topics.forEach(function(topic) {
+      //   const buildString = `<p class="topic-notfication" >${topic.topic}</p>`
+      //   return topicString.concat(buildString)
+      // });
+      // console.log(topicString);
+      const notifications = `
+        <ul class="topic-notfications">
+            ${topics.map(topic => `<li class="topic-notfication">${topic.topic}</li>`).join('')}
+         </ul>
+        `;
+        return notifications
+    }
+
+    console.log('notifications', notifications);
 
     // const createTitle = function(title, url) {
     //   return `<a href="${url}"><h2>${title}</h2></a>`;
@@ -227,11 +236,7 @@ port.onMessage.addListener(function(response) {
                 <span>${activity.number}/44</span>
               </div>
             </div>
-            <div class="topic-notifications">
-              <p class="topic-notfication" >${topics[0].topic}</p>
-              <p class="topic-notfication" >${topics[1].topic}</p>
-              <p class="topic-notfication" >${topics[2].topic}</p>
-            </div>
+            ${notifications}
           </div>
 
       `

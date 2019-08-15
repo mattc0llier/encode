@@ -101,6 +101,8 @@ class Start extends React.Component {
   }
 
   render(){
+
+
     if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
      else return(
       <div className="form-center">
@@ -119,13 +121,17 @@ class Start extends React.Component {
             </div>
             <h2>What objective are you currently on?</h2>
 
-            <select id="objective-select" onChange={this.handleObjectiveChange}>
-              {this.state.objectives.map(objective => (
-                <React.Fragment key={objective.objective_id}>
-                  <option value={objective.number}>{objective.number} - {objective.objective}</option>
-                </React.Fragment>
-              ))}
-            </select>
+            {this.state.objectives.length > 0 ? (
+              <select id="objective-select" onChange={this.handleObjectiveChange}>
+                {this.state.objectives.map(objective => (
+                  <React.Fragment key={objective.objective_id}>
+                    <option value={objective.number}>{objective.number} - {objective.objective}</option>
+                  </React.Fragment>
+                ))}
+              </select>
+            ): <p>Course not available yet</p>}
+
+
             <button type="submit" className="start__button">Let's go</button>
           </form>
         </div>

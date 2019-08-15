@@ -435,7 +435,7 @@ function getActivitiesByUrlAndUserId(tabUrl) {
 
 // get all tags for given objective
 function getTagsByObjectiveId(id) {
-  return db.any('SELECT tags.topic, tags.id AS tag_id from tags, objective_tags WHERE tags.id = objective_tags.tag_id AND objective_tags.objective_id=$1', [id])
+  return db.any('SELECT tags.topic, tags.id AS tag_id, objective_tags.id AS objective_tag_id from tags, objective_tags WHERE tags.id = objective_tags.tag_id AND objective_tags.objective_id=$1', [id])
   .catch((error) => {
     console.log('failed to get tags', error);
   });
@@ -444,7 +444,26 @@ function getTagsByObjectiveId(id) {
 //get tags for a given objectives
 app.get('/api/objective/:id/tags', (req, res) => {
   const { id } = req.params;
-  db.any('SELECT tags.topic, tags.id AS tag_id from tags, objective_tags WHERE tags.id = objective_tags.tag_id AND objective_tags.objective_id=$1', [id])
+  db.any('SELECT tags.topic, tags.id AS tag_id FROM tags, objective_tags WHERE tags.id = objective_tags.tag_id AND objective_tags.objective_id=$1', [id])
+  .then(data => {
+    res.json(data)
+  })
+  .catch(error => res.json({ error: error.message }));
+})
+
+// get all tags
+app.get('/api/tags', (req, res) => {
+  db.any('SELECT tags.topic, tags.id AS tag_id FROM tags')
+  .then(data => {
+    res.json(data)
+  })
+  .catch(error => res.json({ error: error.message }));
+})
+// get all tags from search term
+app.get('/api/tags/search', (req, res) => {
+  console.log('req.query.q', req.query.q);
+  const searchTerm = req.query.q
+  db.any('SELECT tags.topic, tags.id AS tag_id FROM tags WHERE tags.topic LIKE $1', [searchTerm])
   .then(data => {
     res.json(data)
   })
@@ -466,7 +485,7 @@ app.get('/api/tabContext', async (req, res)  => {
   console.log('ext receive', req.params);
   console.log('req.query.url', req.query.url);
   const tabUrl = req.query.url
-  const user_id = 56
+  const user_id = 57
 
   const tabObjective = await getActivitiesByUrlAndUserId(tabUrl)
   console.log('confirmedObjective tabObjective', tabObjective);
