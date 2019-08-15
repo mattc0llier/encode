@@ -11,24 +11,16 @@ port.onMessage.addListener(function(response) {
   const topics = response.activity[1]
   if(activity.complete == false) {
 
-    if (!topics.length) {
-      const notifications = null
-      return notifications
-    } else {
-      // const topicString = topics.forEach(function(topic) {
-      //   const buildString = `<p class="topic-notfication" >${topic.topic}</p>`
-      //   return topicString.concat(buildString)
-      // });
-      // console.log(topicString);
-      const notifications = `
-        <ul class="topic-notfications">
-            ${topics.map(topic => `<li class="topic-notfication">${topic.topic}</li>`).join('')}
-         </ul>
-        `;
-        return notifications
-    }
+    console.log('topics.length', topics.length);
+    let notifications = ''
+    if (topics.length >= 0) {
+      console.log('topics.length hit');
+      const topicsNode = document.querySelector(".topic-notfications");
 
-    console.log('notifications', notifications);
+       notifications = `${topics.map(topic => `<li class="topic-notfication">${topic.topic}</li>`).join('')}`;
+      console.log('topicsNode', topicsNode);
+      console.log('notifications', notifications);
+    }
 
     // const createTitle = function(title, url) {
     //   return `<a href="${url}"><h2>${title}</h2></a>`;
@@ -230,7 +222,10 @@ port.onMessage.addListener(function(response) {
                 <span>${activity.number}/44</span>
               </div>
             </div>
-            ${notifications}
+            <ul class="topic-notfications">
+              ${notifications}
+            </ul>
+            </div>
           </div>
 
       `
@@ -240,6 +235,8 @@ port.onMessage.addListener(function(response) {
 
     }
   });
+
+
   document.body.addEventListener('mousedown', event => {
     console.log('mouse down hit');
     if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
@@ -272,5 +269,10 @@ port.onMessage.addListener(function(response) {
         });
       }
     });
+
+
+
+
+
   }
 });
