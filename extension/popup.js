@@ -1,140 +1,167 @@
-const formNode = document.querySelector("form");
+const port = chrome.runtime.connect({name: "url_activities"});
+port.postMessage({content_loaded: true});
+port.onMessage.addListener(function(response) {
+  console.log('response popup', response);
+  console.log('activities popup', response.activity[0]);
+  console.log('activity popup', response.activity[0][0]);
+  console.log('topics popup', response.activity[1]);
+  const activity = response.activity[0][0]
+  const topics = response.activity[1]
 
-const searchTagsNode = document.querySelector(".search-tags");
-const newTagsNode = document.querySelector(".new-tags");
-var submitAllTagsButton = document.getElementById('submit-all-tags');
+    //Start of popup tag search and form
+    const formNode = document.querySelector("form");
 
-let oldTags = []
-// onreceiving message add existing topics into old tags
+    const searchTagsNode = document.querySelector(".search-tags");
+    const existingTagsNode = document.querySelector(".existing-tags");
+    const newTagsNode = document.querySelector(".new-tags");
+    var submitAllTagsButton = document.getElementById('submit-all-tags');
 
-let newTags = []
+    let oldTags = topics
+    // onreceiving message add existing topics into old tags
+    if (!oldTags.length) {
+      const notifications = null
+      return notifications
+    } else {
+      const notifications = `
+        <ul class="topic-notfications">
+            ${topics.map(topic => `<li>${topic.topic}</li>`).join('')}
+         </ul>
+        `;
 
-let currentCharCount = 0;
+         existingTagsNode.innerHTML = notifications
+    }
 
-const charCount = function(input) {
-  const pNode = document.querySelector(".counter");
-  pNode.innerHTML = `Character count: ${input}`;
-  pNode.style.color = input < 25 ? "black" : "red";
-  currentCharCount = input;
-};
+    let newTags = []
 
-//serach all tags for topics that match what has been written in search
-formNode.addEventListener("keyup", function(event) {
-  const inputText = document.querySelector(".text-area-input");
-  charCount(inputText.textLength);
-  let searchTagArr = []
+    let currentCharCount = 0;
 
-  // newTagsNode.removeChild(event.target.parentElement);
-  // fetch all tags that includes what has been written so far and filter for those that already match
-  fetch(`http://localhost:9090/api/tags/search?q=${inputText.value}%`, {
-    mode: "cors"
-  })
-  .then(function(response) {
-    return response.json();
-  })
-  .then(body => {
-    console.log('body', body);
-    searchTagArr = body
-    searchTagArr.forEach(tag => {
-      console.log('tag', tag);
-      const currentSearchTagNode = document.createElement("div");
-      currentSearchTagNode.className = "currentTag";
-      currentSearchTagNode.innerHTML = `<span>${tag.topic}</span> `;
-      searchTagsNode.appendChild(currentSearchTagNode);
-    })
+    const charCount = function(input) {
+      const pNode = document.querySelector(".counter");
+      pNode.innerHTML = `Character count: ${input}`;
+      pNode.style.color = input < 25 ? "black" : "red";
+      currentCharCount = input;
+    };
 
+    //serach all tags for topics that match what has been written in search
+    formNode.addEventListener("keyup", function(event) {
+      const inputText = document.querySelector(".text-area-input");
+      charCount(inputText.textLength);
+      let searchTagArr = []
 
-
-  })
-  .catch(error => console.log(error.message));
-  // display returned filtered array in dropdown
-
-});
-
-// add a tag into the
-const submitTag = function(input) {
-  console.log('input submitTag', input);
-  // create tweet node
-  const tagNode = document.createElement("div");
-  tagNode.className = "tag";
-
-  //push input into tag array
-  newTags.push(input)
-  console.log('new tag array', newTags);
-  tagNode.innerHTML = `<span>${input}</span> `;
-  // create button node
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "x";
-  // appending delete button to tagNode
-  tagNode.appendChild(deleteButton);
-  //append tweet node to newTagsNode
-  newTagsNode.appendChild(tagNode);
-  // clears text area
-
-  //Setting event listener on delete button
-  deleteButton.addEventListener("click", function(event) {
-    let updatedTags = newTags.filter(word => word !== input)
-    console.log('updatedTags array - a.delete', updatedTags);
-    newTagsNode.removeChild(event.target.parentElement);
-
-  });
-
-  // init character count
-  charCount("0");
+      // newTagsNode.removeChild(event.target.parentElement);
+      // fetch all tags that includes what has been written so far and filter for those that already match
+      fetch(`http://localhost:9090/api/tags/search?q=${inputText.value}%`, {
+        mode: "cors"
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(body => {
+        console.log('body', body);
+        searchTagArr = body
+        searchTagArr.forEach(tag => {
+          console.log('tag', tag);
+          const currentSearchTagNode = document.createElement("div");
+          currentSearchTagNode.className = "currentTag";
+          currentSearchTagNode.innerHTML = `<span>${tag.topic}</span> `;
+          searchTagsNode.appendChild(currentSearchTagNode);
+        })
 
 
-};
 
-formNode.addEventListener("submit", function(event) {
-  event.preventDefault();
-  const inputText = document.querySelector(".text-area-input");
-  if (currentCharCount > 0) {
-    // submit tag and tag_id from filterArr
-    //if filterArr is empty submit inputText.value
-    const newTag = function(){
-      if (!searchTagsNode.length) {
-        return {
-          tag_id: null,
-          topic: inputText.value
+      })
+      .catch(error => console.log(error.message));
+      // display returned filtered array in dropdown
+
+    });
+
+    // add a tag into the
+    const submitTag = function(input) {
+      console.log('input submitTag', input);
+      // create tweet node
+      const tagNode = document.createElement("div");
+      tagNode.className = "tag";
+
+      //push input into tag array
+      newTags.push(input)
+      console.log('new tag array', newTags);
+      tagNode.innerHTML = `<span>${input}</span> `;
+      // create button node
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "x";
+      // appending delete button to tagNode
+      tagNode.appendChild(deleteButton);
+      //append tweet node to newTagsNode
+      newTagsNode.appendChild(tagNode);
+      // clears text area
+
+      //Setting event listener on delete button
+      deleteButton.addEventListener("click", function(event) {
+        let updatedTags = newTags.filter(word => word !== input)
+        console.log('updatedTags array - a.delete', updatedTags);
+        newTagsNode.removeChild(event.target.parentElement);
+
+      });
+
+      // init character count
+      charCount("0");
+
+
+    };
+
+    formNode.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const inputText = document.querySelector(".text-area-input");
+      if (currentCharCount > 0) {
+        // submit tag and tag_id from filterArr
+        //if filterArr is empty submit inputText.value
+        const newTag = function(){
+          if (!searchTagsNode.length) {
+            return {
+              tag_id: null,
+              topic: inputText.value
+            }
+          } else {
+            return {
+              tag_id: searchTagsNode.tag_id,
+              topic: searchTagsNode.topic
+            }
+          }
         }
-      } else {
-        return {
-          tag_id: searchTagsNode.tag_id,
-          topic: searchTagsNode.topic
-        }
+
+
+        console.log('newTag', newTag);
+        submitTag(inputText.value);
+        console.log('input submit', inputText.value);
       }
+      inputText.value = "";
+    });
+
+    // submit all new tags to the db
+    submitAllTagsButton.addEventListener("submit", function(event) {
+      event.preventDefault();
+      console.log('Submit all tags');
+    });
+
+    // Add the new tags arr to the db
+    const submitNewTagsToDb = function(newTags) {
+      fetch(`/api/tags`, {
+        method: 'POST',
+        body: JSON.stringify({
+          newTags: newTags,
+          objective_id: 1
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(body => {
+        console.log(body);
+      })
     }
 
 
-    console.log('newTag', newTag);
-    submitTag(inputText.value);
-    console.log('input submit', inputText.value);
-  }
-  inputText.value = "";
-});
-
-// submit all new tags to the db
-submitAllTagsButton.addEventListener("submit", function(event) {
-  event.preventDefault();
-  console.log('Submit all tags');
-});
-
-// Add the new tags arr to the db
-const submitNewTagsToDb = function(newTags) {
-  fetch(`/api/tags`, {
-    method: 'POST',
-    body: JSON.stringify({
-      newTags: newTags,
-      objective_id: 1
-    }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(function(response) {
-    return response.json();
-  })
-  .then(body => {
-    console.log(body);
-  })
-}
+})

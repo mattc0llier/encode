@@ -1,11 +1,5 @@
 console.log("content script is running");
 
-document.body.addEventListener('submit', event => {
-  if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
-    alert(event.target.className)
-  }
-});
-
 var port = chrome.runtime.connect({name: "url_activities"});
 port.postMessage({content_loaded: true});
 port.onMessage.addListener(function(response) {
