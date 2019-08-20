@@ -47,7 +47,7 @@ port.onMessage.addListener(function(response) {
       const inputText = document.querySelector(".text-area-input");
       charCount(inputText.textLength);
       let searchTagArr = []
-
+      searchTagsNode.innerHTML = '';
       // newTagsNode.removeChild(event.target.parentElement);
       // fetch all tags that includes what has been written so far and filter for those that already match
       fetch(`http://localhost:9090/api/tags/search?q=${inputText.value}%`, {
@@ -64,6 +64,17 @@ port.onMessage.addListener(function(response) {
           const currentSearchTagNode = document.createElement("div");
           currentSearchTagNode.className = "currentTag";
           currentSearchTagNode.innerHTML = `<span>${tag.topic}</span> `;
+          console.log('oldTags for add button', oldTags);
+          console.log('tag.topic for add button', typeof tag.topic);
+          //if tag.topic is not included in current tags then add an add button
+          if(oldTags.includes(tag.topic) == false){
+            // create button node
+            const addButton = document.createElement("button");
+            addButton.className = "add-button";
+            addButton.textContent = "+";
+            // appending delete button to tagNode
+            currentSearchTagNode.appendChild(addButton);
+          }
           searchTagsNode.appendChild(currentSearchTagNode);
         })
 
@@ -128,13 +139,33 @@ port.onMessage.addListener(function(response) {
             }
           }
         }
-
-
         console.log('newTag', newTag);
         submitTag(inputText.value);
         console.log('input submit', inputText.value);
       }
       inputText.value = "";
+    });
+
+    // add an existing tag from add-addButton
+    const addButton = document.querySelector(".search-tags");
+
+    addButton.addEventListener("click", function(event) {
+      console.log('add-button click');
+        // submit tag and tag_id from filterArr
+        //if filterArr is empty submit inputText.value
+        const newTag = function(){
+          if (searchTagsNode.length) {
+            return {
+              tag_id: searchTagsNode.tag_id,
+              topic: searchTagsNode.topic
+            }
+          }
+        }
+
+
+        console.log('newTag', newTag);
+        console.log('searchTagsNode.topic', searchTagsNode.topic);
+        submitTag(searchTagsNode.topic);
     });
 
     // submit all new tags to the db

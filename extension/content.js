@@ -15,10 +15,8 @@ port.onMessage.addListener(function(response) {
     let notifications = ''
     if (topics.length >= 0) {
       console.log('topics.length hit');
-      const topicsNode = document.querySelector(".topic-notfications");
 
        notifications = `${topics.map(topic => `<li class="topic-notfication">${topic.topic}</li>`).join('')}`;
-      console.log('topicsNode', topicsNode);
       console.log('notifications', notifications);
     }
 
@@ -229,9 +227,9 @@ port.onMessage.addListener(function(response) {
           </div>
 
       `
+      debugger
 
       document.body.appendChild(animation);
-
 
     }
   });
