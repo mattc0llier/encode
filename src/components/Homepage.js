@@ -43,8 +43,8 @@ class Homepage extends React.Component {
                   <div className="numberCircle">3</div>
                 </div>
                 <div className="text">
-                  <h2>Prove your personal growth to Lambda School</h2>
-                  <p>We can help you prove the progress you have made by automatically summarising your learning activity.</p>
+                  <h2>Share your personal growth to Lambda School</h2>
+                  <p>We can help you share the progress you have made by automatically summarising your learning activity.</p>
                   <p>Build your ideal public educational profile and what you share is up to you.</p>
                 </div>
               </div>

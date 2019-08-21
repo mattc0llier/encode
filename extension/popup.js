@@ -42,11 +42,12 @@ port.onMessage.addListener(function(response) {
       currentCharCount = input;
     };
 
+    let searchTagArr = []
     //serach all tags for topics that match what has been written in search
     formNode.addEventListener("keyup", function(event) {
       const inputText = document.querySelector(".text-area-input");
       charCount(inputText.textLength);
-      let searchTagArr = []
+
       searchTagsNode.innerHTML = '';
       // newTagsNode.removeChild(event.target.parentElement);
       // fetch all tags that includes what has been written so far and filter for those that already match
@@ -67,7 +68,7 @@ port.onMessage.addListener(function(response) {
           console.log('oldTags for add button', oldTags);
           console.log('tag.topic for add button', typeof tag.topic);
           //if tag.topic is not included in current tags then add an add button
-          if(oldTags.includes(tag.topic) == false){
+          if(oldTags.includes(tag.topic == false)){
             // create button node
             const addButton = document.createElement("button");
             addButton.className = "add-button";
@@ -126,16 +127,17 @@ port.onMessage.addListener(function(response) {
       if (currentCharCount > 0) {
         // submit tag and tag_id from filterArr
         //if filterArr is empty submit inputText.value
+        console.log('new tag buttoon searchTagArr', searchTagArr);
         const newTag = function(){
-          if (!searchTagsNode.length) {
+          if (!searchTagArr.length) {
             return {
               tag_id: null,
               topic: inputText.value
             }
           } else {
             return {
-              tag_id: searchTagsNode.tag_id,
-              topic: searchTagsNode.topic
+              tag_id: searchTagArr.tag_id,
+              topic: searchTagArr.topic
             }
           }
         }
@@ -151,48 +153,60 @@ port.onMessage.addListener(function(response) {
 
     addButton.addEventListener("click", function(event) {
       console.log('add-button click');
+      console.log('new tag buttoon searchTagArr', searchTagArr);
+
         // submit tag and tag_id from filterArr
         //if filterArr is empty submit inputText.value
         const newTag = function(){
-          if (searchTagsNode.length) {
+          if (!!searchTagArr.length) {
             return {
-              tag_id: searchTagsNode.tag_id,
-              topic: searchTagsNode.topic
+              tag_id: searchTagArr[0].tag_id,
+              topic: searchTagArr[0].topic
             }
           }
         }
 
+        //currentSearchTagNode
 
+        //currently just doing the first in an array - needs to do the objective selected
         console.log('newTag', newTag);
-        console.log('searchTagsNode.topic', searchTagsNode.topic);
-        submitTag(searchTagsNode.topic);
+        console.log('searchTagArr.topic', searchTagArr[0].topic);
+        submitTag(searchTagArr[0].topic);
     });
 
     // submit all new tags to the db
-    submitAllTagsButton.addEventListener("submit", function(event) {
-      event.preventDefault();
+    submitAllTagsButton.addEventListener("click", function(event) {
       console.log('Submit all tags');
-    });
 
-    // Add the new tags arr to the db
-    const submitNewTagsToDb = function(newTags) {
-      fetch(`/api/tags`, {
-        method: 'POST',
-        body: JSON.stringify({
-          newTags: newTags,
-          objective_id: 1
-        }),
-        headers: {
-          'Content-Type': 'application/json'
+      const sumbitAllNewTagsArr = newTags.map(tagTopic => (
+        {
+          newTagTopic: tagTopic,
+          tag_id: null
         }
-      })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(body => {
-        console.log(body);
-      })
-    }
+      ))
+      console.log('sumbitAllNewTagsArr', sumbitAllNewTagsArr);
 
-
+      const newTagsArr = sumbitAllNewTagsArr.filter(tag => !tag.tag_id)
+      const existingTags = sumbitAllNewTagsArr.filter(tag => !!tag.tag_id)
+      // Add the new tags arr to the db
+      const submitNewTagsToDb = function(sumbitAllNewTagsArr) {
+        fetch(`/api/tags`, {
+          method: 'POST',
+          body: JSON.stringify({
+            sumbitAllExistingTagsArr: sumbitAllExistingTagsArr,
+            sumbitAllNewTagsArr: sumbitAllNewTagsArr,
+            objective_id: activity.objective_id
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(body => {
+          console.log(body);
+        })
+      }
+    });
 })

@@ -470,14 +470,52 @@ app.get('/api/tags/search', (req, res) => {
   .catch(error => res.json({ error: error.message }));
 })
 
-//add new tags to objective with objective_tag
+//add new tags to db
+const createNewTags = async (newTags) => {
+  const insertTagsQuery = format("INSERT INTO tags (topic) VALUES %L RETURNING id, topic", newTags)
+  try{
+    const  {rows} = await db.query(insertTagsQuery);
+    return rows
+  } catch (error) {
+    res.status(500).send({update: "Tags not created"});
+  }
+}
+//add new objectiveTags to db
+const insertObjectiveTags = async (objectiveTags) => {
+  const insertObjectiveTagsQuery = format("INSERT INTO tags (topic) VALUES %L RETURNING id, topic", objectiveTags)
 
-// add array of new topic tags to topic
-// app.post('/api/tags', (req, res) => {
-//   const {newTags, objective_id} = req.body
-//   db.one('INSERT INTO tags ( course_id, user_id, complete, completion_time, created_at) VALUES %L RETURNING id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at', [])
-//
-// })
+    const  {rows} = await db.query(insertObjectiveTagsQuery);
+    return rows
+}
+
+const formatObjectiveTagsToInsert = (newTags, existingTags) => {
+  newTags.map(tag => (
+    {
+      tag_id: tag.tag_id,
+      objective_id: objective_id
+    }
+  ))
+
+  const formattedObjectiveTags =  existingTags.concat(newTags)
+  return formattedObjectiveTags
+}
+
+// add array of new topic tags to topic [{topic: ?, objective_id: ?}, {}]
+app.post('/api/tags', async (req, res) => {
+  const {sumbitAllExistingTagsArr, sumbitAllNewTagsArr, objective_id} = req.body
+
+  try {
+    const newTags = await createNewTags(newTagsArr)
+    const formattedObjectiveTagsToInsert = await formatObjectiveTagsToInsert(newTags, existingTags)
+    const rows = await insertObjectiveTags(formattedActivitiesToInsert)
+    res.status(200).send({update: "success"});
+    res.end()
+  } catch (error) {
+    res.status(500).send({update: "Activities not created"});
+  }
+
+  db.any('INSERT INTO tags ( course_id, user_id, complete, completion_time, created_at) VALUES RETURNING id', [])
+})
 
 //receive current context tab activities and topics
 app.get('/api/tabContext', async (req, res)  => {
