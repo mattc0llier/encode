@@ -10,12 +10,25 @@ port.onMessage.addListener(function(response) {
 
     //Start of popup tag search and form
     const formNode = document.querySelector("form");
+    const activitiesNode = document.querySelector(".page-activities");
 
-    const searchTagsNode = document.querySelector(".search-tags");
+    const searchTagsNode = document.querySelector("#searchTags");
     const existingTagsNode = document.querySelector(".existing-tags");
     const newTagsNode = document.querySelector(".new-tags");
-    var submitAllTagsButton = document.getElementById('submit-all-tags');
+    const submitAllTagsButton = document.querySelector('#submit-all-tags');
 
+
+    //activities
+    const activityNode = document.createElement("div");
+    activityNode.className = "activity";
+    const existingActivity = `
+      <p>✅${activity.objective}</p>
+    `;
+    activityNode.innerHTML = existingActivity
+
+    activitiesNode.appendChild(activityNode)
+
+    //tags
     let oldTags = topics
     // onreceiving message add existing topics into old tags
     if (!oldTags.length) {
@@ -43,7 +56,7 @@ port.onMessage.addListener(function(response) {
     };
 
     let searchTagArr = []
-    //serach all tags for topics that match what has been written in search
+    // serach all tags for topics that match what has been written in search
     formNode.addEventListener("keyup", function(event) {
       const inputText = document.querySelector(".text-area-input");
       charCount(inputText.textLength);
@@ -60,29 +73,15 @@ port.onMessage.addListener(function(response) {
       .then(body => {
         console.log('body', body);
         searchTagArr = body
-        searchTagArr.forEach(tag => {
-          console.log('tag', tag);
-          const currentSearchTagNode = document.createElement("div");
-          currentSearchTagNode.className = "currentTag";
-          currentSearchTagNode.innerHTML = `<span>${tag.topic}</span> `;
-          console.log('oldTags for add button', oldTags);
-          console.log('tag.topic for add button', typeof tag.topic);
-          //if tag.topic is not included in current tags then add an add button
-          if(oldTags.includes(tag.topic == false)){
-            // create button node
-            const addButton = document.createElement("button");
-            addButton.className = "add-button";
-            addButton.textContent = "+";
-            // appending delete button to tagNode
-            currentSearchTagNode.appendChild(addButton);
-          }
-          searchTagsNode.appendChild(currentSearchTagNode);
-        })
+        const searchTags = `
+            ${searchTagArr.map(existingTags => `<option value="${existingTags.topic}" class="currentTag">`).join('')}
+        `;
 
-
+        searchTagsNode.innerHTML = searchTags
 
       })
       .catch(error => console.log(error.message));
+
       // display returned filtered array in dropdown
 
     });
@@ -97,7 +96,7 @@ port.onMessage.addListener(function(response) {
       //push input into tag array
       newTags.push(input)
       console.log('new tag array', newTags);
-      tagNode.innerHTML = `<span>${input}</span> `;
+      tagNode.innerHTML = `<p>${input.topic}</p> `;
       // create button node
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "x";
@@ -114,13 +113,11 @@ port.onMessage.addListener(function(response) {
         newTagsNode.removeChild(event.target.parentElement);
 
       });
-
       // init character count
       charCount("0");
-
-
     };
 
+    //add what is in the text box to newTagArr and see if it exist already
     formNode.addEventListener("submit", function(event) {
       event.preventDefault();
       const inputText = document.querySelector(".text-area-input");
@@ -136,42 +133,16 @@ port.onMessage.addListener(function(response) {
             }
           } else {
             return {
-              tag_id: searchTagArr.tag_id,
-              topic: searchTagArr.topic
-            }
-          }
-        }
-        console.log('newTag', newTag);
-        submitTag(inputText.value);
-        console.log('input submit', inputText.value);
-      }
-      inputText.value = "";
-    });
-
-    // add an existing tag from add-addButton
-    const addButton = document.querySelector(".search-tags");
-
-    addButton.addEventListener("click", function(event) {
-      console.log('add-button click');
-      console.log('new tag buttoon searchTagArr', searchTagArr);
-
-        // submit tag and tag_id from filterArr
-        //if filterArr is empty submit inputText.value
-        const newTag = function(){
-          if (!!searchTagArr.length) {
-            return {
               tag_id: searchTagArr[0].tag_id,
               topic: searchTagArr[0].topic
             }
           }
         }
-
-        //currentSearchTagNode
-
-        //currently just doing the first in an array - needs to do the objective selected
-        console.log('newTag', newTag);
-        console.log('searchTagArr.topic', searchTagArr[0].topic);
-        submitTag(searchTagArr[0].topic);
+        const newTagOutput = newTag()
+        console.log('newTagOutput', newTagOutput);
+        submitTag(newTagOutput);
+      }
+      inputText.value = "";
     });
 
     // submit all new tags to the db

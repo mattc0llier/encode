@@ -4,31 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+  .topic-notfications {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    text-align: left;
+    padding-left: 0;
+  }
+  li {
+    text-align: center;
+    border-radius: 3px;
+    padding: 0.3rem;
+    background-color: #FF6363;
+    text-decoration: none;
+    color: white;
+    margin: 0 0.3rem 0.3rem 0;
+  }
+  </style>
   <title>encode</title>
 </head>
 <body>
+  <main>
   <h1>encode</h1>
+  <button type="submit" name="button">Login to encode</button>
 
-    <button type="submit" name="button">Login to encode</button>
-
-  <h2>Topic Tags</h2>
+  <div class="page-activities">
+  </div>
+  <div class="existing-tags">
+  </div>
+  <p>New tags</p>
+  <div class="new-tags">
+  </div>
   <form>
-    <textarea rows="1" cols="50" class="text-area-input"></textarea>
+    <input type="text" class="text-area-input" id="default" list="searchTags" placeholder="e.g. JavaScript"/>
+    <datalist id="searchTags">
+    </datalist>
     <button type="submit">Add tag</button>
     <div class="counter">
     </div>
   </form>
-  <main>
-    <h2>Search tags</h2>
-    <div class="search-tags">
-    </div>
-    <h2>Current tags</h2>
-    <div class="existing-tags">
-    </div>
-    <h2>New tags</h2>
-    <div class="new-tags">
-    </div>
-    <br>
     <button type="submit" id="submit-all-tags">Submit new tags</button>
   </main>
   <script src="./popup.js"></script>
