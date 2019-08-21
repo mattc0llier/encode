@@ -22,7 +22,9 @@ port.onMessage.addListener(function(response) {
     const activityNode = document.createElement("div");
     activityNode.className = "activity";
     const existingActivity = `
-      <p>✅${activity.objective}</p>
+      <span style="display: ${activity.complete == false ? 'none' : 'block' }">✅</span>
+      <span style="display: ${activity.complete == true ? 'none' : 'block' }">🤔</span>
+      <p>${activity.objective}</p>
     `;
     activityNode.innerHTML = existingActivity
 

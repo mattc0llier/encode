@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <style>
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  main {
+    margin: 1rem;
+  }
+  h1 {
+    color: #FF6363;
+    margin: 0;
+    padding: 1rem;
+  }
+  nav {
+    background-color: #5214FF;
+    text-align: center;
+  }
   .topic-notfications {
     display: flex;
     flex-wrap: wrap;
@@ -21,29 +37,37 @@
     color: white;
     margin: 0 0.3rem 0.3rem 0;
   }
+  .activity {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
   </style>
   <title>encode</title>
 </head>
 <body>
-  <main>
-  <h1>encode</h1>
-  <button type="submit" name="button">Login to encode</button>
 
-  <div class="page-activities">
-  </div>
-  <div class="existing-tags">
-  </div>
-  <p>New tags</p>
-  <div class="new-tags">
-  </div>
-  <form>
-    <input type="text" class="text-area-input" id="default" list="searchTags" placeholder="e.g. JavaScript"/>
-    <datalist id="searchTags">
-    </datalist>
-    <button type="submit">Add tag</button>
-    <div class="counter">
+  <nav>
+    <h1>encode</h1>
+  </nav>
+  <main>
+    <button type="submit" name="button">Login to encode</button>
+
+    <div class="page-activities">
     </div>
-  </form>
+    <div class="existing-tags">
+    </div>
+    <p>New tags</p>
+    <div class="new-tags">
+    </div>
+    <form>
+      <input type="text" class="text-area-input" id="default" list="searchTags" placeholder="e.g. JavaScript"/>
+      <datalist id="searchTags">
+      </datalist>
+      <button type="submit">Add tag</button>
+      <div class="counter">
+      </div>
+    </form>
     <button type="submit" id="submit-all-tags">Submit new tags</button>
   </main>
   <script src="./popup.js"></script>
