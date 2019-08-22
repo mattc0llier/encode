@@ -104,6 +104,8 @@ class Settings extends React.Component {
           <button className="logout" onClick={this.handleLogout}>Log out</button>
           <h3>Your settings</h3>
           <form  onSubmit={this.handleUpdateSettingsSubmit}>
+            <label for="photo">Appear in public leaderboard</label>
+            <input name="photo" type="radio" className="settings__input" onChange={} />
             <label for="photo">Profile picture url</label>
             <input name="photo" type="url" className="settings__input" onChange={this.handleProfilePictureChange} placeholder={this.state.profilePicture ? this.state.profilePicture : "profile picture url"} />
             <label for="first-name">Bio</label>

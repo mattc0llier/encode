@@ -472,41 +472,44 @@ app.get('/api/tags/search', (req, res) => {
 
 //add new tags to db
 const createNewTags = async (newTags) => {
-  const insertTagsQuery = format("INSERT INTO tags (topic) VALUES %L RETURNING id, topic", newTags)
-  try{
-    const  {rows} = await db.query(insertTagsQuery);
-    return rows
-  } catch (error) {
-    res.status(500).send({update: "Tags not created"});
-  }
-}
-//add new objectiveTags to db
-const insertObjectiveTags = async (objectiveTags) => {
-  const insertObjectiveTagsQuery = format("INSERT INTO tags (topic) VALUES %L RETURNING id, topic", objectiveTags)
-
-    const  {rows} = await db.query(insertObjectiveTagsQuery);
-    return rows
-}
-
-const formatObjectiveTagsToInsert = (newTags, existingTags) => {
-  newTags.map(tag => (
-    {
-      tag_id: tag.tag_id,
-      objective_id: objective_id
-    }
+  const formattedNewTags = newTags.map(tag => (
+    [tag.topic]
   ))
+  console.log('formattedNewTags', formattedNewTags);
+  const insertTagsQuery = format("INSERT INTO tags (topic) VALUES %L RETURNING id, topic", formattedNewTags)
+  const {rows} = await db.query(insertTagsQuery);
+  return rows
+}
 
-  const formattedObjectiveTags =  existingTags.concat(newTags)
+const formatObjectiveTagsToInsert = (newTagsInDb, existingTags) => {
+  const formattedNewTabs = newTagsInDb.map(tag => ([tag]))
+  const formattedOldTabs = existingTags.map(tag => ([tag]))
+  const formattedObjectiveTags =  formattedNewTabs.concat(formattedOldTabs)
   return formattedObjectiveTags
 }
 
+//add new objectiveTags to db
+// const insertObjectiveTags = async (objectiveTags) => {
+//   const formattedObjectiveTags = objectiveTags.map(objectiveTag => (
+//     [objectiveTags.topic]
+//   ))
+//   const insertObjectiveTagsQuery = format("INSERT INTO objectiveTags (tag_id, objective_id) VALUES %L RETURNING id, tag_id, objective_id", objectiveTags)
+//
+//     const  {rows} = await db.query(insertObjectiveTagsQuery);
+//     return rows
+// }
+
 // add array of new topic tags to topic [{topic: ?, objective_id: ?}, {}]
 app.post('/api/tags', async (req, res) => {
-  const {sumbitAllExistingTagsArr, sumbitAllNewTagsArr, objective_id} = req.body
+  const {newTags, objective_id} = req.body
+  const newTagsArr = newTags.filter(tag => !tag.tag_id)
+  const existingTags = newTags.filter(tag => !!tag.tag_id)
+  console.log('newTagsArr', newTagsArr);
+  console.log('existingTags', existingTags);
 
   try {
-    const newTags = await createNewTags(newTagsArr)
-    const formattedObjectiveTagsToInsert = await formatObjectiveTagsToInsert(newTags, existingTags)
+    const newTagsInDb = await createNewTags(newTagsArr)
+    const formattedObjectiveTagsToInsert = await formatObjectiveTagsToInsert(newTagsInDb, existingTags)
     const rows = await insertObjectiveTags(formattedActivitiesToInsert)
     res.status(200).send({update: "success"});
     res.end()

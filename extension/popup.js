@@ -11,7 +11,6 @@ port.onMessage.addListener(function(response) {
     //Start of popup tag search and form
     const formNode = document.querySelector("form");
     const activitiesNode = document.querySelector(".page-activities");
-
     const searchTagsNode = document.querySelector("#searchTags");
     const existingTagsNode = document.querySelector(".existing-tags");
     const newTagsNode = document.querySelector(".new-tags");
@@ -27,11 +26,13 @@ port.onMessage.addListener(function(response) {
       <p>${activity.objective}</p>
     `;
     activityNode.innerHTML = existingActivity
-
     activitiesNode.appendChild(activityNode)
 
     //tags
     let oldTags = topics
+    let newTags = []
+    let searchTagArr = []
+
     // onreceiving message add existing topics into old tags
     if (!oldTags.length) {
       const notifications = null
@@ -42,27 +43,13 @@ port.onMessage.addListener(function(response) {
             ${topics.map(topic => `<li>${topic.topic}</li>`).join('')}
          </ul>
         `;
-
-         existingTagsNode.innerHTML = notifications
+      existingTagsNode.innerHTML = notifications
     }
 
-    let newTags = []
 
-    let currentCharCount = 0;
-
-    const charCount = function(input) {
-      const pNode = document.querySelector(".counter");
-      pNode.innerHTML = `Character count: ${input}`;
-      pNode.style.color = input < 25 ? "black" : "red";
-      currentCharCount = input;
-    };
-
-    let searchTagArr = []
     // serach all tags for topics that match what has been written in search
     formNode.addEventListener("keyup", function(event) {
       const inputText = document.querySelector(".text-area-input");
-      charCount(inputText.textLength);
-
       searchTagsNode.innerHTML = '';
       // newTagsNode.removeChild(event.target.parentElement);
       // fetch all tags that includes what has been written so far and filter for those that already match
@@ -78,27 +65,23 @@ port.onMessage.addListener(function(response) {
         const searchTags = `
             ${searchTagArr.map(existingTags => `<option value="${existingTags.topic}" class="currentTag">`).join('')}
         `;
-
         searchTagsNode.innerHTML = searchTags
-
       })
       .catch(error => console.log(error.message));
-
-      // display returned filtered array in dropdown
-
     });
 
-    // add a tag into the
+
+    // add a tag into the array to be be added to db
     const submitTag = function(input) {
       console.log('input submitTag', input);
       // create tweet node
-      const tagNode = document.createElement("div");
-      tagNode.className = "tag";
+      const tagNode = document.createElement("ul");
+      tagNode.className = "topic-notifications";
 
       //push input into tag array
       newTags.push(input)
       console.log('new tag array', newTags);
-      tagNode.innerHTML = `<p>${input.topic}</p> `;
+      tagNode.innerHTML = `<li>${input.topic}</li> `;
       // create button node
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "x";
@@ -115,26 +98,27 @@ port.onMessage.addListener(function(response) {
         newTagsNode.removeChild(event.target.parentElement);
 
       });
-      // init character count
-      charCount("0");
     };
 
     //add what is in the text box to newTagArr and see if it exist already
     formNode.addEventListener("submit", function(event) {
       event.preventDefault();
-      const inputText = document.querySelector(".text-area-input");
-      if (currentCharCount > 0) {
+      console.log('add tag hit');
+      const inputTextArea = document.querySelector(".text-area-input");
+      let inputTextValue = inputTextArea.value
         // submit tag and tag_id from filterArr
-        //if filterArr is empty submit inputText.value
+        //if filterArr is empty submit inputTex .value
         console.log('new tag buttoon searchTagArr', searchTagArr);
+          console.log('new tag buttoon searchTagArr', inputTextValue);
         const newTag = function(){
           if (!searchTagArr.length) {
             return {
               tag_id: null,
-              topic: inputText.value
+              topic: inputTextValue
             }
           } else {
             return {
+              //just getting the first in array rather than actual tag object
               tag_id: searchTagArr[0].tag_id,
               topic: searchTagArr[0].topic
             }
@@ -143,31 +127,25 @@ port.onMessage.addListener(function(response) {
         const newTagOutput = newTag()
         console.log('newTagOutput', newTagOutput);
         submitTag(newTagOutput);
-      }
-      inputText.value = "";
+
+      inputTextValue = "";
     });
 
     // submit all new tags to the db
     submitAllTagsButton.addEventListener("click", function(event) {
       console.log('Submit all tags');
+      console.log('newTags - Submit all', newTags);
 
-      const sumbitAllNewTagsArr = newTags.map(tagTopic => (
-        {
-          newTagTopic: tagTopic,
-          tag_id: null
-        }
-      ))
-      console.log('sumbitAllNewTagsArr', sumbitAllNewTagsArr);
-
-      const newTagsArr = sumbitAllNewTagsArr.filter(tag => !tag.tag_id)
-      const existingTags = sumbitAllNewTagsArr.filter(tag => !!tag.tag_id)
       // Add the new tags arr to the db
-      const submitNewTagsToDb = function(sumbitAllNewTagsArr) {
-        fetch(`/api/tags`, {
+      const submitNewTagsToDb = function(newTags) {
+        console.log('submitNewTagsToDb hit');
+        console.log('activity.objective_id', activity.objective_id);
+        console.log('newTags', newTags);
+
+        fetch(`http://localhost:9090/api/tags`, {
           method: 'POST',
           body: JSON.stringify({
-            sumbitAllExistingTagsArr: sumbitAllExistingTagsArr,
-            sumbitAllNewTagsArr: sumbitAllNewTagsArr,
+            newTags: newTags,
             objective_id: activity.objective_id
           }),
           headers: {
@@ -181,5 +159,6 @@ port.onMessage.addListener(function(response) {
           console.log(body);
         })
       }
+      submitNewTagsToDb(newTags)
     });
 })
