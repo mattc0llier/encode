@@ -128,7 +128,7 @@ port.onMessage.addListener(function(response) {
         console.log('newTagOutput', newTagOutput);
         submitTag(newTagOutput);
 
-      inputTextValue = "";
+      inputTextArea.value = "";
     });
 
     // submit all new tags to the db
@@ -156,6 +156,7 @@ port.onMessage.addListener(function(response) {
           return response.json();
         })
         .then(body => {
+          newTags = []
           console.log(body);
         })
       }

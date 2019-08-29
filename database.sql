@@ -12,6 +12,8 @@ DROP TABLE organizations;
 DROP TABLE users;
 DROP TABLE activities;
 DROP TABLE scores;
+DROP TABLE tags;
+DROP TABLE objective_tags;
 
 -- Insert this code inside your better_change database
 CREATE TABLE organizations(
@@ -820,8 +822,7 @@ INSERT INTO tags (id, topic) VALUES (248, 'array.map');
 INSERT INTO tags (id, topic) VALUES (249, 'array.forEach');
 INSERT INTO tags (id, topic) VALUES (250, 'annonymous-function');
 INSERT INTO tags (id, topic) VALUES (251, 'array-method');
-
-ALTER SEQUENCE scores_id_seq RESTART WITH 247 INCREMENT BY 1;
+ALTER SEQUENCE tags_id_seq RESTART WITH 252 INCREMENT BY 1;
 
 INSERT INTO objective_tags
   (id, objective_id, tag_id)
