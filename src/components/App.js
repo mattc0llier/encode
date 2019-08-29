@@ -8,7 +8,7 @@ import Feed from './Feed';
 import Footer from './Footer';
 import NewUser from './NewUser';
 import Login from './Login';
-import Start from './Start';
+import Sync from './Sync';
 import Settings from './Settings';
 import PrivateRoute from './PrivateRoute';
 import CelebrationAnimation from './CelebrationAnimation';
@@ -182,8 +182,8 @@ class App extends React.Component {
                   receiveCurrentUserObjectiveUpdate={this.receiveCurrentUserObjectiveUpdate}
                   />)}
                 />
-                <Route path="/start"
-                  render={(props) => (<Start {...props} currentUser={this.state.currentUser} />)}
+                <Route path="/sync"
+                  render={(props) => (<Sync {...props} currentUser={this.state.currentUser} />)}
                 />
                 <PrivateRoute path="/settings"
                   isLoggedIn={this.state.isLoggedIn}

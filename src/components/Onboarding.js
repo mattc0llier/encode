@@ -11,12 +11,12 @@ class Oboarding extends React.Component {
     this.state = { display: "how"}
 
     this.handleOnClick = this.handleOnClick.bind(this)
-    this.handleStartClick = this.handleStartClick.bind(this)
+    this.handleSyncClick = this.handleSyncClick.bind(this)
   }
 
-  handleStartClick(){
+  handleSyncClick(){
     this.setState({
-      display: "start"
+      display: "Sync"
     })
   }
   handleOnClick(){
@@ -26,8 +26,8 @@ class Oboarding extends React.Component {
   }
 
   render(){
-    if (this.state.display == "start") return(
-      <Redirect to='/start' />
+    if (this.state.display == "Sync") return(
+      <Redirect to='/sync' />
     )
     else if (this.state.display == "setup") return(
       <div className="onboarding">
@@ -63,7 +63,7 @@ class Oboarding extends React.Component {
               </div>
             </div>
             <div className="button-cta">
-                <button type="button" name="button" onClick={this.handleStartClick}>Start</button>
+                <button type="button" name="button" onClick={this.handleSyncClick}>Sync</button>
             </div>
           </div>
         </div>

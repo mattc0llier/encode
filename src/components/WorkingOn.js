@@ -17,8 +17,8 @@ const WorkingOn = ({ userProfileObjectivesObject, receiveNextUserObjective, rece
         <div className="next-course">
           <p id="what-to-learn" >What would you like to learn?</p>
           <div className="button-cta">
-            <Link to='/start'>
-              <button type="button" name="button">Start a new course</button>
+            <Link to='/sync'>
+              <button type="button" name="button">Sync your current course</button>
             </Link>
           </div>
         </div>
@@ -44,7 +44,7 @@ const WorkingOn = ({ userProfileObjectivesObject, receiveNextUserObjective, rece
           currentUserProfile={currentUserProfile}
         />
       ) : (
-        <Link to='/start'><h2>Pick a new course</h2></Link>
+        <Link to='/sync'><h2>Pick a new course</h2></Link>
       )}
 
 

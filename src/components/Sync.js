@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import '../../styles/components/Start.scss';
+import '../../styles/components/Sync.scss';
 
 
-class Start extends React.Component {
+class Sync extends React.Component {
   constructor(){
     super();
 
@@ -13,7 +13,7 @@ class Start extends React.Component {
     this.handleCourseClick = this.handleCourseClick.bind(this);
     this.fetchObjectives = this.fetchObjectives.bind(this);
     this.handleObjectiveChange = this.handleObjectiveChange.bind(this);
-    this.handleUserStartPointSubmit = this.handleUserStartPointSubmit.bind(this);
+    this.handleUserSyncPointSubmit = this.handleUserSyncPointSubmit.bind(this);
     this.createUserActivities = this.createUserActivities.bind(this);
   }
 
@@ -42,7 +42,7 @@ class Start extends React.Component {
     })
   }
 
-  handleUserStartPointSubmit(event){
+  handleUserSyncPointSubmit(event){
     event.preventDefault();
     this.createUserActivities()
     this.setState({
@@ -106,11 +106,11 @@ class Start extends React.Component {
     if (this.state.redirect) return(<Redirect to={`/users/${this.props.currentUser.username}`} />)
      else return(
       <div className="form-center">
-        <div className="start">
+        <div className="sync">
 
         <h2>Select your course</h2>
 
-          <form onSubmit={this.handleUserStartPointSubmit}>
+          <form onSubmit={this.handleUserSyncPointSubmit}>
             <div id="course-select" >
               {this.state.courses.map(course => (
                 <div key={course.id} className="course-summary" onClick={() => this.handleCourseClick(course.id)}>
@@ -132,7 +132,7 @@ class Start extends React.Component {
             ): <p>Course not available yet</p>}
 
 
-            <button type="submit" className="start__button">Let's go</button>
+            <button type="submit" className="sync__button">Let's go</button>
           </form>
         </div>
       </div>
@@ -140,4 +140,4 @@ class Start extends React.Component {
   }
 }
 
-export default Start;
+export default Sync;
