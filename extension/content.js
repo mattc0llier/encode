@@ -16,7 +16,7 @@ port.onMessage.addListener(function(response) {
     if (topics.length >= 0) {
       console.log('topics.length hit');
 
-       notifications = `${topics.map(topic => `<li class="topic-notfication">${topic.topic}</li>`).join('')}`;
+       notifications = `${topics.map(topic => `<span class="topic-notification">${topic.topic}</span>`).join('')}`;
       console.log('notifications', notifications);
     }
 
@@ -115,20 +115,20 @@ port.onMessage.addListener(function(response) {
             display: flex;
             justify-content: flex-end;
             flex-direction: row;
+            flex-wrap: wrap;
           }
-          .topic-notfication {
+          .topic-notification {
             display: flex;
-            justify-content: space-between;
-            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 10px;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+            border-radius: 3px;
             background-color: #FF6363;
             color: #ffffff;
             font-style: normal;
             font-weight: 500;
-            font-size: 18px;
-            line-height: 21px;
-            padding: 0.8rem;
-            margin: 0.7rem 0 0.7rem 0.7rem;
+            font-size: 1rem;
+            line-height: 10px;
+            padding: 0.6rem;
+            margin: 0.7rem 0.7rem 0 0;
           }
           .lhs-information{
             display: flex;
@@ -220,18 +220,19 @@ port.onMessage.addListener(function(response) {
                 <span>${activity.number}/44</span>
               </div>
             </div>
-            <ul class="topic-notfications">
+            <div class="topic-notifications">
               ${notifications}
-            </ul>
+            </div>
             </div>
           </div>
 
       `
-      debugger
+      debugger;
 
       document.body.appendChild(animation);
-
+      debugger;
     }
+    debugger;
   });
 
 
@@ -254,7 +255,6 @@ port.onMessage.addListener(function(response) {
 
   document.body.addEventListener('mouseout', event => {
     if(event.target.matches('.prev-link, .next-link, .learndash_mark_complete_button, .gform_button button')){
-
       const removeAnimation = document.getElementsByClassName("overlay-427542754")[0];
       document.body.removeChild(removeAnimation);
     }

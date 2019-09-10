@@ -61,9 +61,8 @@ li a {
 
 li:hover,
 li:focus-within {
-    background: $primary-pink;
     cursor: pointer;
-    border-radius: 5px;
+    color: $primary-pink;
 }
 
 li:focus-within a {
@@ -75,7 +74,7 @@ ul li ul {
   opacity: 0;
   min-width: 16rem;
     position: absolute;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
   margin-top: 1rem;
     left: 0;
   display: none;
@@ -88,6 +87,7 @@ ul li ul:focus {
    visibility: visible;
    opacity: 1;
    display: block;
+   color: $primary-pink;
 }
 
 ul li ul li {

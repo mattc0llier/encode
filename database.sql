@@ -825,223 +825,271 @@ INSERT INTO tags (id, topic) VALUES (251, 'array-method');
 ALTER SEQUENCE tags_id_seq RESTART WITH 252 INCREMENT BY 1;
 
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (1, 1, 1);
+  (1, 1);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (2, 1, 2);
+  (2, 289);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (3, 1, 3);
+  (3, 253);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (4, 2, 1);
+  (4, 253);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (5, 2, 4);
+  (5, 8);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (6, 2, 6);
+  (6, 8);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (7, 25, 1);
+  (7, 11);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (8, 25, 2);
+  (8, 11);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (9, 25, 3);
+  (9, 11);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (10, 3, 6);
+  (10, 8);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (11, 4, 1);
+  (11, 1);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (12, 5, 2);
+  (12, 1);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (13, 6, 3);
+  (13, 1);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (14, 7, 6);
+  (14, 1);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (15, 8, 1);
+  (15, 1);
 INSERT INTO objective_tags
-  (id, objective_id, tag_id)
+  (objective_id, tag_id)
   VALUES
-  (16, 9, 2);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (17, 10, 3);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (18, 11, 6);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (19, 12, 1);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (20, 13, 2);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (21, 14, 3);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (22, 33, 3);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (23, 33, 4);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (24, 33, 5);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (25, 35, 8);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (26, 35, 19);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (27, 35, 33);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (28, 36, 99);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (29, 36, 122);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (30, 36, 56);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (31, 37, 44);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (32, 37, 156);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (33, 37, 200);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (34, 38, 18);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (35, 38, 77);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (36, 38, 200);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (37, 39, 87);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (38, 39, 91);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (39, 39, 92);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (40, 40, 81);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (41, 40, 99);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (42, 40, 23);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (43, 41, 199);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (44, 41, 37);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (45, 41, 57);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (46, 43, 1);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (47, 43, 78);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (48, 43, 17);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (49, 43, 247);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (50, 43, 248);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (51, 43, 249);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (52, 43, 250);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (53, 44, 248);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (54, 44, 249);
-INSERT INTO objective_tags
-  (id, objective_id, tag_id)
-  VALUES
-  (55, 44, 250);
-ALTER SEQUENCE objective_tags_id_seq RESTART WITH 56 INCREMENT BY 1;
+  (16, 1);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (5, 2, 4);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (6, 2, 6);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (7, 25, 1);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (8, 25, 2);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (9, 25, 3);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (10, 3, 6);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (11, 4, 1);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (12, 5, 2);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (13, 6, 3);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (14, 7, 6);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (15, 8, 1);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (16, 9, 2);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (17, 10, 3);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (18, 11, 6);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (19, 12, 1);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (20, 13, 2);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (21, 14, 3);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (22, 33, 3);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (23, 33, 4);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (24, 33, 5);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (25, 35, 8);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (26, 35, 19);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (27, 35, 33);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (28, 36, 99);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (29, 36, 122);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (30, 36, 56);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (31, 37, 44);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (32, 37, 156);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (33, 37, 200);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (34, 38, 18);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (35, 38, 77);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (36, 38, 200);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (37, 39, 87);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (38, 39, 91);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (39, 39, 92);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (40, 40, 81);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (41, 40, 99);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (42, 40, 23);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (43, 41, 199);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (44, 41, 37);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (45, 41, 57);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (46, 43, 1);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (47, 43, 78);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (48, 43, 17);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (49, 43, 247);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (50, 43, 248);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (51, 43, 249);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (52, 43, 250);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (53, 44, 248);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (54, 44, 249);
+-- INSERT INTO objective_tags
+--   (id, objective_id, tag_id)
+--   VALUES
+--   (55, 44, 250);
+-- ALTER SEQUENCE objective_tags_id_seq RESTART WITH 56 INCREMENT BY 1;
