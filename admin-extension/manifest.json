@@ -1,0 +1,52 @@
+{
+  "manifest_version": 2,
+  "name": "encode",
+  "description": "Capture your understanding of the world",
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "storage",
+    "identity",
+    "http://localhost:9090/",
+    "http://*.lambdaschool.com/*",
+    "http://*.encode.app/*"
+  ],
+  "background": {
+    "matches": [
+      "<all_urls>"
+    ],
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "./assets/images/encode-ext-icon16.png",
+    "48": "./assets/images/encode-ext-icon48.png",
+    "128": "./assets/images/encode-ext-icon128.png"
+  },
+  "browser_action": {
+     "default_title": "encode",
+     "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "animation.scss"
+  ],
+  "key": "ddddddddd2d=",
+  "commands": {
+    "update-context": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Send a 'context' event to the extension"
+    }
+  }
+}
