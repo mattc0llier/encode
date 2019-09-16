@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import '../../styles/components/Sync.scss';
 
-
 class Sync extends React.Component {
   constructor(){
     super();
