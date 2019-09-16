@@ -60,7 +60,8 @@ chrome.runtime.onConnect.addListener((port) => {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
       const url = tabs[0].url
-      const urlIsLambdaSchool = url.includes("lambdaschool.com")
+      // testing with sites outside lambda school
+      const urlIsLambdaSchool = url.includes("")
 
       if (!urlIsLambdaSchool) return
 

@@ -22,20 +22,6 @@ port.onMessage.addListener(function(response) {
 
     // draw border Box around elements
 
-
-    // const createTitle = function(title, url) {
-    //   return `<a href="${url}"><h2>${title}</h2></a>`;
-    // };
-    // const createTopics = function(topics) {
-    //   return topics.map(topic => (
-    //     `<p class="topic-notfication" >${topic.topic}</p>`
-    //   ))
-    // }
-    //
-    // createTopics()
-    //
-    // console.log('createTopics', createTopics);
-
     //Verbs needed for blooms taxonomy
     //should be random array with one primary verb.
 
