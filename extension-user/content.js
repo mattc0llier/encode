@@ -238,7 +238,7 @@ port.onMessage.addListener(function(response) {
 
   document.body.addEventListener('mousedown', event => {
     console.log('mouse down hit');
-    if(event.target.matches('.next-link, .learndash_mark_complete_button, .gform_button button')){
+    if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
       console.log('mouse down target next hit')
 
       const animation2 = document.createElement("div");
@@ -254,13 +254,13 @@ port.onMessage.addListener(function(response) {
   });
 
   document.body.addEventListener('mouseout', event => {
-    if(event.target.matches('.prev-link, .next-link, .learndash_mark_complete_button, .gform_button button')){
+    if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
       const removeAnimation = document.getElementsByClassName("overlay-427542754")[0];
       document.body.removeChild(removeAnimation);
     }
   });
     document.body.addEventListener('click', event => {
-      if(event.target.matches('.prev-link, .next-link, .learndash_mark_complete_button, .gform_button button')){
+      if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
 
         chrome.runtime.sendMessage({activity_complete: true}, function(response) {
           console.log(response);

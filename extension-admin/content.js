@@ -20,6 +20,9 @@ port.onMessage.addListener(function(response) {
       console.log('notifications', notifications);
     }
 
+    // draw border Box around elements
+
+
     // const createTitle = function(title, url) {
     //   return `<a href="${url}"><h2>${title}</h2></a>`;
     // };
@@ -267,10 +270,5 @@ port.onMessage.addListener(function(response) {
         });
       }
     });
-
-
-
-
-
   }
 });
