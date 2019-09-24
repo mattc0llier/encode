@@ -61,8 +61,9 @@ chrome.runtime.onConnect.addListener((port) => {
 
       const url = tabs[0].url
       const urlIsLambdaSchool = url.includes("lambdaschool.com")
+      const urlIsReplIt = url.includes("repl.it")
 
-      if (!urlIsLambdaSchool) return
+      if (!urlIsLambdaSchool || urlIsReplIt) return
 
       fetchActivities(url)
         .then((body) => {

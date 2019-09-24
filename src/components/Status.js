@@ -35,8 +35,6 @@ class Status extends React.Component {
       })
       .catch(error => console.log(error.message))
     ))
-
-
   }
 
   sortLatestObjective(){
@@ -112,7 +110,6 @@ class Status extends React.Component {
                     <Objective objectiveObject={objective}/>
                   </div>
                 ))}
-                <Tags statusTags={this.state.statusTags}/>
               </div>
 
               <div className="score-increase">

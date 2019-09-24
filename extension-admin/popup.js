@@ -56,6 +56,7 @@ port.onMessage.addListener(function(response) {
     console.log('bloomsCategories', bloomsCategories);
 
     const blooms = `
+      <h2>Mastery score +${activity.mastery_score}</h2>
       <ul class="topic-notfications">
           ${bloomsCategories.map(verb => `<li>${verb}</li>`).join('')}
        </ul>
@@ -70,7 +71,6 @@ port.onMessage.addListener(function(response) {
       <span style="display: ${activity.complete == false ? 'none' : 'block' }">✅</span>
       <span style="display: ${activity.complete == true ? 'none' : 'block' }">🤔</span>
       <p>${activity.objective}</p>
-      <h2>+${activity.mastery_score}</h2>
     `;
     activityNode.innerHTML = existingActivity
     activitiesNode.appendChild(activityNode)

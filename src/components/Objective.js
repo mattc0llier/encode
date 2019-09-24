@@ -1,4 +1,5 @@
 import React from 'react';
+import Tags from './Tags';
 import '../../styles/components/Objective.scss';
 
 
@@ -6,12 +7,41 @@ class Objective extends React.Component {
   constructor(){
     super();
 
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { showTags: false, objectiveTags:[]}
+
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+    this.fetchObjectiveTags = this.fetchObjectiveTags.bind(this);
+  }
+
+  fetchObjectiveTags(){
+      fetch(`/api/objective/${this.props.objectiveObject.objective_id}/tags`)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(body => {
+        console.log('objectiveTags body', body)
+          this.setState({
+            objectiveTags: body
+          }, () => console.log('objectiveTags state', this.state.objectiveTags))
+      })
+      .catch(error => console.log(error.message))
   }
 
 
-  handleClick(event){
-    this.props.receiveObjectiveStatus(this.props.objectiveObject)
+  handleToggleClick(event){
+    if(this.state.showTags){
+      this.setState({
+        showTags:false
+      })
+    } else {
+      this.setState({
+        showTags:true
+      })
+    }
+  }
+
+  componentDidMount(){
+    this.fetchObjectiveTags()
   }
 
   render(){
@@ -20,7 +50,7 @@ class Objective extends React.Component {
       <div className="objective">
       {objectivesObjectExists ? (
         <React.Fragment>
-        <div className="checkbox">
+        <div className="checkbox" onClick={this.handleToggleClick}>
           { this.props.currentUserProfile ? (
             <React.Fragment>
               <span style={{display: this.props.objectiveObject.complete ? 'none' : 'block' }}><img className="favicon" src="/static/assets/images/lambda-logo-favicon.svg" /></span>
@@ -32,6 +62,9 @@ class Objective extends React.Component {
           <span style={{display: this.props.objectiveObject.complete ? 'block' : 'none' }}><img className="favicon" src="/static/assets/images/lambda-logo-favicon.svg" /></span>
           <a href={this.props.objectiveObject.url} ><p for="objective">{this.props.objectiveObject.objective} ({this.props.objectiveObject.number})</p></a>
           <span className="doubleChecks" style={{display: this.props.objectiveObject.complete ? 'block' : 'none' }}><img src="/static/assets/images/doubleChecks.svg" /></span>
+        </div>
+        <div style={{display: this.state.showTags ? 'block' : 'none' }}>
+          <Tags statusTags={this.state.objectiveTags}/>
         </div>
         </React.Fragment>
 

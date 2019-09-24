@@ -351,6 +351,10 @@ INSERT INTO objectives
   (id, number, objective, url, mastery_score, lesson_id)
   VALUES
   (44, 44, 'Quiz: Using Callbacks in Array Methods', 'https://apply.lambdaschool.com/courses/web-precourse/lessons/javascript-callback-functions/topic/quiz-using-callbacks-in-array-methods/', 3, 9);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (45, 13, 'JS Assignment 1: Variables and Primitive Data Types', 'https://repl.it/student/submissions/7429462', 0, 9);
 
 
 INSERT INTO activities
@@ -569,6 +573,10 @@ INSERT INTO activities
   (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
   (54, 'course', NULL, NULL, 1, 12, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
+INSERT INTO activities
+  (type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
+  VALUES
+  ('course', 45, NULL, NULL, 57, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
 ALTER SEQUENCE activities_id_seq RESTART WITH 55 INCREMENT BY 1;
 
 INSERT INTO tags (id, topic) VALUES (1, 'javascript');
@@ -888,6 +896,10 @@ INSERT INTO objective_tags
   (objective_id, tag_id)
   VALUES
   (16, 1);
+INSERT INTO objective_tags
+  (objective_id, tag_id)
+  VALUES
+  (45, 1);
 -- INSERT INTO objective_tags
 --   (id, objective_id, tag_id)
 --   VALUES

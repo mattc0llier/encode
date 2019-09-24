@@ -216,12 +216,8 @@ port.onMessage.addListener(function(response) {
           </div>
 
       `
-      debugger;
-
       document.body.appendChild(animation);
-      debugger;
     }
-    debugger;
   });
 
 
@@ -256,5 +252,15 @@ port.onMessage.addListener(function(response) {
         });
       }
     });
+
+
   }
 });
+
+document.addEventListener("keydown", keyDownTextField, false);
+  function keyDownTextField(e) {
+    let keyCode = e.keyCode;
+    if(keyCode==192) {
+      alert("You hit the § key.");
+    }
+  }
