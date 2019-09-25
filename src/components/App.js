@@ -4,6 +4,7 @@ import Profile from './Profile';
 import Nav from './Nav';
 import Students from './Students';
 import Leaderboard from './Leaderboard';
+import Screencast from './Screencast';
 import Feed from './Feed';
 import Footer from './Footer';
 import NewUser from './NewUser';
@@ -164,6 +165,9 @@ class App extends React.Component {
               <Switch>
                 <Route path="/" exact
                   component={Homepage}
+                />
+                <Route path="/screencast"
+                  render={(props) => (<Screencast {...props} currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn}/>)}
                 />
                 <Route path="/leaderboard"
                   render={(props) => (<Leaderboard {...props} currentUser={this.state.currentUser} isLoggedIn={this.state.isLoggedIn}/>)}

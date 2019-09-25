@@ -196,7 +196,7 @@ class Leaderboard extends React.Component {
                   </td>
                   <td>
                     <div className="mastery-cell">
-                      <p>{user.mastery_score}</p>
+                      <p>+{user.mastery_score}</p>
                     </div>
                   </td>
                 </tr>
