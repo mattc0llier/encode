@@ -372,7 +372,11 @@ INSERT INTO objectives
 INSERT INTO objectives
   (id, number, objective, url, mastery_score, lesson_id)
   VALUES
-  (45, 13, 'JS Assignment 1: Variables and Primitive Data Types', 'https://repl.it/student/submissions/7429462', 0, 9);
+  (45, 13, 'JS Assignment 1: Variables and Primitive Data Types', 'https://repl.it/student/submissions/7429462', 1, 9);
+INSERT INTO objectives
+  (id, number, objective, url, mastery_score, lesson_id)
+  VALUES
+  (46, 13, 'What is JavaScript?', 'https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript', 1, 9);
 
 INSERT INTO nodes
   (id, favicon, node, url, mastery_score)
@@ -381,11 +385,7 @@ INSERT INTO nodes
 INSERT INTO nodes
   (id, favicon, node, url, mastery_score)
   VALUES
-  (2, 'https://pbs.twimg.com/profile_images/880614604115775489/LNPwoiWi_400x400.jpg', 'JavaScript basics', 'https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics', 0);
-INSERT INTO nodes
-  (id, favicon, node, url, mastery_score)
-  VALUES
-  (3, 'https://images.squarespace-cdn.com/content/v1/54849a7ee4b0b436d77f026f/1478021247807-SVT36TAN5AEZSGL6DO6L/ke17ZwdGBToddI8pDm48kLxnK526YWAH1qleWz-y7AFZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVH33scGBZjC30S7EYewNF5iKKwhonf2ThqWWOBkLKnojuqYeU1KwPvsAK7Tx5ND4WE/big_fvPcCRol_400x400-1472853779.jpg', 'JS Assignment 1: Variables and Primitive Data Types', 'https://repl.it/student/submissions/7429462', 0);
+  (2, 'https://pbs.twimg.com/profile_images/880614604115775489/LNPwoiWi_400x400.jpg', 'What is JavaScript?', 'https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript', 0);
 
 INSERT INTO activities
   (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)

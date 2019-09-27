@@ -222,7 +222,7 @@ app.get('/api/activities', function(req, res){
 app.get('/api/users/:id/objectives', (req, res) => {
   const { id } = req.params;
   return db
-    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo, users.username FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.user_id=$1', [id])
+    .any('SELECT objectives.id AS objective_id, objectives.number, objectives.objective, objectives.url, objectives.lesson_id, objectives.mastery_score, objectives.favicon, activities.id AS activity_id, activities.complete, activities.completion_time, activities.user_id, users.first_name, users.last_name, users.photo, users.username FROM objectives, activities, users WHERE activities.objective_id = objectives.id AND activities.user_id = users.id AND activities.user_id=$1', [id])
     .then(data => {
       res.json(data)
     })
@@ -426,8 +426,8 @@ app.get('/api/users/:id/settings', (req, res) => {
 //BROWSER extension
 
 //get all activity data from browser url
-function getActivitiesByUrlAndUserId(tabUrl) {
-  return db.one('SELECT * FROM objectives WHERE url=$1', [tabUrl])
+function getActivitiesByUrl(tabUrl) {
+  return db.one('SELECT * FROM objectives WHERE objectives.url=$1', [tabUrl])
   .catch((error) => {
     console.log('failed to get user', error);
   });
@@ -533,10 +533,14 @@ app.get('/api/tabContext', async (req, res)  => {
   const tabUrl = req.query.url
   const user_id = 60
 
-  const tabObjective = await getActivitiesByUrlAndUserId(tabUrl)
+  // i changed this friday 155am
+  // i need to create a check for both node and objective url matches tab
+  // they then need seperate logic routes
+  // or i could just make them both objectives for now and simply add favicons to objectives.
+  const tabObjective = await getActivitiesByUrl(tabUrl)
   console.log('confirmedObjective tabObjective', tabObjective);
 
-  db.any('SELECT activities.id AS activity_id, activities.objective_id, objectives.number, objectives.objective, objectives.url, objectives.mastery_score, objectives.lesson_id, activities.complete, activities.completion_time, activities.user_id FROM activities, objectives  WHERE objectives.url=$1 AND activities.user_id=$2 AND activities.objective_id=$3', [tabUrl, user_id, tabObjective.id])
+  db.any('SELECT activities.id AS activity_id, activities.objective_id, objectives.number, objectives.objective, objectives.url, objectives.mastery_score, objectives.lesson_id, activities.complete, activities.completion_time, activities.user_id FROM activities, objectives WHERE objectives.url=$1 AND activities.user_id=$2 AND activities.objective_id=$3', [tabUrl, user_id, tabObjective.id])
   .then(async activityData =>  {
     console.log('activityData 1', activityData);
     const objective_id  = activityData[0].objective_id

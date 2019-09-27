@@ -84,6 +84,7 @@ class Profile extends React.Component {
       number: completedObjective.number,
       objective: completedObjective.objective,
       url: completedObjective.url,
+      favicon: completedObjective.favicon,
       activity_id: completedObjective.activity_id,
       complete: activitiesResponse.complete,
       completion_time: activitiesResponse.completion_time

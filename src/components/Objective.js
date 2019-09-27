@@ -53,7 +53,7 @@ class Objective extends React.Component {
         <div className="checkbox" onClick={this.handleToggleClick}>
           { this.props.currentUserProfile ? (
             <React.Fragment>
-              <span style={{display: this.props.objectiveObject.complete ? 'none' : 'block' }}><img className="favicon" src="/static/assets/images/lambda-logo-favicon.svg" /></span>
+              <span style={{display: this.props.objectiveObject.complete ? 'none' : 'block' }}><img className="favicon" src={this.props.objectiveObject.favicon} /></span>
             </React.Fragment>
           ) : (
             <span style={{display: this.props.objectiveObject.complete ? 'none' : 'block' }}><img src="/static/assets/images/workingOn.svg" /></span>
