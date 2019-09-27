@@ -100,9 +100,6 @@ class NewUser extends React.Component {
                 <input name="first-name" type="text" className="newUser__input" onChange={this.handleCreateFirstNameChange} placeholder="first name" />
                 <label for="last-name">Last name</label>
                 <input name="last-name" type="text" className="newUser__input" onChange={this.handleCreateLastNameChange} placeholder="last name" />
-                <br />
-                <p>- - -</p>
-                <br />
                 <label for="username">Pick a username</label>
                 <input name="username" type="text" className="newUser__input" onChange={this.handleCreateUsernameChange} placeholder="@ username" />
                 <label for="email">Confirm email</label>
