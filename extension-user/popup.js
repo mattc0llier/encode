@@ -11,10 +11,57 @@ port.onMessage.addListener(function(response) {
     //Start of popup tag search and form
     const formNode = document.querySelector("form");
     const activitiesNode = document.querySelector(".page-activities");
+    const activityMasteryNode = document.querySelector(".activity-mastery");
     const searchTagsNode = document.querySelector("#searchTags");
     const existingTagsNode = document.querySelector(".existing-tags");
     const newTagsNode = document.querySelector(".new-tags");
     const submitAllTagsButton = document.querySelector('#submit-all-tags');
+
+    //blooms taxonomy
+    //Verbs needed for blooms taxonomy
+    //should be random array with one primary verb.
+
+    const remember = ["remember", "define", "duplicate", "list", "memorize", "repeat", "state",]
+    const understand = ["understand", "classify", "describe", "discuss", "explain", "identify", "locate", "recognize", "report", "select", "translate"]
+    const apply = ["apply", "execute", "implement", "solve", "use", "demonstrate", "interpret", "operate", "schedule", "sketch"]
+    const analyze = ["analyze", "differentiate", "organize", "relate", "compare", "contrast", "distinguish", "examine", "experiment", "question", "test"]
+    const evaluate = ["evaluate", "appraise", "argue", "judge", "defend", "select", "support", "value", "critique", "weigh"]
+    const create = ["create", "design", "assemble", "construct", "conjecture", "develop", "formulate", "author", "investigate"]
+
+
+    const bloomsMethods = {
+      1: remember,
+      2: understand,
+      3: apply,
+      4: analyze,
+      5: evaluate,
+      6: create
+    }
+    function getBlooms(mastery_score){
+      console.log(mastery_score);
+      const primaryVerb = bloomsMethods[mastery_score][0]
+      console.log('primaryVerb', primaryVerb);
+      const index1 = Math.floor(Math.random() * 6);
+      const index2 = Math.floor(Math.random() * 6);
+      const secondaryVerb = bloomsMethods[mastery_score][index1]
+      console.log('secondaryVerb', secondaryVerb);
+      const thirdVerb = bloomsMethods[mastery_score][index2]
+      console.log('thirdVerb', thirdVerb);
+
+      return [primaryVerb, secondaryVerb, thirdVerb]
+    }
+
+    const bloomsCategories = getBlooms(activity.mastery_score)
+
+    console.log('bloomsCategories', bloomsCategories);
+
+    const blooms = `
+      <h2>Mastery score +${activity.mastery_score}</h2>
+      <ul class="topic-notfications">
+          ${bloomsCategories.map(verb => `<li>${verb}</li>`).join('')}
+       </ul>
+      `;
+    activityMasteryNode.innerHTML = blooms
 
 
     //activities

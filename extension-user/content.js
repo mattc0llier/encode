@@ -20,18 +20,7 @@ port.onMessage.addListener(function(response) {
       console.log('notifications', notifications);
     }
 
-    // const createTitle = function(title, url) {
-    //   return `<a href="${url}"><h2>${title}</h2></a>`;
-    // };
-    // const createTopics = function(topics) {
-    //   return topics.map(topic => (
-    //     `<p class="topic-notfication" >${topic.topic}</p>`
-    //   ))
-    // }
-    //
-    // createTopics()
-    //
-    // console.log('createTopics', createTopics);
+    // draw border Box around elements
 
     //Verbs needed for blooms taxonomy
     //should be random array with one primary verb.
@@ -88,7 +77,8 @@ port.onMessage.addListener(function(response) {
   // adding document event listeners
 
   document.body.addEventListener('mouseover', event => {
-    if(event.target.matches('.prev-link, .next-link, .learndash_mark_complete_button, .gform_button button')){
+    if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
+      console.log('mouseover');
       console.log(event.target.className)
       console.log('run animation');
 
@@ -227,34 +217,31 @@ port.onMessage.addListener(function(response) {
           </div>
 
       `
-      debugger;
-
       document.body.appendChild(animation);
-      debugger;
-    }
-    debugger;
-  });
-
-
-  document.body.addEventListener('mousedown', event => {
-    console.log('mouse down hit');
-    if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
-      console.log('mouse down target next hit')
-
-      const animation2 = document.createElement("div");
-      animation2.setAttribute('class', 'overlay-983y58y43');
-      animation2.innerHTML = `
-        <div class="media-content">
-          <img src="https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif">
-        </div>
-      `
-      const overlay = document.getElementsByClassName("overlay-427542754")[0];
-      overlay.appendChild(animation2);
     }
   });
+
+
+  // document.body.addEventListener('mousedown', event => {
+  //   console.log('mouse down hit');
+  //   if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
+  //     console.log('mouse down target next hit')
+  //
+  //     const animation2 = document.createElement("div");
+  //     animation2.setAttribute('class', 'overlay-983y58y43');
+  //     animation2.innerHTML = `
+  //       <div class="media-content">
+  //         <img src="https://media1.giphy.com/media/3o6fJ1BM7R2EBRDnxK/giphy.gif?cid=6ca70afc5d3af164694436425928b936&rid=giphy.gif">
+  //       </div>
+  //     `
+  //     const overlay = document.getElementsByClassName("overlay-427542754")[0];
+  //     overlay.appendChild(animation2);
+  //   }
+  // });
 
   document.body.addEventListener('mouseout', event => {
     if(event.target.matches('.learndash_mark_complete_button, .gform_button button')){
+      console.log('mouseout');
       const removeAnimation = document.getElementsByClassName("overlay-427542754")[0];
       document.body.removeChild(removeAnimation);
     }
@@ -269,8 +256,13 @@ port.onMessage.addListener(function(response) {
     });
 
 
-
-
-
   }
 });
+
+document.addEventListener("keydown", keyDownTextField, false);
+  function keyDownTextField(e) {
+    let keyCode = e.keyCode;
+    if(keyCode==192) {
+      alert("You hit the § key.");
+    }
+  }

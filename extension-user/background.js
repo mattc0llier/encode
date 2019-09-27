@@ -7,8 +7,6 @@
 //     console.log(redirect_url)
 //   });
 
-
-
 const fetchActivities = (url) => {
   return fetch(`http://localhost:9090/api/tabContext?url=${url}`, {
     mode: "cors"
@@ -60,10 +58,10 @@ chrome.runtime.onConnect.addListener((port) => {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
       const url = tabs[0].url
-      // testing with sites outside lambda school
-      const urlIsLambdaSchool = url.includes("")
+      const urlIsLambdaSchool = url.includes("lambdaschool.com")
+      const urlIsReplIt = url.includes("repl.it")
 
-      if (!urlIsLambdaSchool) return
+      if (!urlIsLambdaSchool || urlIsReplIt) return
 
       fetchActivities(url)
         .then((body) => {
@@ -73,66 +71,3 @@ chrome.runtime.onConnect.addListener((port) => {
     })
   })
  })
-
- // on new opage
- // get activities
- // send message to content script
-
-   // send activity info to content.js.
-   // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-   //   console.log('tabs', tabs);
-   //   console.log('tabs[0].id', tabs[0].id);
-   //   console.log('activity: body', body);
-   //   chrome.tabs.sendMessage(tabs[0].id, {activity: body});
-   // });
-
-   //recieves message when item is marked complete
-
- // update context on loading in a new page and send through response objective to content.js
-
- //     fetch(`http://localhost:9090/api/tabContext?url=${tab.url}`, {
- //        mode: "cors"
- //      })
- //      .then(function(response) {
- //        return response.json();
- //      })
- //      .then(body => {
- //        const completedActivityLister = function(request, sender, sendResponse) {
- //            console.log('activity_complete');
- //
- //          // to be triggered when completed objective click from content script
- //             return fetch(`http://localhost:9090/api/activities/${body[0].activity_id}`, {
- //              method: 'PATCH',
- //              body: JSON.stringify({ complete: true }),
- //              headers: {
- //                'Content-Type': 'application/json'
- //              }
- //            })
- //            .then(function(response) {
- //              return response.json();
- //            })
- //            .then(body => {
- //              console.log('body', body);
- //            })
- //            .catch(error => console.log(error.message));
- //        }
- //
- //        chrome.runtime.onMessage.removeListener(completedActivityLister)
- //        console.log('body', body);
- //        console.log('tab.id', tab.id);
- //
- //        // send activity info to content.js.
- //        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
- //          console.log('tabs', tabs);
- //          console.log('tabs[0].id', tabs[0].id);
- //          console.log('activity: body', body);
- //          chrome.tabs.sendMessage(tabs[0].id, {activity: body});
- //        });
- //
- //        //recieves message when item is marked complete
- //        chrome.runtime.onMessage.addListener(completedActivityLister);
- //        console.log('completedActivityLister added')
- //      })
- //      .catch(error => console.log(error.message));
- //    }
- //  });

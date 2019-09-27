@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "encode",
-  "description": "Capture your understanding of the world",
+  "name": "encode - user",
+  "description": "capture your understanding of the world",
   "version": "1.0",
   "permissions": [
     "tabs",

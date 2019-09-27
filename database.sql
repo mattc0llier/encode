@@ -72,6 +72,7 @@ CREATE TABLE objectives(
 CREATE TABLE activities(
   id SERIAL PRIMARY KEY,
   type VARCHAR(100),
+  node_id INT,
   objective_id INT,
   lesson_id INT,
   course_id INT,
@@ -79,6 +80,7 @@ CREATE TABLE activities(
   complete BOOLEAN DEFAULT FALSE,
   completion_time TIMESTAMP WITH TIME ZONE,
   created_at TIMESTAMP WITH TIME ZONE,
+  FOREIGN KEY (node_id) REFERENCES nodes (id),
   FOREIGN KEY (objective_id) REFERENCES objectives (id),
   FOREIGN KEY (lesson_id) REFERENCES lessons (id),
   FOREIGN KEY (course_id) REFERENCES courses (id),
@@ -96,6 +98,22 @@ CREATE TABLE objective_tags (
   tag_id INT NOT NULL,
   FOREIGN KEY (objective_id) REFERENCES objectives (id),
   FOREIGN KEY (tag_id) REFERENCES tags (id)
+);
+
+CREATE TABLE nodes(
+  id SERIAL PRIMARY KEY,
+  number INT,
+  node VARCHAR(1000) NOT NULL,
+  url VARCHAR(1000) NOT NULL,
+  mastery_score INT,
+);
+
+CREATE TABLE objective_nodes (
+  id SERIAL PRIMARY KEY,
+  objective_id INT NOT NULL,
+  node_id INT NOT NULL,
+  FOREIGN KEY (objective_id) REFERENCES objectives (id),
+  FOREIGN KEY (node_id) REFERENCES nodes (id)
 );
 
 INSERT INTO users
@@ -356,6 +374,18 @@ INSERT INTO objectives
   VALUES
   (45, 13, 'JS Assignment 1: Variables and Primitive Data Types', 'https://repl.it/student/submissions/7429462', 0, 9);
 
+INSERT INTO nodes
+  (id, favicon, node, url, mastery_score)
+  VALUES
+  (1, 'https://images.squarespace-cdn.com/content/v1/54849a7ee4b0b436d77f026f/1478021247807-SVT36TAN5AEZSGL6DO6L/ke17ZwdGBToddI8pDm48kLxnK526YWAH1qleWz-y7AFZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVH33scGBZjC30S7EYewNF5iKKwhonf2ThqWWOBkLKnojuqYeU1KwPvsAK7Tx5ND4WE/big_fvPcCRol_400x400-1472853779.jpg', 'JS Assignment 1: Variables and Primitive Data Types', 'https://repl.it/student/submissions/7429462', 0);
+INSERT INTO nodes
+  (id, favicon, node, url, mastery_score)
+  VALUES
+  (2, 'https://pbs.twimg.com/profile_images/880614604115775489/LNPwoiWi_400x400.jpg', 'JavaScript basics', 'https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics', 0);
+INSERT INTO nodes
+  (id, favicon, node, url, mastery_score)
+  VALUES
+  (3, 'https://images.squarespace-cdn.com/content/v1/54849a7ee4b0b436d77f026f/1478021247807-SVT36TAN5AEZSGL6DO6L/ke17ZwdGBToddI8pDm48kLxnK526YWAH1qleWz-y7AFZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVH33scGBZjC30S7EYewNF5iKKwhonf2ThqWWOBkLKnojuqYeU1KwPvsAK7Tx5ND4WE/big_fvPcCRol_400x400-1472853779.jpg', 'JS Assignment 1: Variables and Primitive Data Types', 'https://repl.it/student/submissions/7429462', 0);
 
 INSERT INTO activities
   (id, type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
@@ -830,6 +860,103 @@ INSERT INTO tags (id, topic) VALUES (248, 'array.map');
 INSERT INTO tags (id, topic) VALUES (249, 'array.forEach');
 INSERT INTO tags (id, topic) VALUES (250, 'annonymous-function');
 INSERT INTO tags (id, topic) VALUES (251, 'array-method');
+
+-- INSERT INTO tags (id, topic) VALUES (247, 'callback');
+-- INSERT INTO tags (id, topic) VALUES (248, 'array.map');
+-- INSERT INTO tags (id, topic) VALUES (249, 'array.forEach');
+-- INSERT INTO tags (id, topic) VALUES (250, 'annonymous-function');
+-- INSERT INTO tags (id, topic) VALUES (251, 'array-method');
+-- INSERT INTO tags (id, topic) VALUES (253, 'web-development');
+-- INSERT INTO tags (id, topic) VALUES (254, 'attributes');
+-- INSERT INTO tags (id, topic) VALUES (256, 'mark-up');
+-- INSERT INTO tags (id, topic) VALUES (257, 'inspect');
+-- INSERT INTO tags (id, topic) VALUES (261, 'box-model');
+-- INSERT INTO tags (id, topic) VALUES (262, 'margin');
+-- INSERT INTO tags (id, topic) VALUES (263, 'border');
+-- INSERT INTO tags (id, topic) VALUES (264, 'padding');
+-- INSERT INTO tags (id, topic) VALUES (265, 'content');
+-- INSERT INTO tags (id, topic) VALUES (266, 'top');
+-- INSERT INTO tags (id, topic) VALUES (267, 'styling');
+-- INSERT INTO tags (id, topic) VALUES (287, 'programming');
+-- INSERT INTO tags (id, topic) VALUES (288, 'programming-languages');
+-- INSERT INTO tags (id, topic) VALUES (289, 'job-role');
+-- INSERT INTO tags (id, topic) VALUES (290, 'types-of-computer');
+-- INSERT INTO tags (id, topic) VALUES (291, 'keywords');
+-- INSERT INTO tags (id, topic) VALUES (292, 'syntax');
+-- INSERT INTO tags (id, topic) VALUES (293, 'documentation');
+-- INSERT INTO tags (id, topic) VALUES (294, 'text-editors');
+-- INSERT INTO tags (id, topic) VALUES (295, 'sandbox-environment');
+-- INSERT INTO tags (id, topic) VALUES (298, 'compiler');
+-- INSERT INTO tags (id, topic) VALUES (299, 'software-engineer');
+-- INSERT INTO tags (id, topic) VALUES (300, 'job-skills');
+-- INSERT INTO tags (id, topic) VALUES (301, 'job-aims');
+-- INSERT INTO tags (id, topic) VALUES (302, 'web-applications');
+-- INSERT INTO tags (id, topic) VALUES (305, 'dynamic-applications');
+-- INSERT INTO tags (id, topic) VALUES (306, 'web-browser');
+-- INSERT INTO tags (id, topic) VALUES (307, 'development-cycles');
+-- INSERT INTO tags (id, topic) VALUES (309, 'front-end');
+-- INSERT INTO tags (id, topic) VALUES (310, 'back-end');
+-- INSERT INTO tags (id, topic) VALUES (311, 'client');
+-- INSERT INTO tags (id, topic) VALUES (312, 'server');
+-- INSERT INTO tags (id, topic) VALUES (313, 'frameworks');
+-- INSERT INTO tags (id, topic) VALUES (314, 'libraries');
+-- INSERT INTO tags (id, topic) VALUES (315, 'open-source');
+-- INSERT INTO tags (id, topic) VALUES (316, 'accessibility');
+-- INSERT INTO tags (id, topic) VALUES (317, 'browser-compatibility');
+-- INSERT INTO tags (id, topic) VALUES (318, 'load-times');
+-- INSERT INTO tags (id, topic) VALUES (319, 'mark-up-language');
+-- INSERT INTO tags (id, topic) VALUES (320, 'elements');
+-- INSERT INTO tags (id, topic) VALUES (321, 'header');
+-- INSERT INTO tags (id, topic) VALUES (322, 'paragraph');
+-- INSERT INTO tags (id, topic) VALUES (323, 'images');
+-- INSERT INTO tags (id, topic) VALUES (324, 'links');
+-- INSERT INTO tags (id, topic) VALUES (325, 'open-tags');
+-- INSERT INTO tags (id, topic) VALUES (326, 'closetag');
+-- INSERT INTO tags (id, topic) VALUES (327, 'head');
+-- INSERT INTO tags (id, topic) VALUES (328, 'body');
+-- INSERT INTO tags (id, topic) VALUES (329, 'browser-inspector');
+-- INSERT INTO tags (id, topic) VALUES (331, 'href');
+-- INSERT INTO tags (id, topic) VALUES (332, 'image-tag');
+-- INSERT INTO tags (id, topic) VALUES (333, 'src');
+-- INSERT INTO tags (id, topic) VALUES (334, 'self-closing');
+-- INSERT INTO tags (id, topic) VALUES (335, 'unordered-list');
+-- INSERT INTO tags (id, topic) VALUES (336, 'ordered-list');
+-- INSERT INTO tags (id, topic) VALUES (337, 'indenting');
+-- INSERT INTO tags (id, topic) VALUES (338, 'anchor-tag');
+-- INSERT INTO tags (id, topic) VALUES (339, 'width');
+-- INSERT INTO tags (id, topic) VALUES (340, 'height');
+-- INSERT INTO tags (id, topic) VALUES (341, 'pixels');
+-- INSERT INTO tags (id, topic) VALUES (342, 'left');
+-- INSERT INTO tags (id, topic) VALUES (343, 'right');
+-- INSERT INTO tags (id, topic) VALUES (344, 'bottom');
+-- INSERT INTO tags (id, topic) VALUES (345, 'border-style');
+-- INSERT INTO tags (id, topic) VALUES (346, 'shorthand');
+-- INSERT INTO tags (id, topic) VALUES (347, 'selector');
+-- INSERT INTO tags (id, topic) VALUES (348, 'style-element');
+-- INSERT INTO tags (id, topic) VALUES (349, 'stylesheet');
+-- INSERT INTO tags (id, topic) VALUES (350, 'link-element');
+-- INSERT INTO tags (id, topic) VALUES (351, 'property');
+-- INSERT INTO tags (id, topic) VALUES (352, 'value');
+-- INSERT INTO tags (id, topic) VALUES (353, 'id-selector');
+-- INSERT INTO tags (id, topic) VALUES (354, 'wildcard-selector');
+-- INSERT INTO tags (id, topic) VALUES (355, 'specificity');
+-- INSERT INTO tags (id, topic) VALUES (356, 'codepen');
+-- INSERT INTO tags (id, topic) VALUES (357, 'v8-engine');
+-- INSERT INTO tags (id, topic) VALUES (358, 'es5');
+-- INSERT INTO tags (id, topic) VALUES (359, 'es6');
+-- INSERT INTO tags (id, topic) VALUES (360, 'console');
+-- INSERT INTO tags (id, topic) VALUES (361, 'assignment');
+-- INSERT INTO tags (id, topic) VALUES (362, 'number');
+-- INSERT INTO tags (id, topic) VALUES (363, 'boolean');
+-- INSERT INTO tags (id, topic) VALUES (364, 'global-objects');
+-- INSERT INTO tags (id, topic) VALUES (365, 'Math');
+-- INSERT INTO tags (id, topic) VALUES (366, 'object.length');
+-- INSERT INTO tags (id, topic) VALUES (367, 'operators');
+-- INSERT INTO tags (id, topic) VALUES (368, 'modulo');
+-- INSERT INTO tags (id, topic) VALUES (369, 'float');
+-- INSERT INTO tags (id, topic) VALUES (370, 'integer');
+-- INSERT INTO tags (id, topic) VALUES (371, 'methods');
+-- INSERT INTO tags (id, topic) VALUES (372, 'commenting')
 ALTER SEQUENCE tags_id_seq RESTART WITH 252 INCREMENT BY 1;
 
 INSERT INTO objective_tags
@@ -900,6 +1027,10 @@ INSERT INTO objective_tags
   (objective_id, tag_id)
   VALUES
   (45, 1);
+INSERT INTO objective_tags
+  (objective_id, tag_id)
+  VALUES
+  (44, 1);
 -- INSERT INTO objective_tags
 --   (id, objective_id, tag_id)
 --   VALUES
