@@ -38,11 +38,13 @@ const WorkingOn = ({ userProfileObjectivesObject, receiveNextUserObjective, rece
       <h3>Working On</h3>
       <div className="next-objective">
       { receiveNextUserObjective ? (
+        <React.Fragment>
         <Objective
           objectiveObject={filteredObjects[0]}
           receiveObjectiveStatus={receiveObjectiveStatus}
           currentUserProfile={currentUserProfile}
         />
+        </React.Fragment>
       ) : (
         <Link to='/sync'><h2>Pick a new course</h2></Link>
       )}

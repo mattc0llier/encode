@@ -261,6 +261,148 @@ document.addEventListener("keydown", keyDownTextField, false);
   function keyDownTextField(e) {
     let keyCode = e.keyCode;
     if(keyCode==192) {
-      alert("You hit the § key.");
+      console.log('you hit the § key');
+
+      var styleEl = document.createElement('style');
+      styleEl.innerHTML = `.notifications {
+            z-index: 1000000000000;
+            font-family: 'Roboto', sans-serif;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            margin-right: 1rem;
+          }
+          .main-notfiication {
+            display: flex;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            width: 30rem;
+            background-color: #5214FF;
+            color: #ffffff;
+          }
+          .topic-notifications {
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+          .topic-notification {
+            display: flex;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+            border-radius: 3px;
+            background-color: #FF6363;
+            color: #ffffff;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 10px;
+            padding: 0.6rem;
+            margin: 0.7rem 0.7rem 0 0;
+          }
+          .lhs-information{
+            display: flex;
+            justify-content: flex-start;
+          }
+            .mastery_score-wut {
+              padding: 1rem;
+              color: #ffffff;
+              display: flex;
+              align-items: center;
+            }
+            .mastery_score-wut h1 {
+              color: #ffffff;
+              font-weight: 600;
+            }
+            .info-test-diff {
+              padding: 0.5rem 1rem;
+              display: flex;
+              align-items: center;
+            }
+            .info-test-diff p {
+              margin-bottom: 0;
+            }
+            .title-test-hello {
+              font-weight: 700;
+            }
+            .blooms-categories-wut {
+              text-align: center;
+            }
+            .progress-iewfni {
+              padding: 1rem;
+              display: flex;
+              align-items: center;
+            }
+            .progress-iewfni span {
+              font-size: 2rem;
+            }
+
+          .media-content {
+            display: flex;
+            justify-content: flex-end;
+          }
+
+          .media-content img {
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            max-width: 20rem;
+          }
+
+          #slide {
+              right: -40rem;
+              width: 30rem;
+              height: 30rem;
+              -webkit-animation: slide 0.5s forwards;
+              animation: slide 0.5s forwards;
+
+          }
+
+          @-webkit-keyframes slide {
+              100% { right: 0; }
+          }
+
+          @keyframes slide {
+              100% { right: 0; }
+          }
+      `;
+      document.head.appendChild(styleEl);
+
+      //should be mapping over the topics depending how many there are
+      const animation = document.createElement("div");
+      animation.setAttribute('class', 'overlay-427542754');
+      animation.innerHTML = `
+          <div class="notifications" id="slide">
+            <div class="main-notfiication">
+            <div class="lhs-information" >
+                <div class="mastery_score-wut">
+                  <h1>+${activity.mastery_score}</h1>
+                </div>
+                <div class="info-test-diff">
+                  <div class="title-test-hello">
+                    <p>
+                      ${activity.objective}
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+              <div class="progress-iewfni">
+                <span>${activity.number}/44</span>
+              </div>
+            </div>
+            <div class="topic-notifications">
+              ${notifications}
+            </div>
+            </div>
+          </div>
+
+      `
+      document.body.appendChild(animation);
+
+
+      chrome.runtime.sendMessage({activity_complete: true}, function(response) {
+        console.log(response);
+      });
     }
   }

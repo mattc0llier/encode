@@ -11,6 +11,8 @@
     "identity",
     "http://localhost:9090/",
     "http://*.lambdaschool.com/*",
+    "http://*.repl.it/*",
+    "https://*.mozilla.org/*",
     "http://*.encode.app/*"
   ],
   "background": {

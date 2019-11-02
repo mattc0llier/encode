@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "encode - user",
+  "name": "encode - your personal learning logbook",
   "description": "capture your understanding of the world",
   "version": "1.0",
   "permissions": [
@@ -9,7 +9,6 @@
     "webRequest",
     "storage",
     "identity",
-    "http://localhost:9090/",
     "http://*.lambdaschool.com/*",
     "http://*.encode.app/*"
   ],
@@ -40,7 +39,6 @@
   "web_accessible_resources": [
     "animation.scss"
   ],
-  "key": "ddddddddd2d=",
   "commands": {
     "update-context": {
       "suggested_key": {
@@ -48,5 +46,6 @@
       },
       "description": "Send a 'context' event to the extension"
     }
-  }
+  },
+  "short_name": "encode"
 }

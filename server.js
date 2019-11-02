@@ -429,7 +429,7 @@ app.get('/api/users/:id/settings', (req, res) => {
 function getActivitiesByUrl(tabUrl) {
   return db.one('SELECT * FROM objectives WHERE objectives.url=$1', [tabUrl])
   .catch((error) => {
-    console.log('failed to get user', error);
+    console.log('failed to get objective from url', error);
   });
 }
 
@@ -531,7 +531,7 @@ app.get('/api/tabContext', async (req, res)  => {
   console.log('ext receive', req.params);
   console.log('req.query.url', req.query.url);
   const tabUrl = req.query.url
-  const user_id = 60
+  const user_id = 57
 
   // i changed this friday 155am
   // i need to create a check for both node and objective url matches tab

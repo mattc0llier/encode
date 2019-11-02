@@ -607,6 +607,10 @@ INSERT INTO activities
   (type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
   VALUES
   ('course', 45, NULL, NULL, 57, FALSE, NULL, '2019-06-29T10:36:33.735972Z');
+INSERT INTO activities
+  (type, objective_id, lesson_id, course_id, user_id, complete, completion_time, created_at)
+  VALUES
+  ('course', 46, NULL, NULL, 57, FALSE, NULL, '2019-06-30T10:36:33.735973Z');
 ALTER SEQUENCE activities_id_seq RESTART WITH 55 INCREMENT BY 1;
 
 INSERT INTO tags (id, topic) VALUES (1, 'javascript');

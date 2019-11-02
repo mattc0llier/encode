@@ -100,7 +100,7 @@ port.onMessage.addListener(function(response) {
       searchTagsNode.innerHTML = '';
       // newTagsNode.removeChild(event.target.parentElement);
       // fetch all tags that includes what has been written so far and filter for those that already match
-      fetch(`http://localhost:9090/api/tags/search?q=${inputText.value}%`, {
+      fetch(`https://www.encode.app/api/tags/search?q=${inputText.value}%`, {
         mode: "cors"
       })
       .then(function(response) {
@@ -189,7 +189,7 @@ port.onMessage.addListener(function(response) {
         console.log('activity.objective_id', activity.objective_id);
         console.log('newTags', newTags);
 
-        fetch(`http://localhost:9090/api/tags`, {
+        fetch(`https://www.encode.app/api/tags`, {
           method: 'POST',
           body: JSON.stringify({
             newTags: newTags,
